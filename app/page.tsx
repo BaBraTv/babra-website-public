@@ -172,12 +172,12 @@ export default function HomePage() {
 
           <div className="hidden items-center gap-1 lg:flex">
             {[
-              ["Cosmetics", "#cosmetics"],
+              ["Products", "/products"],
+              ["Showroom", "/showroom"],
+              ["LifeTalk TV", "/lifetalk-tv"],
+              ["Holding", "/holding"],
               ["Science", "#science-of-babra"],
-              ["Group", "#group"],
-              ["Production", "#production"],
-              ["Platform", "#platform"],
-              ["Growth", "#growth"]
+              ["Platform", "#platform"]
             ].map(([item, href]) => (
               <a key={item} className="rounded-full px-4 py-2 text-sm font-semibold text-white/68 hover:bg-white/10 hover:text-white" href={href}>
                 {item}
@@ -217,7 +217,7 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] shadow-xl shadow-[#f1d58b]/20" href="#cosmetics">
+              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] shadow-xl shadow-[#f1d58b]/20" href="/products">
                 Explore products
               </a>
               <a className="rounded-full border border-white/24 bg-white/5 px-6 py-3 font-black text-white backdrop-blur" href="#science-of-babra">
@@ -661,14 +661,14 @@ export default function HomePage() {
           </div>
 
           <div className="mt-10 flex flex-wrap gap-3">
-            <a className="rounded-full bg-[#090706] px-6 py-3 font-black text-[#f1d58b]" href="/marketplace">
-              Marketplace
+            <a className="rounded-full bg-[#090706] px-6 py-3 font-black text-[#f1d58b]" href="/products">
+              Products
             </a>
-            <a className="rounded-full border border-black/15 px-6 py-3 font-black text-[#18110c]" href="/wallet">
-              Wallet
+            <a className="rounded-full border border-black/15 px-6 py-3 font-black text-[#18110c]" href="/showroom">
+              Showroom
             </a>
-            <a className="rounded-full border border-black/15 px-6 py-3 font-black text-[#18110c]" href="/dashboard">
-              Dashboard
+            <a className="rounded-full border border-black/15 px-6 py-3 font-black text-[#18110c]" href="/lifetalk-tv">
+              LifeTalk TV
             </a>
           </div>
         </div>

@@ -4,11 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://babra.com"),
   title: {
-    default: "BaBra Lotion | Best Body Lotion for Dry, Oily & Normal Skin",
+    default: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
     template: "%s | BaBra.com"
   },
   description:
-    "BaBra Lotion provides long-lasting hydration for dry skin, oily skin and normal skin. Enriched with Shea Butter, Coconut Oil, Aloe Vera and Botanical Extracts. Luxury In Every Touch.",
+    "BaBra Group brings together BaBra Cosmetics, BaBra Lotion, BaBra Pocket Fresh, BaBra Pads, BaBra Soap, BaBra Showroom, LifeTalk TV, and future holding company systems.",
   keywords: [
     "Best body lotion",
     "skin care",
@@ -27,12 +27,19 @@ export const metadata: Metadata = {
     "BaBra Group",
     "Premium Luxury in Every Touch",
     "Rwanda luxury skincare",
-    "global skincare brand"
+    "global skincare brand",
+    "BaBra Pocket Fresh",
+    "BaBra Pads",
+    "BaBra Soap",
+    "BaBra Showroom",
+    "LifeTalk TV",
+    "NZABIGERAHO",
+    "EI BaBra Holding Ltd"
   ],
   openGraph: {
-    title: "BaBra Lotion | Best Body Lotion for Dry, Oily & Normal Skin",
+    title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
     description:
-      "Long-lasting hydration for dry, oily and normal skin. BaBra Lotion delivers daily body care with a premium luxury fragrance experience.",
+      "BaBra Group ecosystem for premium cosmetics, showroom retail, media, LifeTalk TV, and future African business growth.",
     url: "https://babra.com",
     siteName: "BaBra.com",
     images: [{ url: "/brand/logo.jpeg", width: 1200, height: 630, alt: "BaBra Cosmetics Ltd" }],
@@ -41,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BaBra Lotion | Best Body Lotion for Dry, Oily & Normal Skin",
-    description: "Long-lasting hydration, premium body care, and Luxury In Every Touch.",
+    title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
+    description: "BaBra Group ecosystem: cosmetics, showroom, LifeTalk TV, and Luxury In Every Touch.",
     images: ["/brand/logo.jpeg"]
   }
 };
