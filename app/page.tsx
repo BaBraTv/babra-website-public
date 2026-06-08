@@ -147,6 +147,7 @@ const proofPoints = [
   "Premium Luxury in Every Touch",
   "Made for global shelf presence",
   "Rwanda roots, worldwide ambition",
+  "GMP and ISO cosmetics manufacturing support",
   "Commerce, media, finance, education, and agriculture in one BaBra account"
 ];
 
@@ -176,6 +177,7 @@ export default function HomePage() {
               ["Showroom", "/showroom"],
               ["LifeTalk TV", "/lifetalk-tv"],
               ["Holding", "/holding"],
+              ["Quality", "/quality"],
               ["Science", "#science-of-babra"],
               ["Platform", "#platform"]
             ].map(([item, href]) => (
@@ -220,8 +222,8 @@ export default function HomePage() {
               <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] shadow-xl shadow-[#f1d58b]/20" href="/products">
                 Explore products
               </a>
-              <a className="rounded-full border border-white/24 bg-white/5 px-6 py-3 font-black text-white backdrop-blur" href="#science-of-babra">
-                Science of BaBra
+              <a className="rounded-full border border-white/24 bg-white/5 px-6 py-3 font-black text-white backdrop-blur" href="/quality">
+                Quality proof
               </a>
             </div>
 

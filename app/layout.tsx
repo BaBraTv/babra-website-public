@@ -34,7 +34,10 @@ export const metadata: Metadata = {
     "BaBra Showroom",
     "LifeTalk TV",
     "NZABIGERAHO",
-    "EI BaBra Holding Ltd"
+    "EI BaBra Holding Ltd",
+    "BaBra quality documentation",
+    "GMP cosmetics manufacturing",
+    "ISO 22716 cosmetics"
   ],
   openGraph: {
     title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
