@@ -124,6 +124,21 @@ export default function ProductsPage() {
         </div>
       </section>
 
+      <section className="bg-[#120b09] px-5 py-16 text-white md:px-8">
+        <div className="mx-auto max-w-7xl rounded-lg border border-[#d6ad57]/25 bg-[#18110f] p-7 md:p-10">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Samples and partnerships</p>
+              <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Launch-ready for shops, salons, and distributors.</h2>
+              <p className="mt-6 text-lg leading-8 text-white/64">BaBra supports product samples, wholesale discussions, reseller onboarding, and partnership requests through a direct WhatsApp contact flow.</p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/contact">Request samples</a>
+              <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/quality">View quality proof</a>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Future e-commerce structure</p>

@@ -178,6 +178,7 @@ export default function HomePage() {
               ["LifeTalk TV", "/lifetalk-tv"],
               ["Holding", "/holding"],
               ["Quality", "/quality"],
+              ["Contact", "/contact"],
               ["Science", "#science-of-babra"],
               ["Platform", "#platform"]
             ].map(([item, href]) => (
@@ -187,8 +188,8 @@ export default function HomePage() {
             ))}
           </div>
 
-          <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="https://wa.me/250788351482" target="_blank">
-            Order
+          <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="/contact">
+            Samples
           </a>
         </div>
       </nav>
@@ -307,8 +308,8 @@ export default function HomePage() {
                     The website should prove the product exists without publishing full label data, barcode, QR, or complete ingredient details that can help copycats.
                     Full package information stays available on the physical product and for verified business partners.
                   </p>
-                  <a className="mt-6 inline-flex rounded-full bg-[#090706] px-5 py-3 font-black text-[#f1d58b]" href="https://wa.me/250788351482" target="_blank">
-                    Order on WhatsApp
+                  <a className="mt-6 inline-flex rounded-full bg-[#090706] px-5 py-3 font-black text-[#f1d58b]" href="/contact">
+                    Request samples
                   </a>
                 </div>
               </div>
@@ -333,8 +334,8 @@ export default function HomePage() {
                   <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{product.tag}</span>
                   <h3 className="mt-3 font-serif text-3xl leading-tight">{product.name}</h3>
                   <p className="mt-3 leading-7 text-white/62">{product.note}</p>
-                  <a className="mt-5 inline-flex rounded-full border border-[#d6ad57]/35 px-4 py-2 text-sm font-black text-[#f1d58b]" href="https://wa.me/250788351482" target="_blank">
-                    Order now
+                  <a className="mt-5 inline-flex rounded-full border border-[#d6ad57]/35 px-4 py-2 text-sm font-black text-[#f1d58b]" href="/contact">
+                    Request samples
                   </a>
                 </div>
               </motion.article>
