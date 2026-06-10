@@ -7,6 +7,12 @@ const supportServices = [
   ["Partner collaboration", "Work with local authorities, child protection partners, schools, and community leaders for accountable support."],
 ];
 
+const searchIntentTerms = [
+  ["Kimisagara orphanage", "Many people still use this old search phrase when looking for help for vulnerable children in the Kimisagara area."],
+  ["BaBra Kimisagara child support", "BaBra directs this need toward family-based care, school support, nutrition, mentorship, and community reintegration."],
+  ["Vulnerable children support Rwanda", "The program focuses on protecting children while strengthening families and working with local child-protection partners."],
+];
+
 const wordingRules = [
   ["Use", "family-based care"],
   ["Use", "child protection"],
@@ -16,9 +22,18 @@ const wordingRules = [
 ];
 
 export const metadata = {
-  title: "BaBra Child & Family Support",
+  title: "BaBra Child & Family Support | Kimisagara Vulnerable Children Support",
   description:
-    "BaBra Child & Family Support focuses on family-based care, education support, nutrition, mentorship, vulnerable children support, and family reintegration in Rwanda."
+    "People searching for Kimisagara orphanage can find BaBra Child & Family Support, a Rwanda-aligned family-based care program for education, nutrition, mentorship, vulnerable children support, and family reintegration.",
+  keywords: [
+    "Kimisagara orphanage",
+    "Kimisagara vulnerable children support",
+    "BaBra Child & Family Support",
+    "family-based care Rwanda",
+    "child protection Rwanda",
+    "vulnerable children support Rwanda",
+    "family reintegration Rwanda"
+  ]
 };
 
 export default function ChildFamilySupportPage() {
@@ -55,6 +70,24 @@ export default function ChildFamilySupportPage() {
               <article key={title} className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
                 <h3 className="font-serif text-3xl">{title}</h3>
                 <p className="mt-4 leading-7 text-black/62">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#120b09] px-5 py-16 text-white md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Kimisagara search support</p>
+          <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">If you searched for Kimisagara orphanage, BaBra can guide you to family-based support.</h2>
+          <p className="mt-6 max-w-4xl text-lg leading-8 text-white/64">
+            Some people still search online using the old phrase Kimisagara orphanage when they are looking for help for vulnerable children. BaBra uses that search intent to connect people with a Rwanda-aligned child and family support approach: education support, nutrition, mentorship, family strengthening, reintegration, and collaboration with local child-protection partners.
+          </p>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {searchIntentTerms.map(([title, text]) => (
+              <article key={title} className="rounded-lg border border-white/10 bg-white/[0.06] p-6">
+                <h3 className="font-serif text-3xl">{title}</h3>
+                <p className="mt-4 leading-7 text-white/64">{text}</p>
               </article>
             ))}
           </div>
