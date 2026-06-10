@@ -40,7 +40,11 @@ export const metadata: Metadata = {
     "ISO 22716 cosmetics",
     "BaBra samples",
     "BaBra wholesale",
-    "BaBra partnership"
+    "BaBra partnership",
+    "BaBra Child & Family Support",
+    "family-based care Rwanda",
+    "vulnerable children support Rwanda",
+    "family reintegration"
   ],
   openGraph: {
     title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",

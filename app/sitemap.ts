@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/lifetalk-tv", "weekly", 0.85],
     ["/lifetalk-tv/nzabigeraho", "weekly", 0.8],
     ["/holding", "monthly", 0.8],
+    ["/child-family-support", "monthly", 0.75],
     ["/quality", "monthly", 0.85],
     ["/contact", "monthly", 0.85],
     ["/marketplace", "weekly", 0.9],
