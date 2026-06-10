@@ -8,9 +8,16 @@ const supportServices = [
 ];
 
 const searchIntentTerms = [
-  ["Kimisagara orphanage", "Many people still use this old search phrase when looking for help for vulnerable children in the Kimisagara area."],
-  ["BaBra Kimisagara child support", "BaBra directs this need toward family-based care, school support, nutrition, mentorship, and community reintegration."],
-  ["Vulnerable children support Rwanda", "The program focuses on protecting children while strengthening families and working with local child-protection partners."],
+  ["Kimisagara Orphanage legacy Google profile", "This is the old public name many people still find on Google, connected to the same founder/contact."],
+  ["BaBra / RI BaBra community support", "The work now continues under BaBra / RI BaBra with family-based support, school support, nutrition, guidance, and emergency help."],
+  ["Vulnerable children support Rwanda", "The current approach protects children by strengthening families and working through community-based care and child-protection partners."],
+];
+
+const legacyFaq = [
+  ["Is Kimisagara Orphanage still connected to this contact?", "Yes. Kimisagara Orphanage was the old public Google profile that many people still find and call every week. This is the same founder/contact, but the mission has evolved into BaBra / RI BaBra community support."],
+  ["Does BaBra operate as an orphanage today?", "No. BaBra is not presenting or operating this initiative as an orphanage. Support work continues through family-based care, education support, emergency assistance, mentorship, and community reintegration."],
+  ["Why keep the old name on this page?", "The old name is kept only as legacy and search context so people who find Kimisagara Orphanage on Google can understand the transition and reach the correct BaBra support program."],
+  ["How does support continue now?", "Support focuses on helping vulnerable children within families and communities through school materials, basic needs, guidance, emergency help, and collaboration with local child-protection partners."],
 ];
 
 const wordingRules = [
@@ -24,7 +31,7 @@ const wordingRules = [
 export const metadata = {
   title: "BaBra Child & Family Support | Kimisagara Vulnerable Children Support",
   description:
-    "People searching for Kimisagara orphanage can find BaBra Child & Family Support, a Rwanda-aligned family-based care program for education, nutrition, mentorship, vulnerable children support, and family reintegration.",
+    "People who still find the old Kimisagara Orphanage Google profile can find the same founder/contact through BaBra Child & Family Support, now focused on family-based care, education support, emergency help, and community impact.",
   keywords: [
     "Kimisagara orphanage",
     "Kimisagara vulnerable children support",
@@ -79,15 +86,30 @@ export default function ChildFamilySupportPage() {
       <section className="bg-[#120b09] px-5 py-16 text-white md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Kimisagara search support</p>
-          <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">If you searched for Kimisagara orphanage, BaBra can guide you to family-based support.</h2>
+          <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">If you found us through Kimisagara Orphanage on Google, this is the same founder/contact.</h2>
           <p className="mt-6 max-w-4xl text-lg leading-8 text-white/64">
-            Some people still search online using the old phrase Kimisagara orphanage when they are looking for help for vulnerable children. BaBra uses that search intent to connect people with a Rwanda-aligned child and family support approach: education support, nutrition, mentorship, family strengthening, reintegration, and collaboration with local child-protection partners.
+            Kimisagara Orphanage was our old public profile that many people still find on Google and still use to call for help. Today, the work continues under BaBra / RI BaBra. We no longer operate or present ourselves as an orphanage; instead, we support vulnerable children within families and communities through education, basic needs, guidance, emergency assistance, and community impact.
           </p>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {searchIntentTerms.map(([title, text]) => (
               <article key={title} className="rounded-lg border border-white/10 bg-white/[0.06] p-6">
                 <h3 className="font-serif text-3xl">{title}</h3>
                 <p className="mt-4 leading-7 text-white/64">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Legacy Google profile FAQ</p>
+          <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">Kimisagara Orphanage name is legacy search context only.</h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {legacyFaq.map(([question, answer]) => (
+              <article key={question} className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
+                <h3 className="font-serif text-3xl leading-tight">{question}</h3>
+                <p className="mt-4 leading-7 text-black/62">{answer}</p>
               </article>
             ))}
           </div>
