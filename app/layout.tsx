@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://babra.com"),
+  metadataBase: new URL("https://www.babra.store"),
   title: {
     default: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
     template: "%s | BaBra.com"
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
     description:
       "BaBra Group ecosystem for premium cosmetics, showroom retail, media, LifeTalk TV, and future African business growth.",
-    url: "https://babra.com",
+    url: "https://www.babra.store",
     siteName: "BaBra.com",
     images: [{ url: "/brand/logo.jpeg", width: 1200, height: 630, alt: "BaBra Cosmetics Ltd" }],
     locale: "en_RW",

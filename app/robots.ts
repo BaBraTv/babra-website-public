@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/private", "/admin"]
     },
-    sitemap: "https://babra.com/sitemap.xml"
+    sitemap: "https://www.babra.store/sitemap.xml"
   };
 }
 
