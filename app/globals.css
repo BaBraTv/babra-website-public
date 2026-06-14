@@ -58,6 +58,49 @@ a {
   animation: babra-float 5s ease-in-out infinite;
 }
 
+
+@keyframes babra-dance {
+  0%, 100% {
+    transform: translateY(0) rotate(-2deg) scale(1);
+  }
+  20% {
+    transform: translateY(-4px) rotate(3deg) scale(1.04);
+  }
+  40% {
+    transform: translateY(0) rotate(-3deg) scale(1.02);
+  }
+  60% {
+    transform: translateY(-3px) rotate(2deg) scale(1.05);
+  }
+  80% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+.babra-nav-bottle-wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.babra-nav-bottle-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(241, 213, 139, 0.55), transparent 68%);
+  filter: blur(10px);
+}
+
+.babra-nav-bottle {
+  animation: babra-dance 2.8s ease-in-out 0.25s 4;
+  transform-origin: 50% 82%;
+}
+
+.babra-nav-bottle-wrap:hover .babra-nav-bottle,
+.babra-nav-bottle-wrap:focus-within .babra-nav-bottle {
+  animation: babra-dance 1.25s ease-in-out infinite;
+}
 .luxury-glass {
   border: 1px solid rgba(241, 213, 139, 0.22);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.055));
@@ -80,7 +123,8 @@ a {
   }
 
   .babra-orbit,
-  .babra-float {
+  .babra-float,
+  .babra-nav-bottle {
     animation: none;
   }
 }

@@ -162,8 +162,8 @@ export default function HomePage() {
       <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#090706]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 md:px-8">
           <a className="flex min-w-0 items-center gap-3" href="#top" aria-label="BaBra.com home">
-            <span className="grid h-12 w-28 shrink-0 place-items-center rounded-md border border-[#d6ad57]/40 bg-white p-2">
-              <img className="h-full w-full object-contain" src="/brand/logo.jpeg" alt="BaBra logo" />
+            <span className="babra-nav-bottle-wrap grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-full border border-[#f1d58b]/55 bg-[#fff8eb] shadow-xl shadow-[#d6ad57]/20">
+              <img className="babra-nav-bottle h-full w-full object-cover" src="/brand/official-babra-bottle.png" alt="BaBra luxury body lotion bottle" />
             </span>
             <span className="hidden min-w-0 sm:block">
               <strong className="block font-serif text-xl leading-tight">BaBra.com</strong>
