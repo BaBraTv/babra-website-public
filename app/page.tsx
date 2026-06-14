@@ -193,6 +193,7 @@ export default function HomePage() {
               ["Holding", "/holding"],
               ["Quality", "/quality"],
               ["Contact", "/contact"],
+              ["Forms", "/forms"],
               ["Science", "#science-of-babra"],
               ["Platform", "#platform"]
             ].map(([item, href]) => (
