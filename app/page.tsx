@@ -29,6 +29,20 @@ const groupPillars = [
   }
 ];
 
+const heroBottles = [
+  {
+    name: "BaBra Lotion Signature for Her",
+    image: "/brand/official-babra-bottle.png"
+  },
+  {
+    name: "BaBra Lotion Soft Care for Kids",
+    image: "/brand/official-babra-bottle-kids.png"
+  },
+  {
+    name: "BaBra Lotion Signature for Him",
+    image: "/brand/official-babra-bottle-men.png"
+  }
+];
 const products = [
   {
     name: "BaBra Soft Care for Kids",
@@ -258,19 +272,19 @@ export default function HomePage() {
               <div className="babra-orbit-stage relative mt-6 flex min-h-[430px] items-center justify-center overflow-hidden rounded-lg border border-white/15 bg-gradient-to-br from-white/92 via-[#fff8eb]/92 to-[#d4aa3d]/90">
               <div className="absolute inset-x-12 bottom-16 h-12 rounded-full bg-black/20 blur-2xl" />
               <div className="babra-orbit relative h-[330px] w-[330px]">
-                {products.slice(0, 3).map((product, index) => (
+                {heroBottles.map((product, index) => (
                   <figure
                     key={product.name}
-                    className="babra-orbit-card absolute left-1/2 top-1/2 h-[260px] w-[210px] -translate-x-1/2 -translate-y-1/2 rounded-3xl border border-black/10 bg-white/80 p-4 shadow-2xl shadow-black/20"
-                    style={{ transform: `rotateY(${index * 120}deg) translateZ(190px) translateX(-50%) translateY(-50%)` }}
+                    className="babra-orbit-card absolute left-1/2 top-1/2 h-[330px] w-[205px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-black/10 bg-white/85 p-2 shadow-2xl shadow-black/20"
+                    style={{ transform: `rotateY(${index * 120}deg) translateZ(205px) translateX(-50%) translateY(-50%)` }}
                   >
-                    <img className="babra-float h-full w-full object-contain drop-shadow-2xl" src={product.image} alt={product.name} />
+                    <img className="babra-float h-full w-full rounded-2xl object-contain object-center drop-shadow-2xl" src={product.image} alt={product.name} />
                   </figure>
                 ))}
               </div>
               <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-[#090706]/90 p-4 text-white backdrop-blur">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-[#f1d58b]">Rotating collection</p>
-                <p className="mt-1 text-sm text-white/64">Luxury lotion, serum display, and protected product presentation orbit together.</p>
+                <p className="mt-1 text-sm text-white/64">Women, kids, and men BaBra Lotion bottles move together in one premium rotating galaxy.</p>
               </div>
             </div>
 
