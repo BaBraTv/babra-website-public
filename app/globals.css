@@ -50,10 +50,11 @@ a {
   inset: 10%;
   border-radius: 999px;
   background:
-    radial-gradient(circle at 50% 50%, rgba(241, 213, 139, 0.36), transparent 24%),
-    conic-gradient(from 90deg, transparent, rgba(241, 213, 139, 0.32), transparent, rgba(169, 20, 29, 0.24), transparent);
-  filter: blur(18px);
-  opacity: 0.82;
+    radial-gradient(circle at 50% 50%, rgba(78, 190, 255, 0.26), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(241, 213, 139, 0.34), transparent 28%),
+    conic-gradient(from 90deg, transparent, rgba(78, 190, 255, 0.28), rgba(241, 213, 139, 0.34), transparent, rgba(169, 20, 29, 0.22), rgba(78, 190, 255, 0.18), transparent);
+  filter: blur(20px);
+  opacity: 0.88;
   animation: babra-galaxy-pulse 7s ease-in-out infinite;
 }
 
@@ -112,7 +113,7 @@ a {
   inset: 6px;
   z-index: -1;
   border-radius: inherit;
-  background: radial-gradient(circle, rgba(241, 213, 139, 0.55), transparent 68%);
+  background: radial-gradient(circle, rgba(78, 190, 255, 0.32), rgba(241, 213, 139, 0.45), transparent 70%);
   filter: blur(10px);
 }
 

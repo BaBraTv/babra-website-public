@@ -269,13 +269,13 @@ export default function HomePage() {
                 </span>
               </div>
 
-              <div className="babra-orbit-stage relative mt-6 flex min-h-[430px] items-center justify-center overflow-hidden rounded-lg border border-white/15 bg-gradient-to-br from-white/92 via-[#fff8eb]/92 to-[#d4aa3d]/90">
+              <div className="babra-orbit-stage relative mt-6 flex min-h-[430px] items-center justify-center overflow-hidden rounded-lg border border-white/15 bg-[radial-gradient(circle_at_50%_35%,rgba(79,190,255,0.22),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(255,248,235,0.92)_48%,rgba(212,170,61,0.86))]">
               <div className="absolute inset-x-12 bottom-16 h-12 rounded-full bg-black/20 blur-2xl" />
               <div className="babra-orbit relative h-[330px] w-[330px]">
                 {heroBottles.map((product, index) => (
                   <figure
                     key={product.name}
-                    className="babra-orbit-card absolute left-1/2 top-1/2 h-[330px] w-[205px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-black/10 bg-white/85 p-2 shadow-2xl shadow-black/20"
+                    className="babra-orbit-card absolute left-1/2 top-1/2 h-[330px] w-[205px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-[#7bd7ff]/25 bg-white/85 p-2 shadow-2xl shadow-[#4ebeff]/18"
                     style={{ transform: `rotateY(${index * 120}deg) translateZ(205px) translateX(-50%) translateY(-50%)` }}
                   >
                     <img className="babra-float h-full w-full rounded-2xl object-contain object-center drop-shadow-2xl" src={product.image} alt={product.name} />
