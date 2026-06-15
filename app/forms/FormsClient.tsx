@@ -5,8 +5,10 @@ import { RwandaLocationPicker } from "./RwandaLocationPicker";
 import { emptyLocation, LocationValue } from "./rwanda-location-seed";
 
 function formatLocation(label: string, location: LocationValue) {
+  const sector = location.sectorId === "manual-sector" ? location.sectorManual : location.sectorName;
+  const cell = location.cellId === "manual-cell" ? location.cellManual : location.cellName;
   const village = location.villageId === "manual-village" ? location.villageManual : location.villageName;
-  return `${label}: ${location.provinceName} > ${location.districtName} > ${location.sectorName} > ${location.cellName} > ${village}`;
+  return `${label}: ${location.provinceName} > ${location.districtName} > ${sector} > ${cell} > ${village}`;
 }
 
 function openWhatsApp(message: string) {

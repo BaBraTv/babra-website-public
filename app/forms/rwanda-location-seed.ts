@@ -13,8 +13,10 @@ export type LocationValue = {
   districtName: string;
   sectorId: string;
   sectorName: string;
+  sectorManual: string;
   cellId: string;
   cellName: string;
+  cellManual: string;
   villageId: string;
   villageName: string;
   villageManual: string;
@@ -27,8 +29,10 @@ export const emptyLocation: LocationValue = {
   districtName: "",
   sectorId: "",
   sectorName: "",
+  sectorManual: "",
   cellId: "",
   cellName: "",
+  cellManual: "",
   villageId: "",
   villageName: "",
   villageManual: ""
@@ -83,7 +87,8 @@ export const sectors: LocationOption[] = [
   { id: "rw-gasabo-kimironko", name: "Kimironko", parentId: "rw-kigali-gasabo" },
   { id: "rw-gasabo-kacyiru", name: "Kacyiru", parentId: "rw-kigali-gasabo" },
   { id: "rw-kicukiro-gatenga", name: "Gatenga", parentId: "rw-kigali-kicukiro" },
-  { id: "rw-kicukiro-kanombe", name: "Kanombe", parentId: "rw-kigali-kicukiro" }
+  { id: "rw-kicukiro-kanombe", name: "Kanombe", parentId: "rw-kigali-kicukiro" },
+  { id: "manual-sector", name: "Sindi kubona umurenge wanjye", parentId: "*" }
 ];
 
 export const cells: LocationOption[] = [
@@ -92,7 +97,8 @@ export const cells: LocationOption[] = [
   { id: "rw-kimisagara-kimisagara", name: "Kimisagara", parentId: "rw-nyarugenge-kimisagara" },
   { id: "rw-gitega-akabahizi", name: "Akabahizi", parentId: "rw-nyarugenge-gitega" },
   { id: "rw-kimironko-bibare", name: "Bibare", parentId: "rw-gasabo-kimironko" },
-  { id: "rw-gatenga-karugira", name: "Karugira", parentId: "rw-kicukiro-gatenga" }
+  { id: "rw-gatenga-karugira", name: "Karugira", parentId: "rw-kicukiro-gatenga" },
+  { id: "manual-cell", name: "Sindi kubona akagari kanjye", parentId: "*" }
 ];
 
 export const villages: LocationOption[] = [

@@ -96,6 +96,8 @@ export function RwandaLocationPicker({ namePrefix, title, description, value, on
   const cellOptions = byParent(cells, value.sectorId);
   const villageOptions = byParent(villages, value.cellId);
   const activeStep = value.villageId ? 5 : value.cellId ? 4 : value.sectorId ? 3 : value.districtId ? 2 : value.provinceId ? 1 : 0;
+  const manualSector = value.sectorId === "manual-sector";
+  const manualCell = value.cellId === "manual-cell";
   const manualVillage = value.villageId === "manual-village";
 
   function update(next: Partial<LocationValue>) {
@@ -117,8 +119,10 @@ export function RwandaLocationPicker({ namePrefix, title, description, value, on
       districtName: findName(districts, id),
       sectorId: "",
       sectorName: "",
+      sectorManual: "",
       cellId: "",
       cellName: "",
+      cellManual: "",
       villageId: "",
       villageName: "",
       villageManual: ""
@@ -126,12 +130,14 @@ export function RwandaLocationPicker({ namePrefix, title, description, value, on
   }
 
   function selectSector(id: string) {
-    if (!sectors.some((sector) => sector.id === id && sector.parentId === value.districtId)) return;
+    if (id !== "manual-sector" && !sectors.some((sector) => sector.id === id && sector.parentId === value.districtId)) return;
     update({
       sectorId: id,
       sectorName: findName(sectors, id),
+      sectorManual: id === "manual-sector" ? value.sectorManual : "",
       cellId: "",
       cellName: "",
+      cellManual: "",
       villageId: "",
       villageName: "",
       villageManual: ""
@@ -139,10 +145,11 @@ export function RwandaLocationPicker({ namePrefix, title, description, value, on
   }
 
   function selectCell(id: string) {
-    if (!cells.some((cell) => cell.id === id && cell.parentId === value.sectorId)) return;
+    if (id !== "manual-cell" && !cells.some((cell) => cell.id === id && cell.parentId === value.sectorId)) return;
     update({
       cellId: id,
       cellName: findName(cells, id),
+      cellManual: id === "manual-cell" ? value.cellManual : "",
       villageId: "",
       villageName: "",
       villageManual: ""
@@ -191,6 +198,32 @@ export function RwandaLocationPicker({ namePrefix, title, description, value, on
         <LocationSelect label="Umudugudu" placeholder="Banza uhitemo akagari" options={villageOptions} value={value.villageId} onSelect={selectVillage} disabled={!value.cellId} />
       </div>
 
+      {manualSector ? (
+        <label className="mt-4 grid gap-2 rounded-2xl border border-[#d6ad57]/30 bg-white p-4 text-base font-black">
+          Andika umurenge wawe
+          <input
+            className="min-h-14 rounded-xl border border-black/10 px-4 text-lg outline-none focus:border-[#d6ad57]"
+            value={value.sectorManual}
+            onChange={(event) => update({ sectorManual: event.target.value })}
+            placeholder="Urugero: Umurenge wawe"
+            required
+          />
+        </label>
+      ) : null}
+
+      {manualCell ? (
+        <label className="mt-4 grid gap-2 rounded-2xl border border-[#d6ad57]/30 bg-white p-4 text-base font-black">
+          Andika akagari kawe
+          <input
+            className="min-h-14 rounded-xl border border-black/10 px-4 text-lg outline-none focus:border-[#d6ad57]"
+            value={value.cellManual}
+            onChange={(event) => update({ cellManual: event.target.value })}
+            placeholder="Urugero: Akagari kawe"
+            required
+          />
+        </label>
+      ) : null}
+
       {manualVillage ? (
         <label className="mt-4 grid gap-2 rounded-2xl border border-[#d6ad57]/30 bg-white p-4 text-base font-black">
           Andika umudugudu wawe
@@ -209,9 +242,9 @@ export function RwandaLocationPicker({ namePrefix, title, description, value, on
       <input type="hidden" name={`${namePrefix}.districtId`} value={value.districtId} />
       <input type="hidden" name={`${namePrefix}.districtName`} value={value.districtName} />
       <input type="hidden" name={`${namePrefix}.sectorId`} value={value.sectorId} />
-      <input type="hidden" name={`${namePrefix}.sectorName`} value={value.sectorName} />
+      <input type="hidden" name={`${namePrefix}.sectorName`} value={manualSector ? value.sectorManual : value.sectorName} />
       <input type="hidden" name={`${namePrefix}.cellId`} value={value.cellId} />
-      <input type="hidden" name={`${namePrefix}.cellName`} value={value.cellName} />
+      <input type="hidden" name={`${namePrefix}.cellName`} value={manualCell ? value.cellManual : value.cellName} />
       <input type="hidden" name={`${namePrefix}.villageId`} value={value.villageId} />
       <input type="hidden" name={`${namePrefix}.villageName`} value={manualVillage ? value.villageManual : value.villageName} />
     </section>
