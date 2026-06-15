@@ -1,7 +1,7 @@
 export default function MarketplacePage() {
   return (
     <main className="min-h-screen bg-[#fffaf1] px-6 py-10 text-[#161313] md:px-12">
-      <a className="text-sm font-black uppercase tracking-[0.18em] text-[#a9141d]" href="/">Back to BaBra.com</a>
+      <a className="text-sm font-black uppercase tracking-[0.18em] text-[#a9141d]" href="/">Back to babra.store</a>
       <h1 className="mt-6 font-serif text-6xl">BaBra Marketplace</h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-black/65">
         Cosmetics, farm products, vendor shops, school services, invoices, order tracking, and AI-powered recommendations will live here.

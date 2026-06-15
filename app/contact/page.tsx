@@ -25,7 +25,7 @@ export default function ContactPage() {
     <main className="min-h-screen bg-[#090706] text-white">
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">BaBra.com</a>
+          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
           <div className="mt-12 grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Samples, wholesale, support</p>
@@ -35,6 +35,7 @@ export default function ContactPage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="https://wa.me/250788351482?text=Hello%20BaBra%2C%20I%20want%20samples%20or%20wholesale%20information." target="_blank" rel="noopener noreferrer">WhatsApp now</a>
+                <a className="rounded-full bg-white px-6 py-3 font-black text-[#130d08]" href="/contact-showroom">Showroom form</a>
                 <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="mailto:babracosmeticsltd@gmail.com">Email BaBra</a>
               </div>
             </div>

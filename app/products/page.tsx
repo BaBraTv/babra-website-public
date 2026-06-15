@@ -2,7 +2,7 @@ const productFamilies = [
   {
     name: "BaBra Lotion",
     slogan: "Luxury in Every Touch",
-    image: "/products/kids-bottle-original.jpeg",
+    image: "/brand/official-babra-bottle.png",
     editions: ["Women Edition", "Men Edition", "Babies Edition"],
     description:
       "A premium body lotion family created for daily hydration, refined fragrance, and a polished skincare routine.",
@@ -53,9 +53,9 @@ const commerceBlocks = [
 ];
 
 export const metadata = {
-  title: "BaBra Cosmetics Products",
+  title: "BaBra Cosmetics Products | babra.store",
   description:
-    "Explore BaBra Lotion, BaBra Pocket Fresh, BaBra Pads, and BaBra Soap product families with premium packaging, benefits, usage guidance, and future e-commerce readiness."
+    "Explore BaBra Lotion for women, men, kids, serum, pocket fresh, pads, and soap with premium packaging, safe product guidance, and commerce-ready ordering."
 };
 
 export default function ProductsPage() {
@@ -63,13 +63,13 @@ export default function ProductsPage() {
     <main className="min-h-screen bg-[#090706] text-white">
       <section className="border-b border-white/10 px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">BaBra.com</a>
+          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
           <div className="mt-10 grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Cosmetics Division</p>
               <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">A complete premium product house.</h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/66">
-                BaBra Cosmetics now includes lotion, pocket fresh, pads, and soap as future-ready product categories. Public content is designed to sell trust while protecting sensitive label, barcode, and formula details.
+                BaBra Cosmetics includes lotion, serum, pocket fresh, pads, and soap as future-ready product categories. Public content is designed to sell trust while protecting sensitive label, barcode, and formula details.
               </p>
             </div>
             <figure className="overflow-hidden rounded-lg border border-[#d6ad57]/25 bg-[#fffaf1] p-4 shadow-2xl shadow-black/40">
@@ -133,7 +133,7 @@ export default function ProductsPage() {
               <p className="mt-6 text-lg leading-8 text-white/64">BaBra supports product samples, wholesale discussions, reseller onboarding, and partnership requests through a direct WhatsApp contact flow.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/contact">Request samples</a>
+                  <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/store">Shop on babra.store</a>
               <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/quality">View quality proof</a>
             </div>
           </div>

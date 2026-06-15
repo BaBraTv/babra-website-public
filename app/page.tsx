@@ -48,7 +48,7 @@ const products = [
     name: "BaBra Soft Care for Kids",
     tag: "Family Care",
     note: "Gentle comfort for children and family skincare routines without exposing full label details online.",
-    image: "/products/kids-lotion.jpg",
+    image: "/brand/official-babra-bottle-kids.png",
     fit: "contain"
   },
   {
@@ -62,14 +62,14 @@ const products = [
     name: "BaBra Lotion for Women",
     tag: "Signature for Her",
     note: "Soft hydration with refined fragrance and a premium daily care feel.",
-    image: "/products/women-lotion.jpg",
+    image: "/brand/official-babra-bottle.png",
     fit: "contain"
   },
   {
     name: "BaBra Lotion for Men",
     tag: "Signature for Him",
     note: "Clean freshness and premium body care for a confident routine.",
-    image: "/products/men-lotion.jpg",
+    image: "/brand/official-babra-bottle-men.png",
     fit: "contain"
   }
 ];
@@ -165,6 +165,45 @@ const proofPoints = [
   "Commerce, media, finance, education, and agriculture in one BaBra account"
 ];
 
+const primaryNav = [
+  ["Store", "/store"],
+  ["Products", "/products"],
+  ["Forms", "/forms"],
+  ["Showroom", "/showroom"],
+  ["Quality", "/quality"]
+];
+
+const serviceNav = [
+  ["Jobs", "/job-application"],
+  ["Lost Docs", "/lost-documents"],
+  ["Samples", "/sample-request"],
+  ["Wholesale", "/wholesale-distributor"],
+  ["Showroom Form", "/contact-showroom"]
+];
+
+const mobileNav = [
+  ["Store", "/store"],
+  ["Samples", "/sample-request"],
+  ["Wholesale", "/wholesale-distributor"],
+  ["Jobs", "/job-application"],
+  ["Lost Docs", "/lost-documents"],
+  ["Forms", "/forms"],
+  ["Contact", "/contact"]
+];
+
+const platformNav = [
+  ["Science", "#science-of-babra"],
+  ["Platform", "#platform"]
+];
+
+const serviceCards = [
+  ["Job Application", "/job-application", "Apply for BaBra roles with Rwanda address details."],
+  ["Lost Documents", "/lost-documents", "Announce a lost document or found item clearly."],
+  ["Sample Request", "/sample-request", "Request BaBra Lotion and skincare samples."],
+  ["Wholesale / Distributor", "/wholesale-distributor", "Start reseller, wholesale, or distributor verification."],
+  ["Contact / Showroom", "/contact-showroom", "Book showroom support or ask BaBra directly."]
+];
+
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   show: { opacity: 1, y: 0 }
@@ -173,39 +212,58 @@ const fadeUp = {
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#090706] text-white">
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#090706]/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 md:px-8">
-          <a className="flex min-w-0 items-center gap-3" href="#top" aria-label="BaBra.com home">
-            <span className="babra-nav-bottle-wrap grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-full border border-[#f1d58b]/55 bg-[#fff8eb] shadow-xl shadow-[#d6ad57]/20">
+      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#090706]/92 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
+          <a className="flex min-w-0 items-center gap-3" href="#top" aria-label="babra.store home">
+            <span className="babra-nav-bottle-wrap grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full border border-[#f1d58b]/55 bg-[#fff8eb] shadow-xl shadow-[#d6ad57]/20 md:h-14 md:w-14">
               <img className="babra-nav-bottle h-full w-full object-cover" src="/brand/official-babra-bottle.png" alt="BaBra luxury body lotion bottle" />
             </span>
             <span className="hidden min-w-0 sm:block">
-              <strong className="block font-serif text-xl leading-tight">BaBra.com</strong>
-              <span className="block text-xs font-bold uppercase tracking-[0.18em] text-[#d6ad57]">Group ecosystem</span>
+              <strong className="block font-serif text-xl leading-tight">babra.store</strong>
+              <span className="block text-xs font-bold uppercase tracking-[0.16em] text-[#d6ad57]">Premium Rwanda skincare</span>
             </span>
           </a>
 
-          <div className="hidden items-center gap-1 lg:flex">
-            {[
-              ["Products", "/products"],
-              ["Showroom", "/showroom"],
-              ["LifeTalk TV", "/lifetalk-tv"],
-              ["Holding", "/holding"],
-              ["Quality", "/quality"],
-              ["Contact", "/contact"],
-              ["Forms", "/forms"],
-              ["Science", "#science-of-babra"],
-              ["Platform", "#platform"]
-            ].map(([item, href]) => (
+          <div className="hidden items-center gap-2 xl:flex">
+            {primaryNav.map(([item, href]) => (
               <a key={item} className="rounded-full px-4 py-2 text-sm font-semibold text-white/68 hover:bg-white/10 hover:text-white" href={href}>
                 {item}
               </a>
             ))}
+            <span className="mx-1 h-6 w-px bg-white/15" aria-hidden="true" />
+            {serviceNav.map(([item, href]) => (
+              <a key={item} className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-black text-white/70 hover:border-[#d6ad57]/55 hover:text-[#f1d58b]" href={href}>
+                {item}
+              </a>
+            ))}
+            <span className="mx-1 h-6 w-px bg-white/15" aria-hidden="true" />
+            <div className="flex items-center gap-2 rounded-full border border-[#d6ad57]/20 bg-black/25 px-2 py-1">
+              <span className="px-2 text-[10px] font-black uppercase tracking-[0.16em] text-[#d6ad57]">Explore</span>
+              {platformNav.map(([item, href]) => (
+                <a key={item} className="rounded-full bg-white/[0.06] px-3 py-1.5 text-xs font-black text-white/76 hover:bg-[#f1d58b] hover:text-[#130d08]" href={href}>
+                  {item}
+                </a>
+              ))}
+            </div>
           </div>
 
-          <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="/contact">
-            Samples
-          </a>
+          <div className="flex items-center gap-2">
+            <a className="hidden rounded-full border border-white/15 px-4 py-2 text-sm font-black text-white md:inline-flex" href="/forms">
+              Service forms
+            </a>
+            <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="https://wa.me/250788351482?text=Hello%20BaBra%20Store%2C%20I%20want%20support%20from%20babra.store." target="_blank" rel="noopener noreferrer">
+              WhatsApp
+            </a>
+          </div>
+        </div>
+        <div className="border-t border-white/10 px-4 py-2 xl:hidden">
+          <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto">
+            {mobileNav.map(([item, href]) => (
+              <a key={item} className="shrink-0 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-black text-white/78" href={href}>
+                {item}
+              </a>
+            ))}
+          </div>
         </div>
       </nav>
 
@@ -218,7 +276,7 @@ export default function HomePage() {
           loop
           playsInline
           preload="metadata"
-          poster="/products/kids-lotion.jpg"
+          poster="/brand/official-babra-bottle-kids.png"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#090706]/95 via-[#090706]/70 to-[#090706]/28" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#090706] via-transparent to-[#090706]/30" />
@@ -235,12 +293,28 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] shadow-xl shadow-[#f1d58b]/20" href="/products">
-                Explore products
+              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] shadow-xl shadow-[#f1d58b]/20" href="/store">
+                Shop now
+              </a>
+              <a className="rounded-full bg-white px-6 py-3 font-black text-[#130d08]" href="/sample-request">
+                Request samples
+              </a>
+              <a className="rounded-full border border-[#f1d58b]/40 bg-black/20 px-6 py-3 font-black text-[#f1d58b] backdrop-blur" href="/wholesale-distributor">
+                Wholesale
               </a>
               <a className="rounded-full border border-white/24 bg-white/5 px-6 py-3 font-black text-white backdrop-blur" href="/quality">
                 Quality proof
               </a>
+            </div>
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <span className="rounded-full border border-[#d6ad57]/30 bg-black/30 px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#d6ad57]">
+                Explore
+              </span>
+              {platformNav.map(([item, href]) => (
+                <a key={item} className="rounded-full border border-white/18 bg-white/[0.06] px-5 py-2 text-xs font-black uppercase tracking-[0.14em] text-white/76 hover:border-[#d6ad57]/60 hover:text-[#f1d58b]" href={href}>
+                  {item}
+                </a>
+              ))}
             </div>
 
             <div className="mt-10 grid gap-3 sm:grid-cols-2">
@@ -300,6 +374,28 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-y border-white/10 bg-[#0f0a08] px-5 py-12 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Official BaBra actions</p>
+              <h2 className="mt-3 max-w-4xl font-serif text-4xl leading-none md:text-6xl">Clear paths for customers, workers, partners, and showroom visitors.</h2>
+            </div>
+            <a className="rounded-full bg-[#f1d58b] px-5 py-3 font-black text-[#130d08]" href="/forms">
+              Open all forms
+            </a>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {serviceCards.map(([title, href, text]) => (
+              <a key={title} className="rounded-lg border border-white/10 bg-white/[0.055] p-5 shadow-xl shadow-black/10 hover:border-[#d6ad57]/55" href={href}>
+                <h3 className="font-serif text-2xl leading-tight">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-white/62">{text}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="cosmetics" className="border-y border-white/10 bg-[#120b09] px-5 py-20 md:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
@@ -307,14 +403,14 @@ export default function HomePage() {
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Cosmetics</p>
               <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Luxury skincare people can feel before they buy.</h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/64">
-                The product section should work like a premium counter display: clear, calm, polished, and focused on trust.
-                Final studio photos can replace these placeholders without changing the website structure.
+                The product section works like a premium counter display: clear official bottle visuals, calm product education,
+                direct ordering paths, and protected product details.
               </p>
             </div>
             <div className="rounded-[2rem] border border-[#d6ad57]/25 bg-[#fff8eb] p-5 text-[#1b130c] shadow-2xl shadow-black/25">
               <div className="grid gap-4 sm:grid-cols-[0.9fr_1.1fr] sm:items-center">
                 <figure className="rounded-2xl bg-gradient-to-br from-white via-[#fff8eb] to-[#d6ad57] p-3">
-                  <img className="h-80 w-full object-contain drop-shadow-2xl" src="/products/kids-bottle-original.jpeg" alt="Real BaBra luxury body lotion bottle front and back" />
+                  <img className="h-80 w-full object-contain drop-shadow-2xl" src="/brand/official-babra-bottle-kids.png" alt="Official BaBra Soft Care for Kids bottle" />
                 </figure>
                 <div className="p-2">
                   <p className="text-xs font-black uppercase tracking-[0.18em] text-[#a9141d]">Real product proof</p>
@@ -323,8 +419,8 @@ export default function HomePage() {
                     The website should prove the product exists without publishing full label data, barcode, QR, or complete ingredient details that can help copycats.
                     Full package information stays available on the physical product and for verified business partners.
                   </p>
-                  <a className="mt-6 inline-flex rounded-full bg-[#090706] px-5 py-3 font-black text-[#f1d58b]" href="/contact">
-                    Request samples
+                  <a className="mt-6 inline-flex rounded-full bg-[#090706] px-5 py-3 font-black text-[#f1d58b]" href="/store">
+                    Add to cart
                   </a>
                 </div>
               </div>
@@ -349,8 +445,8 @@ export default function HomePage() {
                   <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{product.tag}</span>
                   <h3 className="mt-3 font-serif text-3xl leading-tight">{product.name}</h3>
                   <p className="mt-3 leading-7 text-white/62">{product.note}</p>
-                  <a className="mt-5 inline-flex rounded-full border border-[#d6ad57]/35 px-4 py-2 text-sm font-black text-[#f1d58b]" href="/contact">
-                    Request samples
+                  <a className="mt-5 inline-flex rounded-full border border-[#d6ad57]/35 px-4 py-2 text-sm font-black text-[#f1d58b]" href="/store">
+                    Shop product
                   </a>
                 </div>
               </motion.article>
@@ -361,6 +457,10 @@ export default function HomePage() {
 
       <section id="science-of-babra" className="bg-[#fffaf1] px-5 py-20 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
+          <div className="mb-8 flex flex-wrap gap-3">
+            <span className="rounded-full bg-[#090706] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#f1d58b]">Science section</span>
+            <a className="rounded-full border border-black/10 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-black/62" href="#platform">Go to platform</a>
+          </div>
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} transition={{ duration: 0.65 }} variants={fadeUp}>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Science of BaBra</p>
@@ -460,7 +560,7 @@ export default function HomePage() {
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Brand protection</p>
               <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Enough to trust. Not enough to copy.</h2>
               <p className="mt-6 text-lg leading-8 text-white/64">
-                BaBra.com should help customers understand the product while keeping copy-sensitive information offline.
+                babra.store should help customers understand the product while keeping copy-sensitive information offline.
                 A protected verification marker stays out of the public website, so a duplicated product page cannot reproduce everything.
               </p>
             </motion.div>
@@ -556,7 +656,11 @@ export default function HomePage() {
 
       <section id="platform" className="bg-[#151110] px-5 py-20 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra.com platform</p>
+          <div className="mb-8 flex flex-wrap gap-3">
+            <span className="rounded-full bg-[#f1d58b] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#130d08]">Platform section</span>
+            <a className="rounded-full border border-white/15 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-white/62" href="#science-of-babra">Back to science</a>
+          </div>
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">babra.store platform</p>
           <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">
             Commerce, payments, rewards, delivery, and intelligence in one account.
           </h2>
@@ -665,7 +769,7 @@ export default function HomePage() {
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Worldwide readiness</p>
               <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Premium presentation first. Scalable systems behind it.</h2>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-black/64">
-                BaBra.com should sell trust before it sells a product: clear brand pillars, strong product visuals,
+                babra.store should sell trust before it sells a product: clear brand pillars, strong product visuals,
                 verified payment flows, clean delivery logic, and a roadmap that can support Rwanda, East Africa, and global markets.
               </p>
             </div>
@@ -691,6 +795,33 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <footer className="border-t border-white/10 bg-[#090706] px-5 py-10 text-white md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-5">
+          <div>
+            <p className="font-serif text-3xl">babra.store</p>
+            <p className="mt-2 text-sm text-white/58">Official BaBra Store for premium skincare, Rwanda delivery, wholesale, and support.</p>
+          </div>
+          <div className="flex flex-wrap gap-3 text-sm font-bold text-white/72">
+            {[
+              ["Store", "/store"],
+              ["Sample Request", "/sample-request"],
+              ["Wholesale", "/wholesale-distributor"],
+              ["Jobs", "/job-application"],
+              ["Lost Documents", "/lost-documents"],
+              ["Showroom Form", "/contact-showroom"],
+              ["Privacy", "/privacy"],
+              ["Terms", "/terms"],
+              ["Returns", "/returns"],
+              ["Delivery", "/delivery"],
+              ["Contact", "/contact"]
+            ].map(([label, href]) => (
+              <a key={label} className="rounded-full border border-white/10 px-4 py-2 hover:border-[#d6ad57]/60 hover:text-[#f1d58b]" href={href}>
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

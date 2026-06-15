@@ -31,7 +31,7 @@ export default function HoldingPage() {
     <main className="min-h-screen bg-[#090706] text-white">
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">BaBra.com</a>
+          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
           <div className="mt-12 max-w-5xl">
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Corporate structure</p>
             <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">EI BaBra Holding Ltd.</h1>

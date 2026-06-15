@@ -11,7 +11,7 @@ export default function DashboardPage() {
       <header className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]">User dashboard</p>
-          <h1 className="mt-2 font-serif text-5xl">Welcome to BaBra.com</h1>
+          <h1 className="mt-2 font-serif text-5xl">Welcome to babra.store</h1>
         </div>
         <button className="rounded-full bg-[#c79a3d] px-5 py-3 font-black text-black">AI Assistant</button>
       </header>

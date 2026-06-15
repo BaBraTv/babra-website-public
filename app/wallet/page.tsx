@@ -1,7 +1,7 @@
 export default function WalletPage() {
   return (
     <main className="min-h-screen bg-[#080606] px-6 py-10 text-white md:px-12">
-      <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">Back to BaBra.com</a>
+      <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">Back to babra.store</a>
       <h1 className="mt-6 font-serif text-6xl">BaBra Wallet Hub</h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-white/65">
         One wallet system for shopping, earnings, referrals, deposits, withdrawals, escrow, receipts, and payment notifications.

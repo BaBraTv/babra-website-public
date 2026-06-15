@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ServiceWorkerRegistration } from "./ServiceWorkerRegistration";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.babra.store"),
   title: {
-    default: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
-    template: "%s | BaBra.com"
+    default: "BaBra Lotion Rwanda | Premium Skincare, Samples & Wholesale",
+    template: "%s | babra.store"
   },
   description:
-    "BaBra Group brings together BaBra Cosmetics, BaBra Lotion, BaBra Pocket Fresh, BaBra Pads, BaBra Soap, BaBra Showroom, LifeTalk TV, and future holding company systems.",
+    "Shop BaBra Lotion Rwanda and premium BaBra skincare on babra.store. Request samples, wholesale or distributor pricing, showroom support, and Rwanda delivery by province, district, sector, cell, and village.",
   keywords: [
     "Best body lotion",
     "skin care",
@@ -19,8 +20,14 @@ export const metadata: Metadata = {
     "shea butter lotion",
     "aloe vera lotion",
     "luxury body lotion",
-    "BaBra Lotion",
+    "premium skincare Rwanda",
+    "premium cosmetics Rwanda",
     "BaBra Lotion Rwanda",
+    "BaBra Lotion Kigali",
+    "BaBra Lotion samples",
+    "BaBra Lotion wholesale",
+    "BaBra distributor Rwanda",
+    "BaBra Lotion",
     "BaBra Cosmetics",
     "BaBra Cosmetics Ltd",
     "BaBra",
@@ -47,27 +54,40 @@ export const metadata: Metadata = {
     "family reintegration"
   ],
   openGraph: {
-    title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
+    title: "BaBra Lotion Rwanda | Premium Skincare Store",
     description:
-      "BaBra Group ecosystem for premium cosmetics, showroom retail, media, LifeTalk TV, and future African business growth.",
+      "Official babra.store platform for BaBra Lotion, premium skincare, samples, wholesale, distributor requests, showroom support, and Rwanda delivery.",
     url: "https://www.babra.store",
-    siteName: "BaBra.com",
+    siteName: "babra.store",
     images: [{ url: "/brand/logo.jpeg", width: 1200, height: 630, alt: "BaBra Cosmetics Ltd" }],
     locale: "en_RW",
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
-    description: "BaBra Group ecosystem: cosmetics, showroom, LifeTalk TV, and Luxury In Every Touch.",
+    title: "BaBra Lotion Rwanda | Premium Skincare Store",
+    description: "Shop BaBra Lotion Rwanda with samples, wholesale, showroom support, and Rwanda delivery.",
     images: ["/brand/logo.jpeg"]
+  },
+  applicationName: "BaBra Store",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "BaBra Store",
+    statusBarStyle: "black-translucent"
+  },
+  alternates: {
+    canonical: "https://www.babra.store"
   }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ServiceWorkerRegistration />
+        {children}
+      </body>
     </html>
   );
 }

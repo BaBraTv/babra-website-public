@@ -9,6 +9,17 @@ const categories = [
 
 const upcoming = ["NZABIGERAHO", "BaBra Founder Story", "Factory To Shelf", "Women In Business", "Youth Opportunity Series"];
 
+const featuredMedia = [
+  {
+    title: "BaBra Production Story",
+    label: "Factory to shelf",
+    description:
+      "A public-safe BaBra production media feature showing the product journey, premium brand standards, and customer trust without exposing formulas, QR codes, barcodes, or supplier-sensitive details.",
+    video: "/videos/babra-production-ad.mp4",
+    poster: "/brand/logo.jpeg"
+  }
+];
+
 export const metadata = {
   title: "LifeTalk TV",
   description:
@@ -20,7 +31,7 @@ export default function LifeTalkPage() {
     <main className="min-h-screen bg-[#060505] text-white">
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">BaBra.com</a>
+          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
           <div className="mt-10 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Media Division</p>
@@ -54,6 +65,40 @@ export default function LifeTalkPage() {
               <article key={title} className="min-h-56 rounded-lg border border-white/10 bg-[#18110f] p-6 shadow-xl shadow-black/20">
                 <h3 className="font-serif text-4xl">{title}</h3>
                 <p className="mt-4 leading-7 text-white/62">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#120b09] px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Featured media</p>
+              <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">BaBra videos visitors can watch.</h2>
+            </div>
+            <a className="rounded-full border border-white/20 px-5 py-3 font-black text-white" href="/store">
+              Shop BaBra Store
+            </a>
+          </div>
+
+          <div className="mt-10 grid gap-6">
+            {featuredMedia.map((item) => (
+              <article key={item.title} className="overflow-hidden rounded-lg border border-[#d6ad57]/25 bg-[#18110f] shadow-2xl shadow-black/30">
+                <video
+                  className="aspect-video w-full bg-black object-cover"
+                  src={item.video}
+                  poster={item.poster}
+                  controls
+                  playsInline
+                  preload="metadata"
+                />
+                <div className="p-6 md:p-8">
+                  <span className="text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">{item.label}</span>
+                  <h3 className="mt-3 font-serif text-4xl leading-none md:text-5xl">{item.title}</h3>
+                  <p className="mt-4 max-w-3xl leading-8 text-white/64">{item.description}</p>
+                </div>
               </article>
             ))}
           </div>

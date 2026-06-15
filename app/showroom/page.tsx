@@ -18,7 +18,7 @@ export default function ShowroomPage() {
     <main className="min-h-screen bg-[#090706] text-white">
       <section className="relative overflow-hidden px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">BaBra.com</a>
+          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
           <div className="mt-10 grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Retail experience</p>

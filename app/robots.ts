@@ -5,9 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/private", "/admin"]
+      disallow: ["/api/private", "/admin", "/dashboard"]
     },
     sitemap: "https://www.babra.store/sitemap.xml"
   };
 }
-

@@ -1,0 +1,130 @@
+export const site = {
+  name: "BaBra Store",
+  domain: "babra.store",
+  url: "https://www.babra.store",
+  company: "BaBra Cosmetics Ltd",
+  email: "babracosmeticsltd@gmail.com",
+  phone: "+250 788 351 482",
+  whatsapp: "250788351482",
+  address: "Kigali, Rwanda",
+  license:
+    "Rwanda FDA and premises license records are managed by BaBra Cosmetics Ltd and shared with verified partners when required.",
+  manufacturing:
+    "GMP-supported and ISO cosmetics manufacturing support through verified production partners.",
+  positioning: "Hydroquinone-free premium skincare positioning with protected formula details."
+};
+
+export type ProductSlug = "women" | "men" | "kids" | "serum";
+
+export type StoreProduct = {
+  slug: ProductSlug;
+  name: string;
+  shortName: string;
+  category: string;
+  image: string;
+  price: number;
+  size: string;
+  description: string;
+  audience: string;
+  benefits: string[];
+  usage: string;
+  alt: string;
+};
+
+export const products: StoreProduct[] = [
+  {
+    slug: "women",
+    name: "BaBra Lotion for Women",
+    shortName: "Women Lotion",
+    category: "Women",
+    image: "/brand/official-babra-bottle.png",
+    price: 8500,
+    size: "500ml",
+    description:
+      "Premium daily body lotion for soft hydration, refined fragrance, and polished skin comfort.",
+    audience: "Women and premium daily skincare customers",
+    benefits: ["Long-lasting hydration feel", "Soft daily comfort", "Premium fragrance direction", "Retail-ready bottle"],
+    usage: "Apply to clean skin after bathing or whenever skin needs comfort. Avoid contact with eyes.",
+    alt: "BaBra Lotion for Women 500ml premium body lotion bottle"
+  },
+  {
+    slug: "men",
+    name: "BaBra Lotion for Men",
+    shortName: "Men Lotion",
+    category: "Men",
+    image: "/brand/official-babra-bottle-men.png",
+    price: 8500,
+    size: "500ml",
+    description:
+      "Clean, confident body care for men with a premium fresh feel and everyday skin comfort.",
+    audience: "Men, salons, retailers, and grooming customers",
+    benefits: ["Fresh confident feel", "Non-greasy comfort", "Premium masculine direction", "Wholesale-ready SKU"],
+    usage: "Apply to clean, dry skin. Use daily for a fresh premium body-care routine.",
+    alt: "BaBra Lotion for Men 500ml premium body lotion bottle"
+  },
+  {
+    slug: "kids",
+    name: "BaBra Soft Care for Kids",
+    shortName: "Kids Lotion",
+    category: "Kids",
+    image: "/brand/official-babra-bottle-kids.png",
+    price: 8000,
+    size: "500ml",
+    description:
+      "Family-friendly lotion presentation for gentle daily comfort while keeping sensitive product details protected.",
+    audience: "Kids and family skincare routines",
+    benefits: ["Gentle family positioning", "Soft daily comfort", "Parent-friendly guidance", "Safe public product preview"],
+    usage: "Apply under adult supervision. Avoid eyes and broken skin. Stop use if irritation occurs.",
+    alt: "BaBra Soft Care for Kids 500ml family body lotion bottle"
+  },
+  {
+    slug: "serum",
+    name: "BaBra Anti-Wrinkle Serum",
+    shortName: "Serum",
+    category: "Serum",
+    image: "/products/serum-safe-preview.jpg",
+    price: 18000,
+    size: "30ml",
+    description:
+      "Premium serum preview for advanced care positioning, retail shelf presence, and partner discussions.",
+    audience: "Advanced skincare customers and verified retail partners",
+    benefits: ["Premium shelf presence", "Advanced care positioning", "Partner-ready preview", "Protected label details"],
+    usage: "Use a small amount on clean skin as directed on the physical product label.",
+    alt: "BaBra Anti-Wrinkle Serum premium bottle and retail box"
+  }
+];
+
+export const pricingTiers = [
+  { key: "Retail", min: 1, max: 11, discount: 0, note: "Standard customer price" },
+  { key: "Reseller", min: 12, max: 47, discount: 0.08, note: "Starter reseller margin" },
+  { key: "Wholesale", min: 48, max: 119, discount: 0.15, note: "MOQ pricing for shops and salons" },
+  { key: "Distributor", min: 120, max: null, discount: 0.25, note: "Best margin with invoice support" }
+] as const;
+
+export const rwandaLocations = {
+  "Kigali City": ["Gasabo", "Kicukiro", "Nyarugenge"],
+  "Eastern Province": ["Bugesera", "Gatsibo", "Kayonza", "Kirehe", "Ngoma", "Nyagatare", "Rwamagana"],
+  "Northern Province": ["Burera", "Gakenke", "Gicumbi", "Musanze", "Rulindo"],
+  "Southern Province": ["Gisagara", "Huye", "Kamonyi", "Muhanga", "Nyamagabe", "Nyanza", "Nyaruguru", "Ruhango"],
+  "Western Province": ["Karongi", "Ngororero", "Nyabihu", "Nyamasheke", "Rubavu", "Rusizi", "Rutsiro"]
+};
+
+export function getProduct(slug: string) {
+  return products.find((product) => product.slug === slug);
+}
+
+export function getPricing(quantity: number) {
+  return pricingTiers.find((tier) => quantity >= tier.min && (tier.max === null || quantity <= tier.max)) ?? pricingTiers[0];
+}
+
+export function formatRwf(value: number) {
+  return new Intl.NumberFormat("en-RW", {
+    style: "currency",
+    currency: "RWF",
+    maximumFractionDigits: 0
+  }).format(value);
+}
+
+export function whatsappOrderUrl(message: string) {
+  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
+}
