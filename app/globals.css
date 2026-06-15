@@ -3,15 +3,27 @@
 @tailwind utilities;
 
 :root {
+  --babra-black: #080606;
+  --babra-gold: #f1d58b;
+  --babra-blue: #4ebeff;
+  --babra-blue-soft: rgba(78, 190, 255, 0.18);
+  --babra-blue-line: rgba(78, 190, 255, 0.42);
   color-scheme: dark;
-  background: #080606;
+  background: var(--babra-black);
   scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--babra-blue);
+  color: #061017;
 }
 
 body {
   margin: 0;
   color: #fff;
-  background: #080606;
+  background:
+    radial-gradient(circle at 50% -10%, var(--babra-blue-soft), transparent 28rem),
+    var(--babra-black);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -20,6 +32,23 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--babra-blue);
+  outline-offset: 3px;
+}
+
+.babra-blue-glow {
+  box-shadow: 0 0 0 1px var(--babra-blue-line), 0 24px 80px rgba(78, 190, 255, 0.18);
+}
+
+.babra-blue-line {
+  background: linear-gradient(90deg, transparent, var(--babra-blue), transparent);
 }
 
 @keyframes babra-orbit {
