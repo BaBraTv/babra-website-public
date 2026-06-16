@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
 import { ContactShowroomForm, JobApplicationForm, LostDocumentForm, SampleRequestForm, WholesaleDistributorForm } from "./FormsClient";
+import { divisionForms } from "./division-forms-content";
 
 export const metadata: Metadata = {
-  title: "BaBra Service Forms | Jobs, Samples, Wholesale & Showroom",
+  title: "EI BaBra Holding Forms | Cosmetics, Farm, Schools, LifeTalk TV & Foundation",
   description:
-    "Official babra.store forms for job applications, lost documents announcements, sample requests, wholesale distributor requests, showroom contact, and Rwanda address flow."
+    "Separated EI BaBra Holding forms for BaBra Cosmetics, BaBra Farm, BaBra Schools, LifeTalk TV, BaBra Foundation, jobs, samples, wholesale, and Rwanda address flow."
 };
+
+const divisionRoutes = [
+  ["BaBra Cosmetics", "/forms/cosmetics", divisionForms.cosmetics.description],
+  ["BaBra Farm", "/forms/farm", divisionForms.farm.description],
+  ["BaBra Schools", "/forms/schools", divisionForms.schools.description],
+  ["LifeTalk TV", "/forms/lifetalk-tv", divisionForms["lifetalk-tv"].description],
+  ["BaBra Foundation", "/forms/foundation", divisionForms.foundation.description]
+];
 
 const formRoutes = [
   ["Apply for job", "#job-application", "Send your name, phone, role, and Rwanda address to BaBra."],
@@ -26,16 +35,16 @@ export default function FormsPage() {
         </a>
         <section className="mt-8 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Official BaBra actions</p>
-            <h1 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Choose what you need and send it directly to BaBra.</h1>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">EI BaBra Holding forms</p>
+            <h1 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Choose the division first, then send the right request.</h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/66">
-              Apply for work, report a lost or found document, request samples, request wholesale, or contact the showroom.
-              Each form opens WhatsApp with the right information already organized.
+              BaBra Cosmetics, Farm, Schools, LifeTalk TV, and Foundation requests are separated so visitors reach the correct team.
+              Existing cosmetics, jobs, lost-document, sample, wholesale, and showroom forms remain available below.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="#sample-request">Request samples</a>
-              <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="#wholesale-distributor">Wholesale request</a>
-              <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="#contact-showroom">Contact showroom</a>
+              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/forms/cosmetics">Cosmetics forms</a>
+              <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/forms/farm">Farm forms</a>
+              <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/forms/lifetalk-tv">LifeTalk TV forms</a>
             </div>
           </div>
           <div className="rounded-[1.5rem] border border-[#d6ad57]/25 bg-white/[0.06] p-6">
@@ -53,6 +62,19 @@ export default function FormsPage() {
             </div>
           </div>
         </section>
+
+        <section className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          {divisionRoutes.map(([title, href, text]) => (
+            <a key={title} className="rounded-2xl border border-[#4ebeff]/18 bg-white/[0.055] p-5 hover:border-[#4ebeff]/55" href={href}>
+              <h2 className="font-serif text-2xl">{title}</h2>
+              <p className="mt-3 text-sm leading-6 text-white/62">{text}</p>
+            </a>
+          ))}
+        </section>
+
+        <div className="mt-10">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">Quick public actions</p>
+        </div>
 
         <section className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {formRoutes.map(([title, href, text]) => (
