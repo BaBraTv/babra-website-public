@@ -15,6 +15,12 @@ const services = [
 ];
 
 const documentTypes = ["National ID", "Driving Permit", "Passport", "Student Card", "ATM Card", "Certificate", "Insurance Card", "Other document"];
+const lostFoundStatuses = ["Lost report submitted", "Payment pending", "Published", "Found", "Claimed", "Completed"];
+const paymentFees = [
+  ["Report lost document", "1000 RWF posting fee", "Paid manually by MTN MoMo, Airtel Money, bank transfer, or cash confirmation before publishing."],
+  ["Claim found document", "Claim / service fee", "Claim payment is verified separately from the finder reward process."],
+  ["Finder reward process", "Separate agreement", "Finder reward is handled separately and never shown as automatic payment success."]
+];
 
 function whatsAppHref(service: string) {
   return `https://wa.me/250788351482?text=${encodeURIComponent(`Hello Lost & Found Rwanda, I need this service: ${service}`)}`;
@@ -44,10 +50,36 @@ export default function LostAndFoundPage() {
             Report lost documents, report found documents, search safely, claim found items, and handle finder reward guidance.
             This service is independent from BaBra Cosmetics, Farm, Schools, and LifeTalk TV.
           </p>
+          <p className="mt-4 max-w-3xl rounded-2xl border border-white/15 bg-black/25 px-5 py-4 text-sm font-black text-white/80">
+            Notification email route: <a className="text-[#fb923c]" href="mailto:lostfound@babra.store">lostfound@babra.store</a>
+          </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a className="rounded-full bg-[#fb923c] px-6 py-3 font-black text-[#071426]" href={whatsAppHref("Report Lost Document")} target="_blank" rel="noopener noreferrer">Report lost document</a>
             <a className="rounded-full bg-white px-6 py-3 font-black text-[#071426]" href={whatsAppHref("Report Found Document")} target="_blank" rel="noopener noreferrer">Report found document</a>
             <a className="rounded-full border border-white/30 px-6 py-3 font-black text-white" href="#services">View services</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-[#0b1f3d] px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#fb923c]">Manual payment flow</p>
+          <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">No fake payment success.</h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {paymentFees.map(([title, fee, text]) => (
+              <article key={title} className="rounded-2xl border border-[#fb923c]/30 bg-white/[0.055] p-6">
+                <h3 className="font-serif text-3xl">{title}</h3>
+                <p className="mt-3 text-xl font-black text-[#fb923c]">{fee}</p>
+                <p className="mt-3 leading-7 text-white/64">{text}</p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-8 grid gap-3 md:grid-cols-6">
+            {lostFoundStatuses.map((status) => (
+              <div key={status} className="rounded-2xl border border-white/10 bg-black/25 px-4 py-4 text-sm font-black text-white/76">
+                {status}
+              </div>
+            ))}
           </div>
         </div>
       </section>

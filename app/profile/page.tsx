@@ -1,4 +1,4 @@
-import { StoreClient } from "../store/StoreClient";
+import { PlatformClient } from "../PlatformClient";
 
 export const metadata = {
   title: "Customer Profile | babra.store",
@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function ProfilePage() {
-  return <StoreClient />;
+  return <PlatformClient mode="account" />;
 }

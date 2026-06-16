@@ -14,6 +14,19 @@ const quickFacts = [
   ["Best route", "WhatsApp for fastest response"],
 ];
 
+const businessEmails = [
+  ["General information", "info@babra.store"],
+  ["Customer support", "support@babra.store"],
+  ["Cosmetics", "cosmetics@babra.store"],
+  ["Farm", "farm@babra.store"],
+  ["Schools", "schools@babra.store"],
+  ["LifeTalk TV", "lifetalk@babra.store"],
+  ["Foundation", "foundation@babra.store"],
+  ["Lost & Found", "lostfound@babra.store"],
+  ["Sales", "sales@babra.store"],
+  ["Investors", "investors@babra.store"]
+];
+
 export const metadata = {
   title: "Contact BaBra Cosmetics",
   description:
@@ -67,6 +80,21 @@ export default function ContactPage() {
                 <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{label}</span>
                 <p className="mt-3 text-lg font-black text-white/86">{value}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#071426] px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#4ebeff]">Business email readiness</p>
+          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Correct email route for every BaBra division.</h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {businessEmails.map(([label, email]) => (
+              <a key={email} className="rounded-2xl border border-white/10 bg-white/[0.055] p-5 hover:border-[#4ebeff]/60" href={`mailto:${email}`}>
+                <span className="text-xs font-black uppercase tracking-[0.18em] text-[#4ebeff]">{label}</span>
+                <p className="mt-3 break-words font-black text-white/82">{email}</p>
+              </a>
             ))}
           </div>
         </div>

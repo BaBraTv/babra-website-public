@@ -1,4 +1,4 @@
-import { StoreClient } from "../store/StoreClient";
+import { PlatformClient } from "../PlatformClient";
 
 export const metadata = {
   title: "Order Tracking | babra.store",
@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function OrdersPage() {
-  return <StoreClient />;
+  return <PlatformClient mode="account" />;
 }

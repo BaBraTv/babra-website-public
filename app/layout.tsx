@@ -62,6 +62,9 @@ export const metadata: Metadata = {
     "vulnerable children support Rwanda",
     "family reintegration"
   ],
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "add-google-search-console-verification-token"
+  },
   openGraph: {
     title: "EI BaBra Holding Ltd | Corporate Ecosystem Portal",
     description:
@@ -91,12 +94,43 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: "EI BaBra Holding Ltd",
+        url: "https://www.babra.store",
+        logo: "https://www.babra.store/brand/logo.jpeg",
+        email: "info@babra.store",
+        sameAs: ["https://www.babra.store"]
+      },
+      {
+        "@type": "LocalBusiness",
+        name: "BaBra Showroom",
+        url: "https://www.babra.store/showroom",
+        address: "Kigali, Rwanda",
+        telephone: "+250788351482",
+        email: "support@babra.store"
+      },
+      {
+        "@type": "Product",
+        name: "BaBra Lotion Rwanda",
+        brand: { "@type": "Brand", name: "BaBra Cosmetics" },
+        image: "https://www.babra.store/brand/official-babra-bottle.png",
+        description: "Premium BaBra Lotion Rwanda skincare product with protected formula details.",
+        offers: { "@type": "Offer", priceCurrency: "RWF", availability: "https://schema.org/InStock" }
+      }
+    ]
+  };
+
   return (
     <html lang="en">
       <body>
         <ServiceWorkerRegistration />
         <LanguageBar />
         {children}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       </body>
     </html>
   );

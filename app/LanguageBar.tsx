@@ -27,7 +27,7 @@ export function LanguageBar() {
   return (
     <div className="sticky top-0 z-[60] border-b border-white/10 bg-[#050404]/96 px-4 py-2 text-white backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2">
-        <span className="text-xs font-black uppercase tracking-[0.18em] text-[#f1d58b]">Language:</span>
+        <span className="text-xs font-black uppercase tracking-[0.18em] text-[#f1d58b]">🌐 Language:</span>
         <div className="flex flex-wrap items-center gap-1 text-xs font-black">
           {languages.map(([code, label]) => (
             <button

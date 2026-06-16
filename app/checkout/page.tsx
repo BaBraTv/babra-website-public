@@ -1,4 +1,4 @@
-import { StoreClient } from "../store/StoreClient";
+import { PlatformClient } from "../PlatformClient";
 
 export const metadata = {
   title: "Checkout | babra.store",
@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function CheckoutPage() {
-  return <StoreClient />;
+  return <PlatformClient mode="checkout" />;
 }

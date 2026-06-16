@@ -14,7 +14,7 @@ export const site = {
   positioning: "Hydroquinone-free premium skincare positioning with protected formula details."
 };
 
-export type ProductSlug = "women" | "men" | "kids" | "serum";
+export type ProductSlug = "women" | "men" | "kids" | "serum" | "soap" | "pads" | "pocket-fresh";
 
 export type StoreProduct = {
   slug: ProductSlug;
@@ -91,6 +91,48 @@ export const products: StoreProduct[] = [
     benefits: ["Premium shelf presence", "Advanced care positioning", "Partner-ready preview", "Protected label details"],
     usage: "Use a small amount on clean skin as directed on the physical product label.",
     alt: "BaBra Anti-Wrinkle Serum premium bottle and retail box"
+  },
+  {
+    slug: "soap",
+    name: "BaBra Soap",
+    shortName: "Soap",
+    category: "Soap",
+    image: "/brand/logo.jpeg",
+    price: 2500,
+    size: "Single bar",
+    description: "Future premium hygiene and skincare soap line for daily BaBra body-care routines.",
+    audience: "Retail customers, shops, hotels, and family hygiene buyers",
+    benefits: ["Daily hygiene positioning", "Premium beauty ecosystem fit", "Retail-ready roadmap", "Public-safe preview"],
+    usage: "Use with water for daily cleansing. Follow the physical product label when available.",
+    alt: "BaBra Soap premium public-safe preview"
+  },
+  {
+    slug: "pads",
+    name: "BaBra Pads",
+    shortName: "Pads",
+    category: "Pads",
+    image: "/brand/logo.jpeg",
+    price: 3000,
+    size: "Pack",
+    description: "Personal-care product line positioned for comfort, confidence, and trusted BaBra distribution.",
+    audience: "Retail customers, shops, pharmacies, schools, and distributors",
+    benefits: ["Personal-care confidence", "Retail shelf potential", "Distributor-ready category", "Public-safe preview"],
+    usage: "Use as directed on the physical product packaging.",
+    alt: "BaBra Pads public-safe product category preview"
+  },
+  {
+    slug: "pocket-fresh",
+    name: "BaBra Pocket Fresh",
+    shortName: "Pocket Fresh",
+    category: "Pocket Fresh",
+    image: "/brand/logo.jpeg",
+    price: 1500,
+    size: "Pocket size",
+    description: "Portable freshness product category for modern customers, retail counters, and travel use.",
+    audience: "Retail customers, students, travelers, shops, and beauty counters",
+    benefits: ["Portable freshness", "Impulse retail category", "Youth-friendly product line", "Wholesale-ready roadmap"],
+    usage: "Use as directed on the physical product packaging.",
+    alt: "BaBra Pocket Fresh public-safe product category preview"
   }
 ];
 

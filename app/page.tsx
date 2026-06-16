@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { InstallAppButton } from "./InstallAppButton";
 
 export const metadata: Metadata = {
   title: "EI BaBra Holding Ltd | Beauty, Agriculture, Education, Media & Impact",
@@ -13,6 +14,7 @@ const nav = [
   ["Foundation", "/foundation"],
   ["Investors", "#investors"],
   ["Careers", "/job-application"],
+  ["My Account", "/account"],
   ["Contact", "/contact"]
 ];
 
@@ -112,9 +114,14 @@ export default function HoldingHomePage() {
             ))}
           </nav>
 
-          <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="/store">
-            Shop Now
-          </a>
+          <div className="flex flex-wrap items-center gap-2">
+            <a className="hidden rounded-full border border-white/10 px-4 py-2 text-sm font-black text-white/78 md:inline-flex" href="/login">Login</a>
+            <a className="hidden rounded-full border border-white/10 px-4 py-2 text-sm font-black text-white/78 md:inline-flex" href="/signup">Sign Up</a>
+            <InstallAppButton />
+            <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="/store">
+              Shop Now
+            </a>
+          </div>
         </div>
       </header>
 
@@ -249,6 +256,26 @@ export default function HoldingHomePage() {
               <a key={name} className="rounded-2xl border border-white/10 bg-white/[0.055] p-5 font-black text-white/82 hover:border-[#4ebeff]/60" href={href}>
                 {name}
               </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">FAQ</p>
+          <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Common BaBra questions.</h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            {[
+              ["What is EI BaBra Holding Ltd?", "The parent ecosystem for BaBra Cosmetics, Farm, Schools, LifeTalk TV, Rwanda Mobile Hub, Foundation, and public-service platforms."],
+              ["Can I buy BaBra Lotion in Rwanda?", "Yes. BaBra Store supports cart, checkout, Rwanda delivery information, WhatsApp fallback, and manual payment confirmation."],
+              ["Is Lost & Found part of Cosmetics?", "No. Lost & Found Rwanda is independent and has its own reporting, claim, fee, and status process."],
+              ["Are payments automatic?", "Not yet. Payments run in manual confirmation mode until official APIs are connected, so no fake payment success is shown."]
+            ].map(([question, answer]) => (
+              <article key={question} className="rounded-2xl border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
+                <h3 className="font-serif text-3xl">{question}</h3>
+                <p className="mt-3 leading-7 text-black/62">{answer}</p>
+              </article>
             ))}
           </div>
         </div>

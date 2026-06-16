@@ -2,16 +2,16 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "BaBra Store",
+    name: "BaBra",
     short_name: "BaBra",
-    description: "Official BaBra Store for premium Rwanda skincare, delivery, wholesale, and WhatsApp ordering.",
-    start_url: "/store",
+    description: "Beauty, services, media, farming, education and public support in one African ecosystem.",
+    start_url: "/",
     scope: "/",
     display: "standalone",
     background_color: "#090706",
     theme_color: "#090706",
     orientation: "portrait",
-    categories: ["shopping", "business", "lifestyle"],
+    categories: ["shopping", "business", "lifestyle", "education", "productivity"],
     icons: [
       {
         src: "/icons/icon.svg",

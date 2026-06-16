@@ -1,4 +1,4 @@
-import { StoreClient } from "../store/StoreClient";
+import { PlatformClient } from "../PlatformClient";
 
 export const metadata = {
   title: "Cart | babra.store",
@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function CartPage() {
-  return <StoreClient />;
+  return <PlatformClient mode="cart" />;
 }

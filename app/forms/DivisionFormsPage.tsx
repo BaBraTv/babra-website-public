@@ -1,5 +1,14 @@
 import { divisionForms, type DivisionFormsKey } from "./division-forms-content";
 
+const emails: Record<DivisionFormsKey, string> = {
+  cosmetics: "cosmetics@babra.store",
+  farm: "farm@babra.store",
+  schools: "schools@babra.store",
+  "lifetalk-tv": "lifetalk@babra.store",
+  "rwanda-mobile-hub": "support@babra.store",
+  foundation: "foundation@babra.store"
+};
+
 function whatsappHref(formName: string) {
   return `https://wa.me/250788351482?text=${encodeURIComponent(`Hello EI BaBra Holding, I want to open this form: ${formName}`)}`;
 }
@@ -22,6 +31,9 @@ export function DivisionFormsPage({ division }: { division: DivisionFormsKey }) 
           <p className="text-sm font-black uppercase tracking-[0.24em]" style={{ color: data.accent }}>Separated by division</p>
           <h1 className="mt-3 font-serif text-5xl leading-none md:text-7xl">{data.name}</h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-white/64">{data.description}</p>
+          <p className="mt-4 rounded-2xl border border-white/10 bg-black/25 px-5 py-4 text-sm font-black text-white/76">
+            Notification email route: <a className="text-[#f1d58b]" href={`mailto:${emails[division]}`}>{emails[division]}</a>
+          </p>
         </section>
 
         <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
