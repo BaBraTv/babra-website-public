@@ -10,6 +10,7 @@ const PRECACHE = [
   "/lifetalk-tv",
   "/farm",
   "/schools",
+  "/schools/masterplan",
   "/foundation",
   "/account",
   OFFLINE_URL,
