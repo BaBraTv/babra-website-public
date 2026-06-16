@@ -35,7 +35,7 @@ const heroBottles = [
     image: "/brand/official-babra-bottle.png"
   },
   {
-    name: "BaBra Lotion Soft Care for Kids",
+    name: "BaBra Lotion Baby",
     image: "/brand/official-babra-bottle-kids.png"
   },
   {
@@ -45,7 +45,7 @@ const heroBottles = [
 ];
 const products = [
   {
-    name: "BaBra Soft Care for Kids",
+    name: "BaBra Lotion Baby",
     tag: "Family Care",
     note: "Gentle comfort for children and family skincare routines without exposing full label details online.",
     image: "/brand/official-babra-bottle-kids.png",
@@ -151,10 +151,10 @@ const deliverySteps = [
 ];
 
 const wholesaleTiers = [
-  ["Retail", "1-11 units", "Standard price with simple MoMo or wallet checkout."],
-  ["Starter reseller", "12+ units", "Small discount for first-time resellers."],
-  ["Wholesale", "48+ units", "MOQ-based pricing for shops and salons."],
-  ["Distributor", "120+ units", "Best margin, invoice, payment confirmation, and EBM-ready receipt."]
+  ["Retail", "Official public price", "Standard 500ml BaBra Lotion retail price: 25,000 RWF."],
+  ["Starter reseller", "Private pricing", "Contact BaBra Cosmetics for reseller pricing."],
+  ["Wholesale", "Private pricing", "Contact BaBra Cosmetics for distributor and wholesale pricing."],
+  ["Distributor", "Private pricing", "Distributor pricing is shared only after business verification."]
 ];
 
 const proofPoints = [
@@ -416,7 +416,7 @@ export default function HomePage() {
             <div className="rounded-[2rem] border border-[#d6ad57]/25 bg-[#fff8eb] p-5 text-[#1b130c] shadow-2xl shadow-black/25">
               <div className="grid gap-4 sm:grid-cols-[0.9fr_1.1fr] sm:items-center">
                 <figure className="rounded-2xl bg-gradient-to-br from-white via-[#fff8eb] to-[#d6ad57] p-3">
-                  <img className="h-80 w-full object-contain drop-shadow-2xl" src="/brand/official-babra-bottle-kids.png" alt="Official BaBra Soft Care for Kids bottle" />
+                    <img className="h-80 w-full object-contain drop-shadow-2xl" src="/brand/official-babra-bottle-kids.png" alt="Official BaBra Lotion Baby bottle" />
                 </figure>
                 <div className="p-2">
                   <p className="text-xs font-black uppercase tracking-[0.18em] text-[#a9141d]">Real product proof</p>

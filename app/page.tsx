@@ -173,6 +173,32 @@ export default function HoldingHomePage() {
         </div>
       </section>
 
+      <section className="bg-[#0f0a08] px-5 py-16 text-white md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 rounded-[2rem] border border-[#f1d58b]/25 bg-[radial-gradient(circle_at_80%_20%,rgba(241,213,139,0.18),transparent_24rem),linear-gradient(135deg,#18110f,#090706)] p-6 shadow-2xl shadow-black/30 md:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">BaBra Lotion</p>
+            <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Luxury in Every Touch</h2>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">
+              Premium skincare for women, men, and babies.
+            </p>
+            <p className="mt-5 text-3xl font-black text-[#f1d58b]">Starting from 25,000 RWF</p>
+            <a className="mt-8 inline-flex rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/store">Shop Now</a>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              ["/brand/official-babra-bottle.png", "BaBra Lotion Women - Premium 500ml - 25,000 RWF"],
+              ["/brand/official-babra-bottle-men.png", "BaBra Lotion Men - Premium 500ml - 25,000 RWF"],
+              ["/brand/official-babra-bottle-kids.png", "BaBra Lotion Baby - Premium 500ml - 25,000 RWF"]
+            ].map(([src, alt]) => (
+              <figure key={src} className="rounded-2xl bg-white p-4 shadow-xl shadow-black/20">
+                <img className="h-72 w-full object-contain" src={src} alt={alt} loading="lazy" />
+                <figcaption className="mt-3 text-center text-sm font-black text-[#130d08]">Premium 500ml<br />25,000 RWF</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="companies" className="border-y border-white/10 bg-[#0f0a08] px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">Main divisions</p>

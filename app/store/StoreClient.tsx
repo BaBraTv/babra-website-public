@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { formatRwf, getPricing, products, rwandaLocations, site, whatsappOrderUrl } from "../commerce-data";
+import { useEffect, useMemo, useState } from "react";
+import { formatRwf, formatUsdEstimate, products, rwandaLocations, site, whatsappOrderUrl } from "../commerce-data";
 
 type CartItem = {
   slug: string;
@@ -46,7 +46,20 @@ export function StoreClient() {
   const [customerType, setCustomerType] = useState("Retail");
   const [orderCode, setOrderCode] = useState("BABRA-STORE-0001");
   const [selectedProvince, setSelectedProvince] = useState("Kigali City");
+  const [priceOverrides, setPriceOverrides] = useState<Record<string, number>>({});
   const copy = translations[language];
+
+  useEffect(() => {
+    try {
+      setPriceOverrides(JSON.parse(window.localStorage.getItem("babra-price-overrides") || "{}"));
+    } catch {
+      setPriceOverrides({});
+    }
+  }, []);
+
+  function priceFor(slug: string, fallback: number) {
+    return priceOverrides[slug] || fallback;
+  }
 
   const cartLines = useMemo(
     () =>
@@ -59,10 +72,8 @@ export function StoreClient() {
     [cart]
   );
 
-  const quantity = cart.reduce((total, item) => total + item.quantity, 0);
-  const tier = getPricing(quantity || 1);
-  const subtotal = cartLines.reduce((total, item) => total + item!.product.price * item!.quantity, 0);
-  const total = Math.round(subtotal * (1 - tier.discount));
+  const subtotal = cartLines.reduce((total, item) => total + priceFor(item!.product.slug, item!.product.price) * item!.quantity, 0);
+  const total = subtotal;
 
   function addToCart(slug: string) {
     setCart((current) => {
@@ -86,7 +97,8 @@ export function StoreClient() {
   const whatsappMessage = [
     `Hello ${site.name}, I want to place an order on ${site.domain}.`,
     `Items: ${cartLines.map((item) => `${item!.product.shortName} x${item!.quantity}`).join(", ") || "Please advise"}.`,
-    `Tier: ${tier.key}. Estimated total: ${formatRwf(total)}.`,
+    `Estimated retail total: ${formatRwf(total)}.`,
+    "Wholesale/distributor pricing: please contact BaBra Cosmetics for private pricing.",
     "Delivery: Rwanda address will be confirmed by province, district, sector, cell, village, phone, landmark, and notes."
   ].join("\n");
 
@@ -149,7 +161,9 @@ export function StoreClient() {
                   <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{product.category}</span>
                   <h3 className="mt-3 font-serif text-3xl leading-tight">{product.name}</h3>
                   <p className="mt-3 leading-7 text-white/62">{product.description}</p>
-                  <p className="mt-4 text-xl font-black text-[#f1d58b]">{formatRwf(product.price)}</p>
+                  <p className="mt-4 text-sm font-black uppercase tracking-[0.16em] text-[#d6ad57]">{product.size}</p>
+                  <p className="mt-1 text-xl font-black text-[#f1d58b]">{formatRwf(priceFor(product.slug, product.price))}</p>
+                  <p className="mt-1 text-xs font-bold text-white/48">{formatUsdEstimate(priceFor(product.slug, product.price))}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     <button className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" onClick={() => addToCart(product.slug)} type="button">
                       {copy.add}
@@ -170,9 +184,9 @@ export function StoreClient() {
           <div>
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">{copy.cart}</p>
             <h2 className="mt-3 font-serif text-5xl leading-none">Cart and pricing logic.</h2>
-            <p className="mt-5 leading-8 text-black/64">
-              Quantity automatically routes the order into retail, reseller, wholesale, or distributor pricing.
-            </p>
+              <p className="mt-5 leading-8 text-black/64">
+                Official retail prices are shown publicly. Contact BaBra Cosmetics for distributor and wholesale pricing.
+              </p>
           </div>
           <div className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
             {cartLines.length === 0 ? (
@@ -183,7 +197,7 @@ export function StoreClient() {
                   <div key={item!.slug} className="grid gap-3 rounded-lg border border-black/10 p-4 sm:grid-cols-[1fr_auto] sm:items-center">
                     <div>
                       <h3 className="font-serif text-2xl">{item!.product.name}</h3>
-                      <p className="text-sm text-black/60">{formatRwf(item!.product.price)} each</p>
+                      <p className="text-sm text-black/60">{formatRwf(priceFor(item!.product.slug, item!.product.price))} each</p>
                     </div>
                     <input
                       aria-label={`Quantity for ${item!.product.name}`}
@@ -198,8 +212,8 @@ export function StoreClient() {
               </div>
             )}
             <div className="mt-6 rounded-lg bg-[#090706] p-5 text-white">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]">{tier.key} pricing</p>
-              <p className="mt-2 text-white/62">{tier.note}</p>
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]">Official retail total</p>
+              <p className="mt-2 text-white/62">Contact BaBra Cosmetics for distributor and wholesale pricing.</p>
               <p className="mt-4 text-3xl font-black">{formatRwf(total)}</p>
             </div>
           </div>

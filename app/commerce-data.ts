@@ -14,6 +14,9 @@ export const site = {
   positioning: "Hydroquinone-free premium skincare positioning with protected formula details."
 };
 
+export const OFFICIAL_LOTION_500ML_PRICE_RWF = 25000;
+export const USD_ESTIMATE_RATE_RWF = 1300;
+
 export type ProductSlug = "women" | "men" | "kids" | "serum" | "soap" | "pads" | "pocket-fresh";
 
 export type StoreProduct = {
@@ -38,8 +41,8 @@ export const products: StoreProduct[] = [
     shortName: "Women Lotion",
     category: "Women",
     image: "/brand/official-babra-bottle.png",
-    price: 8500,
-    size: "500ml",
+    price: OFFICIAL_LOTION_500ML_PRICE_RWF,
+    size: "Premium 500ml",
     description:
       "Premium daily body lotion for soft hydration, refined fragrance, and polished skin comfort.",
     audience: "Women and premium daily skincare customers",
@@ -53,8 +56,8 @@ export const products: StoreProduct[] = [
     shortName: "Men Lotion",
     category: "Men",
     image: "/brand/official-babra-bottle-men.png",
-    price: 8500,
-    size: "500ml",
+    price: OFFICIAL_LOTION_500ML_PRICE_RWF,
+    size: "Premium 500ml",
     description:
       "Clean, confident body care for men with a premium fresh feel and everyday skin comfort.",
     audience: "Men, salons, retailers, and grooming customers",
@@ -64,18 +67,18 @@ export const products: StoreProduct[] = [
   },
   {
     slug: "kids",
-    name: "BaBra Soft Care for Kids",
-    shortName: "Kids Lotion",
-    category: "Kids",
+    name: "BaBra Lotion Baby",
+    shortName: "Baby Lotion",
+    category: "Baby",
     image: "/brand/official-babra-bottle-kids.png",
-    price: 8000,
-    size: "500ml",
+    price: OFFICIAL_LOTION_500ML_PRICE_RWF,
+    size: "Premium 500ml",
     description:
       "Family-friendly lotion presentation for gentle daily comfort while keeping sensitive product details protected.",
-    audience: "Kids and family skincare routines",
+    audience: "Babies, kids, and family skincare routines",
     benefits: ["Gentle family positioning", "Soft daily comfort", "Parent-friendly guidance", "Safe public product preview"],
     usage: "Apply under adult supervision. Avoid eyes and broken skin. Stop use if irritation occurs.",
-    alt: "BaBra Soft Care for Kids 500ml family body lotion bottle"
+    alt: "BaBra Lotion Baby premium 500ml body lotion bottle"
   },
   {
     slug: "serum",
@@ -137,10 +140,10 @@ export const products: StoreProduct[] = [
 ];
 
 export const pricingTiers = [
-  { key: "Retail", min: 1, max: 11, discount: 0, note: "Standard customer price" },
-  { key: "Reseller", min: 12, max: 47, discount: 0.08, note: "Starter reseller margin" },
-  { key: "Wholesale", min: 48, max: 119, discount: 0.15, note: "MOQ pricing for shops and salons" },
-  { key: "Distributor", min: 120, max: null, discount: 0.25, note: "Best margin with invoice support" }
+  { key: "Retail", min: 1, max: 11, discount: 0, note: "Official retail price shown publicly" },
+  { key: "Reseller", min: 12, max: 47, discount: 0, note: "Contact BaBra Cosmetics for reseller pricing" },
+  { key: "Wholesale", min: 48, max: 119, discount: 0, note: "Contact BaBra Cosmetics for wholesale pricing" },
+  { key: "Distributor", min: 120, max: null, discount: 0, note: "Contact BaBra Cosmetics for distributor pricing" }
 ] as const;
 
 export const rwandaLocations = {
@@ -160,11 +163,11 @@ export function getPricing(quantity: number) {
 }
 
 export function formatRwf(value: number) {
-  return new Intl.NumberFormat("en-RW", {
-    style: "currency",
-    currency: "RWF",
-    maximumFractionDigits: 0
-  }).format(value);
+  return `${new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(value)} RWF`;
+}
+
+export function formatUsdEstimate(value: number) {
+  return `~$${(value / USD_ESTIMATE_RATE_RWF).toFixed(2)} USD`;
 }
 
 export function whatsappOrderUrl(message: string) {

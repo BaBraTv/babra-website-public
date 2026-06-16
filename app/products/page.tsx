@@ -3,10 +3,10 @@ const productFamilies = [
     name: "BaBra Lotion",
     slogan: "Luxury in Every Touch",
     image: "/brand/official-babra-bottle.png",
-    editions: ["Women Edition", "Men Edition", "Babies Edition"],
+    editions: ["BaBra Lotion Women - 25,000 RWF", "BaBra Lotion Men - 25,000 RWF", "BaBra Lotion Baby - 25,000 RWF"],
     description:
       "A premium body lotion family created for daily hydration, refined fragrance, and a polished skincare routine.",
-    benefits: ["Long-lasting hydration feel", "Smooth daily skin comfort", "Premium fragrance direction", "Retail and wholesale ready"],
+    benefits: ["Premium 500ml", "Official retail price: 25,000 RWF", "Smooth daily skin comfort", "Premium fragrance direction"],
     usage: "Apply to clean skin after bathing or whenever skin needs comfort. Avoid contact with eyes. For children, use under adult supervision.",
     privateNote: "Full label files, barcode records, supplier documents, and complete formula stay private for verified partners only."
   },
@@ -46,9 +46,9 @@ const productFamilies = [
 ];
 
 const commerceBlocks = [
-  ["Product landing pages", "Every category can become its own sales page with gallery, order button, reviews, FAQ, and wholesale pricing."],
+  ["Product landing pages", "Every category can become its own sales page with gallery, order button, reviews, FAQ, and clear retail pricing."],
   ["Future QR verification", "Customers can later scan official packaging to confirm authenticity without public exposure of real barcode data."],
-  ["Wholesale engine", "Retail, reseller, wholesale, and distributor pricing can be attached by MOQ and verified account type."],
+  ["Wholesale engine", "Contact BaBra Cosmetics for distributor and wholesale pricing. Private pricing is not displayed publicly."],
   ["AI product advisor", "The site structure is ready for a future assistant that recommends lotion, soap, pads, or pocket fresh by customer need."]
 ];
 

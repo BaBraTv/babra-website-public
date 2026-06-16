@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { formatRwf, products, rwandaLocations } from "./commerce-data";
+import { formatRwf, formatUsdEstimate, products, rwandaLocations } from "./commerce-data";
 
 type Mode = "signup" | "login" | "forgot" | "account" | "cart" | "checkout" | "payment" | "admin";
 type CartItem = { slug: string; quantity: number };
@@ -66,12 +66,14 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   const [orders, setOrders] = useState<Order[]>([]);
   const [method, setMethod] = useState("Cash on Delivery");
   const [manualStatus, setManualStatus] = useState(paymentStatuses[0]);
+  const [priceOverrides, setPriceOverrides] = useState<Record<string, number>>({});
 
   useEffect(() => {
     setAccount(readJson("babra-account", defaultAccount));
     setLoggedIn(readJson("babra-logged-in", false));
     setCart(readJson("babra-cart", []));
     setOrders(readJson("babra-orders", []));
+    setPriceOverrides(readJson("babra-price-overrides", {}));
   }, []);
 
   const cartLines = useMemo(
@@ -84,7 +86,17 @@ export function PlatformClient({ mode }: { mode: Mode }) {
         .filter(Boolean),
     [cart]
   );
-  const subtotal = cartLines.reduce((sum, item) => sum + item!.product.price * item!.quantity, 0);
+  function priceFor(slug: string, fallback: number) {
+    return priceOverrides[slug] || fallback;
+  }
+
+  function savePrice(slug: string, value: number) {
+    const next = { ...priceOverrides, [slug]: value };
+    setPriceOverrides(next);
+    saveJson("babra-price-overrides", next);
+  }
+
+  const subtotal = cartLines.reduce((sum, item) => sum + priceFor(item!.product.slug, item!.product.price) * item!.quantity, 0);
   const deliveryFee = subtotal > 0 ? 1500 : 0;
   const total = subtotal + deliveryFee;
 
@@ -252,7 +264,8 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                       <img className="h-28 rounded-xl bg-white object-contain p-2" src={product.image} alt={product.alt} />
                       <div>
                         <h2 className="font-serif text-3xl">{product.name}</h2>
-                        <p className="text-white/62">{formatRwf(product.price)}</p>
+                        <p className="text-sm font-black uppercase tracking-[0.14em] text-[#d6ad57]">{product.size}</p>
+                        <p className="mt-1 text-white/72">{formatRwf(priceFor(product.slug, product.price))} <span className="text-white/42">{formatUsdEstimate(priceFor(product.slug, product.price))}</span></p>
                       </div>
                       <div className="flex items-center gap-2">
                         <button className="rounded-full bg-[#f1d58b] px-4 py-2 font-black text-[#130d08]" onClick={() => addToCart(product.slug)} type="button">Add to Cart</button>
@@ -309,6 +322,24 @@ export function PlatformClient({ mode }: { mode: Mode }) {
           <section className="mt-10">
             <h1 className="font-serif text-5xl">BaBra Admin Dashboard</h1>
             <p className="mt-4 text-white/64">Manual-mode admin view for tracking requests until backend database integration.</p>
+            <section className="mt-8 rounded-[2rem] border border-[#f1d58b]/20 bg-white/[0.055] p-6">
+              <h2 className="font-serif text-4xl">Product price controls</h2>
+              <p className="mt-3 text-white/62">Local admin override for future flexibility. Connect this to a database when the backend is ready.</p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {products.map((product) => (
+                  <label key={product.slug} className="grid gap-2 rounded-2xl border border-white/10 bg-black/20 p-4 text-sm font-bold text-white/78">
+                    {product.name}
+                    <input
+                      className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white"
+                      min="0"
+                      type="number"
+                      value={priceFor(product.slug, product.price)}
+                      onChange={(event) => savePrice(product.slug, Number(event.target.value))}
+                    />
+                  </label>
+                ))}
+              </div>
+            </section>
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {adminSections.map((section) => (
                 <article key={section} className="rounded-2xl border border-white/10 bg-white/[0.055] p-6">

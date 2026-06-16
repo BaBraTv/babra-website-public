@@ -167,7 +167,7 @@ export function SampleRequestForm() {
         <TextInput name="name" placeholder="Full name / Business name" />
         <TextInput name="phone" placeholder="Phone / WhatsApp" />
         <SelectInput name="customerType" options={["Retail customer", "Salon", "Shop", "Influencer / media", "Distributor lead"]} />
-        <SelectInput name="productInterest" options={["BaBra Lotion Women", "BaBra Lotion Men", "BaBra Soft Care Kids", "BaBra Serum", "Mixed sample pack"]} />
+        <SelectInput name="productInterest" options={["BaBra Lotion Women", "BaBra Lotion Men", "BaBra Lotion Baby", "BaBra Serum", "Mixed sample pack"]} />
         <TextInput name="quantity" placeholder="Requested quantity" />
         <TextInput name="landmark" placeholder="Nearest landmark" />
       </div>

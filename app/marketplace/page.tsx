@@ -7,7 +7,7 @@ export default function MarketplacePage() {
         Cosmetics, farm products, vendor shops, school services, invoices, order tracking, and AI-powered recommendations will live here.
       </p>
       <section className="mt-10 grid gap-4 md:grid-cols-4">
-        {["Signature for Her", "Signature for Him", "Soft Care for Kids", "Anti-Wrinkle Serum"].map((item) => (
+        {["BaBra Lotion Women", "BaBra Lotion Men", "BaBra Lotion Baby", "Anti-Wrinkle Serum"].map((item) => (
           <article key={item} className="rounded-xl border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
             <span className="text-sm font-black text-[#a9141d]">BaBra Cosmetics</span>
             <h2 className="mt-3 font-serif text-3xl">{item}</h2>
@@ -18,4 +18,3 @@ export default function MarketplacePage() {
     </main>
   );
 }
-
