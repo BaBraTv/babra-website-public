@@ -174,20 +174,18 @@ const primaryNav = [
 ];
 
 const serviceNav = [
-  ["Jobs", "/job-application"],
-  ["Lost Docs", "/lost-documents"],
-  ["Samples", "/sample-request"],
+  ["Apply for job", "/job-application"],
+  ["Lost documents", "/lost-documents"],
+  ["Request samples", "/sample-request"],
   ["Wholesale", "/wholesale-distributor"],
-  ["Showroom Form", "/contact-showroom"]
+  ["Showroom form", "/contact-showroom"]
 ];
 
 const mobileNav = [
   ["Store", "/store"],
-  ["Samples", "/sample-request"],
-  ["Wholesale", "/wholesale-distributor"],
-  ["Jobs", "/job-application"],
-  ["Lost Docs", "/lost-documents"],
+  ["Products", "/products"],
   ["Forms", "/forms"],
+  ["Services", "/forms"],
   ["Contact", "/contact"]
 ];
 
@@ -213,14 +211,14 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#090706] text-white">
       <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#090706]/92 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
-          <a className="flex min-w-0 items-center gap-3" href="#top" aria-label="babra.store home">
-            <span className="babra-nav-bottle-wrap grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full border border-[#f1d58b]/55 bg-[#fff8eb] shadow-xl shadow-[#d6ad57]/20 md:h-14 md:w-14">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 md:gap-5 md:px-8">
+          <a className="flex min-w-0 max-w-[62vw] items-center gap-3 rounded-full border border-white/10 bg-white/[0.035] px-2 py-2 pr-4 shadow-lg shadow-black/10 sm:max-w-none" href="#top" aria-label="babra.store home">
+            <span className="babra-nav-bottle-wrap grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full border border-[#f1d58b]/55 bg-[#fff8eb] shadow-xl shadow-[#d6ad57]/20 md:h-14 md:w-14">
               <img className="babra-nav-bottle h-full w-full object-cover" src="/brand/official-babra-bottle.png" alt="BaBra luxury body lotion bottle" />
             </span>
-            <span className="hidden min-w-0 sm:block">
-              <strong className="block font-serif text-xl leading-tight">babra.store</strong>
-              <span className="block text-xs font-bold uppercase tracking-[0.16em] text-[#d6ad57]">Premium Rwanda skincare</span>
+            <span className="min-w-0">
+              <strong className="block truncate font-serif text-lg leading-tight text-white md:text-xl">BaBra Store</strong>
+              <span className="block truncate text-[10px] font-bold uppercase tracking-[0.14em] text-[#d6ad57] sm:text-xs">babra.store</span>
             </span>
           </a>
 
@@ -230,12 +228,18 @@ export default function HomePage() {
                 {item}
               </a>
             ))}
-            <span className="mx-1 h-6 w-px bg-white/15" aria-hidden="true" />
-            {serviceNav.map(([item, href]) => (
-              <a key={item} className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-2 text-xs font-black text-white/70 hover:border-[#d6ad57]/55 hover:text-[#f1d58b]" href={href}>
-                {item}
-              </a>
-            ))}
+            <details className="group relative">
+              <summary className="cursor-pointer list-none rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-black text-white/76 hover:border-[#d6ad57]/55 hover:text-[#f1d58b]">
+                Official Actions
+              </summary>
+              <div className="absolute right-0 top-full z-50 mt-3 grid w-72 gap-2 rounded-2xl border border-[#d6ad57]/20 bg-[#090706]/98 p-3 shadow-2xl shadow-black/40 backdrop-blur-xl">
+                {serviceNav.map(([item, href]) => (
+                  <a key={item} className="rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm font-black text-white/78 hover:border-[#d6ad57]/55 hover:text-[#f1d58b]" href={href}>
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </details>
             <span className="mx-1 h-6 w-px bg-white/15" aria-hidden="true" />
             <div className="flex items-center gap-2 rounded-full border border-[#d6ad57]/20 bg-black/25 px-2 py-1">
               <span className="px-2 text-[10px] font-black uppercase tracking-[0.16em] text-[#d6ad57]">Explore</span>

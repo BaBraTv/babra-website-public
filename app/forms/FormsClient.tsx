@@ -110,14 +110,14 @@ export function LostDocumentForm() {
 
   return (
     <form onSubmit={submit} className="rounded-[1.5rem] border border-[#4ebeff]/20 bg-[#10161a] p-4 md:p-6">
-      <h2 className="font-serif text-4xl leading-none">Lost document / found item</h2>
+      <h2 className="font-serif text-4xl leading-none">Report lost or found document</h2>
       <p className="mt-3 max-w-3xl leading-7 text-white/64">
-        Iyi form ifasha nyir'ikintu n'uwagitoraguye gushyiramo location neza, ku buryo admin ashobora kuyishakisha ahereye ku ntara kugera ku mudugudu.
+        Use this form if you lost a document or if you found someone else's document or item. BaBra receives the location from province to village.
       </p>
       <div className="mt-6 grid gap-4 md:grid-cols-4">
         <select className="min-h-14 rounded-xl border border-white/10 bg-black/30 px-4 text-base outline-none" name="caseType" required>
-          <option>Nataye icyangombwa/ikintu</option>
-          <option>Natoraguye icyangombwa/ikintu</option>
+          <option>Report lost document</option>
+          <option>Report found document</option>
         </select>
         <TextInput name="ownerName" placeholder="Amazina ya nyiracyo" />
         <TextInput name="phone" placeholder="Telefone / WhatsApp" />
