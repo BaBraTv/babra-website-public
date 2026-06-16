@@ -29,19 +29,33 @@ export const metadata = {
 export default function LifeTalkPage() {
   return (
     <main className="min-h-screen bg-[#060505] text-white">
+      <header className="border-b border-white/10 bg-[#060505]/95 px-5 py-5 md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
+          <a className="font-serif text-2xl" href="/">LifeTalk TV</a>
+          <nav className="flex flex-wrap gap-2 text-sm font-bold text-white/72">
+            <a className="rounded-full border border-white/10 px-4 py-2" href="/">Home</a>
+            <a className="rounded-full border border-white/10 px-4 py-2" href="#shows">Shows</a>
+            <a className="rounded-full border border-white/10 px-4 py-2" href="#films">Films</a>
+            <a className="rounded-full border border-white/10 px-4 py-2" href="/forms/lifetalk-tv">Journalists</a>
+            <a className="rounded-full border border-white/10 px-4 py-2" href="/forms/lifetalk-tv">Advertise</a>
+            <a className="rounded-full border border-white/10 px-4 py-2" href="/forms/lifetalk-tv">TV Forms</a>
+            <a className="rounded-full border border-white/10 px-4 py-2" href="/contact">Contact</a>
+          </nav>
+        </div>
+      </header>
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
+          <a className="text-sm font-black uppercase tracking-[0.18em] text-[#ef4444]" href="/">EI BaBra Holding Ltd</a>
           <div className="mt-10 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Media Division</p>
               <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">LifeTalk TV.</h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/66">
-                A streaming-style platform for motivation, entrepreneurship, business education, documentaries, success stories, and original films under the BaBra Group ecosystem.
+                A streaming-style platform for motivation, entrepreneurship, business education, documentaries, success stories, and original films under EI BaBra Holding Ltd.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/lifetalk-tv/nzabigeraho">Open NZABIGERAHO</a>
-                <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/holding">Group structure</a>
+                <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/forms/lifetalk-tv">Open TV forms</a>
               </div>
             </div>
             <div className="rounded-lg border border-[#d6ad57]/25 bg-gradient-to-br from-[#2a1512] via-[#100907] to-black p-6 shadow-2xl shadow-black/40">
@@ -54,7 +68,7 @@ export default function LifeTalkPage() {
         </div>
       </section>
 
-      <section className="px-5 py-12 md:px-8">
+      <section id="shows" className="px-5 py-12 md:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="flex items-end justify-between gap-5">
             <h2 className="font-serif text-5xl leading-none">Channels</h2>
@@ -105,7 +119,7 @@ export default function LifeTalkPage() {
         </div>
       </section>
 
-      <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
+      <section id="films" className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Upcoming productions</p>
           <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Media that grows the BaBra brand.</h2>

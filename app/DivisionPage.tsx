@@ -1,7 +1,60 @@
 import { divisionContent, type DivisionKey } from "./division-content";
 
+const divisionMenus: Record<DivisionKey, string[][]> = {
+  cosmetics: [
+    ["Store", "/store"],
+    ["Products", "/products"],
+    ["Samples", "/sample-request"],
+    ["Wholesale", "/wholesale-distributor"],
+    ["Showroom", "/showroom"],
+    ["Cosmetics Forms", "/forms/cosmetics"],
+    ["Contact", "/contact"]
+  ],
+  farm: [
+    ["Home", "/"],
+    ["Farm Services", "#services"],
+    ["Farm Forms", "/forms/farm"],
+    ["Farmers", "#farmers"],
+    ["Marketplace", "#marketplace"],
+    ["Partnerships", "#partnerships"],
+    ["Contact", "/contact"]
+  ],
+  schools: [
+    ["Home", "/"],
+    ["Admissions", "#admissions"],
+    ["Teachers", "#teachers"],
+    ["Digital School", "#digital-school"],
+    ["Scholarships", "#scholarships"],
+    ["School Forms", "/forms/schools"],
+    ["Contact", "/contact"]
+  ],
+  foundation: [
+    ["Home", "/"],
+    ["Programs", "#services"],
+    ["Volunteers", "/forms/foundation"],
+    ["Family Support", "/child-family-support"],
+    ["Donations", "/forms/foundation"],
+    ["Contact", "/contact"]
+  ],
+  hospital: [
+    ["Home", "/"],
+    ["Healthcare Vision", "#services"],
+    ["Community Health", "#partnerships"],
+    ["Contact", "/contact"]
+  ],
+  "rwanda-mobile-hub": [
+    ["Home", "/"],
+    ["Repair Services", "#services"],
+    ["Technicians", "/forms/rwanda-mobile-hub"],
+    ["Trade-In", "/forms/rwanda-mobile-hub"],
+    ["Suppliers", "/forms/rwanda-mobile-hub"],
+    ["Contact", "/contact"]
+  ]
+};
+
 export function DivisionPage({ division }: { division: DivisionKey }) {
   const data = divisionContent[division];
+  const menu = divisionMenus[division];
 
   return (
     <main className="min-h-screen bg-[#080606] text-white">
@@ -9,10 +62,9 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
           <a className="font-serif text-2xl" href="/">EI BaBra Holding Ltd</a>
           <nav className="flex flex-wrap gap-2 text-sm font-bold text-white/72">
-            <a className="rounded-full border border-white/10 px-4 py-2" href="/">Home</a>
-            <a className="rounded-full border border-white/10 px-4 py-2" href="/cosmetics">Cosmetics</a>
-            <a className="rounded-full border border-white/10 px-4 py-2" href="/forms">Forms</a>
-            <a className="rounded-full border border-white/10 px-4 py-2" href="/contact">Contact</a>
+            {menu.map(([label, href]) => (
+              <a key={label} className="rounded-full border border-white/10 px-4 py-2" href={href}>{label}</a>
+            ))}
           </nav>
         </div>
       </header>
@@ -25,7 +77,7 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/70">{data.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="rounded-full px-6 py-3 font-black text-[#101010]" href={data.ctaHref} style={{ backgroundColor: data.accent }}>{data.cta}</a>
-              <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href={data.formsHref}>Open division forms</a>
+              <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href={data.formsHref}>Open {data.name} forms</a>
             </div>
           </div>
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 shadow-2xl shadow-black/30">
@@ -40,6 +92,34 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
           </div>
         </div>
       </section>
+
+      {division !== "cosmetics" ? (
+        <section id="services" className="px-5 py-16 md:px-8">
+          <div className="mx-auto max-w-7xl">
+            <p className="text-sm font-black uppercase tracking-[0.24em]" style={{ color: data.accent }}>Division orientation</p>
+            <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">{data.name} services and routes.</h2>
+            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {data.points.map((point, index) => (
+                <article
+                  key={point}
+                  id={index === 0 ? "farmers" : index === 1 ? "marketplace" : index === 2 ? "partnerships" : undefined}
+                  className="rounded-2xl border border-white/10 bg-white/[0.055] p-6"
+                >
+                  <span className="text-sm font-black" style={{ color: data.accent }}>0{index + 1}</span>
+                  <h3 className="mt-2 font-serif text-3xl">{point}</h3>
+                  <p className="mt-3 leading-7 text-white/62">Use the division-specific forms and contact routes for this service area.</p>
+                </article>
+              ))}
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a id="admissions" className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Admissions / forms</a>
+              <a id="teachers" className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Jobs / roles</a>
+              <a id="digital-school" className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Digital systems</a>
+              <a id="scholarships" className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Support requests</a>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {division === "cosmetics" ? (
         <section className="px-5 py-16 md:px-8">

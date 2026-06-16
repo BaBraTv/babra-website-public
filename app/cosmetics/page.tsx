@@ -168,24 +168,26 @@ const proofPoints = [
 const primaryNav = [
   ["Store", "/store"],
   ["Products", "/products"],
-  ["Forms", "/forms"],
+  ["Samples", "/sample-request"],
+  ["Wholesale", "/wholesale-distributor"],
   ["Showroom", "/showroom"],
-  ["Quality", "/quality"]
+  ["Cosmetics Forms", "/forms/cosmetics"],
+  ["Contact", "/contact"]
 ];
 
 const serviceNav = [
-  ["Apply for job", "/job-application"],
-  ["Lost documents", "/lost-documents"],
-  ["Request samples", "/sample-request"],
-  ["Wholesale", "/wholesale-distributor"],
-  ["Showroom form", "/contact-showroom"]
+  ["Sales Representative", "/forms/cosmetics"],
+  ["Beauty Consultant", "/forms/cosmetics"],
+  ["Showroom Staff", "/forms/cosmetics"],
+  ["Product Support", "/contact-showroom"]
 ];
 
 const mobileNav = [
   ["Store", "/store"],
   ["Products", "/products"],
-  ["Forms", "/forms"],
-  ["Services", "/forms"],
+  ["Samples", "/sample-request"],
+  ["Wholesale", "/wholesale-distributor"],
+  ["Forms", "/forms/cosmetics"],
   ["Contact", "/contact"]
 ];
 
@@ -230,7 +232,7 @@ export default function HomePage() {
             ))}
             <details className="group relative">
               <summary className="cursor-pointer list-none rounded-full border border-white/10 bg-white/[0.035] px-4 py-2 text-xs font-black text-white/76 hover:border-[#d6ad57]/55 hover:text-[#f1d58b]">
-                Official Actions
+                Cosmetics Jobs
               </summary>
               <div className="absolute right-0 top-full z-50 mt-3 grid w-72 gap-2 rounded-2xl border border-[#d6ad57]/20 bg-[#090706]/98 p-3 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 {serviceNav.map(([item, href]) => (
@@ -252,8 +254,8 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-2">
-            <a className="hidden rounded-full border border-white/15 px-4 py-2 text-sm font-black text-white md:inline-flex" href="/forms">
-              Service forms
+            <a className="hidden rounded-full border border-white/15 px-4 py-2 text-sm font-black text-white md:inline-flex" href="/forms/cosmetics">
+              Cosmetics forms
             </a>
             <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="https://wa.me/250788351482?text=Hello%20BaBra%20Store%2C%20I%20want%20support%20from%20babra.store." target="_blank" rel="noopener noreferrer">
               WhatsApp

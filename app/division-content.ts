@@ -42,8 +42,8 @@ export const divisionContent = {
     name: "BaBra Foundation",
     eyebrow: "Community impact and family support",
     route: "/foundation",
-    theme: "from-[#f97316]/24 via-[#150d08] to-[#080606]",
-    accent: "#fb923c",
+    theme: "from-[#c084fc]/24 via-[#1c102a] to-[#080606]",
+    accent: "#c084fc",
     description:
       "BaBra Foundation is the community impact division for volunteers, family-based support requests, donations, and community partner applications.",
     points: ["Volunteer registration", "Child and family support", "Donation form", "Community partner application"],
