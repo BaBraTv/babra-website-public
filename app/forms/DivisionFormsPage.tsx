@@ -9,8 +9,12 @@ const emails: Record<DivisionFormsKey, string> = {
   foundation: "foundation@babra.store"
 };
 
-function whatsappHref(formName: string) {
-  return `https://wa.me/250788351482?text=${encodeURIComponent(`Hello EI BaBra Holding, I want to open this form: ${formName}`)}`;
+function mailHref(formName: string, email: string) {
+  const subject = encodeURIComponent(formName);
+  const body = encodeURIComponent(
+    `Hello EI BaBra Holding,\n\nI want to submit this request: ${formName}\n\nFull name:\nPhone / WhatsApp:\nEmail:\nProvince:\nDistrict:\nSector:\nCell:\nVillage:\nLandmark:\nDetails:`
+  );
+  return `mailto:${email}?subject=${subject}&body=${body}`;
 }
 
 export function DivisionFormsPage({ division }: { division: DivisionFormsKey }) {
@@ -38,7 +42,7 @@ export function DivisionFormsPage({ division }: { division: DivisionFormsKey }) 
 
         <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {data.items.map(([name, href, text]) => {
-            const target = href === "whatsapp" ? whatsappHref(name) : href;
+            const target = href === "whatsapp" ? mailHref(name, emails[division]) : href;
             const external = href === "whatsapp";
             return (
               <a
@@ -51,8 +55,9 @@ export function DivisionFormsPage({ division }: { division: DivisionFormsKey }) 
                 <h2 className="font-serif text-3xl leading-tight">{name}</h2>
                 <p className="mt-3 min-h-20 leading-7 text-white/62">{text}</p>
                 <span className="mt-5 inline-flex rounded-full px-4 py-2 text-sm font-black text-[#101010]" style={{ backgroundColor: data.accent }}>
-                  Open form
+                  Submit request
                 </span>
+                <span className="mt-3 block text-xs font-bold text-white/42">WhatsApp fallback: +250 788 351 482</span>
               </a>
             );
           })}

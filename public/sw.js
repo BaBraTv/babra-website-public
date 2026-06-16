@@ -1,4 +1,4 @@
-const CACHE_NAME = "babra-ecosystem-v2";
+const CACHE_NAME = "babra-ecosystem-v3";
 const OFFLINE_URL = "/offline";
 const PRECACHE = [
   "/",
@@ -11,6 +11,7 @@ const PRECACHE = [
   "/farm",
   "/schools",
   "/schools/masterplan",
+  "/investor-sponsor-access",
   "/foundation",
   "/account",
   OFFLINE_URL,

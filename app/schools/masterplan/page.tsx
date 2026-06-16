@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { campusExperience, developmentPhases, galleryPages, masterplanPdf, partnerTracks, pdfFacilityPlans, planCategories } from "../masterplan-data";
+import { campusExperience, developmentPhases, galleryPages, investorAccessRoute, partnerTracks, pdfFacilityPlans, planCategories } from "../masterplan-data";
 import { SchoolsNav } from "../SchoolsNav";
 
 export const metadata: Metadata = {
@@ -22,55 +22,45 @@ export default function SchoolsMasterplanPage() {
               A long-term vision for nursery, primary, secondary, university, digital learning, research, innovation, and community development.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="rounded-full bg-sky-500 px-6 py-3 font-black text-white" href={masterplanPdf} target="_blank" rel="noopener noreferrer">View PDF</a>
-              <a className="rounded-full border border-sky-300 bg-white px-6 py-3 font-black text-[#08243c]" href={masterplanPdf} download>Download PDF</a>
-              <a className="rounded-full border border-sky-300 bg-white/70 px-6 py-3 font-black text-[#08243c]" href="#pdf-viewer">Open embedded plan</a>
+              <a className="rounded-full bg-sky-500 px-6 py-3 font-black text-white" href="#gallery">View Public Gallery</a>
+              <a className="rounded-full border border-sky-300 bg-white px-6 py-3 font-black text-[#08243c]" href={investorAccessRoute}>Request Investor / Sponsor Access</a>
+              <a className="rounded-full border border-sky-300 bg-white/70 px-6 py-3 font-black text-[#08243c]" href="/forms/schools">School Forms</a>
             </div>
           </div>
           <div className="rounded-[2rem] border border-sky-100 bg-white/80 p-6 shadow-2xl shadow-sky-200/50">
             <h2 className="font-serif text-4xl leading-none">Explore the Future BaBra Schools Campus</h2>
             <p className="mt-5 leading-8 text-[#42647d]">
-              The original PDF remains available, and its concepts are organized into campus categories, future facilities,
-              development phases, partner tracks, and implementation references.
+              Public visitors see safe campus concepts and planning categories. Full PDFs, budgets, technical drawings,
+              detailed construction phases, and partnership documents require approved access.
             </p>
           </div>
         </div>
       </section>
 
-      <section id="pdf-viewer" className="px-5 py-16 md:px-8">
+      <section id="gallery" className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-sky-600">Original PDF</p>
-              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Masterplan viewer.</h2>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-sky-600">Public master plan gallery</p>
+              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Public-safe campus concepts.</h2>
             </div>
             <div className="flex flex-wrap gap-2">
-              <a className="rounded-full bg-sky-500 px-5 py-3 font-black text-white" href={masterplanPdf} target="_blank" rel="noopener noreferrer">View PDF</a>
-              <a className="rounded-full border border-sky-300 bg-white px-5 py-3 font-black text-[#08243c]" href={masterplanPdf} download>Download PDF</a>
+              <a className="rounded-full bg-sky-500 px-5 py-3 font-black text-white" href={investorAccessRoute}>Request private package</a>
+              <a className="rounded-full border border-sky-300 bg-white px-5 py-3 font-black text-[#08243c]" href="/forms/schools">School forms</a>
             </div>
           </div>
-          <div className="mt-8 overflow-hidden rounded-[2rem] border border-sky-100 bg-white shadow-2xl shadow-sky-200/50">
-            <iframe className="h-[78vh] w-full" src={`${masterplanPdf}#view=FitH&zoom=page-fit`} title="BaBra Schools Masterplan PDF" />
-          </div>
-          <p className="mt-4 text-sm font-semibold text-[#567289]">
-            Zoom is available through the browser PDF toolbar. Open the PDF in a new tab for full-screen zoom and page navigation.
-          </p>
-        </div>
-      </section>
-
-      <section className="bg-white px-5 py-16 md:px-8">
-        <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-sky-600">Site plan gallery</p>
-          <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Open key PDF sections.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {galleryPages.map(([title, page, caption]) => (
-              <a key={title} className="rounded-2xl border border-sky-100 bg-[#f8fcff] p-6 shadow-lg shadow-sky-100/40 hover:border-sky-300" href={`${masterplanPdf}#page=${page}&zoom=page-fit`} target="_blank" rel="noopener noreferrer">
-                <span className="text-sm font-black text-sky-600">Page {page}</span>
-                <h3 className="mt-2 font-serif text-3xl">{title}</h3>
+            {galleryPages.map(([title, caption]) => (
+              <article key={title} className="rounded-2xl border border-sky-100 bg-white p-6 shadow-lg shadow-sky-100/50">
+                <div className="mb-5 h-32 rounded-2xl bg-[linear-gradient(135deg,#dff4ff,#ffffff,#bae6fd)]" />
+                <h3 className="font-serif text-3xl">{title}</h3>
                 <p className="mt-3 text-sm leading-6 text-[#4b6b82]">{caption}</p>
-              </a>
+              </article>
             ))}
           </div>
+          <p className="mt-6 rounded-2xl border border-sky-100 bg-white px-5 py-4 text-sm font-bold text-[#42647d]">
+            The full master plan PDF is not public. Approved investors and sponsors can request access to protected documents.
+          </p>
         </div>
       </section>
 
@@ -154,7 +144,7 @@ export default function SchoolsMasterplanPage() {
           <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Help build the BaBra Schools future.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-4">
             {partnerTracks.map((item) => (
-              <a key={item} className="rounded-2xl border border-sky-100 bg-white p-6 font-black text-[#16456a] shadow-lg shadow-sky-100/50" href="/forms/schools">
+              <a key={item} className="rounded-2xl border border-sky-100 bg-white p-6 font-black text-[#16456a] shadow-lg shadow-sky-100/50" href={investorAccessRoute}>
                 {item}
               </a>
             ))}

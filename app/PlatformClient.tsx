@@ -32,18 +32,27 @@ const defaultAccount: Account = {
   landmark: ""
 };
 
-const paymentStatuses = ["Pending payment confirmation", "Payment received", "Order confirmed", "Out for delivery", "Completed"];
+const paymentStatuses = ["Pending payment confirmation", "Payment received", "Order confirmed", "Out for delivery", "Completed", "Rejected"];
 const adminSections = [
+  "Users",
   "Orders",
   "Payments",
+  "Products",
   "Customers",
   "Job applications",
   "Lost & Found reports",
   "Farm applications",
   "School applications",
   "LifeTalk TV applications",
-  "Foundation requests"
+  "Rwanda Mobile Hub requests",
+  "Foundation requests",
+  "Investor access requests",
+  "School master plan images",
+  "Private investor PDFs",
+  "Budget values in RWF",
+  "Payment statuses"
 ];
+const budgetControls = ["Estimated Cost", "Funding Secured", "Funding Gap", "Claim/service fee", "Finder reward process"];
 
 function readJson<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
@@ -340,12 +349,26 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                 ))}
               </div>
             </section>
+            <section className="mt-8 rounded-[2rem] border border-[#4ebeff]/20 bg-white/[0.055] p-6">
+              <h2 className="font-serif text-4xl">Budgets, fees, and protected files</h2>
+              <p className="mt-3 text-white/62">
+                RWF is the primary currency. Full PDFs, technical drawings, budgets, and partnership files stay private until investor or sponsor access is approved.
+              </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+                {budgetControls.map((item) => (
+                  <label key={item} className="grid gap-2 rounded-2xl border border-white/10 bg-black/20 p-4 text-sm font-bold text-white/78">
+                    {item}
+                    <input className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white" placeholder="RWF amount / admin note" />
+                  </label>
+                ))}
+              </div>
+            </section>
             <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {adminSections.map((section) => (
                 <article key={section} className="rounded-2xl border border-white/10 bg-white/[0.055] p-6">
                   <h2 className="font-serif text-3xl">{section}</h2>
                   <select className="mt-5 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white">
-                    {["Pending", "Approved", "Rejected", "Paid", "Confirmed", "Completed"].map((status) => <option key={status}>{status}</option>)}
+                    {["Pending Review", "Approved", "Rejected", "Payment Pending", "Published", "Found", "Claimed", "Completed", "Out for Delivery"].map((status) => <option key={status}>{status}</option>)}
                   </select>
                 </article>
               ))}

@@ -35,6 +35,8 @@ export default function LostAndFoundPage() {
           <nav className="flex flex-wrap gap-2 text-sm font-bold text-white/72">
             <a className="rounded-full border border-white/10 px-4 py-2" href="/">Home</a>
             <a className="rounded-full border border-white/10 px-4 py-2" href="#services">Services</a>
+            <a className="rounded-full border border-white/10 px-4 py-2" href="#report">Report</a>
+            <a className="rounded-full border border-white/10 px-4 py-2" href="#search">Search</a>
             <a className="rounded-full border border-white/10 px-4 py-2" href="#documents">Documents</a>
             <a className="rounded-full border border-white/10 px-4 py-2" href="/forms">Forms</a>
             <a className="rounded-full border border-white/10 px-4 py-2" href="/contact">Contact</a>
@@ -56,7 +58,7 @@ export default function LostAndFoundPage() {
           <div className="mt-8 flex flex-wrap gap-3">
             <a className="rounded-full bg-[#fb923c] px-6 py-3 font-black text-[#071426]" href={whatsAppHref("Report Lost Document")} target="_blank" rel="noopener noreferrer">Report lost document</a>
             <a className="rounded-full bg-white px-6 py-3 font-black text-[#071426]" href={whatsAppHref("Report Found Document")} target="_blank" rel="noopener noreferrer">Report found document</a>
-            <a className="rounded-full border border-white/30 px-6 py-3 font-black text-white" href="#services">View services</a>
+            <a className="rounded-full border border-white/30 px-6 py-3 font-black text-white" href="#report">Open report form</a>
           </div>
         </div>
       </section>
@@ -95,6 +97,64 @@ export default function LostAndFoundPage() {
               </a>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="report" className="border-y border-white/10 bg-[#0b1f3d] px-5 py-16 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#fb923c]">Lost & Found forms</p>
+            <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Report, search, or claim safely.</h2>
+            <p className="mt-5 leading-8 text-white/64">
+              Use this public-safe form structure for lost documents, found documents, search requests, claims, and finder reward guidance.
+              Payment is manually reviewed before any report is published.
+            </p>
+          </div>
+          <form className="rounded-[2rem] border border-white/10 bg-white p-6 text-[#071426] md:p-10">
+            <div className="grid gap-4 md:grid-cols-2">
+              <label className="grid gap-2 text-sm font-black">
+                Service type
+                <select className="rounded-xl border border-[#071426]/12 bg-[#f8fafc] px-4 py-3">
+                  {services.map(([service]) => <option key={service}>{service}</option>)}
+                </select>
+              </label>
+              <label className="grid gap-2 text-sm font-black">
+                Document type
+                <select className="rounded-xl border border-[#071426]/12 bg-[#f8fafc] px-4 py-3">
+                  {documentTypes.map((item) => <option key={item}>{item}</option>)}
+                </select>
+              </label>
+              {["Full name", "Phone / WhatsApp", "Email", "Province", "District", "Sector", "Cell", "Village", "Landmark"].map((label) => (
+                <label key={label} className="grid gap-2 text-sm font-black">
+                  {label}
+                  <input className="rounded-xl border border-[#071426]/12 bg-[#f8fafc] px-4 py-3" />
+                </label>
+              ))}
+              <label className="grid gap-2 text-sm font-black md:col-span-2">
+                Notes
+                <textarea className="min-h-28 rounded-xl border border-[#071426]/12 bg-[#f8fafc] px-4 py-3" />
+              </label>
+            </div>
+            <a
+              className="mt-6 inline-flex rounded-full bg-[#fb923c] px-6 py-3 font-black text-[#071426]"
+              href="mailto:lostfound@babra.store?subject=Lost%20and%20Found%20Rwanda%20Request"
+            >
+              Submit to lostfound@babra.store
+            </a>
+            <p className="mt-4 text-sm font-semibold text-[#516579]">
+              Posting fee: 1,000 RWF. Claim/service fee and finder reward process are editable in admin.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <section id="search" className="px-5 py-16 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-4">
+          {["Search Documents", "Claim Document", "Payment Pending", "Published"].map((item) => (
+            <a key={item} className="rounded-2xl border border-[#fb923c]/30 bg-white/[0.055] p-6 font-black text-white/82" href={whatsAppHref(item)} target="_blank" rel="noopener noreferrer">
+              {item}
+            </a>
+          ))}
         </div>
       </section>
 

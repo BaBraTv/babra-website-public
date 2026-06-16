@@ -73,9 +73,9 @@ export const divisionContent = {
     description:
       "Rwanda Mobile Hub is the technology division for mobile devices, repair, digital trade, youth skills, and future digital business systems.",
     points: ["Mobile commerce", "Device support", "Digital jobs", "Youth technology skills"],
-    cta: "Contact Rwanda Mobile Hub",
-    ctaHref: "/contact",
-    formsHref: "/forms"
+    cta: "Open Rwanda Mobile Hub forms",
+    ctaHref: "/forms/rwanda-mobile-hub",
+    formsHref: "/forms/rwanda-mobile-hub"
   }
 } as const;
 

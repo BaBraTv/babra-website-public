@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { campusExperience, developmentPhases, masterplanPdf, partnerTracks, planCategories } from "./masterplan-data";
+import { campusExperience, developmentPhases, galleryPages, investorAccessRoute, partnerTracks, planCategories } from "./masterplan-data";
 import { SchoolsNav } from "./SchoolsNav";
 
 export const metadata: Metadata = {
@@ -24,8 +24,8 @@ export default function SchoolsPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="rounded-full bg-sky-500 px-6 py-3 font-black text-white" href="/schools/masterplan">Explore Masterplan</a>
-              <a className="rounded-full bg-white px-6 py-3 font-black text-[#08243c] shadow-lg shadow-sky-100" href={masterplanPdf} target="_blank" rel="noopener noreferrer">View PDF</a>
-              <a className="rounded-full border border-sky-300 bg-white/60 px-6 py-3 font-black text-[#08243c]" href={masterplanPdf} download>Download PDF</a>
+              <a className="rounded-full bg-white px-6 py-3 font-black text-[#08243c] shadow-lg shadow-sky-100" href={investorAccessRoute}>Request Investor Access</a>
+              <a className="rounded-full border border-sky-300 bg-white/60 px-6 py-3 font-black text-[#08243c]" href="/forms/schools">School Forms</a>
             </div>
           </div>
           <div className="rounded-[2rem] border border-sky-100 bg-white/78 p-6 shadow-2xl shadow-sky-200/50">
@@ -70,6 +70,25 @@ export default function SchoolsPage() {
 
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-sky-600">Public master plan gallery</p>
+          <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Public-safe campus concepts.</h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {galleryPages.map(([title, caption]) => (
+              <article key={title} className="rounded-2xl border border-sky-100 bg-white p-6 shadow-lg shadow-sky-100/50">
+                <div className="mb-5 h-28 rounded-2xl bg-[linear-gradient(135deg,#dff4ff,#ffffff,#bae6fd)]" />
+                <h3 className="font-serif text-3xl">{title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[#4b6b82]">{caption}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-6 rounded-2xl border border-sky-100 bg-white px-5 py-4 text-sm font-bold text-[#42647d]">
+            Full PDFs, budgets, technical drawings, construction phases, and private partnership documents require approved Investor / Sponsor Access.
+          </p>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-sky-600">Future campus experience</p>
           <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Built for learning, innovation, and community.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -103,7 +122,7 @@ export default function SchoolsPage() {
           <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Partner with the BaBra Schools vision.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-4">
             {partnerTracks.map((item) => (
-              <a key={item} className="rounded-2xl border border-sky-100 bg-white p-6 font-black text-[#16456a] shadow-lg shadow-sky-100/50" href="/forms/schools">
+              <a key={item} className="rounded-2xl border border-sky-100 bg-white p-6 font-black text-[#16456a] shadow-lg shadow-sky-100/50" href={investorAccessRoute}>
                 {item}
               </a>
             ))}

@@ -23,17 +23,19 @@ const divisionMenus: Record<DivisionKey, string[][]> = {
     ["Home", "/"],
     ["Admissions", "#admissions"],
     ["Teachers", "#teachers"],
-    ["Digital School", "#digital-school"],
     ["Scholarships", "#scholarships"],
+    ["Digital School", "#digital-school"],
+    ["Master Plan", "/schools/masterplan"],
     ["School Forms", "/forms/schools"],
     ["Contact", "/contact"]
   ],
   foundation: [
     ["Home", "/"],
-    ["Programs", "#services"],
-    ["Volunteers", "/forms/foundation"],
+    ["Child Support", "/child-family-support"],
     ["Family Support", "/child-family-support"],
+    ["Volunteers", "/forms/foundation"],
     ["Donations", "/forms/foundation"],
+    ["Foundation Forms", "/forms/foundation"],
     ["Contact", "/contact"]
   ],
   hospital: [
@@ -44,10 +46,11 @@ const divisionMenus: Record<DivisionKey, string[][]> = {
   ],
   "rwanda-mobile-hub": [
     ["Home", "/"],
-    ["Repair Services", "#services"],
+    ["Repairs", "#services"],
+    ["Accessories", "/forms/rwanda-mobile-hub"],
+    ["Spare Parts", "/forms/rwanda-mobile-hub"],
     ["Technicians", "/forms/rwanda-mobile-hub"],
-    ["Trade-In", "/forms/rwanda-mobile-hub"],
-    ["Suppliers", "/forms/rwanda-mobile-hub"],
+    ["RMH Forms", "/forms/rwanda-mobile-hub"],
     ["Contact", "/contact"]
   ]
 };

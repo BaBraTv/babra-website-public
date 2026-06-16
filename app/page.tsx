@@ -84,6 +84,7 @@ const publicServices = [
 ];
 
 const investorActions = [
+  ["Request Investor / Sponsor Access", "/investor-sponsor-access"],
   ["Invest in BaBra Cosmetics", "/forms/cosmetics"],
   ["Partner with BaBra Farm", "/forms/farm"],
   ["Partner with BaBra Schools", "/forms/schools"],

@@ -1,4 +1,4 @@
-export const masterplanPdf = "/schools/babra-schools-masterplan.pdf";
+export const investorAccessRoute = "/investor-sponsor-access";
 
 export const planCategories = [
   {
@@ -98,11 +98,15 @@ export const partnerTracks = [
 ];
 
 export const galleryPages = [
-  ["Plan index", 1, "Plans, elevations, and sections index for the school blocks and support buildings."],
-  ["Furniture and classroom support", 13, "Furniture list and classroom support items for teaching and operations."],
-  ["Implementation organization", 18, "Project implementation and supervision structure."],
-  ["Quality control", 25, "Quality control items for construction, materials, and inspections."],
-  ["Development schedule", 29, "Implementation schedule and lot-based construction planning."],
-  ["Operation and maintenance", 32, "Operation, teacher/staff planning, and maintenance guidance."],
-  ["Project effect", 42, "Expected education impact, learning environment improvements, and recommendations."]
+  ["Campus overview", "Public-safe overview of the future BaBra Schools campus orientation."],
+  ["Nursery block concept", "Early-childhood learning, safety, play, hygiene, and parent reception concept."],
+  ["Primary block concept", "Primary classroom blocks, outdoor learning, sanitation, and learner support concept."],
+  ["Secondary block concept", "Secondary classrooms, laboratories, ICT support, and multi-purpose learning concept."],
+  ["University concept", "Long-term higher-learning, research, innovation, and entrepreneurship education concept."],
+  ["Digital school concept", "Digital learning center, ICT systems, parent portal, and remote-learning concept."],
+  ["Library concept", "Library, reading rooms, resource management, and academic culture concept."],
+  ["Science laboratories", "Science teaching, laboratory safety, and practical learning concept."],
+  ["Sports facilities", "Sports fields, recreation, student wellness, and community sport concept."],
+  ["Student housing", "Future student accommodation and welfare support concept."],
+  ["Future teaching hospital", "Long-term health education and community-service concept linked to the wider BaBra ecosystem."]
 ];
