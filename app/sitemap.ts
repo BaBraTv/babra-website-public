@@ -41,6 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/child-family-support", "monthly", 0.75],
     ["/quality", "monthly", 0.85],
     ["/contact", "monthly", 0.85],
+    ["/content-studio", "weekly", 0.72],
     ["/forms", "monthly", 0.75],
     ["/forms/cosmetics", "weekly", 0.85],
     ["/forms/farm", "monthly", 0.75],

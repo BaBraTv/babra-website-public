@@ -14,6 +14,7 @@ const nav = [
   ["Foundation", "/foundation"],
   ["Investors", "#investors"],
   ["Careers", "/job-application"],
+  ["Content Studio", "/content-studio"],
   ["My Account", "/account"],
   ["Contact", "/contact"]
 ];
@@ -90,6 +91,12 @@ const investorActions = [
   ["Partner with BaBra Schools", "/forms/schools"],
   ["Advertise with LifeTalk TV", "/forms/lifetalk-tv"],
   ["Support BaBra Foundation", "/forms/foundation"]
+];
+
+const contentActions = [
+  ["Post Image", "/content-studio", "Prepare product photos, showroom shots, event photos, and customer visuals for review."],
+  ["Post Video", "/content-studio", "Prepare factory clips, founder messages, LifeTalk TV videos, or product videos for publishing."],
+  ["Post Text", "/content-studio", "Prepare announcements, testimonials, captions, and BaBra updates for website and social media."]
 ];
 
 const heroHighlights = [
@@ -348,6 +355,32 @@ export default function HoldingHomePage() {
               <a key={name} className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 hover:border-[#fb923c]/60" href={href}>
                 <h3 className="font-serif text-3xl">{name}</h3>
                 <p className="mt-3 leading-7 text-white/64">{description}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-[#0b0807] px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#4ebeff]">Content Studio</p>
+              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Post content for BaBra.</h2>
+            </div>
+            <p className="text-lg font-semibold leading-8 text-white/62">
+              Images, videos, and text updates can be prepared in one place before public approval. This protects the brand
+              while making content creation faster for BaBra teams and contributors.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {contentActions.map(([title, href, text]) => (
+              <a key={title} className="rounded-[1.35rem] border border-white/10 bg-white/[0.055] p-6 shadow-xl shadow-black/20 hover:border-[#4ebeff]/50" href={href}>
+                <h3 className="font-serif text-3xl">{title}</h3>
+                <p className="mt-3 min-h-20 text-sm leading-7 text-white/62">{text}</p>
+                <span className="mt-5 inline-flex rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]">
+                  Open studio
+                </span>
               </a>
             ))}
           </div>
