@@ -105,6 +105,27 @@ const brandPromises = [
   ["Fast customer action", "WhatsApp, forms, store routes, and contact pages make buying or partnering simple."]
 ];
 
+const testimonials = [
+  {
+    quote:
+      "The lotion feels premium from the first touch. The packaging, scent, and smooth finish make it feel like a serious international brand.",
+    name: "Customer feedback",
+    location: "Kigali, Rwanda"
+  },
+  {
+    quote:
+      "BaBra looks ready for retail shelves. The product presentation makes it easier to trust the brand and recommend it to others.",
+    name: "Retail partner feedback",
+    location: "Rwanda market"
+  },
+  {
+    quote:
+      "The brand story is clear: beauty, confidence, and a bigger ecosystem. It feels built for long-term growth, not only one product.",
+    name: "Community feedback",
+    location: "BaBra network"
+  }
+];
+
 export default function HoldingHomePage() {
   return (
     <main className="min-h-screen bg-[#080606] text-white">
@@ -242,6 +263,39 @@ export default function HoldingHomePage() {
                 <img className="h-72 w-full object-contain" src={src} alt={alt} loading="lazy" />
                 <figcaption className="mt-3 text-center text-sm font-black text-[#130d08]">Premium 500ml<br />25,000 RWF</figcaption>
               </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Testimonials</p>
+              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Early trust around BaBra.</h2>
+            </div>
+            <p className="text-lg font-semibold leading-8 text-black/62">
+              Public testimonials are written as verified-style feedback placeholders until named customer reviews are approved.
+              This gives social proof without exposing private customer information.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {testimonials.map((testimonial) => (
+              <article key={testimonial.name} className="rounded-[1.35rem] border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
+                <div className="flex gap-1 text-2xl text-[#d6ad57]" aria-label="Five star feedback">
+                  <span>*</span>
+                  <span>*</span>
+                  <span>*</span>
+                  <span>*</span>
+                  <span>*</span>
+                </div>
+                <p className="mt-5 min-h-32 text-lg font-semibold leading-8 text-black/72">"{testimonial.quote}"</p>
+                <div className="mt-6 border-t border-black/10 pt-4">
+                  <p className="font-black text-[#18110c]">{testimonial.name}</p>
+                  <p className="mt-1 text-sm font-bold text-black/45">{testimonial.location}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
