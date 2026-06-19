@@ -92,6 +92,19 @@ const investorActions = [
   ["Support BaBra Foundation", "/forms/foundation"]
 ];
 
+const heroHighlights = [
+  ["Premium feel", "Luxury finish, non-greasy comfort, and a clean daily skincare experience."],
+  ["3 lotion editions", "Women, Men, and Kids 500ml lines prepared for retail and online ordering."],
+  ["Global-ready brand", "A Rwanda-built ecosystem positioned for East Africa and worldwide customers."]
+];
+
+const brandPromises = [
+  ["Refined fragrance", "A memorable premium scent experience designed around confidence and daily freshness."],
+  ["Smooth hydration", "Comfort-focused body care built around softness, skin-barrier support, and consistency."],
+  ["Professional presentation", "Product pages, showroom flow, samples, and partner forms built for real commerce."],
+  ["Fast customer action", "WhatsApp, forms, store routes, and contact pages make buying or partnering simple."]
+];
+
 export default function HoldingHomePage() {
   return (
     <main className="min-h-screen bg-[#080606] text-white">
@@ -147,6 +160,14 @@ export default function HoldingHomePage() {
               <a className="rounded-full border border-[#fb923c]/50 px-6 py-3 font-black text-[#fb923c]" href="/lost-and-found">Lost & Found Rwanda</a>
               <a className="rounded-full border border-[#4ebeff]/45 px-6 py-3 font-black text-[#9be2ff]" href="/contact">Contact EI BaBra</a>
             </div>
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {heroHighlights.map(([title, text]) => (
+                <article key={title} className="rounded-2xl border border-white/10 bg-white/[0.055] p-4 shadow-xl shadow-black/20">
+                  <h2 className="text-base font-black text-white">{title}</h2>
+                  <p className="mt-2 text-sm leading-6 text-white/60">{text}</p>
+                </article>
+              ))}
+            </div>
           </div>
           <div className="rounded-[2rem] border border-[#f1d58b]/24 bg-white/[0.055] p-6 shadow-2xl shadow-black/35">
             <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f1d58b]">Corporate gateway</p>
@@ -157,6 +178,32 @@ export default function HoldingHomePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-[#0b0807] px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">BaBra Brand Promise</p>
+              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Luxury people can feel fast.</h2>
+            </div>
+            <p className="text-lg font-semibold leading-8 text-white/64">
+              BaBra must be easy to trust, easy to buy, and easy to remember. These customer promises came from the first
+              BaBra website direction, now upgraded into the current EI BaBra ecosystem.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {brandPromises.map(([title, text]) => (
+              <article key={title} className="rounded-[1.35rem] border border-[#f1d58b]/18 bg-white/[0.045] p-6 shadow-xl shadow-black/20">
+                <span className="inline-flex rounded-full border border-[#f1d58b]/30 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#f1d58b]">
+                  Promise
+                </span>
+                <h3 className="mt-5 font-serif text-3xl leading-tight">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-white/62">{text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -304,6 +351,23 @@ export default function HoldingHomePage() {
                 <p className="mt-3 leading-7 text-black/62">{answer}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#0f0a08] px-5 py-16 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 rounded-[2rem] border border-[#f1d58b]/25 bg-[radial-gradient(circle_at_18%_20%,rgba(241,213,139,0.2),transparent_22rem),linear-gradient(135deg,#18110f,#080606)] p-6 md:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">Fast customer route</p>
+            <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Samples, wholesale, partnership.</h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-white/64">
+              A visitor should not search for how to act. BaBra now routes sample requests, wholesale interest, cosmetics
+              support, and general contact through clear public forms.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/forms/cosmetics">Request samples</a>
+            <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/contact">Contact BaBra</a>
           </div>
         </div>
       </section>
