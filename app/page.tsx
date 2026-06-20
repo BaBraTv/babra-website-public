@@ -197,11 +197,24 @@ export default function HoldingHomePage() {
               ))}
             </div>
           </div>
-          <div className="rounded-[2rem] border border-[#f1d58b]/24 bg-white/[0.055] p-6 shadow-2xl shadow-black/35">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f1d58b]">Corporate gateway</p>
-            <div className="mt-5 grid gap-3">
-              {["Beauty commerce", "Agriculture supply chain", "Education systems", "Media production", "Foundation impact"].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-black/25 px-5 py-4 font-black text-white/82">
+          <div className="overflow-hidden rounded-[2rem] border border-[#f1d58b]/24 bg-white/[0.055] shadow-2xl shadow-black/35">
+            <div className="border-b border-white/10 px-5 py-4">
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f1d58b]">Watch BaBra production</p>
+              <h2 className="mt-2 font-serif text-3xl leading-tight">From production care to premium skincare.</h2>
+            </div>
+            <video
+              className="aspect-video w-full bg-black object-cover"
+              src="/videos/babra-production-ad.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              poster="/brand/official-babra-bottle.png"
+            />
+            <div className="grid gap-3 p-5 sm:grid-cols-3">
+              {["Production story", "Quality control", "Premium packaging"].map((item) => (
+                <div key={item} className="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-sm font-black text-white/82">
                   {item}
                 </div>
               ))}
