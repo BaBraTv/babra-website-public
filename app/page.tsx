@@ -205,11 +205,10 @@ export default function HoldingHomePage() {
             <video
               className="aspect-video w-full bg-black object-cover"
               src="/videos/babra-production-ad.mp4"
-              autoPlay
               muted
-              loop
               playsInline
               controls
+              preload="none"
               poster="/brand/official-babra-bottle.png"
             />
             <div className="grid gap-3 p-5 sm:grid-cols-3">
