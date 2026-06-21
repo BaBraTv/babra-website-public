@@ -40,6 +40,16 @@ export const metadata: Metadata = {
     "Premium Luxury in Every Touch",
     "Rwanda luxury skincare",
     "global skincare brand",
+    "BaBra Store",
+    "BaBra official website",
+    "BaBra global skincare",
+    "premium body lotion wholesale",
+    "skincare wholesale Rwanda",
+    "cosmetics distributor Rwanda",
+    "cosmetics export brand",
+    "body lotion supplier Rwanda",
+    "BaBra social media",
+    "BaBra WhatsApp order",
     "BaBra Pocket Fresh",
     "BaBra Pads",
     "BaBra Soap",
@@ -71,7 +81,7 @@ export const metadata: Metadata = {
       "Official babra.store gateway for BaBra Cosmetics, BaBra Farm, BaBra Schools, LifeTalk TV, BaBra Foundation, Rwanda Mobile Hub, and global community impact.",
     url: "https://www.babra.store",
     siteName: "EI BaBra Holding Ltd",
-    images: [{ url: "/brand/logo.jpeg", width: 1200, height: 630, alt: "EI BaBra Holding Ltd" }],
+    images: [{ url: "/brand/official-babra-bottle.png", width: 1200, height: 1600, alt: "Official BaBra Lotion bottle" }],
     locale: "en_RW",
     type: "website"
   },
@@ -79,7 +89,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "EI BaBra Holding Ltd | Global BaBra Corporate Ecosystem",
     description: "BaBra Cosmetics, Farm, Schools, LifeTalk TV, Foundation, and global business platforms.",
-    images: ["/brand/logo.jpeg"]
+    images: ["/brand/official-babra-bottle.png"]
   },
   applicationName: "EI BaBra Holding",
   manifest: "/manifest.webmanifest",
@@ -104,6 +114,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         logo: "https://www.babra.store/brand/logo.jpeg",
         email: "info@babra.store",
         sameAs: ["https://www.babra.store"]
+      },
+      {
+        "@type": "WebSite",
+        name: "BaBra Store",
+        url: "https://www.babra.store",
+        publisher: { "@type": "Organization", name: "EI BaBra Holding Ltd" },
+        inLanguage: ["en", "rw", "fr", "sw"]
+      },
+      {
+        "@type": "Brand",
+        name: "BaBra Cosmetics",
+        slogan: "Luxury in Every Touch",
+        url: "https://www.babra.store/cosmetics",
+        logo: "https://www.babra.store/brand/logo.jpeg"
       },
       {
         "@type": "LocalBusiness",

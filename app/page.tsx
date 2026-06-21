@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { InstallAppButton } from "./InstallAppButton";
 
 export const metadata: Metadata = {
-  title: "EI BaBra Holding Ltd | Beauty, Agriculture, Education, Media & Impact",
+  title: "BaBra Store | Global BaBra Cosmetics, Media, Farm, Schools & Impact",
   description:
-    "EI BaBra Holding Ltd is the parent ecosystem for BaBra Cosmetics Rwanda, BaBra Farm, BaBra Schools, LifeTalk TV, BaBra Foundation, Rwanda Mobile Hub, and future hospital systems."
+    "Official BaBra Store for BaBra Cosmetics, premium BaBra Lotion, LifeTalk TV, BaBra Farm, BaBra Schools, BaBra Foundation, Rwanda Mobile Hub, samples, wholesale, and partnerships."
 };
 
 const nav = [
@@ -131,6 +131,40 @@ const testimonials = [
     name: "Community feedback",
     location: "BaBra network"
   }
+];
+
+const launchChannels = [
+  {
+    title: "Google Search ready",
+    text: "Homepage, product routes, sitemap, semantic content, and public-safe brand language are prepared for search discovery.",
+    action: "Inspect BaBra Store",
+    href: "https://www.babra.store"
+  },
+  {
+    title: "Social media ready",
+    text: "Product visuals, short story angles, production video placement, and share copy can support Facebook, Instagram, TikTok, YouTube, and X.",
+    action: "Open Content Studio",
+    href: "/content-studio"
+  },
+  {
+    title: "WhatsApp sales ready",
+    text: "Customers can move from interest to direct conversation, samples, wholesale, and cosmetics support without confusion.",
+    action: "Request samples",
+    href: "/forms/cosmetics"
+  },
+  {
+    title: "Partner ready",
+    text: "Investors, distributors, showrooms, creators, and business partners get clear routes into the right BaBra division.",
+    action: "Partner with BaBra",
+    href: "#investors"
+  }
+];
+
+const growthSteps = [
+  "Share the official website link first: https://www.babra.store",
+  "Use product photos and short videos before long explanations.",
+  "Send visitors to samples, WhatsApp order, Content Studio, or partner forms.",
+  "Keep formulas, full certificates, barcodes, and private supplier details off public posts."
 ];
 
 export default function HoldingHomePage() {
@@ -395,6 +429,59 @@ export default function HoldingHomePage() {
                 </span>
               </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-[#050505] px-5 py-16 md:px-8">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(78,190,255,0.16),transparent_24rem),radial-gradient(circle_at_82%_20%,rgba(241,213,139,0.18),transparent_25rem)]" />
+        <div className="relative mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">Global launch engine</p>
+              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Built to turn attention into orders.</h2>
+            </div>
+            <p className="text-lg font-semibold leading-8 text-white/66">
+              BaBra now has a public route for discovery, trust, samples, wholesale, media content, and partnerships. The
+              goal is simple: every visitor should know what BaBra is, trust the brand, and take the next action.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {launchChannels.map((channel) => (
+              <article key={channel.title} className="rounded-[1.35rem] border border-white/10 bg-white/[0.055] p-6 shadow-xl shadow-black/25">
+                <h3 className="font-serif text-3xl">{channel.title}</h3>
+                <p className="mt-3 min-h-28 text-sm leading-7 text-white/62">{channel.text}</p>
+                <a className="mt-5 inline-flex rounded-full border border-[#f1d58b]/40 px-4 py-2 text-sm font-black text-[#f1d58b]" href={channel.href}>
+                  {channel.action}
+                </a>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 grid gap-5 rounded-[1.65rem] border border-[#f1d58b]/25 bg-[#100b08]/82 p-5 md:grid-cols-[1fr_auto] md:items-center md:p-7">
+            <div>
+              <h3 className="font-serif text-3xl md:text-4xl">Share BaBra with one clean message.</h3>
+              <ul className="mt-5 grid gap-3 text-sm font-semibold leading-6 text-white/68 md:grid-cols-2">
+                {growthSteps.map((step) => (
+                  <li key={step} className="rounded-2xl border border-white/10 bg-white/[0.045] p-4">{step}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col gap-3 md:min-w-60">
+              <a
+                className="rounded-full bg-[#f1d58b] px-6 py-3 text-center font-black text-[#130d08]"
+                href="https://wa.me/?text=Discover%20BaBra%20Store%3A%20premium%20BaBra%20Cosmetics%2C%20BaBra%20Lotion%2C%20samples%2C%20wholesale%2C%20and%20partnerships%20at%20https%3A%2F%2Fwww.babra.store"
+              >
+                Share on WhatsApp
+              </a>
+              <a className="rounded-full border border-white/20 px-6 py-3 text-center font-black text-white" href="/content-studio">
+                Prepare content
+              </a>
+              <a className="rounded-full border border-[#4ebeff]/30 px-6 py-3 text-center font-black text-[#4ebeff]" href="/cosmetics#production">
+                Watch production story
+              </a>
+            </div>
           </div>
         </div>
       </section>
