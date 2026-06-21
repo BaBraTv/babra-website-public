@@ -6,11 +6,11 @@ import { LanguageBar } from "./LanguageBar";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.babra.store"),
   title: {
-    default: "EI BaBra Holding Ltd | BaBra Cosmetics, Farm, Schools, LifeTalk TV",
+    default: "EI BaBra Holding Ltd | Global Beauty, Media, Agriculture & Innovation",
     template: "%s | babra.store"
   },
   description:
-    "EI BaBra Holding Ltd corporate ecosystem portal for BaBra Cosmetics Rwanda, BaBra Lotion, BaBra Farm, BaBra Schools, LifeTalk TV, BaBra Foundation, Rwanda skincare, agriculture, education, and media.",
+    "EI BaBra Holding Ltd is a global business ecosystem for BaBra Cosmetics, BaBra Lotion, BaBra Farm, BaBra Schools, LifeTalk TV, BaBra Foundation, digital media, agriculture, education, and innovation.",
   keywords: [
     "EI BaBra Holding Ltd",
     "Best body lotion",
@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     "luxury body lotion",
     "premium skincare Rwanda",
     "premium cosmetics Rwanda",
+    "global premium skincare",
+    "worldwide luxury skincare",
+    "international cosmetics brand",
     "BaBra Lotion Rwanda",
     "BaBra Lotion Kigali",
     "BaBra Lotion samples",
@@ -62,13 +65,10 @@ export const metadata: Metadata = {
     "vulnerable children support Rwanda",
     "family reintegration"
   ],
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "add-google-search-console-verification-token"
-  },
   openGraph: {
-    title: "EI BaBra Holding Ltd | Corporate Ecosystem Portal",
+    title: "EI BaBra Holding Ltd | Global Corporate Ecosystem Portal",
     description:
-      "Official babra.store gateway for BaBra Cosmetics Rwanda, BaBra Farm, BaBra Schools, LifeTalk TV, BaBra Foundation, Rwanda Mobile Hub, and community impact.",
+      "Official babra.store gateway for BaBra Cosmetics, BaBra Farm, BaBra Schools, LifeTalk TV, BaBra Foundation, Rwanda Mobile Hub, and global community impact.",
     url: "https://www.babra.store",
     siteName: "EI BaBra Holding Ltd",
     images: [{ url: "/brand/logo.jpeg", width: 1200, height: 630, alt: "EI BaBra Holding Ltd" }],
@@ -77,8 +77,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EI BaBra Holding Ltd | BaBra Corporate Ecosystem",
-    description: "BaBra Cosmetics, Farm, Schools, LifeTalk TV, Foundation, and Rwanda business platforms.",
+    title: "EI BaBra Holding Ltd | Global BaBra Corporate Ecosystem",
+    description: "BaBra Cosmetics, Farm, Schools, LifeTalk TV, Foundation, and global business platforms.",
     images: ["/brand/logo.jpeg"]
   },
   applicationName: "EI BaBra Holding",
@@ -115,10 +115,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       },
       {
         "@type": "Product",
-        name: "BaBra Lotion Rwanda",
+        name: "BaBra Lotion",
         brand: { "@type": "Brand", name: "BaBra Cosmetics" },
         image: "https://www.babra.store/brand/official-babra-bottle.png",
-        description: "Premium BaBra Lotion Rwanda skincare product with protected formula details.",
+        description: "Premium BaBra Lotion skincare product for Rwanda, Africa, and worldwide customers with protected formula details.",
         offers: { "@type": "Offer", priceCurrency: "RWF", price: 25000, availability: "https://schema.org/InStock" }
       }
     ]

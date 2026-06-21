@@ -176,7 +176,7 @@ export default function HoldingHomePage() {
               EI BaBra Holding Ltd
             </h1>
             <p className="mt-6 max-w-3xl text-2xl font-semibold leading-9 text-white/82">
-              Building Beauty, Agriculture, Education, Media & Community Impact Across Africa.
+              Building Beauty, Agriculture, Education, Media & Community Impact for Global Markets.
             </p>
             <p className="mt-5 max-w-3xl leading-8 text-white/62">
               One corporate ecosystem for premium skincare, agriculture growth, future schools, media influence, technology,
@@ -255,8 +255,8 @@ export default function HoldingHomePage() {
             <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">BaBra is bigger than one product.</h2>
           </div>
           <p className="text-xl font-semibold leading-9 text-black/68">
-            BaBra is not only a product. It is a long-term African ecosystem built around beauty, farming, education, media,
-            technology, family support, and public service.
+            BaBra is not only a product. It is a long-term global ecosystem built around beauty, farming, education, media,
+            technology, family support, public service, and business innovation.
           </p>
         </div>
       </section>
