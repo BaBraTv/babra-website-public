@@ -2,16 +2,21 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "BaBra",
+    name: "BaBra Store",
     short_name: "BaBra",
-    description: "Beauty, services, media, farming, education and public support in one African ecosystem.",
-    start_url: "/",
+    description:
+      "Official BaBra Store for BaBra Cosmetics, BaBra Lotion, samples, wholesale, LifeTalk TV, BaBra Farm, BaBra Schools, and BaBra Group services.",
+    id: "/",
+    start_url: "/?source=pwa",
     scope: "/",
     display: "standalone",
+    display_override: ["window-controls-overlay", "standalone", "minimal-ui"],
     background_color: "#090706",
     theme_color: "#090706",
-    orientation: "portrait",
-    categories: ["shopping", "business", "lifestyle", "education", "productivity"],
+    orientation: "portrait-primary",
+    categories: ["business", "shopping", "beauty"],
+    lang: "en-RW",
+    dir: "ltr",
     icons: [
       {
         src: "/icons/icon.svg",
@@ -22,7 +27,31 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: "/brand/logo.jpeg",
         sizes: "512x512",
-        type: "image/jpeg"
+        type: "image/jpeg",
+        purpose: "any"
+      }
+    ],
+    shortcuts: [
+      {
+        name: "Shop BaBra",
+        short_name: "Shop",
+        description: "Open BaBra Store products.",
+        url: "/store",
+        icons: [{ src: "/icons/icon.svg", sizes: "any", type: "image/svg+xml" }]
+      },
+      {
+        name: "Request Samples",
+        short_name: "Samples",
+        description: "Open BaBra Cosmetics sample and wholesale forms.",
+        url: "/forms/cosmetics",
+        icons: [{ src: "/icons/icon.svg", sizes: "any", type: "image/svg+xml" }]
+      },
+      {
+        name: "Contact BaBra",
+        short_name: "Contact",
+        description: "Contact BaBra support.",
+        url: "/contact",
+        icons: [{ src: "/icons/icon.svg", sizes: "any", type: "image/svg+xml" }]
       }
     ]
   };
