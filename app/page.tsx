@@ -116,6 +116,13 @@ const brandPromises = [
   ["Fast customer action", "WhatsApp, forms, store routes, and contact pages make buying or partnering simple."]
 ];
 
+const dedicationPoints = [
+  ["To customers", "Build products and digital experiences that feel premium, trustworthy, simple to understand, and easy to buy."],
+  ["To quality", "Protect private formula details while showing public-safe quality signals, responsible claims, and clear product benefits."],
+  ["To families", "Grow BaBra with respect for family-based support, education, opportunity, dignity, and community reintegration."],
+  ["To the future", "Create a scalable BaBra ecosystem that can move from Rwanda to regional and global markets without losing discipline."]
+];
+
 const testimonials = [
   {
     quote:
@@ -280,6 +287,33 @@ export default function HoldingHomePage() {
                 </span>
                 <h3 className="mt-5 font-serif text-3xl leading-tight">{title}</h3>
                 <p className="mt-3 text-sm leading-7 text-white/62">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#090706] px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">Our Dedication</p>
+              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Dedicated to trust, quality, and long-term impact.</h2>
+            </div>
+            <p className="text-lg font-semibold leading-8 text-white/64">
+              BaBra is being built with a clear standard: every product, service, platform, and public message must protect
+              customer trust and strengthen the brand for the future.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {dedicationPoints.map(([title, text]) => (
+              <article key={title} className="rounded-[1.35rem] border border-[#f1d58b]/20 bg-[#fffaf1] p-6 text-[#18110c] shadow-xl shadow-black/20">
+                <span className="inline-flex rounded-full bg-[#a9141d] px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-white">
+                  Dedication
+                </span>
+                <h3 className="mt-5 font-serif text-3xl leading-tight">{title}</h3>
+                <p className="mt-3 text-sm font-semibold leading-7 text-black/62">{text}</p>
               </article>
             ))}
           </div>
