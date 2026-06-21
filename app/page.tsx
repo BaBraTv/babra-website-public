@@ -58,11 +58,15 @@ const companies = [
   }
 ];
 
-const otherDivisions = [
-  ["BaBra Pocket Fresh", "/products", "Portable freshness products for modern customers and retail shelves.", "View products"],
-  ["BaBra Pads", "/products", "Personal-care products positioned for comfort, confidence, and trusted distribution.", "View products"],
-  ["BaBra Soap", "/products", "Future BaBra soap line connected to premium skincare and daily hygiene.", "View products"],
-  ["BaBra Showroom", "/showroom", "Customer experience, product verification, samples, and partner onboarding.", "Visit showroom"],
+const cosmeticsFamilies = [
+  ["BaBra Lotion", "/cosmetics", "Women, Men, and Kids 500ml lotion editions under the BaBra Cosmetics premium skincare line.", "Explore lotion"],
+  ["BaBra Pocket Fresh", "/products", "Portable freshness products for modern customers, retail shelves, travel, and daily confidence.", "View pocket fresh"],
+  ["BaBra Pads", "/products", "Personal-care products positioned for comfort, confidence, and trusted BaBra Cosmetics distribution.", "View pads"],
+  ["BaBra Soap", "/products", "BaBra soap line connected to premium skincare, daily hygiene, herbal care, and family use.", "View soap"],
+  ["BaBra Showroom", "/showroom", "Cosmetics customer experience, product verification, samples, retail display, and partner onboarding.", "Visit showroom"]
+];
+
+const ecosystemPlatforms = [
   ["BaBra Hospital", "/hospital", "Future healthcare vision for trusted care, systems, and community service.", "Open hospital"],
   ["Rwanda Mobile Hub", "/rwanda-mobile-hub", "Mobile technology, devices, repair, digital trade, and youth opportunity.", "Open mobile hub"],
   ["BaBra Foundation", "/foundation", "Community impact, family support, volunteers, donations, and partnerships.", "Open foundation"]
@@ -378,14 +382,34 @@ export default function HoldingHomePage() {
 
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#4ebeff]">Other BaBra Divisions</p>
-          <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">More platforms in the BaBra ecosystem.</h2>
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {otherDivisions.map(([name, href, description, button]) => (
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">BaBra Cosmetics product families</p>
+          <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">One cosmetics division, multiple premium product lines.</h2>
+          <p className="mt-5 max-w-3xl text-lg font-semibold leading-8 text-white/62">
+            Lotion, Pocket Fresh, Pads, Soap, and the Showroom belong inside BaBra Cosmetics. They are not separate
+            platforms; they are product families and customer-experience routes under the same beauty business.
+          </p>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {cosmeticsFamilies.map(([name, href, description, button]) => (
               <article key={name} className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
                 <h3 className="font-serif text-3xl">{name}</h3>
                 <p className="mt-3 min-h-16 leading-7 text-white/62">{description}</p>
                 <a className="mt-5 inline-flex rounded-full border border-[#f1d58b]/35 px-4 py-2 text-sm font-black text-[#f1d58b]" href={href}>{button}</a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-[#0b0807] px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#4ebeff]">Future ecosystem platforms</p>
+          <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Platforms outside the cosmetics division.</h2>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {ecosystemPlatforms.map(([name, href, description, button]) => (
+              <article key={name} className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
+                <h3 className="font-serif text-3xl">{name}</h3>
+                <p className="mt-3 min-h-16 leading-7 text-white/62">{description}</p>
+                <a className="mt-5 inline-flex rounded-full border border-[#4ebeff]/35 px-4 py-2 text-sm font-black text-[#9be2ff]" href={href}>{button}</a>
               </article>
             ))}
           </div>
