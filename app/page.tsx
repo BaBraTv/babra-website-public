@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { InstallAppButton } from "./InstallAppButton";
 
 export const metadata: Metadata = {
@@ -187,8 +188,15 @@ export default function HoldingHomePage() {
       <header className="sticky top-[49px] z-50 border-b border-white/10 bg-[#080606]/92 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
           <a className="flex min-w-0 items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-2 py-2 pr-4" href="/">
-            <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full border border-[#f1d58b]/55 bg-[#fff8eb]">
-              <img className="h-full w-full object-cover" src="/brand/logo.jpeg" alt="EI BaBra Holding Ltd logo" />
+            <span className="relative grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full border border-[#f1d58b]/55 bg-[#fff8eb]">
+              <Image
+                className="object-cover"
+                src="/brand/logo.jpeg"
+                alt="EI BaBra Holding Ltd logo"
+                fill
+                sizes="44px"
+                priority
+              />
             </span>
             <span className="min-w-0">
               <strong className="block truncate font-serif text-lg leading-tight">EI BaBra Holding Ltd</strong>
@@ -257,7 +265,7 @@ export default function HoldingHomePage() {
               playsInline
               controls
               preload="none"
-              poster="/brand/official-babra-bottle.png"
+              poster="/brand/homepage-video-poster.webp"
             />
             <div className="grid gap-3 p-5 sm:grid-cols-3">
               {["Production story", "Quality control", "Premium packaging"].map((item) => (
@@ -354,7 +362,15 @@ export default function HoldingHomePage() {
               ["/brand/official-babra-bottle-kids.png", "BaBra Lotion Baby - Premium 500ml - 25,000 RWF"]
             ].map(([src, alt]) => (
               <figure key={src} className="rounded-2xl bg-white p-4 shadow-xl shadow-black/20">
-                <img className="h-72 w-full object-contain" src={src} alt={alt} loading="lazy" />
+                <Image
+                  className="h-72 w-full object-contain"
+                  src={src}
+                  alt={alt}
+                  width={518}
+                  height={1024}
+                  sizes="(min-width: 1024px) 220px, (min-width: 640px) 30vw, 86vw"
+                  loading="lazy"
+                />
                 <figcaption className="mt-3 text-center text-sm font-black text-[#130d08]">Premium 500ml<br />25,000 RWF</figcaption>
               </figure>
             ))}

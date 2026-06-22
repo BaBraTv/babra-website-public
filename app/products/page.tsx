@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const productFamilies = [
   {
     name: "BaBra Lotion",
@@ -73,7 +75,16 @@ export default function ProductsPage() {
               </p>
             </div>
             <figure className="overflow-hidden rounded-lg border border-[#d6ad57]/25 bg-[#fffaf1] p-4 shadow-2xl shadow-black/40">
-              <img className="h-[420px] w-full object-contain" src="/products/pocket-fresh-com.png" alt="BaBra Pocket Fresh and Pads product packaging" />
+              <div className="relative h-[420px] w-full">
+                <Image
+                  className="object-contain"
+                  src="/products/pocket-fresh-com.png"
+                  alt="BaBra Pocket Fresh and Pads product packaging"
+                  fill
+                  sizes="(min-width: 1024px) 46vw, 92vw"
+                  priority
+                />
+              </div>
             </figure>
           </div>
         </div>
@@ -84,7 +95,16 @@ export default function ProductsPage() {
           {productFamilies.map((family, index) => (
             <article key={family.name} className="grid overflow-hidden rounded-lg border border-white/10 bg-[#18110f] shadow-2xl shadow-black/20 lg:grid-cols-[0.95fr_1.05fr]">
               <figure className="bg-gradient-to-br from-white via-[#fff8eb] to-[#d5ad49] p-5">
-                <img className="h-[420px] w-full object-contain drop-shadow-2xl" src={family.image} alt={`${family.name} packaging`} />
+                <div className="relative h-[420px] w-full">
+                  <Image
+                    className="object-contain drop-shadow-2xl"
+                    src={family.image}
+                    alt={`${family.name} packaging`}
+                    fill
+                    sizes="(min-width: 1024px) 44vw, 92vw"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </div>
               </figure>
               <div className="p-6 md:p-8">
                 <span className="text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">Category 0{index + 1}</span>
