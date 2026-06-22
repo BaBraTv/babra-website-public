@@ -120,6 +120,9 @@ const dedicationPoints = [
   ["To customers", "Build products and digital experiences that feel premium, trustworthy, simple to understand, and easy to buy."],
   ["To quality", "Protect private formula details while showing public-safe quality signals, responsible claims, and clear product benefits."],
   ["To families", "Grow BaBra with respect for family-based support, education, opportunity, dignity, and community reintegration."],
+  ["To Rwanda's digital vision", "Respect the national direction of H.E. President Paul Kagame, whose leadership has positioned technology, connectivity, and innovation as key drivers of Rwanda's future."],
+  ["To AI and execution", "Use modern AI tools such as ChatGPT responsibly to improve planning, content, software, customer service, and business systems."],
+  ["To Dr. Leon", "Recognize Dr. Leon as a valued friend and supporter who celebrates progress, encourages discipline, and stands behind the positive growth of BaBra."],
   ["To the future", "Create a scalable BaBra ecosystem that can move from Rwanda to regional and global markets without losing discipline."]
 ];
 
@@ -298,7 +301,7 @@ export default function HoldingHomePage() {
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">Our Dedication</p>
-              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Dedicated to trust, quality, and long-term impact.</h2>
+              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Dedicated to trust, technology, support, and long-term impact.</h2>
             </div>
             <p className="text-lg font-semibold leading-8 text-white/64">
               BaBra is being built with a clear standard: every product, service, platform, and public message must protect
