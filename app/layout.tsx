@@ -112,7 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         name: "EI BaBra Holding Ltd",
         url: "https://www.babra.store",
         logo: "https://www.babra.store/brand/logo.jpeg",
-        email: "info@babra.store",
+        email: "babracosmeticsltd@gmail.com",
         sameAs: ["https://www.babra.store"]
       },
       {
@@ -135,7 +135,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         url: "https://www.babra.store/showroom",
         address: "Kigali, Rwanda",
         telephone: "+250788351482",
-        email: "support@babra.store"
+        email: "babracosmeticsltd@gmail.com"
       },
       {
         "@type": "Product",

@@ -14,17 +14,19 @@ const quickFacts = [
   ["Best route", "WhatsApp for fastest response"],
 ];
 
+const companyEmail = "babracosmeticsltd@gmail.com";
+
 const businessEmails = [
-  ["General information", "info@babra.store"],
-  ["Customer support", "support@babra.store"],
-  ["Cosmetics", "cosmetics@babra.store"],
-  ["Farm", "farm@babra.store"],
-  ["Schools", "schools@babra.store"],
-  ["LifeTalk TV", "lifetalk@babra.store"],
-  ["Foundation", "foundation@babra.store"],
-  ["Lost & Found", "lostfound@babra.store"],
-  ["Sales", "sales@babra.store"],
-  ["Investors", "investors@babra.store"]
+  ["General information", companyEmail, "General information"],
+  ["Customer support", companyEmail, "Customer support"],
+  ["Cosmetics", companyEmail, "BaBra Cosmetics"],
+  ["Farm", companyEmail, "BaBra Farm"],
+  ["Schools", companyEmail, "BaBra Schools"],
+  ["LifeTalk TV", companyEmail, "LifeTalk TV"],
+  ["Foundation", companyEmail, "BaBra Foundation"],
+  ["Lost & Found", companyEmail, "Lost and Found Rwanda"],
+  ["Sales", companyEmail, "BaBra Sales"],
+  ["Investors", companyEmail, "Investor and partner request"]
 ];
 
 export const metadata = {
@@ -49,7 +51,7 @@ export default function ContactPage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="https://wa.me/250788351482?text=Hello%20BaBra%2C%20I%20want%20samples%20or%20wholesale%20information." target="_blank" rel="noopener noreferrer">WhatsApp now</a>
                 <a className="rounded-full bg-white px-6 py-3 font-black text-[#130d08]" href="/contact-showroom">Showroom form</a>
-                <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="mailto:babracosmeticsltd@gmail.com">Email BaBra</a>
+                <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href={`mailto:${companyEmail}?subject=BaBra%20website%20message`}>Email BaBra</a>
               </div>
             </div>
             <ContactForm />
@@ -88,10 +90,13 @@ export default function ContactPage() {
       <section className="bg-[#071426] px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#4ebeff]">Business email readiness</p>
-          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Correct email route for every BaBra division.</h2>
+          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">One working email route for every BaBra division.</h2>
+          <p className="mt-5 max-w-3xl leading-8 text-white/62">
+            Until official babra.store mailboxes are fully configured, every division email request goes to the verified BaBra Cosmetics Gmail address.
+          </p>
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {businessEmails.map(([label, email]) => (
-              <a key={email} className="rounded-2xl border border-white/10 bg-white/[0.055] p-5 hover:border-[#4ebeff]/60" href={`mailto:${email}`}>
+            {businessEmails.map(([label, email, subject]) => (
+              <a key={label} className="rounded-2xl border border-white/10 bg-white/[0.055] p-5 hover:border-[#4ebeff]/60" href={`mailto:${email}?subject=${encodeURIComponent(subject)}`}>
                 <span className="text-xs font-black uppercase tracking-[0.18em] text-[#4ebeff]">{label}</span>
                 <p className="mt-3 break-words font-black text-white/82">{email}</p>
               </a>

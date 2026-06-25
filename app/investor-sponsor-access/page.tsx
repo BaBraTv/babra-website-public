@@ -84,9 +84,9 @@ export default function InvestorSponsorAccessPage() {
             </div>
             <a
               className="mt-6 inline-flex rounded-full bg-sky-500 px-6 py-3 font-black text-white"
-              href="mailto:investors@babra.store?subject=Investor%20Sponsor%20Access%20Request"
+              href="mailto:babracosmeticsltd@gmail.com?subject=Investor%20Sponsor%20Access%20Request"
             >
-              Submit to investors@babra.store
+              Submit to BaBra email
             </a>
             <p className="mt-4 text-sm font-semibold text-[#516579]">
               Manual review mode: BaBra marks requests as Pending Review, Approved, or Rejected in the admin dashboard.
@@ -115,7 +115,7 @@ export default function InvestorSponsorAccessPage() {
               </article>
             ))}
           </div>
-          <a className="mt-8 inline-flex rounded-full bg-white px-6 py-3 font-black text-[#071426]" href="mailto:investors@babra.store?subject=Sponsor%20BaBra%20Project">
+          <a className="mt-8 inline-flex rounded-full bg-white px-6 py-3 font-black text-[#071426]" href="mailto:babracosmeticsltd@gmail.com?subject=Sponsor%20BaBra%20Project">
             Sponsor This Project
           </a>
         </section>

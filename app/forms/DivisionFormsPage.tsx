@@ -1,12 +1,12 @@
 import { divisionForms, type DivisionFormsKey } from "./division-forms-content";
 
 const emails: Record<DivisionFormsKey, string> = {
-  cosmetics: "cosmetics@babra.store",
-  farm: "farm@babra.store",
-  schools: "schools@babra.store",
-  "lifetalk-tv": "lifetalk@babra.store",
-  "rwanda-mobile-hub": "support@babra.store",
-  foundation: "foundation@babra.store"
+  cosmetics: "babracosmeticsltd@gmail.com",
+  farm: "babracosmeticsltd@gmail.com",
+  schools: "babracosmeticsltd@gmail.com",
+  "lifetalk-tv": "babracosmeticsltd@gmail.com",
+  "rwanda-mobile-hub": "babracosmeticsltd@gmail.com",
+  foundation: "babracosmeticsltd@gmail.com"
 };
 
 function mailHref(formName: string, email: string) {
