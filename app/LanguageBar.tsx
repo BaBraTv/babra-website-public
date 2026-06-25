@@ -113,7 +113,54 @@ const dictionary: Record<Exclude<LanguageCode, "EN">, Record<string, string>> = 
     "Customer information": "Amakuru y'umukiriya",
     "Payment method": "Uburyo bwo kwishyura",
     "Order tracking": "Gukurikirana commande",
-    "Customer profile": "Umwirondoro w'umukiriya"
+    "Customer profile": "Umwirondoro w'umukiriya",
+    "Samples, wholesale, support": "Samples, kurangura, ubufasha",
+    "Talk to BaBra directly.": "Vugana na BaBra ako kanya.",
+    "WhatsApp now": "Andika kuri WhatsApp",
+    "Showroom form": "Ifishi ya showroom",
+    "Email BaBra": "Ohereza email kuri BaBra",
+    "Quick routes": "Inzira zihuse",
+    "Choose the right conversation.": "Hitamo aho ikibazo cyawe kijyana.",
+    "Business email readiness": "Email za business ziteguye",
+    "Correct email route for every BaBra division.": "Inzira ya email ikwiye kuri buri shami rya BaBra.",
+    "Retail experience": "Uburyo bwo kwakira abakiriya",
+    "BaBra Showroom.": "BaBra Showroom.",
+    "Book showroom support": "Saba ubufasha bwa showroom",
+    "View products": "Reba products",
+    "Showroom system": "System ya showroom",
+    "A physical brand experience built for trust.": "Aho abakiriya babonera brand ku buryo bubaha icyizere.",
+    "Gallery ready": "Gallery yiteguye",
+    "Photos, videos, and franchise proof.": "Amafoto, videos n'ibimenyetso bya franchise.",
+    "Quality and compliance": "Quality n'ibyangombwa",
+    "Trust that can be verified.": "Icyizere gishobora kugenzurwa.",
+    "Important wording rule": "Itegeko ry'imvugo ikoreshwa",
+    "Use evidence-based claims only.": "Koresha gusa ibyo ufitiye gihamya.",
+    "Trust signals": "Ibimenyetso by'icyizere",
+    "Premium quality story without exposing private documents.": "Inkuru ya quality ya premium idashyira hanze documents z'ibanga.",
+    "Claim control": "Kugenzura ibyo tuvuga",
+    "Strong claims must be legally defensible.": "Ibyo tuvuga bigomba kuba bifite gihamya yemewe.",
+    "Verification model": "Uburyo bwo kugenzura",
+    "Public confidence, private proof.": "Icyizere cya public, gihamya ikinzwe.",
+    "BaBra Cosmetics Division": "Ishami rya BaBra Cosmetics",
+    "A complete premium product house.": "Inzu yuzuye ya products za premium.",
+    "Usage": "Uko ikoreshwa",
+    "Protected details": "Amakuru arinzwe",
+    "Samples and partnerships": "Samples n'ubufatanye",
+    "Launch-ready for shops, salons, and distributors.": "Yiteguye amaduka, salons n'abacuruzi barangura.",
+    "View quality proof": "Reba gihamya ya quality",
+    "Future e-commerce structure": "Imiterere ya e-commerce izaza",
+    "Ready for ordering, verification, and scale.": "Yiteguye commande, verification no kwaguka.",
+    "BaBra Store commerce app": "BaBra Store commerce app",
+    "Shop BaBra skincare with Rwanda-first delivery.": "Gura BaBra skincare ifite delivery ibanza mu Rwanda.",
+    "Hydroquinone-free positioning. Formula protected.": "Imyitwarire ya hydroquinone-free. Formula irinzwe.",
+    "Product pages": "Amapaji ya products",
+    "Women, men, kids, and serum.": "Abagore, abagabo, abana na serum.",
+    "Quote request.": "Gusaba quote.",
+    "Cart is empty. Add a product above or use WhatsApp fallback for manual ordering.": "Cart nta kintu kirimo. Hitamo product hejuru cyangwa ukoreshe WhatsApp.",
+    "Price confirmed by BaBra support": "Igiciro cyemezwa na BaBra support",
+    "Rwanda-first delivery.": "Delivery ibanza mu Rwanda.",
+    "Delivery Policy": "Amategeko ya delivery",
+    "Delivery support": "Ubufasha bwa delivery"
   },
   FR: {
     "Home": "Accueil",
@@ -191,7 +238,53 @@ const dictionary: Record<Exclude<LanguageCode, "EN">, Record<string, string>> = 
     "Customer information": "Informations client",
     "Payment method": "Mode de paiement",
     "Order tracking": "Suivi de commande",
-    "Customer profile": "Profil client"
+    "Customer profile": "Profil client",
+    "Samples, wholesale, support": "Echantillons, grossiste, support",
+    "Talk to BaBra directly.": "Parlez directement a BaBra.",
+    "WhatsApp now": "WhatsApp maintenant",
+    "Showroom form": "Formulaire showroom",
+    "Email BaBra": "Envoyer un email a BaBra",
+    "Quick routes": "Acces rapides",
+    "Choose the right conversation.": "Choisissez le bon sujet de contact.",
+    "Business email readiness": "Emails business prets",
+    "Correct email route for every BaBra division.": "Le bon email pour chaque division BaBra.",
+    "Retail experience": "Experience retail",
+    "Book showroom support": "Reserver le support showroom",
+    "View products": "Voir les produits",
+    "Showroom system": "Systeme showroom",
+    "A physical brand experience built for trust.": "Une experience de marque physique creee pour la confiance.",
+    "Gallery ready": "Galerie prete",
+    "Photos, videos, and franchise proof.": "Photos, videos et preuves de franchise.",
+    "Quality and compliance": "Qualite et conformite",
+    "Trust that can be verified.": "Une confiance verifiable.",
+    "Important wording rule": "Regle importante de formulation",
+    "Use evidence-based claims only.": "Utiliser uniquement des affirmations fondees sur des preuves.",
+    "Trust signals": "Signaux de confiance",
+    "Premium quality story without exposing private documents.": "Une histoire de qualite premium sans exposer les documents prives.",
+    "Claim control": "Controle des affirmations",
+    "Strong claims must be legally defensible.": "Les affirmations fortes doivent etre defendables legalement.",
+    "Verification model": "Modele de verification",
+    "Public confidence, private proof.": "Confiance publique, preuves privees.",
+    "BaBra Cosmetics Division": "Division BaBra Cosmetics",
+    "A complete premium product house.": "Une maison complete de produits premium.",
+    "Usage": "Utilisation",
+    "Protected details": "Details proteges",
+    "Samples and partnerships": "Echantillons et partenariats",
+    "Launch-ready for shops, salons, and distributors.": "Pret pour boutiques, salons et distributeurs.",
+    "View quality proof": "Voir les preuves de qualite",
+    "Future e-commerce structure": "Future structure e-commerce",
+    "Ready for ordering, verification, and scale.": "Pret pour commandes, verification et croissance.",
+    "BaBra Store commerce app": "Application commerce BaBra Store",
+    "Shop BaBra skincare with Rwanda-first delivery.": "Achetez BaBra skincare avec livraison prioritaire au Rwanda.",
+    "Hydroquinone-free positioning. Formula protected.": "Positionnement sans hydroquinone. Formule protegee.",
+    "Product pages": "Pages produits",
+    "Women, men, kids, and serum.": "Femmes, hommes, enfants et serum.",
+    "Quote request.": "Demande de devis.",
+    "Cart is empty. Add a product above or use WhatsApp fallback for manual ordering.": "Le panier est vide. Ajoutez un produit ou utilisez WhatsApp.",
+    "Price confirmed by BaBra support": "Prix confirme par le support BaBra",
+    "Rwanda-first delivery.": "Livraison Rwanda d'abord.",
+    "Delivery Policy": "Politique de livraison",
+    "Delivery support": "Support livraison"
   },
   SW: {
     "Home": "Mwanzo",
@@ -233,7 +326,35 @@ const dictionary: Record<Exclude<LanguageCode, "EN">, Record<string, string>> = 
     "Ask on WhatsApp": "Uliza WhatsApp",
     "Request quote": "Omba bei",
     "Customer information": "Taarifa za mteja",
-    "Payment method": "Njia ya malipo"
+    "Payment method": "Njia ya malipo",
+    "Samples, wholesale, support": "Sampuli, jumla, msaada",
+    "Talk to BaBra directly.": "Wasiliana moja kwa moja na BaBra.",
+    "WhatsApp now": "WhatsApp sasa",
+    "Showroom form": "Fomu ya showroom",
+    "Email BaBra": "Tuma email kwa BaBra",
+    "Quick routes": "Njia za haraka",
+    "Choose the right conversation.": "Chagua mazungumzo sahihi.",
+    "Retail experience": "Uzoefu wa duka",
+    "Book showroom support": "Omba msaada wa showroom",
+    "View products": "Tazama bidhaa",
+    "Quality and compliance": "Ubora na utii",
+    "Trust that can be verified.": "Uaminifu unaoweza kuthibitishwa.",
+    "Trust signals": "Ishara za uaminifu",
+    "BaBra Cosmetics Division": "Kitengo cha BaBra Cosmetics",
+    "A complete premium product house.": "Nyumba kamili ya bidhaa za premium.",
+    "Usage": "Matumizi",
+    "Protected details": "Maelezo yaliyolindwa",
+    "Samples and partnerships": "Sampuli na ushirikiano",
+    "View quality proof": "Tazama uthibitisho wa ubora",
+    "BaBra Store commerce app": "Programu ya biashara ya BaBra Store",
+    "Shop BaBra skincare with Rwanda-first delivery.": "Nunua BaBra skincare kwa delivery inayoanza Rwanda.",
+    "Product pages": "Kurasa za bidhaa",
+    "Women, men, kids, and serum.": "Wanawake, wanaume, watoto na serum.",
+    "Quote request.": "Ombi la bei.",
+    "Price confirmed by BaBra support": "Bei inathibitishwa na msaada wa BaBra",
+    "Rwanda-first delivery.": "Delivery ya Rwanda kwanza.",
+    "Delivery Policy": "Sera ya delivery",
+    "Delivery support": "Msaada wa delivery"
   },
   CN: {
     "Home": "首页",
@@ -275,7 +396,35 @@ const dictionary: Record<Exclude<LanguageCode, "EN">, Record<string, string>> = 
     "Ask on WhatsApp": "WhatsApp 询价",
     "Request quote": "请求报价",
     "Customer information": "客户信息",
-    "Payment method": "付款方式"
+    "Payment method": "付款方式",
+    "Samples, wholesale, support": "样品、批发、支持",
+    "Talk to BaBra directly.": "直接联系 BaBra。",
+    "WhatsApp now": "立即 WhatsApp",
+    "Showroom form": "展厅表单",
+    "Email BaBra": "发送邮件给 BaBra",
+    "Quick routes": "快速入口",
+    "Choose the right conversation.": "选择正确的沟通入口。",
+    "Retail experience": "零售体验",
+    "Book showroom support": "预约展厅支持",
+    "View products": "查看产品",
+    "Quality and compliance": "质量与合规",
+    "Trust that can be verified.": "可验证的信任。",
+    "Trust signals": "信任信号",
+    "BaBra Cosmetics Division": "BaBra Cosmetics 部门",
+    "A complete premium product house.": "完整的高端产品体系。",
+    "Usage": "使用方法",
+    "Protected details": "受保护的信息",
+    "Samples and partnerships": "样品与合作",
+    "View quality proof": "查看质量证明",
+    "BaBra Store commerce app": "BaBra Store 商务应用",
+    "Shop BaBra skincare with Rwanda-first delivery.": "购买 BaBra 护肤品，优先支持卢旺达配送。",
+    "Product pages": "产品页面",
+    "Women, men, kids, and serum.": "女性、男性、儿童和精华。",
+    "Quote request.": "报价请求。",
+    "Price confirmed by BaBra support": "价格由 BaBra 客服确认",
+    "Rwanda-first delivery.": "卢旺达优先配送。",
+    "Delivery Policy": "配送政策",
+    "Delivery support": "配送支持"
   }
 };
 
@@ -301,23 +450,26 @@ function translateText(value: string, code: LanguageCode) {
 function applyLanguage(code: LanguageCode) {
   if (isApplyingLanguage) return;
   isApplyingLanguage = true;
-  document.documentElement.lang = htmlLang[code];
-  document.documentElement.dataset.babraLanguage = code;
+  try {
+    document.documentElement.lang = htmlLang[code];
+    document.documentElement.dataset.babraLanguage = code;
 
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  const nodes: Text[] = [];
-  while (walker.nextNode()) nodes.push(walker.currentNode as Text);
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    const nodes: Text[] = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode as Text);
 
-  for (const node of nodes) {
-    if (shouldSkipNode(node)) continue;
-    const current = node.nodeValue ?? "";
-    if (!normalizeText(current)) continue;
-    if (!originalText.has(node)) originalText.set(node, current);
-    const original = originalText.get(node) ?? current;
-    const nextValue = translateText(original, code);
-    if (node.nodeValue !== nextValue) node.nodeValue = nextValue;
+    for (const node of nodes) {
+      if (shouldSkipNode(node)) continue;
+      const current = node.nodeValue ?? "";
+      if (!normalizeText(current)) continue;
+      if (!originalText.has(node)) originalText.set(node, current);
+      const original = originalText.get(node) ?? current;
+      const nextValue = translateText(original, code);
+      if (node.nodeValue !== nextValue) node.nodeValue = nextValue;
+    }
+  } finally {
+    isApplyingLanguage = false;
   }
-  isApplyingLanguage = false;
 }
 
 export function LanguageBar() {
