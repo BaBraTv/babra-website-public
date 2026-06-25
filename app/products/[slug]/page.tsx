@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { formatRwf, formatUsdEstimate, getProduct, products, site, whatsappOrderUrl } from "../../commerce-data";
+import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, getProduct, products, site, whatsappOrderUrl } from "../../commerce-data";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -45,13 +45,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     description: product.description,
     brand: { "@type": "Brand", name: "BaBra Cosmetics" },
     manufacturer: { "@type": "Organization", name: site.company },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "RWF",
-      price: product.price,
-      availability: "https://schema.org/InStock",
-      url: `${site.url}/products/${product.slug}`
-    }
+    url: `${site.url}/products/${product.slug}`
   };
 
   const message = `Hello BaBra Store, I want to order ${product.name} from ${site.domain}. Please confirm price, delivery, and availability.`;
@@ -71,17 +65,17 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">{product.category} product page</p>
             <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">{product.name}</h1>
             <div className="mt-5 rounded-2xl border border-[#f1d58b]/30 bg-white/[0.06] p-5">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d6ad57]">Price:</p>
-              <p className="mt-2 text-3xl font-black text-[#f1d58b]">{formatRwf(product.price)}</p>
-              <p className="mt-1 text-sm font-bold text-white/58">{product.size} - {formatUsdEstimate(product.price)}</p>
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d6ad57]">Price inquiry</p>
+              <p className="mt-2 text-3xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
+              <p className="mt-1 text-sm font-bold text-white/58">{product.size} - {PRICE_INQUIRY_NOTE}</p>
             </div>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">{product.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/store">
-                Add to cart in store
+                Baza igiciro
               </a>
               <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href={whatsappOrderUrl(message)} target="_blank" rel="noopener noreferrer">
-                Order on WhatsApp
+                Ask on WhatsApp
               </a>
             </div>
           </div>

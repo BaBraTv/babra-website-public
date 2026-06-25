@@ -142,8 +142,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         name: "BaBra Lotion",
         brand: { "@type": "Brand", name: "BaBra Cosmetics" },
         image: "https://www.babra.store/brand/official-babra-bottle.png",
-        description: "Premium BaBra Lotion skincare product for Rwanda, Africa, and worldwide customers with protected formula details.",
-        offers: { "@type": "Offer", priceCurrency: "RWF", price: 25000, availability: "https://schema.org/InStock" }
+        description: "Premium BaBra Lotion skincare product for Rwanda, Africa, and worldwide customers with protected formula details. Customers can ask BaBra for current price, delivery, reseller, wholesale, or distributor information."
       }
     ]
   };

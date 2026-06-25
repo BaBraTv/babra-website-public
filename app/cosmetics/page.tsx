@@ -151,7 +151,7 @@ const deliverySteps = [
 ];
 
 const wholesaleTiers = [
-  ["Retail", "Official public price", "Standard 500ml BaBra Lotion retail price: 25,000 RWF."],
+  ["Retail", "Ask today's price", "Customers ask BaBra Cosmetics to confirm the current 500ml BaBra Lotion price before ordering."],
   ["Starter reseller", "Private pricing", "Contact BaBra Cosmetics for reseller pricing."],
   ["Wholesale", "Private pricing", "Contact BaBra Cosmetics for distributor and wholesale pricing."],
   ["Distributor", "Private pricing", "Distributor pricing is shared only after business verification."]

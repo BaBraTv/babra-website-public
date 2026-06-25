@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { formatRwf, formatUsdEstimate, products, rwandaLocations } from "./commerce-data";
+import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, formatRwf, products, rwandaLocations } from "./commerce-data";
 
 type Mode = "signup" | "login" | "forgot" | "account" | "cart" | "checkout" | "payment" | "admin";
 type CartItem = { slug: string; quantity: number };
@@ -274,7 +274,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                       <div>
                         <h2 className="font-serif text-3xl">{product.name}</h2>
                         <p className="text-sm font-black uppercase tracking-[0.14em] text-[#d6ad57]">{product.size}</p>
-                        <p className="mt-1 text-white/72">{formatRwf(priceFor(product.slug, product.price))} <span className="text-white/42">{formatUsdEstimate(priceFor(product.slug, product.price))}</span></p>
+                        <p className="mt-1 text-white/72">{PRICE_INQUIRY_LABEL} <span className="text-white/42">{PRICE_INQUIRY_NOTE}</span></p>
                       </div>
                       <div className="flex items-center gap-2">
                         <button className="rounded-full bg-[#f1d58b] px-4 py-2 font-black text-[#130d08]" onClick={() => addToCart(product.slug)} type="button">Add to Cart</button>
@@ -286,11 +286,11 @@ export function PlatformClient({ mode }: { mode: Mode }) {
               </div>
             </div>
             <aside className="rounded-[2rem] border border-[#f1d58b]/20 bg-white/[0.05] p-6">
-              <h2 className="font-serif text-4xl">Order summary</h2>
-              <p className="mt-4 text-white/64">Subtotal: {formatRwf(subtotal)}</p>
-              <p className="mt-2 text-white/64">Delivery fee placeholder: {formatRwf(deliveryFee)}</p>
-              <p className="mt-4 text-3xl font-black text-[#f1d58b]">{formatRwf(total)}</p>
-              {mode === "cart" ? <a className="mt-6 inline-flex rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/checkout">Checkout</a> : null}
+              <h2 className="font-serif text-4xl">Price request summary</h2>
+              <p className="mt-4 text-white/64">Selected items: {cartLines.length}</p>
+              <p className="mt-2 text-white/64">BaBra confirms product price, delivery fee, and availability before payment.</p>
+              <p className="mt-4 text-3xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
+              {mode === "cart" ? <a className="mt-6 inline-flex rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/checkout">Request quote</a> : null}
               {mode === "checkout" ? (
                 <div className="mt-6 grid gap-4">
                   <h3 className="font-serif text-3xl">Customer information</h3>

@@ -5,10 +5,10 @@ const productFamilies = [
     name: "BaBra Lotion",
     slogan: "Luxury in Every Touch",
     image: "/brand/official-babra-bottle.png",
-    editions: ["BaBra Lotion Women - 25,000 RWF", "BaBra Lotion Men - 25,000 RWF", "BaBra Lotion Baby - 25,000 RWF"],
+    editions: ["BaBra Lotion Women", "BaBra Lotion Men", "BaBra Lotion Baby"],
     description:
       "A premium body lotion family created for daily hydration, refined fragrance, and a polished skincare routine.",
-    benefits: ["Premium 500ml", "Official retail price: 25,000 RWF", "Smooth daily skin comfort", "Premium fragrance direction"],
+    benefits: ["Premium 500ml", "Ask BaBra for today's price", "Smooth daily skin comfort", "Premium fragrance direction"],
     usage: "Apply to clean skin after bathing or whenever skin needs comfort. Avoid contact with eyes. For children, use under adult supervision.",
     privateNote: "Full label files, barcode records, supplier documents, and complete formula stay private for verified partners only."
   },
@@ -48,7 +48,7 @@ const productFamilies = [
 ];
 
 const commerceBlocks = [
-  ["Product landing pages", "Every category can become its own sales page with gallery, order button, reviews, FAQ, and clear retail pricing."],
+  ["Product landing pages", "Every category can become its own sales page with gallery, price inquiry button, reviews, FAQ, and private quote routing."],
   ["Future QR verification", "Customers can later scan official packaging to confirm authenticity without public exposure of real barcode data."],
   ["Wholesale engine", "Contact BaBra Cosmetics for distributor and wholesale pricing. Private pricing is not displayed publicly."],
   ["AI product advisor", "The site structure is ready for a future assistant that recommends lotion, soap, pads, or pocket fresh by customer need."]
@@ -153,7 +153,7 @@ export default function ProductsPage() {
               <p className="mt-6 text-lg leading-8 text-white/64">BaBra supports product samples, wholesale discussions, reseller onboarding, and partnership requests through a direct WhatsApp contact flow.</p>
             </div>
             <div className="flex flex-wrap gap-3">
-                  <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/store">Shop on babra.store</a>
+              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/store">Baza igiciro</a>
               <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/quality">View quality proof</a>
             </div>
           </div>

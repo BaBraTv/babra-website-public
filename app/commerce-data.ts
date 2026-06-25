@@ -16,6 +16,8 @@ export const site = {
 
 export const OFFICIAL_LOTION_500ML_PRICE_RWF = 25000;
 export const USD_ESTIMATE_RATE_RWF = 1300;
+export const PRICE_INQUIRY_LABEL = "Baza igiciro";
+export const PRICE_INQUIRY_NOTE = "Igiciro gihamyezwa na BaBra hakurikijwe product, quantity, delivery, reseller, wholesale, cyangwa distributor request.";
 
 export type ProductSlug = "women" | "men" | "kids" | "serum" | "soap" | "pads" | "pocket-fresh";
 
@@ -140,7 +142,7 @@ export const products: StoreProduct[] = [
 ];
 
 export const pricingTiers = [
-  { key: "Retail", min: 1, max: 11, discount: 0, note: "Official retail price shown publicly" },
+  { key: "Retail", min: 1, max: 11, discount: 0, note: "Ask BaBra Cosmetics for today's retail price" },
   { key: "Reseller", min: 12, max: 47, discount: 0, note: "Contact BaBra Cosmetics for reseller pricing" },
   { key: "Wholesale", min: 48, max: 119, discount: 0, note: "Contact BaBra Cosmetics for wholesale pricing" },
   { key: "Distributor", min: 120, max: null, discount: 0, note: "Contact BaBra Cosmetics for distributor pricing" }

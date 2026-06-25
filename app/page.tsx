@@ -352,14 +352,14 @@ export default function HoldingHomePage() {
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">
               Premium skincare for women, men, and babies.
             </p>
-            <p className="mt-5 text-3xl font-black text-[#f1d58b]">Starting from 25,000 RWF</p>
-            <a className="mt-8 inline-flex rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/store">Shop Now</a>
+            <p className="mt-5 text-3xl font-black text-[#f1d58b]">Ask today&apos;s BaBra price</p>
+            <a className="mt-8 inline-flex rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/store">Baza igiciro</a>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {[
-              ["/brand/official-babra-bottle.png", "BaBra Lotion Women - Premium 500ml - 25,000 RWF"],
-              ["/brand/official-babra-bottle-men.png", "BaBra Lotion Men - Premium 500ml - 25,000 RWF"],
-              ["/brand/official-babra-bottle-kids.png", "BaBra Lotion Baby - Premium 500ml - 25,000 RWF"]
+              ["/brand/official-babra-bottle.png", "BaBra Lotion Women - Premium 500ml"],
+              ["/brand/official-babra-bottle-men.png", "BaBra Lotion Men - Premium 500ml"],
+              ["/brand/official-babra-bottle-kids.png", "BaBra Lotion Baby - Premium 500ml"]
             ].map(([src, alt]) => (
               <figure key={src} className="rounded-2xl bg-white p-4 shadow-xl shadow-black/20">
                 <Image
@@ -371,7 +371,7 @@ export default function HoldingHomePage() {
                   sizes="(min-width: 1024px) 220px, (min-width: 640px) 30vw, 86vw"
                   loading="lazy"
                 />
-                <figcaption className="mt-3 text-center text-sm font-black text-[#130d08]">Premium 500ml<br />25,000 RWF</figcaption>
+                <figcaption className="mt-3 text-center text-sm font-black text-[#130d08]">Premium 500ml<br />Baza igiciro</figcaption>
               </figure>
             ))}
           </div>
