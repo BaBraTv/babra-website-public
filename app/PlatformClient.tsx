@@ -238,7 +238,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
             <h1 className="font-serif text-5xl">Forgot Password</h1>
             <p className="mt-4 text-white/64">Manual reset mode: submit your email or phone and BaBra support will verify you before resetting access.</p>
             <input className="mt-8 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white" placeholder="Email or phone" />
-            <a className="mt-6 inline-flex rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="mailto:babracosmeticsltd@gmail.com?subject=BaBra%20password%20reset">Request reset</a>
+            <a className="mt-6 inline-flex rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="mailto:support@babra.store?subject=BaBra%20password%20reset">Request reset</a>
           </section>
         )}
 

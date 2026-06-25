@@ -53,7 +53,7 @@ export default function LostAndFoundPage() {
             This service is independent from BaBra Cosmetics, Farm, Schools, and LifeTalk TV.
           </p>
           <p className="mt-4 max-w-3xl rounded-2xl border border-white/15 bg-black/25 px-5 py-4 text-sm font-black text-white/80">
-            Notification email route: <a className="text-[#fb923c]" href="mailto:babracosmeticsltd@gmail.com?subject=Lost%20and%20Found%20Rwanda">babracosmeticsltd@gmail.com</a>
+            Notification email route: <a className="text-[#fb923c]" href="mailto:support@babra.store?subject=Lost%20and%20Found%20Rwanda">support@babra.store</a>
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a className="rounded-full bg-[#fb923c] px-6 py-3 font-black text-[#071426]" href={whatsAppHref("Report Lost Document")} target="_blank" rel="noopener noreferrer">Report lost document</a>
@@ -137,7 +137,7 @@ export default function LostAndFoundPage() {
             </div>
             <a
               className="mt-6 inline-flex rounded-full bg-[#fb923c] px-6 py-3 font-black text-[#071426]"
-              href="mailto:babracosmeticsltd@gmail.com?subject=Lost%20and%20Found%20Rwanda%20Request"
+              href="mailto:support@babra.store?subject=Lost%20and%20Found%20Rwanda%20Request"
             >
               Submit to BaBra email
             </a>

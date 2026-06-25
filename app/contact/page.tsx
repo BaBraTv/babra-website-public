@@ -9,24 +9,26 @@ const contactOptions = [
 
 const quickFacts = [
   ["Phone / WhatsApp", "+250 788 351 482"],
-  ["Company email", "babracosmeticsltd@gmail.com"],
+  ["Company email", "info@babra.store"],
+  ["Backup email", "babracosmeticsltd@gmail.com"],
   ["Location", "Kigali, Rwanda"],
   ["Best route", "WhatsApp for fastest response"],
 ];
 
-const companyEmail = "babracosmeticsltd@gmail.com";
+const companyEmail = "info@babra.store";
+const backupEmail = "babracosmeticsltd@gmail.com";
 
 const businessEmails = [
-  ["General information", companyEmail, "General information"],
-  ["Customer support", companyEmail, "Customer support"],
-  ["Cosmetics", companyEmail, "BaBra Cosmetics"],
-  ["Farm", companyEmail, "BaBra Farm"],
-  ["Schools", companyEmail, "BaBra Schools"],
-  ["LifeTalk TV", companyEmail, "LifeTalk TV"],
-  ["Foundation", companyEmail, "BaBra Foundation"],
-  ["Lost & Found", companyEmail, "Lost and Found Rwanda"],
-  ["Sales", companyEmail, "BaBra Sales"],
-  ["Investors", companyEmail, "Investor and partner request"]
+  ["General information", "info@babra.store", "General information"],
+  ["Customer support", "support@babra.store", "Customer support"],
+  ["Cosmetics", "sales@babra.store", "BaBra Cosmetics"],
+  ["Farm", "info@babra.store", "BaBra Farm"],
+  ["Schools", "info@babra.store", "BaBra Schools"],
+  ["LifeTalk TV", "info@babra.store", "LifeTalk TV"],
+  ["Foundation", "support@babra.store", "BaBra Foundation"],
+  ["Lost & Found", "support@babra.store", "Lost and Found Rwanda"],
+  ["Sales", "sales@babra.store", "BaBra Sales"],
+  ["Investors", "info@babra.store", "Investor and partner request"]
 ];
 
 export const metadata = {
@@ -90,9 +92,9 @@ export default function ContactPage() {
       <section className="bg-[#071426] px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#4ebeff]">Business email readiness</p>
-          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">One working email route for every BaBra division.</h2>
+          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Company email routes for every BaBra division.</h2>
           <p className="mt-5 max-w-3xl leading-8 text-white/62">
-            Until official babra.store mailboxes are fully configured, every division email request goes to the verified BaBra Cosmetics Gmail address.
+            BaBra uses verified babra.store mailboxes for official customer, support, sales, and partnership communication. Gmail remains a backup route.
           </p>
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {businessEmails.map(([label, email, subject]) => (
@@ -102,6 +104,9 @@ export default function ContactPage() {
               </a>
             ))}
           </div>
+          <p className="mt-6 text-sm font-bold text-white/50">
+            Backup email: <a className="text-[#f1d58b]" href={`mailto:${backupEmail}?subject=BaBra%20backup%20contact`}>{backupEmail}</a>
+          </p>
         </div>
       </section>
     </main>
