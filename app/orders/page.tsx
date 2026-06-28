@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function OrdersPage() {
-  return <PlatformClient mode="account" />;
+  return <PlatformClient mode="orders" />;
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaLocations, site, whatsappOrderUrl } from "../commerce-data";
+import { InstallAppButton } from "../InstallAppButton";
 
 type CartItem = {
   slug: string;
@@ -48,6 +49,34 @@ export function StoreClient() {
   const [selectedProvince, setSelectedProvince] = useState("Kigali City");
   const copy = translations[language];
 
+  useEffect(() => {
+    try {
+      const savedCart = window.localStorage.getItem("babra-cart");
+      const savedLanguage = window.localStorage.getItem("babra-store-language") as Lang | null;
+      const savedCustomerType = window.localStorage.getItem("babra-customer-type");
+      if (savedCart) setCart(JSON.parse(savedCart) as CartItem[]);
+      if (savedLanguage && translations[savedLanguage]) setLanguage(savedLanguage);
+      if (savedCustomerType) setCustomerType(savedCustomerType);
+    } catch {
+      // Local storage is optional; WhatsApp ordering still works without it.
+    }
+  }, []);
+
+  function saveCart(next: CartItem[]) {
+    setCart(next);
+    window.localStorage.setItem("babra-cart", JSON.stringify(next));
+  }
+
+  function saveLanguage(next: Lang) {
+    setLanguage(next);
+    window.localStorage.setItem("babra-store-language", next);
+  }
+
+  function saveCustomerType(next: string) {
+    setCustomerType(next);
+    window.localStorage.setItem("babra-customer-type", next);
+  }
+
   const cartLines = useMemo(
     () =>
       cart
@@ -60,21 +89,29 @@ export function StoreClient() {
   );
 
   function addToCart(slug: string) {
-    setCart((current) => {
-      const existing = current.find((item) => item.slug === slug);
-      if (existing) {
-        return current.map((item) => (item.slug === slug ? { ...item, quantity: item.quantity + 1 } : item));
-      }
-      return [...current, { slug, quantity: 1 }];
-    });
+    const existing = cart.find((item) => item.slug === slug);
+    const next = existing ? cart.map((item) => (item.slug === slug ? { ...item, quantity: item.quantity + 1 } : item)) : [...cart, { slug, quantity: 1 }];
+    saveCart(next);
   }
 
   function updateQuantity(slug: string, quantityValue: number) {
     const safeQuantity = Math.max(0, quantityValue);
-    setCart((current) =>
-      safeQuantity === 0
-        ? current.filter((item) => item.slug !== slug)
-        : current.map((item) => (item.slug === slug ? { ...item, quantity: safeQuantity } : item))
+    const next = safeQuantity === 0 ? cart.filter((item) => item.slug !== slug) : cart.map((item) => (item.slug === slug ? { ...item, quantity: safeQuantity } : item));
+    saveCart(next);
+  }
+
+  function saveDraftOrder() {
+    const nextOrderCode = `BABRA-${Date.now().toString().slice(-6)}`;
+    setOrderCode(nextOrderCode);
+    window.localStorage.setItem(
+      "babra-draft-order",
+      JSON.stringify({
+        code: nextOrderCode,
+        customerType,
+        province: selectedProvince,
+        items: cartLines.map((item) => ({ slug: item!.slug, quantity: item!.quantity })),
+        createdAt: new Date().toLocaleString()
+      })
     );
   }
 
@@ -102,11 +139,24 @@ export function StoreClient() {
                 <button
                   key={lang}
                   className={`rounded-full px-4 py-2 text-sm font-black uppercase ${language === lang ? "bg-[#f1d58b] text-[#130d08]" : "border border-white/20 text-white"}`}
-                  onClick={() => setLanguage(lang)}
+                  onClick={() => saveLanguage(lang)}
                   type="button"
                 >
                   {lang}
                 </button>
+              ))}
+              <InstallAppButton />
+            </div>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {[
+                ["Cart", "/cart"],
+                ["Checkout", "/checkout"],
+                ["Orders", "/orders"],
+                ["Profile", "/profile"]
+              ].map(([label, href]) => (
+                <a key={label} className="rounded-full border border-white/15 px-4 py-2 text-sm font-black text-white/72 hover:border-[#f1d58b]/60 hover:text-[#f1d58b]" href={href}>
+                  {label}
+                </a>
               ))}
             </div>
           </div>
@@ -212,7 +262,7 @@ export function StoreClient() {
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               <label className="grid gap-2 text-sm font-bold text-white/78">
                 Customer type
-                <select className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" value={customerType} onChange={(event) => setCustomerType(event.target.value)}>
+                <select className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" value={customerType} onChange={(event) => saveCustomerType(event.target.value)}>
                   {["Retail", "Reseller", "Wholesale", "Distributor"].map((type) => (
                     <option key={type}>{type}</option>
                   ))}
@@ -249,7 +299,7 @@ export function StoreClient() {
               <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href={whatsappOrderUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
                 {copy.fallback}
               </a>
-              <button className="rounded-full border border-white/20 px-6 py-3 font-black text-white" type="button" onClick={() => setOrderCode(`BABRA-${Date.now().toString().slice(-6)}`)}>
+              <button className="rounded-full border border-white/20 px-6 py-3 font-black text-white" type="button" onClick={saveDraftOrder}>
                 Save draft order
               </button>
             </div>

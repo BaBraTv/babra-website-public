@@ -1,4 +1,4 @@
-const CACHE_NAME = "babra-ecosystem-v4";
+const CACHE_NAME = "babra-ecosystem-v5";
 const OFFLINE_URL = "/offline";
 const PRECACHE = [
   "/",
@@ -17,7 +17,13 @@ const PRECACHE = [
   OFFLINE_URL,
   "/manifest.webmanifest",
   "/icons/icon.svg",
-  "/brand/logo.jpeg"
+  "/brand/logo.jpeg",
+  "/brand/official-babra-bottle.png",
+  "/brand/official-babra-bottle-men.png",
+  "/brand/official-babra-bottle-kids.png",
+  "/products/pocket-fresh-rose.png",
+  "/products/pads.png",
+  "/products/soap-2.png"
 ];
 
 self.addEventListener("install", (event) => {

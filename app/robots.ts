@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { site } from "./commerce-data";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/private", "/admin", "/dashboard"]
     },
-    sitemap: "https://www.babra.store/sitemap.xml"
+    sitemap: `${site.url}/sitemap.xml`
   };
 }

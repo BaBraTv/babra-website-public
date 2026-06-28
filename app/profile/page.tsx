@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function ProfilePage() {
-  return <PlatformClient mode="account" />;
+  return <PlatformClient mode="profile" />;
 }

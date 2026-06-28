@@ -1,6 +1,6 @@
 # babra.store Web Deployment
 
-This is the clean deployment copy of the babra.store Next.js commerce-ready website.
+This is the clean deployment copy of the babra.store Next.js website.
 
 ## Local Development
 
@@ -20,7 +20,7 @@ http://localhost:3000
 Use this folder as the GitHub/Vercel project:
 
 ```text
-D:\BaBraWebsite-PublicSafe
+D:\BaBraWebsite-Deploy
 ```
 
 Vercel settings:
