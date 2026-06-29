@@ -350,22 +350,22 @@ export default function HomePage() {
                 </span>
               </div>
 
-              <div className="babra-orbit-stage relative mt-6 flex min-h-[430px] items-center justify-center overflow-hidden rounded-lg border border-white/15 bg-[radial-gradient(circle_at_50%_35%,rgba(79,190,255,0.22),transparent_26%),linear-gradient(135deg,rgba(255,255,255,0.94),rgba(255,248,235,0.92)_48%,rgba(212,170,61,0.86))]">
-              <div className="absolute inset-x-12 bottom-16 h-12 rounded-full bg-black/20 blur-2xl" />
-              <div className="babra-orbit relative h-[330px] w-[330px]">
+              <div className="babra-orbit-stage relative mt-6 flex min-h-[430px] items-center justify-center overflow-hidden rounded-lg border border-white/15 bg-[radial-gradient(circle_at_50%_32%,rgba(255,255,255,0.92),rgba(255,248,235,0.56)_34%,rgba(28,17,13,0.5)_72%),linear-gradient(135deg,rgba(255,255,255,0.88),rgba(212,170,61,0.78))]">
+              <div className="absolute inset-x-10 bottom-14 h-16 rounded-full bg-black/30 blur-2xl" />
+              <div className="babra-orbit relative h-[340px] w-[340px]">
                 {heroBottles.map((product, index) => (
                   <figure
                     key={product.name}
-                    className="babra-orbit-card absolute left-1/2 top-1/2 h-[330px] w-[205px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-[#7bd7ff]/25 bg-white/85 p-2 shadow-2xl shadow-[#4ebeff]/18"
-                    style={{ transform: `rotateY(${index * 120}deg) translateZ(205px) translateX(-50%) translateY(-50%)` }}
+                    className="babra-orbit-card babra-bottle-3d absolute left-1/2 top-1/2 h-[330px] w-[190px] -translate-x-1/2 -translate-y-1/2"
+                    style={{ transform: `rotateY(${index * 120}deg) translateZ(210px) translateX(-50%) translateY(-50%)` }}
                   >
-                    <img className="babra-float h-full w-full rounded-2xl object-contain object-center drop-shadow-2xl" src={product.image} alt={product.name} />
+                    <img className="babra-float babra-bottle-image h-full w-full object-contain object-center" src={product.image} alt={product.name} />
                   </figure>
                 ))}
               </div>
               <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-[#090706]/90 p-4 text-white backdrop-blur">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-[#f1d58b]">Rotating collection</p>
-                <p className="mt-1 text-sm text-white/64">Women, kids, and men BaBra Lotion bottles move together in one premium rotating galaxy.</p>
+                <p className="mt-1 text-sm text-white/64">Official women, baby, and men BaBra Lotion bottles rotate in a premium 3D product view.</p>
               </div>
             </div>
 

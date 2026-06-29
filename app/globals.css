@@ -108,6 +108,41 @@ textarea:focus-visible {
   transform-style: preserve-3d;
 }
 
+.babra-bottle-3d {
+  isolation: isolate;
+  transform-origin: 50% 50%;
+}
+
+.babra-bottle-3d::before {
+  content: "";
+  position: absolute;
+  inset: 9% 18% 10%;
+  z-index: -1;
+  border-radius: 42% 42% 34% 34%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.06) 38%, rgba(0, 0, 0, 0.22) 100%);
+  filter: blur(10px);
+  transform: translateX(16px) rotateY(-18deg);
+}
+
+.babra-bottle-3d::after {
+  content: "";
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  bottom: -7%;
+  z-index: -2;
+  height: 20%;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.34), transparent 68%);
+  filter: blur(8px);
+  transform: rotateX(72deg);
+}
+
+.babra-bottle-image {
+  filter: drop-shadow(18px 24px 20px rgba(0, 0, 0, 0.32)) drop-shadow(-8px -8px 16px rgba(255, 255, 255, 0.2));
+  transform: translateZ(34px) rotateY(-7deg);
+}
+
 .babra-float {
   animation: babra-float 5s ease-in-out infinite;
 }
