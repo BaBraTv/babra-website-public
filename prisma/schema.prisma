@@ -128,6 +128,7 @@ model User {
   messagesAssigned    ContactMessage[]     @relation("MessageAssignee")
   jobApplications     JobApplication[]
   lostFoundReports    LostFoundReport[]
+  investorRequests    InvestorAccessRequest[]
 
   @@index([role, status])
   @@index([createdAt])
@@ -361,6 +362,29 @@ model LostFoundReport {
   @@index([reportType, status])
   @@index([reporterPhone])
   @@index([createdAt])
+}
+
+model InvestorAccessRequest {
+  id             String        @id @default(cuid())
+  userId         String?
+  fullName       String
+  organization   String?
+  position       String?
+  country        String?
+  email          String
+  phone          String?
+  projectArea    String?
+  message        String?
+  status         MessageStatus @default(NEW)
+  reviewedAt     DateTime?
+  adminNotes     String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([email])
 }
 
 model AdminActivityLog {

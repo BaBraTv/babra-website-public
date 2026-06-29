@@ -60,3 +60,14 @@ export const lostFoundReportSchema = z
     lostLocation: z.string().trim().max(240).optional()
   })
   .merge(rwandaAddressSchema.pick({ province: true, district: true, sector: true, cell: true, village: true }));
+
+export const investorAccessRequestSchema = z.object({
+  fullName: z.string().trim().min(2).max(120),
+  organization: z.string().trim().max(160).optional().or(z.literal("")),
+  position: z.string().trim().max(120).optional().or(z.literal("")),
+  country: z.string().trim().max(120).optional().or(z.literal("")),
+  email: z.string().trim().email(),
+  phone: z.string().trim().max(32).optional().or(z.literal("")),
+  projectArea: z.string().trim().max(160).optional().or(z.literal("")),
+  message: z.string().trim().max(4000).optional().or(z.literal(""))
+});
