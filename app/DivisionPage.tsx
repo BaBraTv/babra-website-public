@@ -55,6 +55,12 @@ const divisionMenus: Record<DivisionKey, string[][]> = {
   ]
 };
 
+const serviceAnchors: Partial<Record<DivisionKey, Array<string | undefined>>> = {
+  farm: ["farmers", "suppliers", "marketplace", "partnerships"],
+  schools: ["admissions", "teachers", "scholarships", "digital-school"],
+  hospital: ["roadmap", "systems", "trust", "partnerships"]
+};
+
 export function DivisionPage({ division }: { division: DivisionKey }) {
   const data = divisionContent[division];
   const menu = divisionMenus[division];
@@ -105,7 +111,7 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
               {data.points.map((point, index) => (
                 <article
                   key={point}
-                  id={index === 0 ? "farmers" : index === 1 ? "marketplace" : index === 2 ? "partnerships" : undefined}
+                  id={serviceAnchors[division]?.[index]}
                   className="rounded-2xl border border-white/10 bg-white/[0.055] p-6"
                 >
                   <span
@@ -120,10 +126,10 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
               ))}
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a id="admissions" className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Admissions / forms</a>
-              <a id="teachers" className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Jobs / roles</a>
-              <a id="digital-school" className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Digital systems</a>
-              <a id="scholarships" className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Support requests</a>
+              <a className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Admissions / forms</a>
+              <a className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Jobs / roles</a>
+              <a className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Digital systems</a>
+              <a className="rounded-full border border-white/15 px-5 py-3 font-black text-white/75" href={data.formsHref}>Support requests</a>
             </div>
           </div>
         </section>
