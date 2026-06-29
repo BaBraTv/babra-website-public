@@ -75,7 +75,9 @@ export default function SchoolsPage() {
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {galleryPages.map(([title, caption]) => (
               <article key={title} className="rounded-2xl border border-sky-100 bg-white p-6 shadow-lg shadow-sky-100/50">
-                <div className="mb-5 h-28 rounded-2xl bg-[linear-gradient(135deg,#dff4ff,#ffffff,#bae6fd)]" />
+                <figure className="mb-5 overflow-hidden rounded-2xl border border-sky-100 bg-white">
+                  <img className="h-28 w-full object-contain p-3" src="/brand/logo.jpeg" alt="Official BaBra Schools brand image" />
+                </figure>
                 <h3 className="font-serif text-3xl">{title}</h3>
                 <p className="mt-3 text-sm leading-6 text-[#4b6b82]">{caption}</p>
               </article>

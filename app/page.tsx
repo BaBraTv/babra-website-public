@@ -293,7 +293,7 @@ export default function HomePage() {
               <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Luxury skincare people can feel before they buy.</h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/64">
                 The product section should work like a premium counter display: clear, calm, polished, and focused on trust.
-                Final studio photos can replace these placeholders without changing the website structure.
+                Uploaded product photos can be refreshed as new studio shots arrive without changing the website structure.
               </p>
             </div>
             <div className="rounded-[2rem] border border-[#d6ad57]/25 bg-[#fff8eb] p-5 text-[#1b130c] shadow-2xl shadow-black/25">

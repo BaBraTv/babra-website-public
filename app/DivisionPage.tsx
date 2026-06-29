@@ -89,14 +89,19 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
               <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href={data.formsHref}>Open {data.name} forms</a>
             </div>
           </div>
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 shadow-2xl shadow-black/30">
-            <h2 className="font-serif text-3xl">Division focus</h2>
-            <div className="mt-5 grid gap-3">
-              {data.points.map((point) => (
-                <div key={point} className="rounded-2xl border border-white/10 bg-black/25 px-5 py-4 font-black text-white/82">
-                  {point}
-                </div>
-              ))}
+          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-2xl shadow-black/30">
+            <figure className="border-b border-white/10 bg-black/25">
+              <img className="h-72 w-full object-cover" src={data.image} alt={data.imageAlt} />
+            </figure>
+            <div className="p-6">
+              <h2 className="font-serif text-3xl">Division focus</h2>
+              <div className="mt-5 grid gap-3">
+                {data.points.map((point) => (
+                  <div key={point} className="rounded-2xl border border-white/10 bg-black/25 px-5 py-4 font-black text-white/82">
+                    {point}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

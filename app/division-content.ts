@@ -7,6 +7,8 @@ export const divisionContent = {
     accent: "#f1d58b",
     description:
       "BaBra Cosmetics is the premium beauty division for BaBra Lotion, soap, pads, pocket fresh, showroom, product verification, samples, wholesale, and Rwanda-first delivery.",
+    image: "/brand/official-babra-bottle.png",
+    imageAlt: "Official BaBra Lotion product bottle",
     points: ["BaBra Lotion Rwanda", "Premium skincare and showroom", "Wholesale and distributor engine", "Product verification and customer support"],
     cta: "Shop BaBra Cosmetics",
     ctaHref: "/store",
@@ -20,6 +22,8 @@ export const divisionContent = {
     accent: "#4ade80",
     description:
       "BaBra Farm is the agriculture division for farmer registration, supplier networks, produce marketplace, livestock systems, and regional supply-chain growth.",
+    image: "/brand/logo.jpeg",
+    imageAlt: "Official BaBra brand image",
     points: ["Farmer registration", "Supplier onboarding", "Produce marketplace", "Agriculture partnerships"],
     cta: "Open BaBra Farm forms",
     ctaHref: "/forms/farm",
@@ -33,6 +37,8 @@ export const divisionContent = {
     accent: "#7dd3fc",
     description:
       "BaBra Schools represents the long-term education vision for nursery, primary, secondary, university, digital learning, admissions, teachers, and scholarships.",
+    image: "/brand/logo.jpeg",
+    imageAlt: "Official BaBra Schools brand image",
     points: ["Student applications", "Teacher applications", "Scholarship requests", "Digital school registration"],
     cta: "Open BaBra Schools forms",
     ctaHref: "/forms/schools",
@@ -46,6 +52,8 @@ export const divisionContent = {
     accent: "#c084fc",
     description:
       "BaBra Foundation is the community impact division for volunteers, family-based support requests, donations, and community partner applications.",
+    image: "/brand/logo.jpeg",
+    imageAlt: "Official BaBra Foundation brand image",
     points: ["Volunteer registration", "Child and family support", "Donation form", "Community partner application"],
     cta: "Open Foundation forms",
     ctaHref: "/forms/foundation",
@@ -59,6 +67,8 @@ export const divisionContent = {
     accent: "#38bdf8",
     description:
       "BaBra Hospital is the long-term healthcare vision for trusted medical services, patient systems, care access, and community health support.",
+    image: "/showroom/showroom.png",
+    imageAlt: "BaBra uploaded project showroom image",
     points: ["Future hospital roadmap", "Healthcare systems", "Patient trust", "Community health"],
     cta: "Contact EI BaBra",
     ctaHref: "/contact",
@@ -72,6 +82,8 @@ export const divisionContent = {
     accent: "#4ebeff",
     description:
       "Rwanda Mobile Hub is the technology division for mobile devices, repair, digital trade, youth skills, and future digital business systems.",
+    image: "/showroom/showroom.png",
+    imageAlt: "BaBra uploaded project showroom image",
     points: ["Mobile commerce", "Device support", "Digital jobs", "Youth technology skills"],
     cta: "Open Rwanda Mobile Hub forms",
     ctaHref: "/forms/rwanda-mobile-hub",
