@@ -1,0 +1,412 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+  STAFF
+}
+
+enum UserStatus {
+  ACTIVE
+  PENDING_VERIFICATION
+  SUSPENDED
+  DELETED
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+enum OrderStatus {
+  DRAFT
+  QUOTE_REQUESTED
+  PENDING_PAYMENT
+  PAYMENT_RECEIVED
+  PROCESSING
+  PACKING
+  OUT_FOR_DELIVERY
+  DELIVERED
+  COMPLETED
+  CANCELLED
+  REJECTED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  CANCELLED
+  REFUNDED
+  CALLBACK_RECEIVED
+  MANUAL_REVIEW
+}
+
+enum PaymentProvider {
+  CASH_ON_DELIVERY
+  MTN_MOMO
+  AIRTEL_MONEY
+  BANK_TRANSFER
+  CARD
+  USDT
+  MANUAL
+}
+
+enum MessageStatus {
+  NEW
+  IN_REVIEW
+  RESPONDED
+  CLOSED
+  SPAM
+}
+
+enum JobApplicationStatus {
+  SUBMITTED
+  SCREENING
+  INTERVIEW
+  ACCEPTED
+  REJECTED
+  ARCHIVED
+}
+
+enum LostFoundType {
+  LOST
+  FOUND
+}
+
+enum LostFoundStatus {
+  SUBMITTED
+  VERIFYING
+  MATCHED
+  CLAIMED
+  RETURNED
+  CLOSED
+  REJECTED
+}
+
+enum AdminAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  STATUS_CHANGE
+  PAYMENT_REVIEW
+  EXPORT
+  SECURITY_EVENT
+}
+
+model User {
+  id              String             @id @default(cuid())
+  email           String?            @unique
+  phone           String?            @unique
+  passwordHash    String?
+  fullName        String
+  role            UserRole           @default(CUSTOMER)
+  status          UserStatus         @default(PENDING_VERIFICATION)
+  emailVerifiedAt DateTime?
+  phoneVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  preferredLocale String             @default("en")
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  profile             CustomerProfile?
+  sessions            Session[]
+  passwordResetTokens PasswordResetToken[]
+  orders              Order[]              @relation("CustomerOrders")
+  adminLogs           AdminActivityLog[]   @relation("AdminActor")
+  messagesAssigned    ContactMessage[]     @relation("MessageAssignee")
+  jobApplications     JobApplication[]
+  lostFoundReports    LostFoundReport[]
+
+  @@index([role, status])
+  @@index([createdAt])
+}
+
+model CustomerProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  customerType    String   @default("Retail")
+  province        String?
+  district        String?
+  sector          String?
+  cell            String?
+  village         String?
+  landmark        String?
+  deliveryNotes   String?
+  rewardPoints    Int      @default(0)
+  marketingOptIn  Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  sessionToken String   @unique
+  userAgent    String?
+  ipAddress    String?
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+}
+
+model Product {
+  id              String        @id @default(cuid())
+  slug            String        @unique
+  name            String
+  shortName       String?
+  description     String?
+  size            String?
+  category        String
+  status          ProductStatus @default(DRAFT)
+  priceCents      Int?
+  currency        String        @default("RWF")
+  stockQuantity   Int           @default(0)
+  imageUrl        String?
+  imageAlt        String?
+  isFeatured      Boolean       @default(false)
+  publicSortOrder Int           @default(0)
+  metadata        Json?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  orderItems OrderItem[]
+
+  @@index([status, category])
+  @@index([isFeatured, publicSortOrder])
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique
+  customerId      String?
+  customerName    String
+  customerEmail   String?
+  customerPhone   String
+  status          OrderStatus @default(QUOTE_REQUESTED)
+  subtotalCents   Int         @default(0)
+  deliveryCents   Int         @default(0)
+  discountCents   Int         @default(0)
+  totalCents      Int         @default(0)
+  currency        String      @default("RWF")
+  province        String?
+  district        String?
+  sector          String?
+  cell            String?
+  village         String?
+  landmark        String?
+  deliveryNotes   String?
+  adminNotes      String?
+  submittedAt     DateTime    @default(now())
+  completedAt     DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  customer User?       @relation("CustomerOrders", fields: [customerId], references: [id], onDelete: SetNull)
+  items    OrderItem[]
+  payments Payment[]
+
+  @@index([customerId])
+  @@index([status, createdAt])
+  @@index([customerPhone])
+}
+
+model OrderItem {
+  id             String   @id @default(cuid())
+  orderId        String
+  productId      String?
+  productSlug    String
+  productName    String
+  quantity       Int
+  unitPriceCents Int      @default(0)
+  totalCents     Int      @default(0)
+  createdAt      DateTime @default(now())
+
+  order   Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([orderId])
+  @@index([productSlug])
+}
+
+model Payment {
+  id                    String          @id @default(cuid())
+  orderId               String?
+  provider              PaymentProvider
+  status                PaymentStatus   @default(PENDING)
+  amountCents           Int
+  currency              String          @default("RWF")
+  customerPhone         String?
+  providerReference     String?
+  internalReference     String          @unique
+  callbackUrl           String?
+  callbackPayload       Json?
+  callbackReceivedAt    DateTime?
+  failureReason         String?
+  manualReviewNotes     String?
+  requestedAt           DateTime        @default(now())
+  paidAt                DateTime?
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+
+  order Order? @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([orderId])
+  @@index([provider, status])
+  @@index([providerReference])
+}
+
+model ContactMessage {
+  id          String        @id @default(cuid())
+  fullName    String
+  email       String?
+  phone       String?
+  subject     String?
+  message     String
+  sourcePage  String?
+  status      MessageStatus @default(NEW)
+  assignedToId String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  assignedTo User? @relation("MessageAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([assignedToId])
+}
+
+model JobApplication {
+  id            String               @id @default(cuid())
+  userId        String?
+  fullName      String
+  email         String?
+  phone         String
+  roleApplied   String
+  division      String?
+  province      String?
+  district      String?
+  experience    String?
+  coverMessage  String?
+  resumeUrl     String?
+  status        JobApplicationStatus @default(SUBMITTED)
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([status, createdAt])
+  @@index([division])
+}
+
+model LostFoundReport {
+  id              String          @id @default(cuid())
+  userId          String?
+  reportType      LostFoundType
+  status          LostFoundStatus @default(SUBMITTED)
+  reporterName    String
+  reporterPhone   String
+  reporterEmail   String?
+  itemType        String
+  itemTitle       String
+  itemDescription String
+  ownerName       String?
+  foundLocation   String?
+  lostLocation    String?
+  province        String?
+  district        String?
+  sector          String?
+  cell            String?
+  village         String?
+  rewardCents     Int?
+  currency        String          @default("RWF")
+  proofImageUrl   String?
+  adminNotes      String?
+  matchedReportId String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  closedAt        DateTime?
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([reportType, status])
+  @@index([reporterPhone])
+  @@index([createdAt])
+}
+
+model AdminActivityLog {
+  id          String      @id @default(cuid())
+  actorId     String?
+  action      AdminAction
+  entityType  String
+  entityId    String?
+  summary     String
+  metadata    Json?
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime    @default(now())
+
+  actor User? @relation("AdminActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId])
+  @@index([entityType, entityId])
+  @@index([action, createdAt])
+}
+
+model EmailNotification {
+  id            String    @id @default(cuid())
+  recipient     String
+  subject       String
+  templateKey   String
+  payload       Json
+  sentAt        DateTime?
+  failedAt      DateTime?
+  failureReason String?
+  createdAt     DateTime  @default(now())
+
+  @@index([templateKey, createdAt])
+  @@index([sentAt])
+}
+
+model RateLimitEvent {
+  id        String   @id @default(cuid())
+  key       String
+  route     String
+  ipAddress String?
+  count     Int      @default(1)
+  resetAt   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([key, route])
+  @@index([resetAt])
+}

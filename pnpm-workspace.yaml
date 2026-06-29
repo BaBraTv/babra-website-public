@@ -1,3 +1,5 @@
 allowBuilds:
-  sharp: set this to true or false
+  '@prisma/engines': true
+  prisma: true
+  sharp: true
 strictDepBuilds: false
