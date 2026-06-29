@@ -712,7 +712,9 @@ export default function HomePage() {
           <div className="grid gap-4">
             {deliverySteps.map(([title, text], index) => (
               <article key={title} className="rounded-2xl border border-white/10 bg-white/[0.055] p-6">
-                <span className="text-sm font-black text-[#d6ad57]">0{index + 1}</span>
+                <span className="inline-flex whitespace-nowrap text-sm font-black text-[#d6ad57]">
+                  Step {index + 1}
+                </span>
                 <h3 className="mt-2 font-serif text-3xl">{title}</h3>
                 <p className="mt-3 leading-7 text-white/62">{text}</p>
               </article>

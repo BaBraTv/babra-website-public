@@ -107,7 +107,9 @@ export default function ProductsPage() {
                 </div>
               </figure>
               <div className="p-6 md:p-8">
-                <span className="text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">Category 0{index + 1}</span>
+                <span className="inline-flex whitespace-nowrap text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">
+                  Category {index + 1}
+                </span>
                 <h2 className="mt-3 font-serif text-5xl leading-none">{family.name}</h2>
                 <p className="mt-2 text-lg font-black text-[#f1d58b]">{family.slogan}</p>
                 <p className="mt-5 leading-8 text-white/66">{family.description}</p>

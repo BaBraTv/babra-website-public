@@ -625,7 +625,7 @@ function OrderTimeline({ order }: { order: Order }) {
     <div className="mt-8 grid gap-3">
       {steps.map((step, index) => (
         <div key={step} className={`rounded-xl border px-4 py-3 text-sm font-black ${index <= activeIndex ? "border-[#f1d58b] bg-[#f1d58b] text-[#130d08]" : "border-white/10 bg-black/25 text-white/62"}`}>
-          0{index + 1}. {step}
+          <span className="whitespace-nowrap">Step {index + 1}.</span> {step}
         </div>
       ))}
     </div>

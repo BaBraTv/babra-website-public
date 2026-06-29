@@ -320,7 +320,7 @@ export function StoreClient() {
               <div className="mt-5 grid gap-3">
                 {["Order received", "Payment confirmation", "Packing", "Out for delivery"].map((step, index) => (
                   <div key={step} className="rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-sm font-bold text-white/78">
-                    0{index + 1}. {step}
+                    <span className="whitespace-nowrap">Step {index + 1}.</span> {step}
                   </div>
                 ))}
               </div>
