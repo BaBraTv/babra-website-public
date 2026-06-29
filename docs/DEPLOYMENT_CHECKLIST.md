@@ -18,8 +18,9 @@ Use this checklist before making `babra.store` fully operational.
 - Run:
 
 ```bash
+pnpm production:env-check
 pnpm exec prisma validate
-pnpm exec prisma migrate deploy
+pnpm production:migrate
 ```
 
 ## 3. Vercel Environment Variables
@@ -46,6 +47,8 @@ MTN_MOMO_SUBSCRIPTION_KEY=""
 MTN_MOMO_API_USER=""
 MTN_MOMO_API_KEY=""
 ```
+
+Use `scripts/vercel-env-production-template.txt` as the copy checklist.
 
 Email and payment provider values can stay empty until configured, but `DATABASE_URL`, auth secrets, and `ADMIN_SETUP_SECRET` must be real before production use.
 
