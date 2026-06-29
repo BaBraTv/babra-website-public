@@ -117,16 +117,19 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
                 <article
                   key={point}
                   id={serviceAnchors[division]?.[index]}
-                  className="rounded-2xl border border-white/10 bg-white/[0.055] p-6"
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055]"
                 >
-                  <span
-                    className="inline-flex h-8 items-center rounded-full border border-white/10 bg-black/25 px-3 text-xs font-black uppercase tracking-[0.14em] tabular-nums"
-                    style={{ color: data.accent }}
-                  >
-                    {`Step ${index + 1}`}
-                  </span>
-                  <h3 className="mt-2 font-serif text-3xl">{point}</h3>
-                  <p className="mt-3 leading-7 text-white/62">Use the division-specific forms and contact routes for this service area.</p>
+                  <img className="h-40 w-full object-cover" src={data.serviceImages[index] || data.image} alt={`${data.name} - ${point}`} loading="lazy" />
+                  <div className="p-6">
+                    <span
+                      className="inline-flex h-8 items-center rounded-full border border-white/10 bg-black/25 px-3 text-xs font-black uppercase tracking-[0.14em] tabular-nums"
+                      style={{ color: data.accent }}
+                    >
+                      {`Step ${index + 1}`}
+                    </span>
+                    <h3 className="mt-2 font-serif text-3xl">{point}</h3>
+                    <p className="mt-3 leading-7 text-white/62">Use the division-specific forms and contact routes for this service area.</p>
+                  </div>
                 </article>
               ))}
             </div>
