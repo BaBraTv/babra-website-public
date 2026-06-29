@@ -108,7 +108,12 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
                   id={index === 0 ? "farmers" : index === 1 ? "marketplace" : index === 2 ? "partnerships" : undefined}
                   className="rounded-2xl border border-white/10 bg-white/[0.055] p-6"
                 >
-                  <span className="text-sm font-black" style={{ color: data.accent }}>0{index + 1}</span>
+                  <span
+                    className="inline-flex h-8 items-center rounded-full border border-white/10 bg-black/25 px-3 text-xs font-black uppercase tracking-[0.14em] tabular-nums"
+                    style={{ color: data.accent }}
+                  >
+                    {`Step ${index + 1}`}
+                  </span>
                   <h3 className="mt-2 font-serif text-3xl">{point}</h3>
                   <p className="mt-3 leading-7 text-white/62">Use the division-specific forms and contact routes for this service area.</p>
                 </article>
