@@ -1,5 +1,8 @@
+import "./load-production-env.mjs";
+
 const required = [
   "DATABASE_URL",
+  "DIRECT_URL",
   "PRODUCTION_APP_URL",
   "NEXT_PUBLIC_SITE_URL",
   "AUTH_SESSION_SECRET",
@@ -21,22 +24,26 @@ function redacted(value) {
 const missing = required.filter((key) => !process.env[key]);
 const warnings = [...emailPlaceholders, ...paymentPlaceholders].filter((key) => !process.env[key]);
 const databaseUrl = process.env.DATABASE_URL || "";
+const directUrl = process.env.DIRECT_URL || "";
 
 const checks = {
   hasDatabaseUrl: Boolean(databaseUrl),
+  hasDirectUrl: Boolean(directUrl),
   databaseLooksPostgres: databaseUrl.startsWith("postgresql://") || databaseUrl.startsWith("postgres://"),
+  directUrlLooksPostgres: directUrl.startsWith("postgresql://") || directUrl.startsWith("postgres://"),
   databaseIsNotLocalhost: databaseUrl ? !/localhost|127\.0\.0\.1/i.test(databaseUrl) : false,
+  directUrlIsNotLocalhost: directUrl ? !/localhost|127\.0\.0\.1/i.test(directUrl) : false,
   appUrl: process.env.PRODUCTION_APP_URL || process.env.NEXT_PUBLIC_SITE_URL || "",
   missingRequired: missing,
   unsetOptionalPlaceholders: warnings
 };
 
 console.log(JSON.stringify({
-  ok: missing.length === 0 && checks.databaseLooksPostgres && checks.databaseIsNotLocalhost,
+  ok: missing.length === 0 && checks.databaseLooksPostgres && checks.directUrlLooksPostgres && checks.databaseIsNotLocalhost && checks.directUrlIsNotLocalhost,
   checks,
   redacted: Object.fromEntries(required.map((key) => [key, redacted(process.env[key] || "")]))
 }, null, 2));
 
-if (missing.length > 0 || !checks.databaseLooksPostgres || !checks.databaseIsNotLocalhost) {
+if (missing.length > 0 || !checks.databaseLooksPostgres || !checks.directUrlLooksPostgres || !checks.databaseIsNotLocalhost || !checks.directUrlIsNotLocalhost) {
   process.exitCode = 1;
 }

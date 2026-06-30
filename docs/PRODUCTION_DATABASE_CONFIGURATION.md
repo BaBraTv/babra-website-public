@@ -19,9 +19,11 @@ Set this in Vercel Project Settings > Environment Variables:
 
 ```env
 DATABASE_URL="postgresql://postgres.PROJECT_REF:PASSWORD@aws-0-REGION.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1"
+DIRECT_URL="postgresql://postgres:PASSWORD@db.PROJECT_REF.supabase.co:5432/postgres"
 ```
 
 Use the Supabase pooler URL for Vercel runtime so serverless functions do not open too many direct database connections.
+Use `DIRECT_URL` for Prisma migrations.
 
 ## Local Development Variable
 
@@ -36,7 +38,7 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/babra_store?schema=p
 After `DATABASE_URL` points to the production database, run:
 
 ```bash
-pnpm exec prisma migrate deploy
+pnpm production:migrate
 ```
 
 Do not run destructive reset commands against production.

@@ -8,3 +8,5 @@ out/
 *.log
 tsconfig.tsbuildinfo
 app/generated/prisma/
+.vercel
+.env*

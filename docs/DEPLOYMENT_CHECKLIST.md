@@ -29,6 +29,7 @@ Set these in Vercel production:
 
 ```env
 DATABASE_URL=""
+DIRECT_URL=""
 PRODUCTION_APP_URL="https://www.babra.store"
 NEXT_PUBLIC_SITE_URL="https://www.babra.store"
 AUTH_SESSION_SECRET=""
@@ -62,6 +63,8 @@ pnpm exec prisma generate
 pnpm exec tsc --noEmit
 pnpm build
 ```
+
+On Vercel production, `pnpm build` runs `prisma migrate deploy` before `next build` when `DIRECT_URL` or `DATABASE_URL` is available.
 
 ## 5. API Verification
 
