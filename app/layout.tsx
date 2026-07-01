@@ -6,11 +6,11 @@ import { ServiceWorkerRegistration } from "./ServiceWorkerRegistration";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
+    default: "EI BaBra Holding Ltd | BaBra Ecosystem Platform",
     template: `%s | ${site.domain}`
   },
   description:
-    "BaBra Group brings together BaBra Cosmetics, BaBra Lotion, BaBra Pocket Fresh, BaBra Pads, BaBra Soap, BaBra Showroom, LifeTalk TV, and future holding company systems.",
+    "EI BaBra Holding Ltd brings together BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Hospital, BaBra Farm, BaBra Foundation, LifeTalk TV, Lost & Found Rwanda, store products, forms, and partner access.",
   keywords: [
     "Best body lotion",
     "skin care",
@@ -52,20 +52,20 @@ export const metadata: Metadata = {
     canonical: site.url
   },
   openGraph: {
-    title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
+    title: "EI BaBra Holding Ltd | BaBra Ecosystem Platform",
     description:
-      "BaBra Group ecosystem for premium cosmetics, showroom retail, media, LifeTalk TV, and future African business growth.",
+      "The BaBra ecosystem platform for cosmetics, mobile technology, schools, healthcare, agriculture, foundation work, media, public services, commerce, and partner access.",
     url: site.url,
     siteName: site.domain,
-    images: [{ url: "/brand/logo.jpeg", width: 1200, height: 630, alt: "BaBra Cosmetics Ltd" }],
+    images: [{ url: "/brand/homepage-video-poster.webp", width: 1200, height: 630, alt: "EI BaBra Holding Ltd ecosystem" }],
     locale: "en_RW",
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
-    description: "BaBra Group ecosystem: cosmetics, showroom, LifeTalk TV, and Luxury In Every Touch.",
-    images: ["/brand/logo.jpeg"]
+    title: "EI BaBra Holding Ltd | BaBra Ecosystem Platform",
+    description: "BaBra ecosystem: cosmetics, mobile hub, schools, hospital, farm, foundation, LifeTalk TV, Lost & Found Rwanda, store, forms, and partner access.",
+    images: ["/brand/homepage-video-poster.webp"]
   }
 };
 

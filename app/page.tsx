@@ -29,6 +29,119 @@ const groupPillars = [
   }
 ];
 
+const topNav = [
+  ["Holding", "#ecosystem"],
+  ["Cosmetics", "/cosmetics"],
+  ["Mobile Hub", "/rwanda-mobile-hub"],
+  ["Schools", "/schools"],
+  ["Hospital", "/hospital"],
+  ["Farm", "/farm"],
+  ["Foundation", "/foundation"],
+  ["LifeTalk TV", "/lifetalk-tv"],
+  ["Store", "/store"],
+  ["Contact", "/contact"],
+  ["Forms", "/forms"]
+];
+
+const ecosystemCards = [
+  {
+    title: "EI BaBra Holding Ltd",
+    label: "Group structure",
+    text: "The parent ecosystem connecting commerce, technology, education, healthcare, agriculture, media, and social impact.",
+    href: "/holding",
+    image: "/showroom/showroom.png",
+    accent: "#f1d58b"
+  },
+  {
+    title: "BaBra Cosmetics",
+    label: "Beauty and products",
+    text: "BaBra Lotion, soap, pads, pocket fresh, showroom, samples, wholesale, and Rwanda-first store operations.",
+    href: "/cosmetics",
+    image: "/brand/official-babra-bottle.png",
+    accent: "#d6ad57"
+  },
+  {
+    title: "Rwanda Mobile Hub",
+    label: "Technology division",
+    text: "Mobile commerce, device support, repairs, accessories, spare parts, technicians, and youth technology skills.",
+    href: "/rwanda-mobile-hub",
+    image: "/photos/mobile-smartphone.jpg",
+    accent: "#4ebeff"
+  },
+  {
+    title: "BaBra Schools",
+    label: "Education systems",
+    text: "Future nursery, primary, secondary, university, digital learning, admissions, teachers, and scholarships.",
+    href: "/schools",
+    image: "/photos/school-classroom.jpg",
+    accent: "#7dd3fc"
+  },
+  {
+    title: "BaBra Hospital",
+    label: "Healthcare vision",
+    text: "Trusted healthcare systems, patient care access, medical services, and community health planning.",
+    href: "/hospital",
+    image: "/photos/hospital-doctor.jpg",
+    accent: "#38bdf8"
+  },
+  {
+    title: "BaBra Farm",
+    label: "Agriculture network",
+    text: "Farmers, suppliers, greenhouse production, livestock roadmap, produce marketplace, and supply chains.",
+    href: "/farm",
+    image: "/photos/farm-crops.jpg",
+    accent: "#4ade80"
+  },
+  {
+    title: "BaBra Foundation",
+    label: "Community impact",
+    text: "Volunteers, donations, family-based support, vulnerable children support, and community partnerships.",
+    href: "/foundation",
+    image: "/photos/foundation-community.jpg",
+    accent: "#c084fc"
+  },
+  {
+    title: "LifeTalk TV",
+    label: "Media and storytelling",
+    text: "Brand storytelling, interviews, business education, social impact content, and original productions.",
+    href: "/lifetalk-tv",
+    image: "/brand/homepage-video-poster.webp",
+    accent: "#fb7185"
+  },
+  {
+    title: "Lost & Found Rwanda",
+    label: "Public service",
+    text: "Independent lost documents, found items, claims, searches, finder process, and support routing.",
+    href: "/lost-and-found",
+    image: "/photos/mobile-workstation.jpg",
+    accent: "#fb923c"
+  },
+  {
+    title: "Investor / Sponsor Access",
+    label: "Private review",
+    text: "Structured access requests for verified partners, sponsors, investors, and institutional stakeholders.",
+    href: "/investor-sponsor-access",
+    image: "/photos/foundation-volunteers.jpg",
+    accent: "#facc15"
+  },
+  {
+    title: "Store / Products",
+    label: "Commerce",
+    text: "Product catalog, cart, checkout, Rwanda delivery flow, order tracking, and manual payment review.",
+    href: "/store",
+    image: "/brand/official-babra-bottle-kids.png",
+    accent: "#f1d58b"
+  },
+  {
+    title: "Contact / Forms",
+    label: "Operations gateway",
+    text: "Division forms, contact messages, job applications, lost/found submissions, and support channels.",
+    href: "/forms",
+    image: "/photos/mobile-accessories.jpg",
+    accent: "#60a5fa"
+  }
+];
+
 const products = [
   {
     name: "BaBra Soft Care for Kids",
@@ -177,34 +290,25 @@ export default function HomePage() {
       <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#090706]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 md:px-8">
           <a className="flex min-w-0 items-center gap-3" href="#top" aria-label="babra.store home">
-            <span className="grid h-12 w-28 shrink-0 place-items-center rounded-md border border-[#d6ad57]/40 bg-white p-2">
-              <img className="h-full w-full object-contain" src="/brand/logo.jpeg" alt="BaBra logo" />
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md border border-[#d6ad57]/45 bg-[#f1d58b] text-lg font-black text-[#090706] shadow-lg shadow-[#d6ad57]/20">
+              EI
             </span>
             <span className="hidden min-w-0 sm:block">
-              <strong className="block font-serif text-xl leading-tight">babra.store</strong>
-              <span className="block text-xs font-bold uppercase tracking-[0.18em] text-[#d6ad57]">Group ecosystem</span>
+              <strong className="block font-serif text-xl leading-tight">EI BaBra Holding Ltd</strong>
+              <span className="block text-xs font-bold uppercase tracking-[0.18em] text-[#d6ad57]">babra.store ecosystem</span>
             </span>
           </a>
 
           <div className="hidden items-center gap-1 lg:flex">
-            {[
-              ["Products", "/products"],
-              ["Showroom", "/showroom"],
-              ["LifeTalk TV", "/lifetalk-tv"],
-              ["Holding", "/holding"],
-              ["Quality", "/quality"],
-              ["Contact", "/contact"],
-              ["Science", "#science-of-babra"],
-              ["Platform", "#platform"]
-            ].map(([item, href]) => (
+            {topNav.map(([item, href]) => (
               <a key={item} className="rounded-full px-4 py-2 text-sm font-semibold text-white/68 hover:bg-white/10 hover:text-white" href={href}>
                 {item}
               </a>
             ))}
           </div>
 
-          <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="/contact">
-            Samples
+          <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="/investor-sponsor-access">
+            Access
           </a>
         </div>
       </nav>
@@ -225,21 +329,21 @@ export default function HomePage() {
 
         <div className="relative mx-auto grid min-h-[calc(100vh-81px)] max-w-7xl items-center gap-10 px-5 py-12 md:px-8 lg:grid-cols-[0.94fr_1.06fr]">
           <motion.div initial="hidden" animate="show" transition={{ duration: 0.8, ease: "easeOut" }} variants={fadeUp}>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Group Worldwide</p>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">EI BaBra Holding Ltd</p>
             <h1 className="mt-5 max-w-5xl font-serif text-6xl leading-[0.9] md:text-8xl">
-              BaBra Lotion, luxury in every touch.
+              One BaBra ecosystem. Many engines of growth.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/72">
-              Long-lasting hydration, skin-barrier comfort, protected product science, and a premium fragrance experience
-              built for Rwanda, East Africa, and worldwide skincare customers.
+              babra.store is the digital platform for EI BaBra Holding Ltd: cosmetics, mobile technology, schools,
+              hospital vision, agriculture, foundation work, LifeTalk TV, Lost & Found Rwanda, commerce, and partner access.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] shadow-xl shadow-[#f1d58b]/20" href="/products">
-                Explore products
+              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] shadow-xl shadow-[#f1d58b]/20" href="#ecosystem">
+                Explore ecosystem
               </a>
-              <a className="rounded-full border border-white/24 bg-white/5 px-6 py-3 font-black text-white backdrop-blur" href="/quality">
-                Quality proof
+              <a className="rounded-full border border-white/24 bg-white/5 px-6 py-3 font-black text-white backdrop-blur" href="/store">
+                Store / Products
               </a>
             </div>
 
@@ -262,41 +366,73 @@ export default function HomePage() {
             <div className="relative flex h-full flex-col justify-between">
               <div className="flex items-center justify-between gap-4 text-white">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f1d58b]">Signature skincare</p>
-                  <h2 className="mt-2 font-serif text-4xl leading-none">BaBra Cosmetics</h2>
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f1d58b]">Holding command map</p>
+                  <h2 className="mt-2 font-serif text-4xl leading-none">EI BaBra Ecosystem</h2>
                 </div>
                 <span className="rounded-full border border-[#d6ad57]/50 bg-black/30 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#f1d58b]">
-                  500ml
+                  Rwanda + global
                 </span>
               </div>
 
-              <div className="babra-orbit-stage relative mt-6 flex min-h-[430px] items-center justify-center overflow-hidden rounded-lg border border-white/15 bg-[radial-gradient(circle_at_50%_32%,rgba(255,255,255,0.92),rgba(255,248,235,0.56)_34%,rgba(28,17,13,0.5)_72%),linear-gradient(135deg,rgba(255,255,255,0.88),rgba(212,170,61,0.78))]">
-              <div className="absolute inset-x-10 bottom-14 h-16 rounded-full bg-black/30 blur-2xl" />
-              <div className="babra-orbit relative h-[340px] w-[340px]">
-                {heroBottles.map((product, index) => (
-                  <figure
-                    key={product.name}
-                    className="babra-orbit-card babra-bottle-3d absolute left-1/2 top-1/2 h-[330px] w-[190px] -translate-x-1/2 -translate-y-1/2"
-                    style={{ transform: `rotateY(${index * 120}deg) translateZ(210px) translateX(-50%) translateY(-50%)` }}
-                  >
-                    <img className="babra-float babra-bottle-image h-full w-full object-contain" src={product.image} alt={product.name} />
-                  </figure>
-                ))}
+              <div className="relative mt-6 min-h-[430px] overflow-hidden rounded-lg border border-white/15 bg-[#fffaf1] p-4">
+                <div className="grid h-full min-h-[398px] gap-3 sm:grid-cols-2">
+                  {ecosystemCards.slice(0, 6).map((item) => (
+                    <a key={item.title} href={item.href} className="group relative min-h-32 overflow-hidden rounded-lg border border-black/10 bg-black text-white">
+                      <img className="absolute inset-0 h-full w-full object-cover opacity-60 transition duration-500 group-hover:scale-105 group-hover:opacity-75" src={item.image} alt={item.title} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/38 to-transparent" />
+                      <div className="absolute inset-x-0 bottom-0 p-4">
+                        <p className="text-[0.65rem] font-black uppercase tracking-[0.18em]" style={{ color: item.accent }}>{item.label}</p>
+                        <h3 className="mt-1 font-serif text-2xl leading-none">{item.title}</h3>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
-              <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-[#090706]/90 p-4 text-white backdrop-blur">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#f1d58b]">Rotating collection</p>
-                <p className="mt-1 text-sm text-white/64">Official women, men, and baby BaBra Lotion bottles rotate in a premium 3D product view.</p>
-              </div>
-            </div>
 
             <div className="mt-5 rounded-lg bg-[#090706]/90 p-5 text-white backdrop-blur">
-              <p className="font-serif text-3xl">Premium Luxury in Every Touch</p>
+              <p className="font-serif text-3xl">Built as an enterprise ecosystem</p>
               <p className="mt-3 text-sm leading-6 text-white/60">
-                Product-first presentation designed for global buyers, retailers, partners, and modern customers.
+                Products remain important, but the homepage must present the whole holding structure, division routes, forms, partners, and operating platform.
               </p>
             </div>
           </div>
           </motion.div>
+        </div>
+      </section>
+
+      <section id="ecosystem" className="bg-[#fffaf1] px-5 py-20 text-[#18110c] md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">EI BaBra Holding Ltd</p>
+              <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">The full BaBra ecosystem is the homepage.</h2>
+            </div>
+            <p className="text-lg leading-8 text-black/64">
+              BaBra Lotion is one strong product line, but babra.store must represent the whole enterprise:
+              divisions, public services, forms, commerce, partners, and future operating systems.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {ecosystemCards.map((item) => (
+              <a key={item.title} href={item.href} className="group overflow-hidden rounded-lg border border-black/10 bg-white shadow-xl shadow-black/5 transition hover:-translate-y-1 hover:shadow-2xl">
+                <figure className="relative h-56 overflow-hidden bg-[#090706]">
+                  <img className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]" src={item.image} alt={item.title} loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/84 via-black/18 to-transparent" />
+                  <span className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-2 text-xs font-black uppercase tracking-[0.16em] text-white backdrop-blur">
+                    {item.label}
+                  </span>
+                </figure>
+                <div className="p-6">
+                  <h3 className="font-serif text-3xl leading-tight">{item.title}</h3>
+                  <p className="mt-4 leading-7 text-black/62">{item.text}</p>
+                  <span className="mt-5 inline-flex rounded-full px-4 py-2 text-sm font-black text-[#090706]" style={{ backgroundColor: item.accent }}>
+                    Open division
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -524,16 +660,16 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">BaBra Group</p>
           <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">
-            One brand family, multiple engines of growth.
+            Division structure, routes, and operating focus stay visible.
           </h2>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {groupPillars.map((pillar) => (
-              <article key={pillar.title} className="rounded-2xl border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
+          <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {ecosystemCards.slice(1, 9).map((pillar) => (
+              <a key={pillar.title} href={pillar.href} className="rounded-2xl border border-black/10 bg-white p-6 shadow-xl shadow-black/5 hover:border-[#a9141d]/35">
                 <span className="text-xs font-black uppercase tracking-[0.18em] text-[#a9141d]">{pillar.label}</span>
                 <h3 className="mt-4 font-serif text-3xl">{pillar.title}</h3>
                 <p className="mt-4 leading-7 text-black/62">{pillar.text}</p>
-              </article>
+              </a>
             ))}
           </div>
         </div>
@@ -550,7 +686,7 @@ export default function HomePage() {
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-[#d6ad57]/25 bg-black shadow-2xl shadow-black/40">
-          <video className="aspect-video w-full object-cover" src="/videos/babra-production-ad.mp4" muted controls playsInline poster="/brand/logo.jpeg" />
+          <video className="aspect-video w-full object-cover" src="/videos/babra-production-ad.mp4" muted controls playsInline poster="/brand/homepage-video-poster.webp" />
         </div>
       </section>
 
