@@ -2,33 +2,6 @@
 
 import { motion } from "framer-motion";
 
-const groupPillars = [
-  {
-    title: "BaBra Cosmetics",
-    label: "Luxury skincare",
-    text: "Premium lotions, serum, daily body care, direct ordering, reviews, inventory, and digital invoices.",
-    href: "#cosmetics"
-  },
-  {
-    title: "BaBra School",
-    label: "Future education",
-    text: "A private school vision for admissions, student records, parent portals, fees, and digital learning.",
-    href: "#group"
-  },
-  {
-    title: "BaBra Farm",
-    label: "Agriculture network",
-    text: "Crop records, livestock management, farmer marketplace, supply chain, and market intelligence.",
-    href: "#group"
-  },
-  {
-    title: "LifeTalk TV",
-    label: "Media and influence",
-    text: "Brand storytelling, interviews, business education, product campaigns, and community content.",
-    href: "#group"
-  }
-];
-
 const topNav = [
   ["Holding", "#ecosystem"],
   ["Cosmetics", "/cosmetics"],
@@ -170,21 +143,6 @@ const products = [
     note: "Clean freshness and premium body care for a confident routine.",
     image: "/products/men-lotion.jpg",
     fit: "contain"
-  }
-];
-
-const heroBottles = [
-  {
-    name: "BaBra Lotion for Women official bottle",
-    image: "/brand/official-babra-bottle.png"
-  },
-  {
-    name: "BaBra Lotion for Men official bottle",
-    image: "/brand/official-babra-bottle-men.png"
-  },
-  {
-    name: "BaBra Lotion Baby official bottle",
-    image: "/brand/official-babra-bottle-kids.png"
   }
 ];
 
