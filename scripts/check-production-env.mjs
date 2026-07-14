@@ -12,8 +12,10 @@ const required = [
   "PAYMENT_CALLBACK_SECRET"
 ];
 
-const emailPlaceholders = ["EMAIL_FROM", "SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASSWORD", "SMTP_SECURE"];
-const paymentPlaceholders = ["MTN_MOMO_BASE_URL", "MTN_MOMO_SUBSCRIPTION_KEY", "MTN_MOMO_API_USER", "MTN_MOMO_API_KEY"];
+const emailPlaceholders = ["EMAIL_PROVIDER", "EMAIL_FROM", "RESEND_API_KEY", "SENDGRID_API_KEY", "SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASSWORD", "SMTP_SECURE"];
+const notificationPlaceholders = ["WHATSAPP_PROVIDER", "WHATSAPP_ACCESS_TOKEN", "WHATSAPP_PHONE_NUMBER_ID", "SMS_PROVIDER", "SMS_API_KEY", "SMS_SENDER_ID"];
+const mediaPlaceholders = ["MEDIA_STORAGE_PROVIDER", "MEDIA_PUBLIC_BASE_URL", "MEDIA_BUCKET", "MEDIA_ACCESS_KEY_ID", "MEDIA_SECRET_ACCESS_KEY"];
+const paymentPlaceholders = ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "MTN_MOMO_BASE_URL", "MTN_MOMO_SUBSCRIPTION_KEY", "MTN_MOMO_API_USER", "MTN_MOMO_API_KEY", "AIRTEL_MONEY_BASE_URL", "AIRTEL_MONEY_CLIENT_ID", "AIRTEL_MONEY_CLIENT_SECRET"];
 
 function redacted(value) {
   if (!value) return "";
@@ -22,7 +24,7 @@ function redacted(value) {
 }
 
 const missing = required.filter((key) => !process.env[key]);
-const warnings = [...emailPlaceholders, ...paymentPlaceholders].filter((key) => !process.env[key]);
+const warnings = [...emailPlaceholders, ...notificationPlaceholders, ...mediaPlaceholders, ...paymentPlaceholders].filter((key) => !process.env[key]);
 const databaseUrl = process.env.DATABASE_URL || "";
 const directUrl = process.env.DIRECT_URL || "";
 

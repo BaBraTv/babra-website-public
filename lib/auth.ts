@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import { z } from "zod";
 import type { UserRole } from "@prisma/client";
 
-export const authRoles = ["CUSTOMER", "ADMIN", "STAFF"] as const satisfies readonly UserRole[];
+export const authRoles = ["CUSTOMER", "ADMIN", "MANAGER", "STAFF"] as const satisfies readonly UserRole[];
 
 export const signupSchema = z.object({
   fullName: z.string().trim().min(2).max(120),
@@ -22,7 +22,7 @@ export const forgotPasswordSchema = z.object({
 });
 
 export function requireAdminRole(role: UserRole) {
-  if (role !== "ADMIN" && role !== "STAFF") {
+  if (role !== "ADMIN" && role !== "MANAGER" && role !== "STAFF") {
     throw new Error("Admin access required");
   }
 }

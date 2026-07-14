@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState, type ChangeEvent, type ReactNode } from "react";
 import {
@@ -402,8 +402,8 @@ export function PlatformClient({ mode }: { mode: Mode }) {
     [cart]
   );
 
-  function priceFor(slug: string, fallback: number) {
-    return priceOverrides[slug] || fallback;
+  function priceFor(slug: string, fallback: number | null) {
+    return priceOverrides[slug] || fallback || 0;
   }
 
   const subtotal = cartLines.reduce((sum, item) => sum + priceFor(item.product.slug, item.product.price) * item.quantity, 0);
