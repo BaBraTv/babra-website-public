@@ -1,347 +1,235 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaLocations, site, whatsappOrderUrl } from "../commerce-data";
-import { InstallAppButton } from "../InstallAppButton";
+import { cosmeticsCategories, editableCosmeticsProducts, productPriceLabel, productSortOptions, productStockLabel, type EditableCosmeticsProduct } from "../data/cosmetics-catalog";
+import { PRICE_INQUIRY_NOTE, rwandaLocations, site, whatsappOrderUrl } from "../commerce-data";
 
-type CartItem = {
-  slug: string;
-  quantity: number;
-};
+type ViewMode = "grid" | "list";
+type CartItem = { slug: string; quantity: number };
+type SortOption = (typeof productSortOptions)[number];
+type CategoryOption = (typeof cosmeticsCategories)[number];
 
-const translations = {
-  en: {
-    hero: "Premium skincare shopping for Rwanda and global BaBra customers.",
-    cart: "Cart",
-    checkout: "Checkout",
-    profile: "Customer profile",
-    tracking: "Order tracking",
-    add: "Ask price",
-    fallback: "Ask on WhatsApp"
-  },
-  rw: {
-    hero: "Gura skincare ya BaBra mu Rwanda no ku bakiriya mpuzamahanga.",
-    cart: "Agaseke",
-    checkout: "Kwishyura",
-    profile: "Umwirondoro",
-    tracking: "Gukurikirana commande",
-    add: "Baza igiciro",
-    fallback: "Baza kuri WhatsApp"
-  },
-  fr: {
-    hero: "Achat skincare premium pour le Rwanda et les clients BaBra du monde.",
-    cart: "Panier",
-    checkout: "Commande",
-    profile: "Profil client",
-    tracking: "Suivi commande",
-    add: "Demander le prix",
-    fallback: "Demander sur WhatsApp"
+function readJson<T>(key: string, fallback: T): T {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const value = window.localStorage.getItem(key);
+    return value ? (JSON.parse(value) as T) : fallback;
+  } catch {
+    return fallback;
   }
-};
+}
 
-type Lang = keyof typeof translations;
+function saveJson<T>(key: string, value: T) {
+  window.localStorage.setItem(key, JSON.stringify(value));
+}
+
+function productMessage(product: EditableCosmeticsProduct, action: string) {
+  return [
+    `Hello BaBra Cosmetics, ${action}.`,
+    `Product: ${product.name} ${product.size}`,
+    `SKU: ${product.sku}`,
+    "Please confirm official price, stock, delivery, and payment options."
+  ].join("\n");
+}
+
+function ProductCard({ product, view, wished, compared, onAddCart, onWishlist, onCompare, onViewed }: { product: EditableCosmeticsProduct; view: ViewMode; wished: boolean; compared: boolean; onAddCart: (slug: string) => void; onWishlist: (slug: string) => void; onCompare: (slug: string) => void; onViewed: (slug: string) => void }) {
+  return (
+    <article className={view === "grid" ? "group overflow-hidden rounded-lg border border-white/10 bg-[#16100f] shadow-2xl shadow-black/20" : "grid overflow-hidden rounded-lg border border-white/10 bg-[#16100f] shadow-2xl shadow-black/20 md:grid-cols-[280px_1fr]"}>
+      <a href={`/products/${product.slug}`} onClick={() => onViewed(product.slug)} className="block bg-gradient-to-br from-white via-[#fff8eb] to-[#d6ad57] p-5">
+        <img className="h-80 w-full object-contain transition duration-500 group-hover:scale-[1.03]" src={product.gallery[0].src} alt={product.gallery[0].alt} loading="lazy" />
+      </a>
+      <div className="p-6">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full border border-[#f1d58b]/35 bg-[#f1d58b]/10 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-[#f1d58b]">{product.category}</span>
+          <span className="rounded-full border border-[#4ebeff]/30 bg-[#4ebeff]/10 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-[#9be0ff]">Editable</span>
+        </div>
+        <h2 className="mt-4 font-serif text-4xl leading-none">{product.name}</h2>
+        <p className="mt-2 text-sm font-black uppercase tracking-[0.16em] text-white/46">{product.sku}</p>
+        <p className="mt-4 leading-7 text-white/64">{product.description}</p>
+        <div className="mt-5 grid gap-2 text-sm font-bold text-white/70">
+          <span>{productPriceLabel(product)}</span>
+          <span>{productStockLabel(product)}</span>
+          <span>{product.barcodePlaceholder}</span>
+        </div>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <button type="button" onClick={() => onAddCart(product.slug)} className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#080606]">Add to cart</button>
+          <a className="rounded-full border border-[#f1d58b]/35 px-4 py-2 text-sm font-black text-[#f1d58b]" href={`/products/${product.slug}`}>View</a>
+          <button type="button" onClick={() => onWishlist(product.slug)} className="rounded-full border border-white/15 px-4 py-2 text-sm font-black text-white/80">{wished ? "Wishlisted" : "Wishlist"}</button>
+          <button type="button" onClick={() => onCompare(product.slug)} className="rounded-full border border-white/15 px-4 py-2 text-sm font-black text-white/80">{compared ? "Comparing" : "Compare"}</button>
+        </div>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a className="text-sm font-black text-[#9be0ff] underline-offset-4 hover:underline" href={whatsappOrderUrl(productMessage(product, "I want to buy this product on WhatsApp"))} target="_blank" rel="noopener noreferrer">Buy on WhatsApp</a>
+          <a className="text-sm font-black text-[#9be0ff] underline-offset-4 hover:underline" href={whatsappOrderUrl(productMessage(product, "I want to request a quotation"))} target="_blank" rel="noopener noreferrer">Request quotation</a>
+          <a className="text-sm font-black text-[#9be0ff] underline-offset-4 hover:underline" href={whatsappOrderUrl(productMessage(product, "I have an international inquiry"))} target="_blank" rel="noopener noreferrer">International inquiry</a>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export function StoreClient() {
-  const [language, setLanguage] = useState<Lang>("en");
+  const [view, setView] = useState<ViewMode>("grid");
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<CategoryOption>("All");
+  const [sort, setSort] = useState<SortOption>("Featured");
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [customerType, setCustomerType] = useState("Retail");
-  const [orderCode, setOrderCode] = useState("BABRA-STORE-0001");
-  const [selectedProvince, setSelectedProvince] = useState("Kigali City");
-  const copy = translations[language];
+  const [wishlist, setWishlist] = useState<string[]>([]);
+  const [compare, setCompare] = useState<string[]>([]);
+  const [recent, setRecent] = useState<string[]>([]);
+  const [province, setProvince] = useState("Kigali City");
+  const [coupon, setCoupon] = useState("");
 
   useEffect(() => {
-    try {
-      const savedCart = window.localStorage.getItem("babra-cart");
-      const savedLanguage = window.localStorage.getItem("babra-store-language") as Lang | null;
-      const savedCustomerType = window.localStorage.getItem("babra-customer-type");
-      if (savedCart) setCart(JSON.parse(savedCart) as CartItem[]);
-      if (savedLanguage && translations[savedLanguage]) setLanguage(savedLanguage);
-      if (savedCustomerType) setCustomerType(savedCustomerType);
-    } catch {
-      // Local storage is optional; WhatsApp ordering still works without it.
-    }
+    setCart(readJson<CartItem[]>("babra-cart", []));
+    setWishlist(readJson<string[]>("babra-wishlist", []));
+    setCompare(readJson<string[]>("babra-compare", []));
+    setRecent(readJson<string[]>("babra-recent-products", []));
   }, []);
 
-  function saveCart(next: CartItem[]) {
+  const visibleProducts = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+    const filtered = editableCosmeticsProducts.filter((product) => {
+      const matchesCategory = category === "All" || product.category === category;
+      const matchesQuery = !normalizedQuery || [product.name, product.sku, product.category, product.size].join(" ").toLowerCase().includes(normalizedQuery);
+      return matchesCategory && matchesQuery;
+    });
+
+    return [...filtered].sort((a, b) => {
+      if (sort === "Name A-Z") return a.name.localeCompare(b.name);
+      if (sort === "Category") return a.category.localeCompare(b.category);
+      return Number(b.isFeatured) - Number(a.isFeatured);
+    });
+  }, [category, query, sort]);
+
+  const cartLines = cart.map((line) => ({ ...line, product: editableCosmeticsProducts.find((product) => product.slug === line.slug) })).filter((line): line is CartItem & { product: EditableCosmeticsProduct } => Boolean(line.product));
+  const recentProducts = recent.map((slug) => editableCosmeticsProducts.find((product) => product.slug === slug)).filter((product): product is EditableCosmeticsProduct => Boolean(product));
+  const compareProducts = compare.map((slug) => editableCosmeticsProducts.find((product) => product.slug === slug)).filter((product): product is EditableCosmeticsProduct => Boolean(product));
+
+  function persistCart(next: CartItem[]) {
     setCart(next);
-    window.localStorage.setItem("babra-cart", JSON.stringify(next));
+    saveJson("babra-cart", next);
   }
 
-  function saveLanguage(next: Lang) {
-    setLanguage(next);
-    window.localStorage.setItem("babra-store-language", next);
+  function addCart(slug: string) {
+    const found = cart.find((item) => item.slug === slug);
+    persistCart(found ? cart.map((item) => (item.slug === slug ? { ...item, quantity: item.quantity + 1 } : item)) : [...cart, { slug, quantity: 1 }]);
+    markViewed(slug);
   }
 
-  function saveCustomerType(next: string) {
-    setCustomerType(next);
-    window.localStorage.setItem("babra-customer-type", next);
+  function updateQuantity(slug: string, quantity: number) {
+    const safe = Math.max(0, quantity);
+    persistCart(safe === 0 ? cart.filter((item) => item.slug !== slug) : cart.map((item) => (item.slug === slug ? { ...item, quantity: safe } : item)));
   }
 
-  const cartLines = useMemo(
-    () =>
-      cart
-        .map((item) => {
-          const product = products.find((entry) => entry.slug === item.slug);
-          return product ? { ...item, product } : null;
-        })
-        .filter(Boolean),
-    [cart]
-  );
-
-  function addToCart(slug: string) {
-    const existing = cart.find((item) => item.slug === slug);
-    const next = existing ? cart.map((item) => (item.slug === slug ? { ...item, quantity: item.quantity + 1 } : item)) : [...cart, { slug, quantity: 1 }];
-    saveCart(next);
+  function toggleStored(key: "babra-wishlist" | "babra-compare", slug: string, setter: (value: string[]) => void, current: string[], limit?: number) {
+    const exists = current.includes(slug);
+    const next = exists ? current.filter((item) => item !== slug) : [slug, ...current.filter((item) => item !== slug)].slice(0, limit ?? 20);
+    setter(next);
+    saveJson(key, next);
   }
 
-  function updateQuantity(slug: string, quantityValue: number) {
-    const safeQuantity = Math.max(0, quantityValue);
-    const next = safeQuantity === 0 ? cart.filter((item) => item.slug !== slug) : cart.map((item) => (item.slug === slug ? { ...item, quantity: safeQuantity } : item));
-    saveCart(next);
+  function markViewed(slug: string) {
+    const next = [slug, ...recent.filter((item) => item !== slug)].slice(0, 4);
+    setRecent(next);
+    saveJson("babra-recent-products", next);
   }
 
-  function saveDraftOrder() {
-    const nextOrderCode = `BABRA-${Date.now().toString().slice(-6)}`;
-    setOrderCode(nextOrderCode);
-    window.localStorage.setItem(
-      "babra-draft-order",
-      JSON.stringify({
-        code: nextOrderCode,
-        customerType,
-        province: selectedProvince,
-        items: cartLines.map((item) => ({ slug: item!.slug, quantity: item!.quantity })),
-        createdAt: new Date().toLocaleString()
-      })
-    );
-  }
-
-  const whatsappMessage = [
-    `Hello ${site.name}, I want to place an order on ${site.domain}.`,
-    `Items: ${cartLines.map((item) => `${item!.product.shortName} x${item!.quantity}`).join(", ") || "Please advise"}.`,
-    "Please confirm today's price, delivery cost, and availability.",
-    "If I qualify for reseller, wholesale, or distributor pricing, please advise me.",
-    "Delivery: Rwanda address will be confirmed by province, district, sector, cell, village, phone, landmark, and notes."
+  const quoteMessage = [
+    `Hello ${site.name}, I want a cosmetics order quote.`,
+    `Items: ${cartLines.map((line) => `${line.product.name} x${line.quantity}`).join(", ") || "Please advise"}.`,
+    `Delivery province: ${province}.`,
+    coupon ? `Coupon/reference: ${coupon}.` : "No coupon/reference yet.",
+    "Please confirm official price, discount, stock, delivery options, and payment workflow."
   ].join("\n");
 
   return (
-    <main className="min-h-screen bg-[#090706] text-white">
-      <section className="border-b border-white/10 px-5 py-14 md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+    <main className="min-h-screen bg-[#080606] text-white">
+      <section className="border-b border-white/10 bg-[radial-gradient(circle_at_78%_12%,rgba(16,36,97,0.58),transparent_34rem)] px-5 py-16 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
-            <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">
-              {site.domain}
-            </a>
-            <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Store commerce app</p>
-            <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">Shop BaBra skincare with Rwanda-first delivery.</h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">{copy.hero}</p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              {(["en", "rw", "fr"] as Lang[]).map((lang) => (
-                <button
-                  key={lang}
-                  className={`rounded-full px-4 py-2 text-sm font-black uppercase ${language === lang ? "bg-[#f1d58b] text-[#130d08]" : "border border-white/20 text-white"}`}
-                  onClick={() => saveLanguage(lang)}
-                  type="button"
-                >
-                  {lang}
-                </button>
-              ))}
-              <InstallAppButton />
-            </div>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {[
-                ["Cart", "/cart"],
-                ["Checkout", "/checkout"],
-                ["Orders", "/orders"],
-                ["Profile", "/profile"]
-              ].map(([label, href]) => (
-                <a key={label} className="rounded-full border border-white/15 px-4 py-2 text-sm font-black text-white/72 hover:border-[#f1d58b]/60 hover:text-[#f1d58b]" href={href}>
-                  {label}
-                </a>
-              ))}
-            </div>
+            <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
+            <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Cosmetics Enterprise Store</p>
+            <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">Luxury cosmetics commerce, ready for official data.</h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">Search, compare, wishlist, request quotations, and prepare checkout for the three approved editable 500ml lotion products.</p>
           </div>
-          <div className="rounded-lg border border-[#d6ad57]/25 bg-[#fffaf1] p-5 text-[#18110c] shadow-2xl shadow-black/35">
-            <div className="grid gap-4 sm:grid-cols-2">
-              {products.slice(0, 4).map((product) => (
-                <img key={product.slug} className="h-44 w-full rounded-lg bg-white object-contain p-3" src={product.image} alt={product.alt} loading="lazy" />
-              ))}
-            </div>
-            <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-[#a9141d]">Hydroquinone-free positioning. Formula protected.</p>
-          </div>
+          <aside className="rounded-lg border border-[#f1d58b]/20 bg-white/[0.06] p-5">
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]">Mini cart</p>
+            <p className="mt-2 text-4xl font-serif">{cartLines.reduce((sum, item) => sum + item.quantity, 0)} items</p>
+            <p className="mt-2 text-sm text-white/58">{PRICE_INQUIRY_NOTE}</p>
+            <a className="mt-5 inline-flex rounded-full bg-[#f1d58b] px-5 py-3 font-black text-[#080606]" href="#checkout">Checkout summary</a>
+          </aside>
         </div>
       </section>
 
-      <section className="px-5 py-14 md:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-wrap items-end justify-between gap-5">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Product pages</p>
-              <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Women, men, kids, and serum.</h2>
-            </div>
-            <a className="rounded-full border border-white/20 px-5 py-3 font-black text-white" href="/products">
-              View full catalog
-            </a>
-          </div>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {products.map((product) => (
-              <article key={product.slug} className="overflow-hidden rounded-lg border border-white/10 bg-[#18110f]">
-                <a href={`/products/${product.slug}`} aria-label={`View ${product.name}`}>
-                  <figure className="bg-gradient-to-br from-white via-[#fff8eb] to-[#d6ad57] p-4">
-                    <img className="h-72 w-full object-contain drop-shadow-2xl" src={product.image} alt={product.alt} loading="lazy" />
-                  </figure>
-                </a>
-                <div className="p-5">
-                  <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{product.category}</span>
-                  <h3 className="mt-3 font-serif text-3xl leading-tight">{product.name}</h3>
-                  <p className="mt-3 leading-7 text-white/62">{product.description}</p>
-                  <p className="mt-4 text-sm font-black uppercase tracking-[0.16em] text-[#d6ad57]">{product.size}</p>
-                  <p className="mt-1 text-xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
-                  <p className="mt-1 text-xs font-bold text-white/48">{PRICE_INQUIRY_NOTE}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    <button className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" onClick={() => addToCart(product.slug)} type="button">
-                      {copy.add}
-                    </button>
-                    <a className="rounded-full border border-[#d6ad57]/35 px-4 py-2 text-sm font-black text-[#f1d58b]" href={`/products/${product.slug}`}>
-                      Details
-                    </a>
-                  </div>
-                </div>
-              </article>
+      <section className="px-5 py-8 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 rounded-lg border border-white/10 bg-[#14100f] p-4 md:grid-cols-[1fr_auto_auto_auto] md:items-end">
+          <label className="grid gap-2 text-sm font-bold text-white/72">Search
+            <input className="min-h-12 rounded-lg border border-white/10 bg-black/30 px-4 text-white" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search product, SKU, category" />
+          </label>
+          <label className="grid gap-2 text-sm font-bold text-white/72">Category
+            <select className="min-h-12 rounded-lg border border-white/10 bg-black/30 px-4 text-white" value={category} onChange={(event) => setCategory(event.target.value as CategoryOption)}>
+              {cosmeticsCategories.map((item) => <option key={item}>{item}</option>)}
+            </select>
+          </label>
+          <label className="grid gap-2 text-sm font-bold text-white/72">Sort
+            <select className="min-h-12 rounded-lg border border-white/10 bg-black/30 px-4 text-white" value={sort} onChange={(event) => setSort(event.target.value as SortOption)}>
+              {productSortOptions.map((item) => <option key={item}>{item}</option>)}
+            </select>
+          </label>
+          <div className="flex rounded-lg border border-white/10 p-1">
+            {(["grid", "list"] as ViewMode[]).map((mode) => (
+              <button key={mode} type="button" className={`rounded-md px-4 py-3 text-sm font-black capitalize ${view === mode ? "bg-[#f1d58b] text-[#080606]" : "text-white/70"}`} onClick={() => setView(mode)}>{mode}</button>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#fffaf1] px-5 py-14 text-[#18110c] md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">{copy.cart}</p>
-            <h2 className="mt-3 font-serif text-5xl leading-none">Quote request.</h2>
-              <p className="mt-5 leading-8 text-black/64">
-                Add products you want, then ask BaBra to confirm today&apos;s price, delivery, reseller, wholesale, or distributor offer.
-              </p>
-          </div>
-          <div className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
-            {cartLines.length === 0 ? (
-              <p className="leading-7 text-black/62">Cart is empty. Add a product above or use WhatsApp fallback for manual ordering.</p>
-            ) : (
-              <div className="grid gap-4">
-                {cartLines.map((item) => (
-                  <div key={item!.slug} className="grid gap-3 rounded-lg border border-black/10 p-4 sm:grid-cols-[1fr_auto] sm:items-center">
-                    <div>
-                      <h3 className="font-serif text-2xl">{item!.product.name}</h3>
-                      <p className="text-sm text-black/60">Price confirmed by BaBra support</p>
-                    </div>
-                    <input
-                      aria-label={`Quantity for ${item!.product.name}`}
-                      className="w-24 rounded-lg border border-black/15 px-3 py-2"
-                      min="0"
-                      onChange={(event) => updateQuantity(item!.slug, Number(event.target.value))}
-                      type="number"
-                      value={item!.quantity}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-            <div className="mt-6 rounded-lg bg-[#090706] p-5 text-white">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]">Price confirmation</p>
-              <p className="mt-2 text-white/62">BaBra support confirms price after checking product, quantity, delivery location, and customer type.</p>
-              <p className="mt-4 text-3xl font-black">{PRICE_INQUIRY_LABEL}</p>
-            </div>
-          </div>
+      <section className="px-5 pb-16 md:px-8">
+        <div className={`mx-auto max-w-7xl ${view === "grid" ? "grid gap-5 md:grid-cols-2 xl:grid-cols-3" : "grid gap-5"}`}>
+          {visibleProducts.map((product) => (
+            <ProductCard key={product.slug} product={product} view={view} wished={wishlist.includes(product.slug)} compared={compare.includes(product.slug)} onAddCart={addCart} onWishlist={(slug) => toggleStored("babra-wishlist", slug, setWishlist, wishlist)} onCompare={(slug) => toggleStored("babra-compare", slug, setCompare, compare, 3)} onViewed={markViewed} />
+          ))}
         </div>
       </section>
 
-      <section className="px-5 py-14 md:px-8">
+      <section className="bg-[#fffaf1] px-5 py-16 text-[#111827] md:px-8">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
-          <form className="rounded-lg border border-white/10 bg-[#18110f] p-6 lg:col-span-2">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">{copy.checkout}</p>
-            <h2 className="mt-3 font-serif text-5xl leading-none">Rwanda-first delivery.</h2>
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
-              <label className="grid gap-2 text-sm font-bold text-white/78">
-                Customer type
-                <select className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" value={customerType} onChange={(event) => saveCustomerType(event.target.value)}>
-                  {["Retail", "Reseller", "Wholesale", "Distributor"].map((type) => (
-                    <option key={type}>{type}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="grid gap-2 text-sm font-bold text-white/78">
-                Province
-                <select className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" value={selectedProvince} onChange={(event) => setSelectedProvince(event.target.value)}>
-                  {Object.keys(rwandaLocations).map((province) => (
-                    <option key={province}>{province}</option>
-                  ))}
-                </select>
-              </label>
-              {["District", "Sector", "Cell", "Village", "Phone / WhatsApp", "Nearest landmark"].map((field) => (
-                <label key={field} className="grid gap-2 text-sm font-bold text-white/78">
-                  {field}
-                  {field === "District" ? (
-                    <select className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white">
-                      {rwandaLocations[selectedProvince as keyof typeof rwandaLocations].map((district) => (
-                        <option key={district}>{district}</option>
-                      ))}
-                    </select>
-                  ) : (
-                    <input className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" placeholder={field} />
-                  )}
-                </label>
-              ))}
-              <label className="grid gap-2 text-sm font-bold text-white/78 md:col-span-2">
-                Delivery notes
-                <textarea className="min-h-28 rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" placeholder="Building color, gate number, preferred delivery time, or rider instructions" />
-              </label>
+          <div className="lg:col-span-2">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#0b2a5b]">Compare</p>
+            <h2 className="mt-3 font-serif text-5xl leading-none">Compare editable product fields.</h2>
+            <div className="mt-8 overflow-x-auto rounded-lg border border-black/10 bg-white">
+              <table className="min-w-full text-left text-sm">
+                <thead className="bg-[#0b2a5b] text-white"><tr><th className="p-4">Field</th>{compareProducts.map((product) => <th className="p-4" key={product.slug}>{product.shortName}</th>)}</tr></thead>
+                <tbody>{["size", "sku", "price", "stock", "barcode"].map((field) => <tr className="border-t border-black/10" key={field}><th className="p-4 capitalize">{field}</th>{compareProducts.map((product) => <td className="p-4" key={`${product.slug}-${field}`}>{field === "size" ? product.size : field === "sku" ? product.sku : field === "price" ? productPriceLabel(product) : field === "stock" ? productStockLabel(product) : product.barcodePlaceholder}</td>)}</tr>)}</tbody>
+              </table>
             </div>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href={whatsappOrderUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
-                {copy.fallback}
-              </a>
-              <button className="rounded-full border border-white/20 px-6 py-3 font-black text-white" type="button" onClick={saveDraftOrder}>
-                Save draft order
-              </button>
-            </div>
-          </form>
-
-          <aside className="grid gap-5">
-            <section className="rounded-lg border border-white/10 bg-[#18110f] p-6">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-[#d6ad57]">{copy.profile}</p>
-              <div className="mt-5 grid gap-3">
-                {["Full name", "Phone", "Email", "Preferred language"].map((field) => (
-                  <input key={field} className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" placeholder={field} />
-                ))}
-              </div>
-            </section>
-            <section className="rounded-lg border border-white/10 bg-[#18110f] p-6">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-[#d6ad57]">{copy.tracking}</p>
-              <input className="mt-5 w-full rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" value={orderCode} onChange={(event) => setOrderCode(event.target.value)} />
-              <div className="mt-5 grid gap-3">
-                {["Order received", "Payment confirmation", "Packing", "Out for delivery"].map((step, index) => (
-                  <div key={step} className="rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-sm font-bold text-white/78">
-                    <span className="whitespace-nowrap">Step {index + 1}.</span> {step}
-                  </div>
-                ))}
-              </div>
-            </section>
+          </div>
+          <aside className="rounded-lg border border-black/10 bg-white p-6">
+            <h2 className="font-serif text-4xl">Recently viewed</h2>
+            <div className="mt-5 grid gap-3">{recentProducts.length ? recentProducts.map((product) => <a className="rounded-lg border border-black/10 p-3 font-bold hover:bg-[#fffaf1]" href={`/products/${product.slug}`} key={product.slug}>{product.name}</a>) : <p className="text-black/58">Recently viewed products will appear here.</p>}</div>
           </aside>
         </div>
       </section>
 
-      <section className="bg-[#120b09] px-5 py-14 md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {[
-            [site.company, site.address],
-            ["Phone / WhatsApp", site.phone],
-            ["Email", site.email],
-            ["Trust status", `${site.license} ${site.manufacturing} ${site.positioning}`]
-          ].map(([title, text]) => (
-            <article key={title} className="rounded-lg border border-white/10 bg-[#18110f] p-6">
-              <h3 className="font-serif text-3xl">{title}</h3>
-              <p className="mt-4 leading-7 text-white/62">{text}</p>
-            </article>
-          ))}
+      <section id="checkout" className="px-5 py-16 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="rounded-lg border border-white/10 bg-[#14100f] p-6">
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#f1d58b]">Checkout</p>
+            <h2 className="mt-3 font-serif text-5xl leading-none">Order summary and delivery options.</h2>
+            <div className="mt-8 grid gap-4">
+              {cartLines.length ? cartLines.map((line) => <div className="grid gap-3 rounded-lg border border-white/10 p-4 md:grid-cols-[1fr_auto_auto] md:items-center" key={line.slug}><div><h3 className="font-serif text-2xl">{line.product.name}</h3><p className="text-sm text-white/54">{line.product.sku}</p></div><input aria-label={`Quantity for ${line.product.name}`} className="w-24 rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-white" type="number" min="0" value={line.quantity} onChange={(event) => updateQuantity(line.slug, Number(event.target.value))} /><button type="button" className="rounded-full border border-white/15 px-4 py-2 text-sm font-black" onClick={() => updateQuantity(line.slug, 0)}>Remove</button></div>) : <p className="rounded-lg border border-white/10 p-4 text-white/62">Cart is empty.</p>}
+            </div>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <label className="grid gap-2 text-sm font-bold text-white/72">Delivery province<select className="min-h-12 rounded-lg border border-white/10 bg-black/30 px-4 text-white" value={province} onChange={(event) => setProvince(event.target.value)}>{Object.keys(rwandaLocations).map((item) => <option key={item}>{item}</option>)}</select></label>
+              <label className="grid gap-2 text-sm font-bold text-white/72">Coupon / reference architecture<input className="min-h-12 rounded-lg border border-white/10 bg-black/30 px-4 text-white" value={coupon} onChange={(event) => setCoupon(event.target.value)} placeholder="Optional code, disabled until official" /></label>
+            </div>
+          </div>
+          <aside className="rounded-lg border border-[#f1d58b]/20 bg-[#0b2a5b] p-6">
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]">Quote total</p>
+            <p className="mt-4 font-serif text-5xl">Price on request</p>
+            <p className="mt-4 leading-7 text-white/68">No fake total is calculated. BaBra confirms price, discount, stock, and delivery manually or through configured payment workflows.</p>
+            <a className="mt-6 inline-flex rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#080606]" href={whatsappOrderUrl(quoteMessage)} target="_blank" rel="noopener noreferrer">Buy on WhatsApp</a>
+          </aside>
         </div>
       </section>
     </main>

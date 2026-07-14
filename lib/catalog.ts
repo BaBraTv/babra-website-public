@@ -1,4 +1,4 @@
-import { products } from "../app/commerce-data";
+﻿import { products } from "../app/commerce-data";
 import { getPrisma } from "./db";
 
 export async function ensureCatalogProduct(slug: string) {
@@ -14,7 +14,7 @@ export async function ensureCatalogProduct(slug: string) {
       size: product.size,
       category: product.category,
       status: "ACTIVE",
-      priceCents: product.price * 100,
+      priceCents: product.priceCents,
       currency: "RWF",
       imageUrl: product.image,
       imageAlt: product.alt
@@ -27,7 +27,7 @@ export async function ensureCatalogProduct(slug: string) {
       size: product.size,
       category: product.category,
       status: "ACTIVE",
-      priceCents: product.price * 100,
+      priceCents: product.priceCents,
       currency: "RWF",
       stockQuantity: 0,
       imageUrl: product.image,
@@ -38,7 +38,7 @@ export async function ensureCatalogProduct(slug: string) {
 
 export function catalogPriceCents(slug: string) {
   const product = products.find((item) => item.slug === slug);
-  return product ? product.price * 100 : 0;
+  return product?.priceCents ?? 0;
 }
 
 export function catalogName(slug: string) {

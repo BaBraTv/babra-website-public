@@ -181,32 +181,123 @@ model PasswordResetToken {
   @@index([userId, expiresAt])
 }
 
-model Product {
-  id              String        @id @default(cuid())
-  slug            String        @unique
-  name            String
-  shortName       String?
-  description     String?
-  size            String?
-  category        String
-  status          ProductStatus @default(DRAFT)
-  priceCents      Int?
-  currency        String        @default("RWF")
-  stockQuantity   Int           @default(0)
-  imageUrl        String?
-  imageAlt        String?
-  isFeatured      Boolean       @default(false)
-  publicSortOrder Int           @default(0)
-  metadata        Json?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
 
-  orderItems OrderItem[]
+
+model Product {
+  id                     String        @id @default(cuid())
+  slug                   String        @unique
+  name                   String
+  shortName              String?
+  description            String?
+  size                   String?
+  category               String
+  categoryId             String?
+  brandId                String?
+  status                 ProductStatus @default(DRAFT)
+  priceCents             Int?
+  compareAtCents         Int?
+  discountCents          Int?
+  currency               String        @default("RWF")
+  stockQuantity          Int           @default(0)
+  lowStockThreshold      Int?
+  sku                    String?       @unique
+  barcode                String?
+  barcodePlaceholder     String?
+  ingredientsPlaceholder String?
+  directions             String?
+  features               Json?
+  gallery                Json?
+  imageUrl               String?
+  imageAlt               String?
+  isEditable             Boolean       @default(true)
+  isFeatured             Boolean       @default(false)
+  publicSortOrder        Int           @default(0)
+  metadata               Json?
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+
+  categoryRecord     ProductCategory?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  brand              ProductBrand?      @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  images             ProductImage[]
+  inventoryMovements InventoryMovement[]
+  wishlistItems      WishlistItem[]
+  orderItems         OrderItem[]
 
   @@index([status, category])
+  @@index([categoryId])
+  @@index([brandId])
   @@index([isFeatured, publicSortOrder])
+  @@index([stockQuantity])
 }
 
+model ProductCategory {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  products Product[]
+
+  @@index([isActive, sortOrder])
+}
+
+model ProductBrand {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  website   String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  url       String
+  alt       String?
+  sortOrder Int      @default(0)
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, sortOrder])
+}
+
+model InventoryMovement {
+  id          String   @id @default(cuid())
+  productId   String
+  quantity    Int
+  reason      String
+  reference   String?
+  actorId     String?
+  createdAt   DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, createdAt])
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  userId    String?
+  sessionId String?
+  productId String
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([sessionId])
+  @@index([productId])
+}
 model Order {
   id              String      @id @default(cuid())
   orderNumber     String      @unique
