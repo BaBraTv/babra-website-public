@@ -42,7 +42,11 @@ export async function GET() {
       contactMessages,
       jobApplications,
       lostFoundReports,
-      investorRequests
+      investorRequests,
+      products,
+      categories,
+      brands,
+      stockAlerts
     });
   } catch (error) {
     return authFail(error);

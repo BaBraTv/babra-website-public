@@ -1,4 +1,4 @@
-import { PlatformClient } from "../PlatformClient";
+import { AdminDashboardClient } from "./AdminDashboardClient";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "../../lib/session";
 
@@ -10,6 +10,6 @@ export const metadata = {
 export default async function AdminPage() {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
-  if (user.role !== "ADMIN" && user.role !== "STAFF") redirect("/account");
-  return <PlatformClient mode="admin" />;
+  if (user.role !== "ADMIN" && user.role !== "MANAGER" && user.role !== "STAFF") redirect("/account");
+  return <AdminDashboardClient />;
 }

@@ -99,7 +99,7 @@ export async function requireCurrentUser() {
 
 export async function requireAdminUser() {
   const user = await requireCurrentUser();
-  if (user.role !== "ADMIN" && user.role !== "STAFF") {
+  if (user.role !== "ADMIN" && user.role !== "MANAGER" && user.role !== "STAFF") {
     throw new Error("Admin access required");
   }
   return user;
