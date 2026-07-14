@@ -10,6 +10,11 @@ export const rwandaAddressSchema = z.object({
   deliveryNotes: z.string().trim().max(1000).optional()
 });
 
+export const checkoutAddressSchema = rwandaAddressSchema.extend({
+  recipientName: z.string().trim().max(120).optional().or(z.literal("")),
+  phone: z.string().trim().max(32).optional().or(z.literal(""))
+});
+
 export const contactMessageSchema = z.object({
   fullName: z.string().trim().min(2).max(120),
   email: z.string().trim().email().optional().or(z.literal("")),
@@ -30,9 +35,30 @@ export const orderSubmissionSchema = z
     customerEmail: z.string().trim().email().optional().or(z.literal("")),
     customerPhone: z.string().trim().min(7).max(32),
     items: z.array(orderItemSchema).min(1),
-    paymentProvider: z.enum(["CASH_ON_DELIVERY", "MTN_MOMO", "AIRTEL_MONEY", "BANK_TRANSFER", "CARD", "USDT", "MANUAL"]).default("CASH_ON_DELIVERY")
+    paymentProvider: z.enum(["CASH_ON_DELIVERY", "MTN_MOMO", "AIRTEL_MONEY", "BANK_TRANSFER", "CARD", "USDT", "MANUAL"]).default("CASH_ON_DELIVERY"),
+    billingAddress: checkoutAddressSchema.optional(),
+    shippingAddress: checkoutAddressSchema.optional(),
+    deliveryOption: z.enum(["PICKUP", "KIGALI_DELIVERY", "RWANDA_DELIVERY", "INTERNATIONAL_QUOTE"]).default("KIGALI_DELIVERY"),
+    couponCode: z.string().trim().max(80).optional().or(z.literal("")),
+    giftNote: z.string().trim().max(500).optional().or(z.literal(""))
   })
   .merge(rwandaAddressSchema);
+
+export const savedCartSchema = z.object({
+  sessionId: z.string().trim().max(120).optional().or(z.literal("")),
+  items: z.array(orderItemSchema).max(100),
+  coupon: z.string().trim().max(80).optional().or(z.literal("")),
+  giftNote: z.string().trim().max(500).optional().or(z.literal(""))
+});
+
+export const wishlistSchema = z.object({
+  productSlug: z.string().trim().min(1).max(120)
+});
+
+export const recentlyViewedSchema = z.object({
+  productSlug: z.string().trim().min(1).max(120),
+  sessionId: z.string().trim().max(120).optional().or(z.literal(""))
+});
 
 export const jobApplicationSchema = z
   .object({

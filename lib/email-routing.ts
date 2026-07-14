@@ -19,9 +19,49 @@ export async function queueNotification(input: {
   templateKey: string;
   payload: unknown;
 }) {
-  return getPrisma().emailNotification.create({
+  const prisma = getPrisma();
+  const recipient = divisionEmailRoutes[input.route];
+  const [emailNotification] = await prisma.$transaction([
+    prisma.emailNotification.create({
+      data: {
+        recipient,
+        subject: input.subject,
+        templateKey: input.templateKey,
+        payload: input.payload as object
+      }
+    }),
+    prisma.notificationDelivery.create({
+      data: {
+        channel: "EMAIL",
+        recipient,
+        subject: input.subject,
+        templateKey: input.templateKey,
+        payload: input.payload as object
+      }
+    })
+  ]);
+  return emailNotification;
+}
+
+export const commerceEmailTemplates = {
+  welcome: "customer.welcome",
+  orderConfirmation: "orders.confirmation",
+  shipping: "orders.shipping",
+  passwordReset: "auth.forgot_password",
+  contact: "contact.received"
+} as const;
+
+export async function queueCustomerNotification(input: {
+  channel: "EMAIL" | "WHATSAPP" | "SMS";
+  recipient: string;
+  subject?: string;
+  templateKey: string;
+  payload: unknown;
+}) {
+  return getPrisma().notificationDelivery.create({
     data: {
-      recipient: divisionEmailRoutes[input.route],
+      channel: input.channel,
+      recipient: input.recipient,
       subject: input.subject,
       templateKey: input.templateKey,
       payload: input.payload as object

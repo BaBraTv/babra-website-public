@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-type AdminTab = "overview" | "products" | "categories" | "brands" | "inventory" | "orders" | "customers" | "messages" | "media" | "settings";
+type AdminTab = "overview" | "products" | "categories" | "brands" | "inventory" | "orders" | "customers" | "messages" | "media" | "reports" | "settings";
 
 type AdminProduct = {
   id: string;
@@ -43,6 +43,7 @@ const tabs: Array<[AdminTab, string]> = [
   ["customers", "Customers"],
   ["messages", "Messages"],
   ["media", "Media Library"],
+  ["reports", "Reports"],
   ["settings", "Settings"]
 ];
 
@@ -182,6 +183,7 @@ export function AdminDashboardClient() {
           {tab === "customers" ? <SimpleList title="Customers" description="Customer list from authenticated users." items={summary?.users?.map((user) => `${user.fullName} - ${user.role} - ${user.status}`) ?? []} /> : null}
           {tab === "messages" ? <SimpleList title="Messages" description="Contact and form messages routed to admin review." items={summary?.contactMessages?.map((message) => `${message.fullName} - ${message.status} - ${message.subject ?? "No subject"}`) ?? []} /> : null}
           {tab === "media" ? <MediaPanel /> : null}
+          {tab === "reports" ? <ReportsPanel /> : null}
           {tab === "settings" ? <SettingsPanel /> : null}
         </section>
       </div>
@@ -208,6 +210,10 @@ function OrdersPanel({ orders }: { orders: NonNullable<AdminSummary["orders"]> }
 
 function MediaPanel() {
   return <SimpleList title="Media Library" description="Upload, replace, delete, and folder organization are prepared as admin modules. Storage provider is not configured yet." items={["products", "homepage", "company", "documents"]} />;
+}
+
+function ReportsPanel() {
+  return <SimpleList title="Reports" description="Sales, revenue, inventory, customers, and product reports are available through the protected reports API." items={["Sales report", "Revenue by payment provider", "Inventory report", "Customer report", "Product performance report"]} />;
 }
 
 function SettingsPanel() {

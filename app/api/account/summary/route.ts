@@ -8,11 +8,15 @@ export async function GET() {
   try {
     const user = await requireCurrentUser();
     const prisma = getPrisma();
-    const [orders, jobApplications, lostFoundReports, investorRequests] = await Promise.all([
+    const [orders, jobApplications, lostFoundReports, investorRequests, addresses, wishlistItems, savedCarts, recentlyViewed] = await Promise.all([
       prisma.order.findMany({ where: { customerId: user.id }, orderBy: { createdAt: "desc" }, include: { items: true, payments: true } }),
       prisma.jobApplication.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" } }),
       prisma.lostFoundReport.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" } }),
-      prisma.investorAccessRequest.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" } })
+      prisma.investorAccessRequest.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" } }),
+      prisma.customerAddress.findMany({ where: { userId: user.id }, orderBy: [{ isDefault: "desc" }, { updatedAt: "desc" }] }),
+      prisma.wishlistItem.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" }, include: { product: true } }),
+      prisma.savedCart.findMany({ where: { userId: user.id }, orderBy: { updatedAt: "desc" }, take: 1 }),
+      prisma.recentlyViewedProduct.findMany({ where: { userId: user.id }, orderBy: { viewedAt: "desc" }, take: 12, include: { product: true } })
     ]);
 
     return NextResponse.json({
@@ -22,6 +26,10 @@ export async function GET() {
       jobApplications,
       lostFoundReports,
       investorRequests,
+      addresses,
+      wishlistItems,
+      savedCart: savedCarts[0] ?? null,
+      recentlyViewed,
       payments: orders.flatMap((order) => order.payments)
     });
   } catch (error) {
