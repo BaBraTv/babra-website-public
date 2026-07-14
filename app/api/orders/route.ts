@@ -9,6 +9,7 @@ import { z } from "zod";
 import { createPaymentIntent } from "../../../lib/payments";
 import { assertRateLimit } from "../../../lib/rate-limit";
 import { requireSameOrigin } from "../../../lib/security";
+import { recordAdminAction } from "../../../lib/audit";
 
 const paymentProviderMap = {
   CASH_ON_DELIVERY: "CASH_ON_DELIVERY",
@@ -155,15 +156,7 @@ export async function PATCH(request: NextRequest) {
       include: { items: true, payments: true }
     });
 
-    await getPrisma().adminActivityLog.create({
-      data: {
-        actorId: admin.id,
-        action: "STATUS_CHANGE",
-        entityType: "Order",
-        entityId: order.id,
-        summary: `Order ${order.orderNumber} moved to ${payload.status}`
-      }
-    });
+    await recordAdminAction({ actorId: admin.id, action: "STATUS_CHANGE", entityType: "Order", entityId: order.id, summary: `Order ${order.orderNumber} moved to ${payload.status}` });
 
     return NextResponse.json({ ok: true, order });
   } catch (error) {

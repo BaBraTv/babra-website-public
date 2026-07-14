@@ -60,6 +60,54 @@ export const recentlyViewedSchema = z.object({
   sessionId: z.string().trim().max(120).optional().or(z.literal(""))
 });
 
+export const couponSchema = z.object({
+  code: z.string().trim().min(2).max(80).transform((value) => value.toUpperCase()),
+  description: z.string().trim().max(500).optional().or(z.literal("")),
+  discountType: z.enum(["FIXED", "PERCENTAGE"]),
+  discountCents: z.number().int().min(0).optional().nullable(),
+  discountPercent: z.number().int().min(0).max(100).optional().nullable(),
+  startsAt: z.string().datetime().optional().nullable(),
+  expiresAt: z.string().datetime().optional().nullable(),
+  maxRedemptions: z.number().int().min(1).optional().nullable(),
+  isActive: z.boolean().optional()
+});
+
+export const shippingZoneSchema = z.object({
+  code: z.string().trim().min(2).max(80).transform((value) => value.toUpperCase()),
+  name: z.string().trim().min(2).max(160),
+  countries: z.array(z.string().trim().min(2).max(3)).min(1),
+  regions: z.array(z.string().trim().min(1).max(120)).optional(),
+  isActive: z.boolean().optional()
+});
+
+export const shippingMethodSchema = z.object({
+  zoneId: z.string().trim().min(1),
+  code: z.string().trim().min(2).max(80).transform((value) => value.toUpperCase()),
+  name: z.string().trim().min(2).max(160),
+  description: z.string().trim().max(1000).optional().or(z.literal("")),
+  baseFeeCents: z.number().int().min(0),
+  currency: z.string().trim().min(3).max(8).default("RWF"),
+  estimateMinDays: z.number().int().min(0).optional().nullable(),
+  estimateMaxDays: z.number().int().min(0).optional().nullable(),
+  supportsCOD: z.boolean().optional(),
+  requiresQuote: z.boolean().optional(),
+  isActive: z.boolean().optional()
+});
+
+export const refundRequestSchema = z.object({
+  orderId: z.string().trim().min(1),
+  paymentId: z.string().trim().min(1).optional().or(z.literal("")),
+  reason: z.string().trim().min(5).max(1000),
+  amountCents: z.number().int().min(1),
+  customerNotes: z.string().trim().max(2000).optional().or(z.literal(""))
+});
+
+export const refundReviewSchema = z.object({
+  refundId: z.string().trim().min(1),
+  status: z.enum(["UNDER_REVIEW", "APPROVED", "REJECTED", "PROCESSING", "REFUNDED", "CANCELLED"]),
+  adminNotes: z.string().trim().max(2000).optional().or(z.literal(""))
+});
+
 export const jobApplicationSchema = z
   .object({
     fullName: z.string().trim().min(2).max(120),
