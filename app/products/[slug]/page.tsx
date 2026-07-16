@@ -20,12 +20,14 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     return { title: "Product not found" };
   }
 
+  const description = `${product.name} official BaBra product page. Price, ingredients, stock, and detailed product information are pending official approval.`;
+
   return {
     title: `${product.name} | ${site.domain}`,
-    description: product.description,
+    description,
     openGraph: {
       title: product.name,
-      description: product.description,
+      description,
       images: [{ url: product.image, width: 1200, height: 630, alt: product.alt }]
     }
   };
