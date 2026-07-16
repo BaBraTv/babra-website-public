@@ -1,4 +1,4 @@
-const CACHE_NAME = "babra-ecosystem-v5";
+const CACHE_NAME = "babra-ecosystem-v6";
 const OFFLINE_URL = "/offline";
 const PRECACHE = [
   "/",
@@ -16,7 +16,13 @@ const PRECACHE = [
   "/account",
   OFFLINE_URL,
   "/manifest.webmanifest",
-  "/icons/icon.svg",
+  "/site.webmanifest",
+  "/favicon.ico",
+  "/favicon-16x16.png",
+  "/favicon-32x32.png",
+  "/apple-touch-icon.png",
+  "/android-chrome-192x192.png",
+  "/android-chrome-512x512.png",
   "/media/logos/babra-logo.jpeg",
   "/media/products/babra-lotion-women-500ml.png",
   "/media/products/babra-lotion-men-500ml.png",
