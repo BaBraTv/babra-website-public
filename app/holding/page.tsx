@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import { site } from "../commerce-data";
-import { officialMediaPendingLabel } from "../data/official-media";
 
 const companies = [
   ["BaBra Cosmetics", "Official cosmetics division with approved 500 ml BaBra Lotion product media.", "/cosmetics"],
-  ["Rwanda Mobile Hub", "Official information pending.", "/rwanda-mobile-hub"],
-  ["BaBra Schools", "Official information pending.", "/schools"],
-  ["BaBra Foundation", "Official information pending.", "/foundation"],
-  ["LifeTalk TV", "Official information pending.", "/lifetalk-tv"]
+  ["Rwanda Mobile Hub", "Repairs, accessories, software, hardware, and training routes.", "/rwanda-mobile-hub"],
+  ["BaBra Schools", "Nursery, primary, secondary, university, innovation, scholarship, and masterplan access.", "/schools"],
+  ["BaBra Foundation", "Mission, education, health, community, and donation access.", "/foundation"],
+  ["LifeTalk TV", "Shows, movies, series, news, gallery, and YouTube access.", "/lifetalk-tv"]
 ];
 
 const pillars = [
-  ["About", "Official company profile pending approval."],
+  ["About", "BaBra Holding Ltd is the public platform for the official BaBra company ecosystem."],
   ["Vision", "Official vision statement pending approval."],
   ["Mission", "Official mission statement pending approval."],
   ["Values", "Official values pending approval."]
@@ -114,9 +113,6 @@ export default function HoldingPage() {
               </article>
             ))}
           </div>
-          <p className="mt-8 rounded-lg border border-dashed border-[#d6ad57]/35 p-5 text-sm font-black uppercase tracking-[0.14em] text-[#f1d58b]">
-            {officialMediaPendingLabel}
-          </p>
         </div>
       </section>
     </main>

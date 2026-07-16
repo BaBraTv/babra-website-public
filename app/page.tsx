@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { OfficialMedia } from "./components/OfficialMedia";
-import { approvedProductMedia, officialMediaById, officialMediaPendingLabel } from "./data/official-media";
+import { approvedProductMedia, officialMediaById } from "./data/official-media";
 import { products } from "./commerce-data";
 
 const navItems = [
@@ -18,20 +18,11 @@ const navItems = [
 
 const divisions = [
   ["BaBra Cosmetics", "Official product division", "Approved official product media is live.", "/cosmetics"],
-  ["BaBra School", "Education division", officialMediaPendingLabel, "/schools"],
-  ["Rwanda Mobile Hub", "Mobile technology division", officialMediaPendingLabel, "/rwanda-mobile-hub"],
-  ["BaBra Foundation", "Foundation division", officialMediaPendingLabel, "/foundation"],
-  ["LifeTalk TV", "Media division", officialMediaPendingLabel, "/lifetalk-tv"],
-  ["EI BaBra Holding Ltd", "Holding platform", officialMediaPendingLabel, "/holding"]
-];
-
-const pendingMediaPages = [
-  "Founder",
-  "Rwanda Mobile Hub",
-  "BaBra Foundation",
-  "BaBra Schools master plan",
-  "LifeTalk TV",
-  "Holding division media"
+  ["BaBra School", "Education division", "Nursery, primary, secondary, university, innovation, scholarship, and masterplan access.", "/schools"],
+  ["Rwanda Mobile Hub", "Mobile technology division", "Repairs, accessories, software, hardware, and training routes.", "/rwanda-mobile-hub"],
+  ["BaBra Foundation", "Foundation division", "Mission, education, health, community, and donation access.", "/foundation"],
+  ["LifeTalk TV", "Media division", "Shows, movies, series, news, gallery, and YouTube access.", "/lifetalk-tv"],
+  ["EI BaBra Holding Ltd", "Holding platform", "Official BaBra company ecosystem and roadmap structure.", "/holding"]
 ];
 
 const fadeUp = {
@@ -39,24 +30,13 @@ const fadeUp = {
   show: { opacity: 1, y: 0 }
 };
 
-function PendingPanel({ label }: { label: string }) {
-  return (
-    <div className="grid min-h-44 place-items-center rounded-2xl border border-dashed border-[#d6ad57]/35 bg-[#120d0a]/72 p-6 text-center text-xs font-black uppercase tracking-[0.16em] text-[#f1d58b] shadow-inner shadow-black/30">
-      <span>
-        <span className="block text-white/60">{label}</span>
-        <span className="mt-3 block">{officialMediaPendingLabel}</span>
-      </span>
-    </div>
-  );
-}
-
 export default function HomePage() {
   const productSchema = products.map((product) => ({
     "@type": "Product",
     name: product.name,
     image: product.image,
     brand: { "@type": "Brand", name: "BaBra Cosmetics" },
-    description: "Official information pending"
+    description: product.description
   }));
 
   return (
@@ -190,16 +170,6 @@ export default function HomePage() {
                 <span className="mt-6 inline-flex text-sm font-black text-[#8a651d] transition group-hover:translate-x-1">Open division</span>
               </a>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-4 py-20 md:px-8">
-        <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-black uppercase tracking-[0.28em] text-[#d6ad57]">Official media status</p>
-          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Text-only placeholders until approval.</h2>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {pendingMediaPages.map((item) => <PendingPanel key={item} label={item} />)}
           </div>
         </div>
       </section>
