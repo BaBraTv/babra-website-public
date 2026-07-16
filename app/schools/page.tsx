@@ -6,7 +6,21 @@ import { officialMediaPendingLabel } from "../data/official-media";
 export const metadata: Metadata = {
   title: "BaBra Schools | Masterplan, Digital Learning & Future Campus",
   description:
-    "BaBra Schools future education ecosystem for nursery, primary, secondary, university, digital learning, research, innovation, and community development."
+    "BaBra Schools official page for nursery, primary, secondary, university, hospital, innovation center, scholarship, and masterplan access.",
+  alternates: {
+    canonical: "https://www.babra.store/schools"
+  },
+  openGraph: {
+    title: "BaBra Schools | Official Masterplan",
+    description: "Official BaBra Schools public page. Masterplan media and detailed documents are pending approved access.",
+    images: [{ url: "/media/logos/babra-logo.jpeg", width: 1200, height: 630, alt: "Official BaBra logo" }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BaBra Schools | Official Masterplan",
+    description: "Official BaBra Schools public page.",
+    images: ["/media/logos/babra-logo.jpeg"]
+  }
 };
 
 export default function SchoolsPage() {

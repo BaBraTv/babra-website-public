@@ -29,7 +29,7 @@ export default function ShowroomPage() {
                 A future premium showroom for product discovery, customer support, wholesale meetings, franchise onboarding, digital screens, and official product verification.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="https://wa.me/250788351482" target="_blank">Book showroom support</a>
+                <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="https://wa.me/250788351482" target="_blank" rel="noopener noreferrer">Book showroom support</a>
                 <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/products">View products</a>
               </div>
             </div>

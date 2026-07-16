@@ -32,6 +32,9 @@ export type StoreProduct = {
   audience: string;
   benefits: string[];
   usage: string;
+  fragrance: string;
+  gallery: string[];
+  ctaLabel: string;
   alt: string;
   mediaId: string;
 };
@@ -45,10 +48,13 @@ export const products: StoreProduct[] = [
     image: approvedProductMedia.women.path,
     price: 0,
     size: "500 ml",
-    description: OFFICIAL_INFORMATION_PENDING,
+    description: "Official 500 ml BaBra Lotion for women. Detailed product information is pending official approval.",
     audience: OFFICIAL_INFORMATION_PENDING,
-    benefits: [OFFICIAL_INFORMATION_PENDING],
-    usage: OFFICIAL_INFORMATION_PENDING,
+    benefits: ["Official benefits pending approval"],
+    usage: "Official usage directions pending approval",
+    fragrance: "Official fragrance information pending approval",
+    gallery: [approvedProductMedia.women.path],
+    ctaLabel: "Request official details",
     alt: approvedProductMedia.women.alt,
     mediaId: approvedProductMedia.women.id
   },
@@ -60,10 +66,13 @@ export const products: StoreProduct[] = [
     image: approvedProductMedia.men.path,
     price: 0,
     size: "500 ml",
-    description: OFFICIAL_INFORMATION_PENDING,
+    description: "Official 500 ml BaBra Lotion for men. Detailed product information is pending official approval.",
     audience: OFFICIAL_INFORMATION_PENDING,
-    benefits: [OFFICIAL_INFORMATION_PENDING],
-    usage: OFFICIAL_INFORMATION_PENDING,
+    benefits: ["Official benefits pending approval"],
+    usage: "Official usage directions pending approval",
+    fragrance: "Official fragrance information pending approval",
+    gallery: [approvedProductMedia.men.path],
+    ctaLabel: "Request official details",
     alt: approvedProductMedia.men.alt,
     mediaId: approvedProductMedia.men.id
   },
@@ -75,10 +84,13 @@ export const products: StoreProduct[] = [
     image: approvedProductMedia.babies.path,
     price: 0,
     size: "500 ml",
-    description: OFFICIAL_INFORMATION_PENDING,
+    description: "Official 500 ml BaBra Lotion for babies. Detailed product information is pending official approval.",
     audience: OFFICIAL_INFORMATION_PENDING,
-    benefits: [OFFICIAL_INFORMATION_PENDING],
-    usage: OFFICIAL_INFORMATION_PENDING,
+    benefits: ["Official benefits pending approval"],
+    usage: "Official usage directions pending approval",
+    fragrance: "Official fragrance information pending approval",
+    gallery: [approvedProductMedia.babies.path],
+    ctaLabel: "Request official details",
     alt: approvedProductMedia.babies.alt,
     mediaId: approvedProductMedia.babies.id
   }

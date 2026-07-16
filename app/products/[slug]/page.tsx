@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, getProduct, products, site, whatsappOrderUrl } from "../../commerce-data";
 import { OfficialMedia } from "../../components/OfficialMedia";
@@ -25,10 +26,19 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   return {
     title: `${product.name} | ${site.domain}`,
     description,
+    alternates: {
+      canonical: `${site.url}/products/${product.slug}`
+    },
     openGraph: {
       title: product.name,
       description,
       images: [{ url: product.image, width: 1200, height: 630, alt: product.alt }]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description,
+      images: [product.image]
     }
   };
 }
@@ -78,7 +88,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">{product.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/store">
-                Baza igiciro
+                {product.ctaLabel}
               </a>
               <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href={whatsappOrderUrl(message)} target="_blank" rel="noopener noreferrer">
                 Ask on WhatsApp
@@ -99,6 +109,16 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <p className="mt-4 leading-7 text-black/62">{product.usage}</p>
           </article>
           <article className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
+            <h2 className="font-serif text-4xl">Fragrance</h2>
+            <p className="mt-4 leading-7 text-black/62">{product.fragrance}</p>
+          </article>
+        </div>
+        <div className="mx-auto mt-6 grid max-w-7xl gap-6 lg:grid-cols-[0.75fr_1.25fr]">
+          <article className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
+            <h2 className="font-serif text-4xl">Size</h2>
+            <p className="mt-4 text-2xl font-black text-black/72">{product.size}</p>
+          </article>
+          <article className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
             <h2 className="font-serif text-4xl">Official details</h2>
             <p className="mt-4 leading-7 text-black/62">
               Ingredients, barcode, supplier records, production details, and complete label files are official information pending approval.
@@ -111,6 +131,16 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               {benefit}
             </div>
           ))}
+        </div>
+        <div className="mx-auto mt-8 max-w-7xl">
+          <h2 className="font-serif text-4xl">Gallery</h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            {product.gallery.map((image) => (
+              <figure key={image} className="rounded-lg border border-black/10 bg-white p-5 shadow-xl shadow-black/5">
+                <Image className="h-72 w-full object-contain" src={image} alt={product.alt} width={520} height={1024} sizes="(min-width: 768px) 30vw, 92vw" />
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
     </main>

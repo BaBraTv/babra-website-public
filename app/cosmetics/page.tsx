@@ -5,7 +5,21 @@ import { products } from "../commerce-data";
 
 export const metadata: Metadata = {
   title: "BaBra Cosmetics | Official Products",
-  description: "Official BaBra Cosmetics product media for BaBra Lotion Women, Men, and Babies 500 ml."
+  description: "Official BaBra Cosmetics product media for BaBra Lotion Women, Men, and Babies 500 ml.",
+  alternates: {
+    canonical: "https://www.babra.store/cosmetics"
+  },
+  openGraph: {
+    title: "BaBra Cosmetics | Official Products",
+    description: "Official BaBra Lotion Women, Men, and Babies 500 ml product pages.",
+    images: [{ url: "/media/logos/babra-logo.jpeg", width: 1200, height: 630, alt: "Official BaBra logo" }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BaBra Cosmetics | Official Products",
+    description: "Official BaBra Lotion Women, Men, and Babies 500 ml product pages.",
+    images: ["/media/logos/babra-logo.jpeg"]
+  }
 };
 
 export default function CosmeticsPage() {

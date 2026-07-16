@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { site } from "./commerce-data";
+import { OfficialFooter } from "./components/OfficialFooter";
 import { ServiceWorkerRegistration } from "./ServiceWorkerRegistration";
 
 export const metadata: Metadata = {
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <ServiceWorkerRegistration />
         {children}
+        <OfficialFooter />
       </body>
     </html>
   );

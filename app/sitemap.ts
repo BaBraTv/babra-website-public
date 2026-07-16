@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/rwanda-mobile-hub", "monthly", 0.85],
     ["/foundation", "monthly", 0.85],
     ["/contact", "monthly", 0.85],
+    ["/founder", "monthly", 0.75],
     ["/showroom", "monthly", 0.85],
     ["/lifetalk-tv", "weekly", 0.85],
     ["/lifetalk-tv/nzabigeraho", "weekly", 0.8],

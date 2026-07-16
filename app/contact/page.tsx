@@ -31,10 +31,33 @@ const businessEmails = [
   ["Investors", "info@babra.store", "Investor and partner request"]
 ];
 
+const contactReadiness = [
+  ["Google Maps", "Official map pin pending approval"],
+  ["Phone", "+250 788 351 482"],
+  ["Email", companyEmail],
+  ["WhatsApp", "+250 788 351 482"],
+  ["Business hours", "Official business hours pending approval"],
+  ["Social links", "Official social links pending approval"]
+];
+
 export const metadata = {
   title: "Contact BaBra Cosmetics",
   description:
-    "Contact BaBra Cosmetics Ltd for samples, wholesale, partnership, reseller, showroom, and customer support through WhatsApp or email."
+    "Contact BaBra Cosmetics Ltd for samples, wholesale, partnership, reseller, showroom, and customer support through WhatsApp or email.",
+  alternates: {
+    canonical: "https://www.babra.store/contact"
+  },
+  openGraph: {
+    title: "Contact BaBra",
+    description: "Official BaBra contact page for phone, email, WhatsApp, business hours, and support.",
+    images: [{ url: "/media/logos/babra-logo.jpeg", width: 1200, height: 630, alt: "Official BaBra logo" }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact BaBra",
+    description: "Official BaBra contact page.",
+    images: ["/media/logos/babra-logo.jpeg"]
+  }
 };
 
 export default function ContactPage() {
@@ -84,6 +107,21 @@ export default function ContactPage() {
                 <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{label}</span>
                 <p className="mt-3 text-lg font-black text-white/86">{value}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Official contact readiness</p>
+          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Phone, email, WhatsApp, map, and hours.</h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {contactReadiness.map(([label, value]) => (
+              <article key={label} className="rounded-lg border border-white/10 bg-[#18110f] p-6">
+                <h3 className="font-serif text-3xl">{label}</h3>
+                <p className="mt-4 leading-7 text-white/62">{value}</p>
+              </article>
             ))}
           </div>
         </div>

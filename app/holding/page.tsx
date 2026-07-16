@@ -1,35 +1,73 @@
-const subsidiaries = [
-  ["BaBra Cosmetics", "Official BaBra Lotion Women, Men, and Babies 500 ml media is approved."],
-  ["Rwanda Mobile Hub", "Official information pending."],
-  ["BaBra Schools", "Official information pending."],
-  ["BaBra Hospital", "Official information pending."],
-  ["LifeTalk TV", "Official information pending."],
-  ["BaBra Foundation", "Official information pending."],
+import type { Metadata } from "next";
+import { site } from "../commerce-data";
+import { officialMediaPendingLabel } from "../data/official-media";
+
+const companies = [
+  ["BaBra Cosmetics", "Official cosmetics division with approved 500 ml BaBra Lotion product media.", "/cosmetics"],
+  ["Rwanda Mobile Hub", "Official information pending.", "/rwanda-mobile-hub"],
+  ["BaBra Schools", "Official information pending.", "/schools"],
+  ["BaBra Foundation", "Official information pending.", "/foundation"],
+  ["LifeTalk TV", "Official information pending.", "/lifetalk-tv"]
+];
+
+const pillars = [
+  ["About", "Official company profile pending approval."],
+  ["Vision", "Official vision statement pending approval."],
+  ["Mission", "Official mission statement pending approval."],
+  ["Values", "Official values pending approval."]
 ];
 
 const roadmap = [
-  ["Phase 1", "Official BaBra media and product catalog foundation."],
-  ["Phase 2", "Official information pending."],
-  ["Phase 3", "Official information pending."],
+  ["Current", "Official public platform, approved product media, and official content intake foundation."],
+  ["Next", "Official division media, founder content, and approved company information."],
+  ["Future", "Official roadmap pending approval."]
 ];
 
-export const metadata = {
-  title: "EI BaBra Holding Ltd",
-  description:
-    "EI BaBra Holding Ltd official platform. Additional holding information pending approval."
+export const metadata: Metadata = {
+  title: "BaBra Holding Ltd | Official Companies",
+  description: "Official BaBra Holding Ltd page for BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Foundation, and LifeTalk TV.",
+  alternates: {
+    canonical: `${site.url}/holding`
+  },
+  openGraph: {
+    title: "BaBra Holding Ltd | Official Companies",
+    description: "Official BaBra Holding Ltd company structure.",
+    images: [{ url: "/media/logos/babra-logo.jpeg", width: 1200, height: 630, alt: "Official BaBra logo" }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BaBra Holding Ltd | Official Companies",
+    description: "Official BaBra Holding Ltd company structure.",
+    images: ["/media/logos/babra-logo.jpeg"]
+  }
 };
 
 export default function HoldingPage() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "BaBra Holding Ltd",
+    url: site.url,
+    logo: `${site.url}/media/logos/babra-logo.jpeg`,
+    subOrganization: companies.map(([name, description, route]) => ({
+      "@type": "Organization",
+      name,
+      description,
+      url: `${site.url}${route}`
+    }))
+  };
+
   return (
     <main className="min-h-screen bg-[#090706] text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
           <div className="mt-12 max-w-5xl">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Corporate structure</p>
-            <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">EI BaBra Holding Ltd.</h1>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Official holding platform</p>
+            <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">BaBra Holding Ltd.</h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/66">
-              Official EI BaBra Holding Ltd platform. Additional company information pending approval.
+              Official public page for the BaBra company ecosystem. Detailed company history and leadership information are pending approval.
             </p>
           </div>
         </div>
@@ -37,12 +75,11 @@ export default function HoldingPage() {
 
       <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Subsidiaries</p>
-          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">One ecosystem, many engines.</h2>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {subsidiaries.map(([title, text]) => (
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">About, vision, mission, values</p>
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {pillars.map(([title, text]) => (
               <article key={title} className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
-                <h3 className="font-serif text-3xl">{title}</h3>
+                <h2 className="font-serif text-3xl">{title}</h2>
                 <p className="mt-4 leading-7 text-black/62">{text}</p>
               </article>
             ))}
@@ -50,19 +87,25 @@ export default function HoldingPage() {
         </div>
       </section>
 
-      <section className="bg-[#090706] px-5 py-16 text-white md:px-8">
-        <div className="mx-auto max-w-7xl rounded-lg border border-[#d6ad57]/25 bg-[#18110f] p-7 md:p-10">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Child & Family Support</p>
-          <h2 className="mt-3 max-w-4xl font-serif text-4xl leading-none md:text-6xl">Family-based care first.</h2>
-          <p className="mt-5 max-w-4xl text-lg leading-8 text-white/64">Official information pending.</p>
-          <a className="mt-6 inline-flex rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/child-family-support">Open support program</a>
+      <section className="px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Companies</p>
+          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Official BaBra companies.</h2>
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {companies.map(([title, text, href]) => (
+              <a key={title} href={href} className="rounded-lg border border-white/10 bg-[#18110f] p-6 shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:border-[#d6ad57]/45">
+                <h3 className="font-serif text-3xl">{title}</h3>
+                <p className="mt-4 leading-7 text-white/62">{text}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="px-5 py-16 md:px-8">
+      <section className="bg-[#090706] px-5 py-16 text-white md:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Five-year direction</p>
-          <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">Official roadmap pending approval.</h2>
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Future roadmap</p>
+          <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">Official roadmap status.</h2>
           <div className="mt-10 grid gap-5">
             {roadmap.map(([phase, text]) => (
               <article key={phase} className="grid gap-4 rounded-lg border border-white/10 bg-[#18110f] p-6 md:grid-cols-[180px_1fr] md:items-center">
@@ -71,6 +114,9 @@ export default function HoldingPage() {
               </article>
             ))}
           </div>
+          <p className="mt-8 rounded-lg border border-dashed border-[#d6ad57]/35 p-5 text-sm font-black uppercase tracking-[0.14em] text-[#f1d58b]">
+            {officialMediaPendingLabel}
+          </p>
         </div>
       </section>
     </main>
