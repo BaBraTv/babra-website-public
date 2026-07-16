@@ -28,7 +28,7 @@ export default function CosmeticsPage() {
                   <p className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{product.category}</p>
                   <h2 className="mt-3 font-serif text-4xl leading-none">{product.name}</h2>
                   <p className="mt-4 leading-7 text-white/62">{product.description}</p>
-                  <a className="mt-5 inline-flex rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b]" href={`/products/${product.slug}`}>View product</a>
+                  <a className="mt-5 inline-flex rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b]" href={`/products/${product.slug}`}>View Details</a>
                 </div>
               </article>
             ))}

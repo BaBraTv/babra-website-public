@@ -84,7 +84,7 @@ export default function HomePage() {
           </div>
 
           <a className="rounded-full bg-[#f1d58b] px-5 py-3 text-sm font-black text-[#130d08] shadow-lg shadow-[#d6ad57]/20 transition duration-300 hover:-translate-y-0.5 hover:bg-white" href="/store">
-            Store
+            Shop Now
           </a>
         </div>
       </nav>
@@ -99,15 +99,15 @@ export default function HomePage() {
               <span className="block text-[#f1d58b]">Innovation.</span>
               <span className="block">African Excellence.</span>
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/72 md:text-xl md:leading-9">
-              The official BaBra public platform for cosmetics, education, mobile technology, foundation work, media, and enterprise access.
+            <p className="mt-7 max-w-xl text-lg leading-8 text-white/72 md:text-xl md:leading-9">
+              Official BaBra beauty and enterprise presence, presented with approved media only.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <a className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#f1d58b] px-7 py-3 font-black text-[#130d08] shadow-xl shadow-[#d6ad57]/20 transition duration-300 hover:-translate-y-0.5 hover:bg-white" href="/products">
-                Explore products
+                Shop Now
               </a>
-              <a className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/24 bg-white/5 px-7 py-3 font-black text-white transition duration-300 hover:-translate-y-0.5 hover:border-[#f1d58b]/60 hover:text-[#f1d58b]" href="/holding">
-                Discover BaBra
+              <a className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/24 bg-white/5 px-7 py-3 font-black text-white transition duration-300 hover:-translate-y-0.5 hover:border-[#f1d58b]/60 hover:text-[#f1d58b]" href="/sample-request">
+                Request Samples
               </a>
             </div>
           </motion.div>
@@ -166,9 +166,9 @@ export default function HomePage() {
                 <div className="p-6">
                   <span className="text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">{product.category}</span>
                   <h3 className="mt-3 font-serif text-3xl leading-tight md:text-4xl">{product.name}</h3>
-                  <p className="mt-4 leading-7 text-white/62">{product.description}</p>
+                  <p className="mt-4 text-sm font-black uppercase tracking-[0.18em] text-white/55">{product.size}</p>
                   <a className="mt-6 inline-flex min-h-11 items-center rounded-full border border-[#d6ad57]/35 px-5 py-2 text-sm font-black text-[#f1d58b] transition hover:bg-[#f1d58b] hover:text-[#130d08]" href={`/products/${product.slug}`}>
-                    View product
+                    View Details
                   </a>
                 </div>
               </motion.article>
@@ -180,7 +180,7 @@ export default function HomePage() {
       <section className="bg-[#fffaf1] px-4 py-20 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-xs font-black uppercase tracking-[0.28em] text-[#a9141d]">BaBra ecosystem</p>
-          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-7xl">One holding platform, multiple official divisions.</h2>
+          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Official divisions. Clear paths.</h2>
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {divisions.map(([title, label, text, href]) => (
               <a key={title} href={href} className="group rounded-[1.5rem] border border-black/10 bg-white p-6 shadow-xl shadow-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/10">
@@ -197,7 +197,7 @@ export default function HomePage() {
       <section className="px-4 py-20 md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-xs font-black uppercase tracking-[0.28em] text-[#d6ad57]">Official media status</p>
-          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Clean placeholders until official media is approved.</h2>
+          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Text-only placeholders until approval.</h2>
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {pendingMediaPages.map((item) => <PendingPanel key={item} label={item} />)}
           </div>
@@ -210,8 +210,8 @@ export default function HomePage() {
             <p className="text-xs font-black uppercase tracking-[0.24em]">BaBra Holding Ltd</p>
             <h2 className="mt-2 font-serif text-4xl leading-none md:text-6xl">Connect with the official platform.</h2>
           </div>
-          <a className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#070504] px-7 py-3 font-black text-white transition hover:-translate-y-0.5 hover:bg-[#1f1712]" href="/contact">
-            Contact BaBra
+          <a className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#070504] px-7 py-3 font-black text-white transition hover:-translate-y-0.5 hover:bg-[#1f1712]" href="/sample-request">
+            Request Samples
           </a>
         </div>
       </section>

@@ -25,8 +25,8 @@ export default function ProductsPage() {
             <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
             <p className="mt-10 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Cosmetics Division</p>
             <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-[0.9] md:text-8xl">Official BaBra Lotion catalog.</h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/66">
-              Only approved BaBra media is shown. Missing product details remain marked as official information pending.
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/66">
+              Official BaBra bottles only. Product details remain pending until approved.
             </p>
           </div>
           <figure className="overflow-hidden rounded-[2rem] border border-[#d6ad57]/25 bg-[radial-gradient(circle_at_50%_15%,#ffffff,#fff8e6_52%,#c99f37)] p-6 shadow-2xl shadow-black/40">
@@ -46,9 +46,9 @@ export default function ProductsPage() {
               <div className="p-6">
                 <span className="inline-flex whitespace-nowrap text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">{product.category}</span>
                 <h2 className="mt-3 font-serif text-5xl leading-none">{product.name}</h2>
-                <p className="mt-5 leading-8 text-white/66">{product.description}</p>
-                <p className="mt-5 text-xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
-                <a className="mt-6 inline-flex min-h-11 items-center rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b] transition hover:bg-[#f1d58b] hover:text-[#130d08]" href={`/products/${product.slug}`}>View product</a>
+                <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-white/55">{product.size}</p>
+                <p className="mt-3 text-xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
+                <a className="mt-6 inline-flex min-h-11 items-center rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b] transition hover:bg-[#f1d58b] hover:text-[#130d08]" href={`/products/${product.slug}`}>View Details</a>
               </div>
             </article>
           ))}

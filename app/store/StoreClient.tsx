@@ -17,7 +17,7 @@ const translations = {
     checkout: "Checkout",
     profile: "Customer profile",
     tracking: "Order tracking",
-    add: "Ask price",
+    add: "Shop Now",
     fallback: "Ask on WhatsApp"
   },
   rw: {
@@ -26,7 +26,7 @@ const translations = {
     checkout: "Kwishyura",
     profile: "Umwirondoro",
     tracking: "Gukurikirana commande",
-    add: "Baza igiciro",
+    add: "Shop Now",
     fallback: "Baza kuri WhatsApp"
   },
   fr: {
@@ -35,7 +35,7 @@ const translations = {
     checkout: "Commande",
     profile: "Profil client",
     tracking: "Suivi commande",
-    add: "Demander le prix",
+    add: "Shop Now",
     fallback: "Demander sur WhatsApp"
   }
 };
@@ -135,7 +135,7 @@ export function StoreClient() {
             </a>
             <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Store commerce app</p>
             <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-[0.9] md:text-8xl">Shop official BaBra products.</h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">{copy.hero}</p>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/68">Official products. Approved media. Price confirmed by BaBra.</p>
             <div className="mt-7 flex flex-wrap gap-3">
               {(["en", "rw", "fr"] as Lang[]).map((lang) => (
                 <button
@@ -180,8 +180,8 @@ export function StoreClient() {
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Product pages</p>
               <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Women, men, and babies.</h2>
             </div>
-            <a className="rounded-full border border-white/20 px-5 py-3 font-black text-white" href="/products">
-              View full catalog
+              <a className="rounded-full border border-white/20 px-5 py-3 font-black text-white transition hover:border-[#f1d58b]/60 hover:text-[#f1d58b]" href="/sample-request">
+              Request Samples
             </a>
           </div>
 
@@ -197,7 +197,6 @@ export function StoreClient() {
                 <div className="p-5">
                   <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{product.category}</span>
                   <h3 className="mt-3 font-serif text-3xl leading-tight">{product.name}</h3>
-                  <p className="mt-3 leading-7 text-white/62">{product.description}</p>
                   <p className="mt-4 text-sm font-black uppercase tracking-[0.16em] text-[#d6ad57]">{product.size}</p>
                   <p className="mt-1 text-xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
                   <p className="mt-1 text-xs font-bold text-white/48">{PRICE_INQUIRY_NOTE}</p>
@@ -206,7 +205,7 @@ export function StoreClient() {
                       {copy.add}
                     </button>
                     <a className="rounded-full border border-[#d6ad57]/35 px-4 py-2 text-sm font-black text-[#f1d58b]" href={`/products/${product.slug}`}>
-                      Details
+                      View Details
                     </a>
                   </div>
                 </div>
