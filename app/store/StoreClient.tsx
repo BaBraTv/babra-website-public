@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaLocations, site, whatsappOrderUrl } from "../commerce-data";
 import { InstallAppButton } from "../InstallAppButton";
 
@@ -162,11 +163,11 @@ export function StoreClient() {
           </div>
           <div className="rounded-lg border border-[#d6ad57]/25 bg-[#fffaf1] p-5 text-[#18110c] shadow-2xl shadow-black/35">
             <div className="grid gap-4 sm:grid-cols-2">
-              {products.slice(0, 4).map((product) => (
-                <img key={product.slug} className="h-44 w-full rounded-lg bg-white object-contain p-3" src={product.image} alt={product.alt} loading="lazy" />
+              {products.map((product) => (
+                <Image key={product.slug} className="h-44 w-full rounded-lg bg-white object-contain p-3" src={product.image} alt={product.alt} width={520} height={1024} sizes="(min-width: 1024px) 24vw, 45vw" />
               ))}
             </div>
-            <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-[#a9141d]">Hydroquinone-free positioning. Formula protected.</p>
+            <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-[#a9141d]">Official product information pending approval.</p>
           </div>
         </div>
       </section>
@@ -176,7 +177,7 @@ export function StoreClient() {
           <div className="flex flex-wrap items-end justify-between gap-5">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Product pages</p>
-              <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Women, men, kids, and serum.</h2>
+              <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Women, men, and babies.</h2>
             </div>
             <a className="rounded-full border border-white/20 px-5 py-3 font-black text-white" href="/products">
               View full catalog
@@ -188,7 +189,7 @@ export function StoreClient() {
               <article key={product.slug} className="overflow-hidden rounded-lg border border-white/10 bg-[#18110f]">
                 <a href={`/products/${product.slug}`} aria-label={`View ${product.name}`}>
                   <figure className="bg-gradient-to-br from-white via-[#fff8eb] to-[#d6ad57] p-4">
-                    <img className="h-72 w-full object-contain drop-shadow-2xl" src={product.image} alt={product.alt} loading="lazy" />
+                    <Image className="h-72 w-full object-contain drop-shadow-2xl" src={product.image} alt={product.alt} width={520} height={1024} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 45vw, 92vw" />
                   </figure>
                 </a>
                 <div className="p-5">

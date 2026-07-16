@@ -1,4 +1,5 @@
 import { divisionContent, type DivisionKey } from "./division-content";
+import { officialMediaPendingLabel } from "./data/official-media";
 
 const divisionMenus: Record<DivisionKey, string[][]> = {
   cosmetics: [
@@ -91,7 +92,13 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
           </div>
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-2xl shadow-black/30">
             <figure className="border-b border-white/10 bg-black/25">
-              <img className="h-72 w-full object-cover" src={data.image} alt={data.imageAlt} />
+              {data.image ? (
+                <img className="h-72 w-full object-cover" src={data.image} alt={data.imageAlt} />
+              ) : (
+                <div className="grid h-72 w-full place-items-center p-6 text-center text-sm font-black uppercase tracking-[0.14em] text-[#f1d58b]">
+                  {officialMediaPendingLabel}
+                </div>
+              )}
             </figure>
             <div className="p-6">
               <h2 className="font-serif text-3xl">Division focus</h2>
@@ -119,7 +126,13 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
                   id={serviceAnchors[division]?.[index]}
                   className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055]"
                 >
-                  <img className="h-40 w-full object-cover" src={data.serviceImages[index] || data.image} alt={`${data.name} - ${point}`} loading="lazy" />
+                  {data.serviceImages[index] || data.image ? (
+                    <img className="h-40 w-full object-cover" src={data.serviceImages[index] || data.image} alt={`${data.name} - ${point}`} loading="lazy" />
+                  ) : (
+                    <div className="grid h-40 w-full place-items-center p-4 text-center text-xs font-black uppercase tracking-[0.12em] text-[#f1d58b]">
+                      {officialMediaPendingLabel}
+                    </div>
+                  )}
                   <div className="p-6">
                     <span
                       className="inline-flex h-8 items-center rounded-full border border-white/10 bg-black/25 px-3 text-xs font-black uppercase tracking-[0.14em] tabular-nums"
@@ -147,7 +160,7 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
         <section className="px-5 py-16 md:px-8">
           <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 xl:grid-cols-4">
             {[
-              ["Products", "/products", "Women, men, kids, serum, pocket fresh, pads, soap, and safe product previews."],
+              ["Products", "/products", "Official BaBra Lotion Women, Men, and Babies 500 ml."],
               ["Store", "/store", "Retail checkout, cart, Rwanda delivery flow, and WhatsApp order fallback."],
               ["Showroom", "/showroom", "Premium showroom support, samples, and product verification."],
               ["Quality", "/quality", "Public-safe compliance, manufacturing support, and brand protection."]

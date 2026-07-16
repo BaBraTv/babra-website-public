@@ -26,7 +26,7 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "maskable"
       },
       {
-        src: "/brand/logo.jpeg",
+        src: "/media/logos/babra-logo.jpeg",
         sizes: "512x512",
         type: "image/jpeg",
         purpose: "any"

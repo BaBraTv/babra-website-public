@@ -17,13 +17,10 @@ const PRECACHE = [
   OFFLINE_URL,
   "/manifest.webmanifest",
   "/icons/icon.svg",
-  "/brand/logo.jpeg",
-  "/brand/official-babra-bottle.png",
-  "/brand/official-babra-bottle-men.png",
-  "/brand/official-babra-bottle-kids.png",
-  "/products/pocket-fresh-rose.png",
-  "/products/pads.png",
-  "/products/soap-2.png"
+  "/media/logos/babra-logo.jpeg",
+  "/media/products/babra-lotion-women-500ml.png",
+  "/media/products/babra-lotion-men-500ml.png",
+  "/media/products/babra-lotion-babies-500ml.png"
 ];
 
 self.addEventListener("install", (event) => {

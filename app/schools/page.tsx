@@ -1,25 +1,13 @@
 import type { Metadata } from "next";
 import { campusExperience, developmentPhases, galleryPages, investorAccessRoute, partnerTracks, planCategories } from "./masterplan-data";
 import { SchoolsNav } from "./SchoolsNav";
+import { officialMediaPendingLabel } from "../data/official-media";
 
 export const metadata: Metadata = {
   title: "BaBra Schools | Masterplan, Digital Learning & Future Campus",
   description:
     "BaBra Schools future education ecosystem for nursery, primary, secondary, university, digital learning, research, innovation, and community development."
 };
-
-const galleryImages = [
-  "/photos/school-classroom.jpg",
-  "/photos/school-classroom.jpg",
-  "/photos/medical-lab.jpg",
-  "/photos/school-classroom.jpg",
-  "/photos/mobile-workstation.jpg",
-  "/photos/school-classroom.jpg",
-  "/photos/medical-lab.jpg",
-  "/photos/farm-crops.jpg",
-  "/photos/foundation-community.jpg",
-  "/photos/hospital-ward.jpg"
-];
 
 export default function SchoolsPage() {
   return (
@@ -86,10 +74,12 @@ export default function SchoolsPage() {
           <p className="text-sm font-black uppercase tracking-[0.24em] text-sky-600">Public master plan gallery</p>
           <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Public-safe campus concepts.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {galleryPages.map(([title, caption], index) => (
+            {galleryPages.map(([title, caption]) => (
               <article key={title} className="rounded-2xl border border-sky-100 bg-white p-6 shadow-lg shadow-sky-100/50">
                 <figure className="mb-5 overflow-hidden rounded-2xl border border-sky-100 bg-white">
-                  <img className="h-32 w-full object-cover" src={galleryImages[index] || "/photos/school-classroom.jpg"} alt={`${title} real photograph`} loading="lazy" />
+                  <div className="grid h-32 w-full place-items-center p-4 text-center text-xs font-black uppercase tracking-[0.12em] text-sky-700">
+                    {officialMediaPendingLabel}
+                  </div>
                 </figure>
                 <h3 className="font-serif text-3xl">{title}</h3>
                 <p className="mt-3 text-sm leading-6 text-[#4b6b82]">{caption}</p>
@@ -147,3 +137,4 @@ export default function SchoolsPage() {
     </main>
   );
 }
+

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, getProduct, products, site, whatsappOrderUrl } from "../../commerce-data";
+import { OfficialMedia } from "../../components/OfficialMedia";
+import { officialMediaById } from "../../data/official-media";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -56,7 +58,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <figure className="rounded-lg border border-[#d6ad57]/25 bg-gradient-to-br from-white via-[#fff8eb] to-[#d6ad57] p-6 shadow-2xl shadow-black/35">
-            <img className="h-[520px] w-full object-contain drop-shadow-2xl" src={product.image} alt={product.alt} />
+            <OfficialMedia className="h-[520px] w-full object-contain drop-shadow-2xl" media={officialMediaById[product.mediaId]} priority sizes="(min-width: 1024px) 46vw, 92vw" />
           </figure>
           <div>
             <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/store">
@@ -93,9 +95,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <p className="mt-4 leading-7 text-black/62">{product.usage}</p>
           </article>
           <article className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
-            <h2 className="font-serif text-4xl">Formula protection</h2>
+            <h2 className="font-serif text-4xl">Official details</h2>
             <p className="mt-4 leading-7 text-black/62">
-              Public pages show benefits and safe usage guidance only. Full ingredients, QR, barcode, supplier records, and complete label files stay offline.
+              Ingredients, barcode, supplier records, production details, and complete label files are official information pending approval.
             </p>
           </article>
         </div>

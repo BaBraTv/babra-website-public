@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type ChangeEvent, type ReactNode } from "react";
+import Image from "next/image";
 import {
   PRICE_INQUIRY_LABEL,
   PRICE_INQUIRY_NOTE,
@@ -792,7 +793,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                   const item = cart.find((entry) => entry.slug === product.slug);
                   return (
                     <article key={product.slug} className="grid gap-4 rounded-2xl border border-white/10 bg-white/[0.055] p-4 md:grid-cols-[120px_1fr_auto] md:items-center">
-                      <img className="h-28 rounded-xl bg-white object-contain p-2" src={product.image} alt={product.alt} />
+                      <Image className="h-28 rounded-xl bg-white object-contain p-2" src={product.image} alt={product.alt} width={520} height={1024} sizes="112px" />
                       <div>
                         <h2 className="font-serif text-3xl">{product.name}</h2>
                         <p className="text-sm font-black uppercase tracking-[0.14em] text-[#d6ad57]">{product.size}</p>

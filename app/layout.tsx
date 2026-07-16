@@ -6,66 +6,44 @@ import { ServiceWorkerRegistration } from "./ServiceWorkerRegistration";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
+    default: "EI BaBra Holding Ltd | Official BaBra Platform",
     template: `%s | ${site.domain}`
   },
   description:
-    "BaBra Group brings together BaBra Cosmetics, BaBra Lotion, BaBra Pocket Fresh, BaBra Pads, BaBra Soap, BaBra Showroom, LifeTalk TV, and future holding company systems.",
+    "Official BaBra platform for EI BaBra Holding Ltd, BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Foundation, LifeTalk TV, Store, and Contact routes.",
   keywords: [
-    "Best body lotion",
-    "skin care",
-    "moisturizing lotion",
-    "dry skin lotion",
-    "oily skin lotion",
-    "normal skin lotion",
-    "shea butter lotion",
-    "aloe vera lotion",
-    "luxury body lotion",
     "BaBra Lotion",
     "BaBra Lotion Rwanda",
+    "BaBra Lotion Women 500 ml",
+    "BaBra Lotion Men 500 ml",
+    "BaBra Lotion Babies 500 ml",
     "BaBra Cosmetics",
-    "BaBra Cosmetics Ltd",
     "BaBra",
-    "BaBra Group",
-    "Premium Luxury in Every Touch",
-    "Rwanda luxury skincare",
-    "global skincare brand",
-    "BaBra Pocket Fresh",
-    "BaBra Pads",
-    "BaBra Soap",
-    "BaBra Showroom",
     "LifeTalk TV",
-    "NZABIGERAHO",
     "EI BaBra Holding Ltd",
-    "BaBra quality documentation",
-    "GMP cosmetics manufacturing",
-    "ISO 22716 cosmetics",
-    "BaBra samples",
-    "BaBra wholesale",
-    "BaBra partnership",
-    "BaBra Child & Family Support",
-    "family-based care Rwanda",
-    "vulnerable children support Rwanda",
-    "family reintegration"
+    "Rwanda Mobile Hub",
+    "BaBra Schools",
+    "BaBra Foundation",
+    "BaBra Store"
   ],
   alternates: {
     canonical: site.url
   },
   openGraph: {
-    title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
+    title: "EI BaBra Holding Ltd | Official BaBra Platform",
     description:
-      "BaBra Group ecosystem for premium cosmetics, showroom retail, media, LifeTalk TV, and future African business growth.",
+      "Official BaBra platform using approved BaBra media only.",
     url: site.url,
     siteName: site.domain,
-    images: [{ url: "/brand/logo.jpeg", width: 1200, height: 630, alt: "BaBra Cosmetics Ltd" }],
+    images: [{ url: "/media/logos/babra-logo.jpeg", width: 1200, height: 630, alt: "Official BaBra logo" }],
     locale: "en_RW",
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "BaBra Group | Cosmetics, LifeTalk TV, Showroom & Holding Vision",
-    description: "BaBra Group ecosystem: cosmetics, showroom, LifeTalk TV, and Luxury In Every Touch.",
-    images: ["/brand/logo.jpeg"]
+    title: "EI BaBra Holding Ltd | Official BaBra Platform",
+    description: "Official BaBra platform using approved BaBra media only.",
+    images: ["/media/logos/babra-logo.jpeg"]
   }
 };
 

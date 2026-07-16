@@ -1,3 +1,5 @@
+import { officialMediaPendingLabel } from "../data/official-media";
+
 const showroomFeatures = [
   ["Luxury product displays", "Clean shelves, gold accents, and grouped product families help customers understand the full BaBra line quickly."],
   ["Customer waiting area", "A calm premium space for consultation, wholesale appointments, and customer support."],
@@ -32,7 +34,9 @@ export default function ShowroomPage() {
               </div>
             </div>
             <figure className="overflow-hidden rounded-lg border border-[#d6ad57]/25 shadow-2xl shadow-black/40">
-              <img className="h-[520px] w-full object-cover" src="/showroom/showroom.png" alt="BaBra luxury showroom concept" />
+              <div className="grid h-[520px] w-full place-items-center p-6 text-center text-sm font-black uppercase tracking-[0.14em] text-[#f1d58b]">
+                {officialMediaPendingLabel}
+              </div>
             </figure>
           </div>
         </div>
@@ -61,7 +65,7 @@ export default function ShowroomPage() {
               <h2 className="mt-3 font-serif text-5xl leading-none">Photos, videos, and franchise proof.</h2>
             </div>
             <p className="text-lg leading-8 text-white/66">
-              This page is ready for future showroom photos, customer videos, product testing clips, and partner testimonials. Sensitive QR/barcode data should remain private; the public showroom only explains that official verification exists.
+              This page is ready for official showroom media after approval. No showroom photos, customer videos, product testing clips, or testimonials are published until approved.
             </p>
           </div>
         </div>
