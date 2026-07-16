@@ -6,12 +6,14 @@ export function OfficialMedia({
   media,
   className = "",
   priority = false,
-  sizes = "(max-width: 768px) 92vw, 420px"
+  sizes = "(max-width: 768px) 92vw, 420px",
+  loading
 }: {
   media?: OfficialMediaItem | null;
   className?: string;
   priority?: boolean;
   sizes?: string;
+  loading?: "eager" | "lazy";
 }) {
   if (!media?.approved || !media.path) {
     return (
@@ -30,7 +32,7 @@ export function OfficialMedia({
       height={media.category === "logo" ? 1024 : 1024}
       sizes={sizes}
       priority={priority}
+      loading={priority ? undefined : loading ?? "lazy"}
     />
   );
 }
-

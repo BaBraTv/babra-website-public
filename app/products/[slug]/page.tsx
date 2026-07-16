@@ -53,19 +53,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const message = `Hello BaBra Store, I want to order ${product.name} from ${site.domain}. Please confirm price, delivery, and availability.`;
 
   return (
-    <main className="min-h-screen bg-[#090706] text-white">
+    <main className="min-h-screen bg-[#070504] text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <section className="px-5 py-16 md:px-8">
+      <section className="relative px-5 py-16 md:px-8">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_12%,rgba(241,213,139,0.16),transparent_28rem),radial-gradient(circle_at_12%_20%,rgba(29,78,216,0.18),transparent_30rem)]" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-          <figure className="rounded-lg border border-[#d6ad57]/25 bg-gradient-to-br from-white via-[#fff8eb] to-[#d6ad57] p-6 shadow-2xl shadow-black/35">
-            <OfficialMedia className="h-[520px] w-full object-contain drop-shadow-2xl" media={officialMediaById[product.mediaId]} priority sizes="(min-width: 1024px) 46vw, 92vw" />
+          <figure className="relative overflow-hidden rounded-[2rem] border border-[#d6ad57]/25 bg-[radial-gradient(circle_at_50%_12%,#ffffff,#fff8eb_48%,#d6ad57)] p-6 shadow-2xl shadow-black/35">
+            <div className="absolute inset-x-10 bottom-10 h-14 rounded-full bg-black/18 blur-2xl" aria-hidden="true" />
+            <OfficialMedia className="relative h-[540px] w-full object-contain drop-shadow-2xl" media={officialMediaById[product.mediaId]} priority sizes="(min-width: 1024px) 46vw, 92vw" />
           </figure>
           <div>
             <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/store">
               {site.domain} store
             </a>
             <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">{product.category} product page</p>
-            <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">{product.name}</h1>
+            <h1 className="mt-4 font-serif text-6xl leading-[0.9] md:text-8xl">{product.name}</h1>
             <div className="mt-5 rounded-2xl border border-[#f1d58b]/30 bg-white/[0.06] p-5">
               <p className="text-sm font-black uppercase tracking-[0.18em] text-[#d6ad57]">Price inquiry</p>
               <p className="mt-2 text-3xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>

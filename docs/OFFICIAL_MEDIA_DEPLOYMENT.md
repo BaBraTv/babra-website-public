@@ -81,7 +81,7 @@ Empty intake folders include `.gitkeep` so the structure remains in Git.
 
 The site intentionally keeps these as text until official approval:
 
-- “Official BaBra media pending approval.”
+- “Official media coming soon.”
 - “Official information pending.”
 - Product prices, stock, ingredients, barcode, certifications, reviews, testimonials, production details, and claims.
 
@@ -105,4 +105,3 @@ Required commands were run after implementation:
 - `pnpm exec tsc --noEmit`
 - `pnpm prisma validate`
 - `pnpm build`
-

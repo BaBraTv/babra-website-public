@@ -13,7 +13,7 @@ export type OfficialMediaItem = {
   sourceNote: string;
 };
 
-export const officialMediaPendingLabel = "Official BaBra media pending approval.";
+export const officialMediaPendingLabel = "Official media coming soon.";
 
 export const officialMedia: OfficialMediaItem[] = [
   {
@@ -69,4 +69,3 @@ export const approvedProductMedia = {
   men: officialMediaById["babra-lotion-men-500ml"],
   babies: officialMediaById["babra-lotion-babies-500ml"]
 } as const;
-

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.domain}`
   },
   description:
-    "Official BaBra platform for EI BaBra Holding Ltd, BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Foundation, LifeTalk TV, Store, and Contact routes.",
+    "Official BaBra Holding Ltd platform for BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Foundation, LifeTalk TV, Store, and Contact routes.",
   keywords: [
     "BaBra Lotion",
     "BaBra Lotion Rwanda",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     canonical: site.url
   },
   openGraph: {
-    title: "EI BaBra Holding Ltd | Official BaBra Platform",
+    title: "BaBra Holding Ltd | Luxury. Innovation. African Excellence.",
     description:
       "Official BaBra platform using approved BaBra media only.",
     url: site.url,
@@ -41,16 +41,33 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EI BaBra Holding Ltd | Official BaBra Platform",
+    title: "BaBra Holding Ltd | Luxury. Innovation. African Excellence.",
     description: "Official BaBra platform using approved BaBra media only.",
     images: ["/media/logos/babra-logo.jpeg"]
   }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "BaBra Holding Ltd",
+    url: site.url,
+    logo: `${site.url}/media/logos/babra-logo.jpeg`,
+    brand: [
+      { "@type": "Brand", name: "BaBra Cosmetics" },
+      { "@type": "Brand", name: "Rwanda Mobile Hub" },
+      { "@type": "Brand", name: "BaBra Schools" },
+      { "@type": "Brand", name: "BaBra Foundation" },
+      { "@type": "Brand", name: "LifeTalk TV" }
+    ],
+    sameAs: []
+  };
+
   return (
     <html lang="en">
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <ServiceWorkerRegistration />
         {children}
       </body>

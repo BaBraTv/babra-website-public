@@ -125,15 +125,16 @@ export function StoreClient() {
   ].join("\n");
 
   return (
-    <main className="min-h-screen bg-[#090706] text-white">
-      <section className="border-b border-white/10 px-5 py-14 md:px-8">
+    <main className="min-h-screen bg-[#070504] text-white">
+      <section className="relative border-b border-white/10 px-5 py-14 md:px-8">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_82%_10%,rgba(241,213,139,0.16),transparent_28rem),radial-gradient(circle_at_12%_18%,rgba(29,78,216,0.18),transparent_26rem)]" />
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">
               {site.domain}
             </a>
             <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Store commerce app</p>
-            <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">Shop BaBra skincare with Rwanda-first delivery.</h1>
+            <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-[0.9] md:text-8xl">Shop official BaBra products.</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">{copy.hero}</p>
             <div className="mt-7 flex flex-wrap gap-3">
               {(["en", "rw", "fr"] as Lang[]).map((lang) => (
@@ -161,10 +162,10 @@ export function StoreClient() {
               ))}
             </div>
           </div>
-          <div className="rounded-lg border border-[#d6ad57]/25 bg-[#fffaf1] p-5 text-[#18110c] shadow-2xl shadow-black/35">
+          <div className="rounded-[2rem] border border-[#d6ad57]/25 bg-[linear-gradient(135deg,#fffaf1,#ffffff_50%,#d6ad57)] p-5 text-[#18110c] shadow-2xl shadow-black/35">
             <div className="grid gap-4 sm:grid-cols-2">
               {products.map((product) => (
-                <Image key={product.slug} className="h-44 w-full rounded-lg bg-white object-contain p-3" src={product.image} alt={product.alt} width={520} height={1024} sizes="(min-width: 1024px) 24vw, 45vw" />
+                <Image key={product.slug} className="h-52 w-full rounded-2xl bg-white/70 object-contain p-3 drop-shadow-xl" src={product.image} alt={product.alt} width={520} height={1024} sizes="(min-width: 1024px) 24vw, 45vw" />
               ))}
             </div>
             <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-[#a9141d]">Official product information pending approval.</p>
@@ -184,12 +185,13 @@ export function StoreClient() {
             </a>
           </div>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {products.map((product) => (
-              <article key={product.slug} className="overflow-hidden rounded-lg border border-white/10 bg-[#18110f]">
+              <article key={product.slug} className="group overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#18110f] transition duration-500 hover:-translate-y-1 hover:border-[#d6ad57]/45">
                 <a href={`/products/${product.slug}`} aria-label={`View ${product.name}`}>
-                  <figure className="bg-gradient-to-br from-white via-[#fff8eb] to-[#d6ad57] p-4">
-                    <Image className="h-72 w-full object-contain drop-shadow-2xl" src={product.image} alt={product.alt} width={520} height={1024} sizes="(min-width: 1280px) 25vw, (min-width: 768px) 45vw, 92vw" />
+                  <figure className="relative overflow-hidden bg-[radial-gradient(circle_at_50%_12%,#ffffff,#fff8eb_45%,#d6ad57)] p-4">
+                    <div className="absolute inset-x-10 bottom-8 h-10 rounded-full bg-black/18 blur-2xl" aria-hidden="true" />
+                    <Image className="relative h-80 w-full object-contain drop-shadow-2xl transition duration-700 group-hover:scale-[1.04]" src={product.image} alt={product.alt} width={520} height={1024} sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 92vw" />
                   </figure>
                 </a>
                 <div className="p-5">
