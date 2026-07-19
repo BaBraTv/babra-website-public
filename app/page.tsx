@@ -37,6 +37,7 @@ const topNav = [
   ["Mobile Hub", "/rwanda-mobile-hub"],
   ["Schools", "/schools"],
   ["Hospital", "/hospital"],
+  ["Dental Clinic", "/dental-experts-clinic"],
   ["Farm", "/farm"],
   ["Foundation", "/foundation"],
   ["LifeTalk TV", "/lifetalk-tv"],
@@ -85,6 +86,14 @@ const ecosystemCards = [
     href: "/hospital",
     image: "/photos/hospital-doctor.jpg",
     accent: "#38bdf8"
+  },
+  {
+    title: "Dental Experts Clinic",
+    label: "Featured healthcare partner",
+    text: "Professional dental care in Kimironko, Kigali, with appointments for general, cosmetic, pediatric, orthodontic, implant, and root canal services.",
+    href: "/dental-experts-clinic",
+    image: "/partners/dental-experts-clinic.svg",
+    accent: "#55e6d0"
   },
   {
     title: "BaBra Farm",
@@ -337,7 +346,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/72">
               babra.store is the digital platform for EI BaBra Holding Ltd: cosmetics, mobile technology, schools,
-              hospital vision, agriculture, foundation work, LifeTalk TV, Lost & Found Rwanda, commerce, and partner access.
+              hospital vision, Dental Experts Clinic, agriculture, foundation work, LifeTalk TV, Lost & Found Rwanda, commerce, and partner access.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -435,6 +444,35 @@ export default function HomePage() {
               </a>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-y border-[#55e6d0]/20 bg-[#06191b] px-5 py-20 md:px-8">
+        <div className="absolute -right-32 -top-40 h-96 w-96 rounded-full bg-[#55e6d0]/10 blur-3xl" />
+        <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#55e6d0]">Featured healthcare partner</p>
+            <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-7xl">A healthier smile starts with trusted care.</h2>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68">
+              Dental Experts Clinic provides modern, patient-focused dental care for adults and children in Kimironko, Kigali.
+              Discover services, call the clinic, or book directly through its official website.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a className="rounded-full bg-[#55e6d0] px-6 py-3 font-black text-[#06191b]" href="/dental-experts-clinic">Explore the clinic</a>
+              <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href="https://dentalexpertsclinic.rw/contact/" target="_blank" rel="noopener noreferrer">Book appointment</a>
+              <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href="tel:+250790719688">Call clinic</a>
+            </div>
+          </div>
+          <a href="/dental-experts-clinic" className="group overflow-hidden rounded-lg border border-white/15 bg-white/[0.06] p-5 shadow-2xl shadow-black/30">
+            <img className="h-[390px] w-full rounded-md object-cover transition duration-700 group-hover:scale-[1.02]" src="/partners/dental-experts-clinic.svg" alt="Dental Experts Clinic in Kigali" />
+            <div className="flex flex-wrap items-center justify-between gap-3 px-2 pb-1 pt-5">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#55e6d0]">Kimironko · Kigali</p>
+                <p className="mt-1 font-serif text-3xl">Dental Experts Clinic</p>
+              </div>
+              <span className="rounded-full bg-white px-4 py-2 text-sm font-black text-[#06191b]">Open clinic page</span>
+            </div>
+          </a>
         </div>
       </section>
 

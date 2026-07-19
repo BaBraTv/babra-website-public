@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Dental Experts Clinic</title>
+  <desc id="desc">Premium dental healthcare partner illustration in teal, ivory, and navy.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#06191b"/>
+      <stop offset="1" stop-color="#123c40"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="20%" r="70%">
+      <stop stop-color="#55e6d0" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#55e6d0" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="28" stdDeviation="24" flood-color="#000" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#glow)"/>
+  <circle cx="1320" cy="150" r="230" fill="none" stroke="#55e6d0" stroke-opacity=".2" stroke-width="2"/>
+  <circle cx="1320" cy="150" r="170" fill="none" stroke="#55e6d0" stroke-opacity=".16" stroke-width="2"/>
+  <g transform="translate(1040 510)" filter="url(#shadow)">
+    <path d="M-210-250c-124 35-180 171-122 289 35 71 91 117 122 198 31 82 39 192 100 207 67 17 70-145 111-145s44 162 111 145c61-15 69-125 100-207 31-81 87-127 122-198 58-118 2-254-122-289-76-21-130 14-211 14s-135-35-211-14z" fill="#fffaf1"/>
+    <path d="M-190-191c-75 44-94 142-49 213" fill="none" stroke="#55e6d0" stroke-linecap="round" stroke-width="18"/>
+    <path d="M84-208c68 19 116 71 126 135" fill="none" stroke="#d8fff9" stroke-linecap="round" stroke-width="11" opacity=".9"/>
+  </g>
+  <g transform="translate(120 150)">
+    <text fill="#55e6d0" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="8">FEATURED HEALTHCARE PARTNER</text>
+    <text y="115" fill="#fffaf1" font-family="Georgia, serif" font-size="92">Dental Experts</text>
+    <text y="215" fill="#fffaf1" font-family="Georgia, serif" font-size="92">Clinic</text>
+    <rect y="265" width="104" height="6" rx="3" fill="#55e6d0"/>
+    <text y="340" fill="#c7d9d8" font-family="Arial, sans-serif" font-size="34">Professional dental care you can trust.</text>
+    <text y="405" fill="#fffaf1" font-family="Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="3">KIMIRONKO · KIGALI</text>
+  </g>
+  <g transform="translate(120 780)" fill="#d8fff9" font-family="Arial, sans-serif" font-size="25">
+    <text>GENERAL DENTISTRY</text><circle cx="330" cy="-8" r="5" fill="#55e6d0"/>
+    <text x="370">COSMETIC CARE</text><circle cx="650" cy="-8" r="5" fill="#55e6d0"/>
+    <text x="690">PEDIATRIC DENTISTRY</text>
+  </g>
+</svg>
