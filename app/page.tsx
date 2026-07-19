@@ -32,18 +32,13 @@ const groupPillars = [
 ];
 
 const topNav = [
-  ["Holding", "#ecosystem"],
+  ["About", "/holding"],
   ["Cosmetics", "/cosmetics"],
   ["Mobile Hub", "/rwanda-mobile-hub"],
   ["Schools", "/schools"],
-  ["Hospital", "/hospital"],
   ["Dental Clinic", "/dental-experts-clinic"],
-  ["Farm", "/farm"],
-  ["Foundation", "/foundation"],
-  ["LifeTalk TV", "/lifetalk-tv"],
   ["Store", "/store"],
-  ["Contact", "/contact"],
-  ["Forms", "/forms"]
+  ["Contact", "/contact"]
 ];
 
 const ecosystemCards = [
@@ -283,11 +278,9 @@ const wholesaleTiers = [
 ];
 
 const proofPoints = [
-  "Premium Luxury in Every Touch",
-  "Made for global shelf presence",
-  "Rwanda roots, worldwide ambition",
-  "GMP and ISO cosmetics manufacturing support",
-  "Commerce, media, finance, education, and agriculture in one BaBra account"
+  ["Rwanda", "Rooted at home"],
+  ["East Africa", "Built to expand"],
+  ["Global", "Designed to endure"]
 ];
 
 const fadeUp = {
@@ -298,33 +291,31 @@ const fadeUp = {
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#090706] text-white">
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#090706]/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-4 md:px-8">
-          <a className="flex min-w-0 items-center gap-3" href="#top" aria-label="babra.store home">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-md border border-[#d6ad57]/45 bg-[#f1d58b] text-lg font-black text-[#090706] shadow-lg shadow-[#d6ad57]/20">
-              EI
-            </span>
-            <span className="hidden min-w-0 sm:block">
-              <strong className="block font-serif text-xl leading-tight">EI BaBra Holding Ltd</strong>
-              <span className="block text-xs font-bold uppercase tracking-[0.18em] text-[#d6ad57]">babra.store ecosystem</span>
+      <nav className="sticky top-11 z-50 border-b border-white/10 bg-[#090706]/95 backdrop-blur-2xl">
+        <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-5 py-3 md:px-8">
+          <a className="flex shrink-0 items-center gap-3" href="#top" aria-label="EI BaBra Holding Ltd home">
+            <img className="h-11 w-11 rounded-full border border-[#d6ad57]/45 object-cover shadow-lg shadow-[#d6ad57]/15" src="/media/logos/babra-logo.jpeg" alt="BaBra official logo" />
+            <span className="hidden sm:block">
+              <strong className="block whitespace-nowrap font-serif text-lg leading-none tracking-wide">EI BaBra Holding Ltd</strong>
+              <span className="mt-1.5 block whitespace-nowrap text-[0.62rem] font-black uppercase tracking-[0.24em] text-[#d6ad57]">One vision · lasting impact</span>
             </span>
           </a>
 
-          <div className="hidden items-center gap-1 lg:flex">
+          <div className="hidden items-center gap-1 xl:flex">
             {topNav.map(([item, href]) => (
-              <a key={item} className="rounded-full px-4 py-2 text-sm font-semibold text-white/68 hover:bg-white/10 hover:text-white" href={href}>
+              <a key={item} className="rounded-full px-3.5 py-2 text-sm font-semibold text-white/68 transition hover:bg-white/10 hover:text-white" href={href}>
                 {item}
               </a>
             ))}
           </div>
 
-          <a className="rounded-full bg-[#f1d58b] px-4 py-2 text-sm font-black text-[#130d08]" href="/investor-sponsor-access">
-            Access
+          <a className="shrink-0 rounded-full bg-[#f1d58b] px-5 py-2.5 text-sm font-black text-[#130d08] shadow-lg shadow-[#d6ad57]/10" href="#ecosystem">
+            Explore BaBra
           </a>
         </div>
       </nav>
 
-      <section id="top" className="relative min-h-[calc(100vh-81px)] overflow-hidden">
+      <section id="top" className="relative min-h-[calc(100vh-69px)] overflow-hidden">
         <video
           className="absolute inset-0 h-full w-full object-cover"
           src="/videos/skin-hero.mp4"
@@ -335,33 +326,36 @@ export default function HomePage() {
           preload="metadata"
           poster="/products/kids-lotion.jpg"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#090706]/95 via-[#090706]/70 to-[#090706]/28" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#090706] via-transparent to-[#090706]/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#090706]/95 via-[#090706]/76 to-[#090706]/35" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#090706] via-transparent to-[#090706]/45" />
 
-        <div className="relative mx-auto grid min-h-[calc(100vh-81px)] max-w-7xl items-center gap-10 px-5 py-12 md:px-8 lg:grid-cols-[0.94fr_1.06fr]">
+        <div className="relative mx-auto grid min-h-[calc(100vh-69px)] max-w-7xl items-center gap-12 px-5 py-16 md:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:py-20">
           <motion.div initial="hidden" animate="show" transition={{ duration: 0.8, ease: "easeOut" }} variants={fadeUp}>
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">EI BaBra Holding Ltd</p>
-            <h1 className="mt-5 max-w-5xl font-serif text-6xl leading-[0.9] md:text-8xl">
-              One BaBra ecosystem. Many engines of growth.
+            <div className="flex items-center gap-4">
+              <span className="h-px w-12 bg-[#d6ad57]" />
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[#f1d58b]">EI BaBra Holding Ltd</p>
+            </div>
+            <h1 className="mt-7 max-w-3xl font-serif text-5xl leading-[0.96] tracking-[-0.035em] sm:text-6xl md:text-7xl">
+              One vision.<br />A growing legacy.
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/72">
-              babra.store is the digital platform for EI BaBra Holding Ltd: cosmetics, mobile technology, schools,
-              hospital vision, Dental Experts Clinic, agriculture, foundation work, LifeTalk TV, Lost & Found Rwanda, commerce, and partner access.
+            <p className="mt-7 max-w-xl text-lg leading-8 text-white/68">
+              A Rwandan enterprise building premium beauty, technology, education, healthcare, agriculture, media, and community impact for generations.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] shadow-xl shadow-[#f1d58b]/20" href="#ecosystem">
-                Explore ecosystem
+            <div className="mt-9 flex flex-wrap gap-3">
+              <a className="rounded-full bg-[#f1d58b] px-7 py-3.5 font-black text-[#130d08] shadow-xl shadow-[#f1d58b]/20" href="#ecosystem">
+                Discover our ecosystem
               </a>
-              <a className="rounded-full border border-white/24 bg-white/5 px-6 py-3 font-black text-white backdrop-blur" href="/store">
-                Store / Products
+              <a className="rounded-full border border-white/24 bg-white/5 px-7 py-3.5 font-black text-white backdrop-blur" href="/holding">
+                Our story
               </a>
             </div>
 
-            <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              {proofPoints.map((item) => (
-                <div key={item} className="luxury-glass rounded-lg px-4 py-3 text-sm font-semibold leading-6 text-white/82">
-                  {item}
+            <div className="mt-12 grid max-w-2xl grid-cols-3 border-y border-white/12 py-5">
+              {proofPoints.map(([title, text], index) => (
+                <div key={title} className={index ? "border-l border-white/12 px-5" : "pr-5"}>
+                  <p className="font-serif text-xl text-[#f1d58b] md:text-2xl">{title}</p>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-white/45">{text}</p>
                 </div>
               ))}
             </div>
@@ -371,42 +365,35 @@ export default function HomePage() {
             initial={{ opacity: 0, scale: 0.96, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.18, ease: "easeOut" }}
-            className="luxury-glass relative min-h-[610px] overflow-hidden rounded-lg p-5 text-[#1b130c]"
+            className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-[#0c0908]/70 p-7 shadow-2xl shadow-black/40 backdrop-blur-xl md:p-9"
           >
-            <div className="absolute inset-x-10 top-0 h-px luxury-gold-line" />
-            <div className="relative flex h-full flex-col justify-between">
-              <div className="flex items-center justify-between gap-4 text-white">
+            <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#d6ad57]/12 blur-3xl" />
+            <div className="relative">
+              <div className="flex items-start justify-between gap-5">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-[#f1d58b]">Holding command map</p>
-                  <h2 className="mt-2 font-serif text-4xl leading-none">EI BaBra Ecosystem</h2>
+                  <p className="text-xs font-black uppercase tracking-[0.24em] text-[#f1d58b]">The BaBra promise</p>
+                  <h2 className="mt-3 max-w-md font-serif text-4xl leading-tight md:text-5xl">Purpose in every enterprise.</h2>
                 </div>
-                <span className="rounded-full border border-[#d6ad57]/50 bg-black/30 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#f1d58b]">
-                  Rwanda + global
-                </span>
+                <img className="h-16 w-16 shrink-0 rounded-full border border-[#d6ad57]/35 object-cover" src="/media/logos/babra-logo.jpeg" alt="BaBra" />
               </div>
-
-              <div className="relative mt-6 min-h-[430px] overflow-hidden rounded-lg border border-white/15 bg-[#fffaf1] p-4">
-                <div className="grid h-full min-h-[398px] gap-3 sm:grid-cols-2">
-                  {ecosystemCards.slice(0, 6).map((item) => (
-                    <a key={item.title} href={item.href} className="group relative min-h-32 overflow-hidden rounded-lg border border-black/10 bg-black text-white">
-                      <img className="absolute inset-0 h-full w-full object-cover opacity-60 transition duration-500 group-hover:scale-105 group-hover:opacity-75" src={item.image} alt={item.title} />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/38 to-transparent" />
-                      <div className="absolute inset-x-0 bottom-0 p-4">
-                        <p className="text-[0.65rem] font-black uppercase tracking-[0.18em]" style={{ color: item.accent }}>{item.label}</p>
-                        <h3 className="mt-1 font-serif text-2xl leading-none">{item.title}</h3>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-            <div className="mt-5 rounded-lg bg-[#090706]/90 p-5 text-white backdrop-blur">
-              <p className="font-serif text-3xl">Built as an enterprise ecosystem</p>
-              <p className="mt-3 text-sm leading-6 text-white/60">
-                Products remain important, but the homepage must present the whole holding structure, division routes, forms, partners, and operating platform.
+              <p className="mt-5 max-w-lg leading-7 text-white/58">
+                We connect business growth with human progress—creating trusted brands, useful services, opportunity, and a future Baine and Brandon can be proud of.
               </p>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {ecosystemCards.slice(1, 5).map((item) => (
+                  <a key={item.title} href={item.href} className="group rounded-2xl border border-white/10 bg-white/[0.055] p-5 transition hover:border-[#d6ad57]/45 hover:bg-white/[0.09]">
+                    <p className="text-[0.62rem] font-black uppercase tracking-[0.18em]" style={{ color: item.accent }}>{item.label}</p>
+                    <h3 className="mt-2 font-serif text-2xl">{item.title}</h3>
+                    <span className="mt-4 inline-flex text-sm font-black text-white/48 transition group-hover:text-[#f1d58b]">Explore →</span>
+                  </a>
+                ))}
+              </div>
+
+              <a className="mt-6 flex items-center justify-between rounded-2xl bg-[#f1d58b] px-5 py-4 font-black text-[#130d08]" href="#ecosystem">
+                <span>View all BaBra divisions</span><span aria-hidden="true">↘</span>
+              </a>
             </div>
-          </div>
           </motion.div>
         </div>
       </section>
