@@ -3,6 +3,7 @@ import "./globals.css";
 import { site } from "./commerce-data";
 import { OfficialFooter } from "./components/OfficialFooter";
 import { ServiceWorkerRegistration } from "./ServiceWorkerRegistration";
+import { LanguageBar } from "./LanguageBar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <ServiceWorkerRegistration />
+        <LanguageBar />
         {children}
         <OfficialFooter />
       </body>
