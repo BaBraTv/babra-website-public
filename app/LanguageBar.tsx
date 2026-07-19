@@ -30,6 +30,20 @@ const uiCopy: Record<LanguageCode, { language: string; active: string }> = {
 
 const dictionary: Record<Exclude<LanguageCode, "EN">, Record<string, string>> = {
   RW: {
+    "About": "Abo turi bo",
+    "Dental Clinic": "Ivuriro ry'amenyo",
+    "Explore BaBra": "Menya BaBra",
+    "One vision.": "Icyerekezo kimwe.",
+    "A growing legacy.": "Umurage ukomeza gukura.",
+    "A Rwandan enterprise building premium beauty, technology, education, healthcare, agriculture, media, and community impact for generations.": "Ikigo nyarwanda cyubaka ubwiza bwa premium, ikoranabuhanga, uburezi, ubuzima, ubuhinzi, itangazamakuru n'ibikorwa bifasha abantu mu bihe bizaza.",
+    "Discover our ecosystem": "Menya ibikorwa byacu byose",
+    "Our story": "Inkuru yacu",
+    "Rooted at home": "Dushingiye iwacu",
+    "Built to expand": "Twubakiye kwaguka",
+    "Designed to endure": "Twubakiye kuramba",
+    "The BaBra promise": "Isezerano rya BaBra",
+    "Purpose in every enterprise.": "Intego muri buri gikorwa.",
+    "View all BaBra divisions": "Reba amashami yose ya BaBra",
     "Home": "Ahabanza",
     "Companies": "Amashami",
     "Lost & Found": "Ibyatakaye n'ibyabonetse",
@@ -163,6 +177,20 @@ const dictionary: Record<Exclude<LanguageCode, "EN">, Record<string, string>> = 
     "Delivery support": "Ubufasha bwa delivery"
   },
   FR: {
+    "About": "A propos",
+    "Dental Clinic": "Clinique dentaire",
+    "Explore BaBra": "Explorer BaBra",
+    "One vision.": "Une vision.",
+    "A growing legacy.": "Un heritage en croissance.",
+    "A Rwandan enterprise building premium beauty, technology, education, healthcare, agriculture, media, and community impact for generations.": "Une entreprise rwandaise qui developpe la beaute premium, la technologie, l'education, la sante, l'agriculture, les medias et l'impact communautaire pour les generations futures.",
+    "Discover our ecosystem": "Decouvrir notre ecosysteme",
+    "Our story": "Notre histoire",
+    "Rooted at home": "Enracines au Rwanda",
+    "Built to expand": "Construits pour grandir",
+    "Designed to endure": "Concus pour durer",
+    "The BaBra promise": "La promesse BaBra",
+    "Purpose in every enterprise.": "Une mission dans chaque entreprise.",
+    "View all BaBra divisions": "Voir toutes les divisions BaBra",
     "Home": "Accueil",
     "Companies": "Divisions",
     "Lost & Found": "Objets perdus",
@@ -287,6 +315,20 @@ const dictionary: Record<Exclude<LanguageCode, "EN">, Record<string, string>> = 
     "Delivery support": "Support livraison"
   },
   SW: {
+    "About": "Kuhusu sisi",
+    "Dental Clinic": "Kliniki ya meno",
+    "Explore BaBra": "Gundua BaBra",
+    "One vision.": "Dira moja.",
+    "A growing legacy.": "Urithi unaokua.",
+    "A Rwandan enterprise building premium beauty, technology, education, healthcare, agriculture, media, and community impact for generations.": "Biashara ya Rwanda inayojenga urembo wa hali ya juu, teknolojia, elimu, afya, kilimo, vyombo vya habari na maendeleo ya jamii kwa vizazi vijavyo.",
+    "Discover our ecosystem": "Gundua mfumo wetu",
+    "Our story": "Hadithi yetu",
+    "Rooted at home": "Mizizi yetu Rwanda",
+    "Built to expand": "Tumejengwa kukua",
+    "Designed to endure": "Tumeundwa kudumu",
+    "The BaBra promise": "Ahadi ya BaBra",
+    "Purpose in every enterprise.": "Lengo katika kila biashara.",
+    "View all BaBra divisions": "Tazama vitengo vyote vya BaBra",
     "Home": "Mwanzo",
     "Companies": "Vitengo",
     "Lost & Found": "Vilivyopotea",
@@ -357,6 +399,20 @@ const dictionary: Record<Exclude<LanguageCode, "EN">, Record<string, string>> = 
     "Delivery support": "Msaada wa delivery"
   },
   CN: {
+    "About": "关于我们",
+    "Dental Clinic": "牙科诊所",
+    "Explore BaBra": "探索 BaBra",
+    "One vision.": "同一个愿景。",
+    "A growing legacy.": "不断成长的传承。",
+    "A Rwandan enterprise building premium beauty, technology, education, healthcare, agriculture, media, and community impact for generations.": "一家立足卢旺达、为世代发展高端美妆、科技、教育、医疗、农业、媒体与社区影响力的企业。",
+    "Discover our ecosystem": "探索我们的生态体系",
+    "Our story": "我们的故事",
+    "Rooted at home": "扎根卢旺达",
+    "Built to expand": "面向增长",
+    "Designed to endure": "致力长久",
+    "The BaBra promise": "BaBra 的承诺",
+    "Purpose in every enterprise.": "每项事业皆有使命。",
+    "View all BaBra divisions": "查看所有 BaBra 业务",
     "Home": "首页",
     "Companies": "公司",
     "Lost & Found": "失物招领",
@@ -497,10 +553,10 @@ export function LanguageBar() {
   }
 
   return (
-    <div className="sticky top-0 z-[60] border-b border-white/10 bg-[#050404]/96 px-4 py-2 text-white backdrop-blur-xl" data-no-translate="true">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2">
-        <span className="text-xs font-black uppercase tracking-[0.18em] text-[#f1d58b]">{selectedCopy.language}:</span>
-        <div className="flex flex-wrap items-center gap-1 text-xs font-black">
+    <div className="sticky top-0 z-[60] h-11 border-b border-white/10 bg-[#050404]/96 px-4 text-white backdrop-blur-xl" data-no-translate="true">
+      <div className="mx-auto flex h-full max-w-[1500px] items-center justify-between gap-3">
+        <span className="hidden text-[0.65rem] font-black uppercase tracking-[0.18em] text-[#f1d58b] sm:block">{selectedCopy.language}</span>
+        <div className="flex items-center gap-1 text-[0.68rem] font-black">
           {languages.map(([code, label]) => (
             <button
               key={code}
@@ -508,7 +564,7 @@ export function LanguageBar() {
               aria-label={`Choose ${label}`}
               aria-pressed={selected === code}
               onClick={() => chooseLanguage(code)}
-              className={`rounded-full border px-3 py-1.5 transition ${
+              className={`rounded-full border px-2.5 py-1 transition sm:px-3 ${
                 selected === code
                   ? "border-[#4ebeff] bg-[#4ebeff] text-[#061017]"
                   : "border-white/12 bg-white/[0.04] text-white/72 hover:border-[#d6ad57]/60 hover:text-[#f1d58b]"
@@ -518,7 +574,7 @@ export function LanguageBar() {
             </button>
           ))}
         </div>
-        <span className="w-full text-[11px] font-bold text-white/52 sm:w-auto">{selectedCopy.active}</span>
+        <span className="hidden text-[11px] font-bold text-white/52 md:block">{selectedCopy.active}</span>
       </div>
     </div>
   );
