@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { YouTubeIcon } from "./components/YouTubeIcon";
+import { officialChannels, verifiedExternalLinkProps } from "./data/official-channels";
 
 const groupPillars = [
   {
@@ -790,6 +792,27 @@ export default function HomePage() {
                 <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{quantity}</span>
                 <h3 className="mt-4 font-serif text-3xl">{title}</h3>
                 <p className="mt-4 leading-7 text-white/62">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-white/10 bg-[#0d0909] px-5 py-20 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-[#d6ad57]">Official YouTube channels</p>
+          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Two channels. Two clear roles.</h2>
+          <div className="mt-12 grid gap-5 lg:grid-cols-2">
+            {[officialChannels.lifetalk, officialChannels.babra].map((channel, index) => (
+              <article key={channel.name} className={`rounded-[2rem] border p-7 md:p-10 ${index === 0 ? "border-[#a9141d]/40 bg-[#181012]" : "border-[#d6ad57]/35 bg-[#17110d]"}`}>
+                <div className="flex items-center gap-3 text-[#f1d58b]"><YouTubeIcon className="h-7 w-7" /><span className="text-sm font-black uppercase tracking-[0.2em]">{channel.handle}</span></div>
+                <h3 className="mt-5 font-serif text-4xl md:text-5xl">{channel.name}</h3>
+                <p className="mt-2 text-xl font-bold text-[#f1d58b]">{channel.tagline}</p>
+                <p className="mt-5 max-w-xl leading-7 text-white/60">{channel.role}</p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a className="rounded-full border border-white/15 px-5 py-3 text-sm font-black" href={channel.websiteUrl}>Explore channel</a>
+                  <a {...verifiedExternalLinkProps} className="rounded-full bg-[#e5222d] px-5 py-3 text-sm font-black text-white" href={channel.youtubeUrl}>Watch on YouTube</a>
+                </div>
               </article>
             ))}
           </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { site } from "./commerce-data";
+import { OfficialFooter } from "./components/OfficialFooter";
 import { ServiceWorkerRegistration } from "./ServiceWorkerRegistration";
 
 export const metadata: Metadata = {
@@ -10,71 +11,81 @@ export const metadata: Metadata = {
     template: `%s | ${site.domain}`
   },
   description:
-    "EI BaBra Holding Ltd brings together BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Hospital, BaBra Farm, BaBra Foundation, LifeTalk TV, Lost & Found Rwanda, store products, forms, and partner access.",
+    "EI BaBra Holding Ltd brings together BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Hospital, BaBra Farm, BaBra Foundation, LifeTalk TV, BaBra TV, Lost & Found Rwanda, commerce, and partner access.",
   keywords: [
-    "Best body lotion",
-    "skin care",
-    "moisturizing lotion",
-    "dry skin lotion",
-    "oily skin lotion",
-    "normal skin lotion",
-    "shea butter lotion",
-    "aloe vera lotion",
-    "luxury body lotion",
     "BaBra Lotion",
     "BaBra Lotion Rwanda",
+    "BaBra Lotion Women 500 ml",
+    "BaBra Lotion Men 500 ml",
+    "BaBra Lotion Babies 500 ml",
     "BaBra Cosmetics",
-    "BaBra Cosmetics Ltd",
     "BaBra",
-    "BaBra Group",
-    "Premium Luxury in Every Touch",
-    "Rwanda luxury skincare",
-    "global skincare brand",
-    "BaBra Pocket Fresh",
-    "BaBra Pads",
-    "BaBra Soap",
-    "BaBra Showroom",
     "LifeTalk TV",
-    "NZABIGERAHO",
+    "BaBra TV",
     "EI BaBra Holding Ltd",
-    "BaBra quality documentation",
-    "GMP cosmetics manufacturing",
-    "ISO 22716 cosmetics",
-    "BaBra samples",
-    "BaBra wholesale",
-    "BaBra partnership",
-    "BaBra Child & Family Support",
-    "family-based care Rwanda",
-    "vulnerable children support Rwanda",
-    "family reintegration"
+    "Rwanda Mobile Hub",
+    "BaBra Schools",
+    "BaBra Foundation",
+    "BaBra Hospital",
+    "BaBra Farm",
+    "Lost & Found Rwanda",
+    "BaBra Store"
   ],
   alternates: {
     canonical: site.url
   },
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" }
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }]
+  },
   openGraph: {
-    title: "EI BaBra Holding Ltd | BaBra Ecosystem Platform",
+    title: "BaBra Holding Ltd | Luxury. Innovation. African Excellence.",
     description:
-      "The BaBra ecosystem platform for cosmetics, mobile technology, schools, healthcare, agriculture, foundation work, media, public services, commerce, and partner access.",
+      "Official BaBra platform using approved BaBra media only.",
     url: site.url,
     siteName: site.domain,
-    images: [{ url: "/brand/homepage-video-poster.webp", width: 1200, height: 630, alt: "EI BaBra Holding Ltd ecosystem" }],
+    images: [{ url: "/media/logos/babra-logo.jpeg", width: 1200, height: 630, alt: "Official BaBra logo" }],
     locale: "en_RW",
     type: "website"
   },
   twitter: {
     card: "summary_large_image",
-    title: "EI BaBra Holding Ltd | BaBra Ecosystem Platform",
-    description: "BaBra ecosystem: cosmetics, mobile hub, schools, hospital, farm, foundation, LifeTalk TV, Lost & Found Rwanda, store, forms, and partner access.",
-    images: ["/brand/homepage-video-poster.webp"]
+    title: "BaBra Holding Ltd | Luxury. Innovation. African Excellence.",
+    description: "Official BaBra platform using approved BaBra media only.",
+    images: ["/media/logos/babra-logo.jpeg"]
   }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "BaBra Holding Ltd",
+    url: site.url,
+    logo: `${site.url}/media/logos/babra-logo.jpeg`,
+    brand: [
+      { "@type": "Brand", name: "BaBra Cosmetics" },
+      { "@type": "Brand", name: "Rwanda Mobile Hub" },
+      { "@type": "Brand", name: "BaBra Schools" },
+      { "@type": "Brand", name: "BaBra Foundation" },
+      { "@type": "Brand", name: "LifeTalk TV" },
+      { "@type": "Brand", name: "BaBra TV" }
+    ],
+    sameAs: []
+  };
+
   return (
     <html lang="en">
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <ServiceWorkerRegistration />
         {children}
+        <OfficialFooter />
       </body>
     </html>
   );

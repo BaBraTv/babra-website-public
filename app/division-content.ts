@@ -1,105 +1,74 @@
+import { officialMediaPendingLabel } from "./data/official-media";
+
+const pending = officialMediaPendingLabel;
+
 export const divisionContent = {
   cosmetics: {
     name: "BaBra Cosmetics",
-    eyebrow: "Premium skincare and beauty commerce",
+    eyebrow: "Official product division",
     route: "/cosmetics",
     theme: "from-[#f1d58b]/26 via-[#090706] to-[#090706]",
     accent: "#f1d58b",
-    description:
-      "BaBra Cosmetics is the premium beauty division for BaBra Lotion, soap, pads, pocket fresh, showroom, product verification, samples, wholesale, and Rwanda-first delivery.",
-    image: "/brand/official-babra-bottle.png",
-    imageAlt: "Official BaBra Lotion product bottle",
-    serviceImages: [
-      "/brand/official-babra-bottle.png",
-      "/showroom/showroom.png",
-      "/products/pocket-fresh-rose.png",
-      "/products/soap-2.png"
-    ],
-    points: ["BaBra Lotion Rwanda", "Premium skincare and showroom", "Wholesale and distributor engine", "Product verification and customer support"],
-    cta: "Shop BaBra Cosmetics",
-    ctaHref: "/store",
+    description: "Approved official BaBra Lotion media is available on the Cosmetics and Products pages.",
+    image: "",
+    imageAlt: pending,
+    serviceImages: ["", "", "", ""],
+    points: ["BaBra Lotion Women — 500 ml", "BaBra Lotion Men — 500 ml", "BaBra Lotion Babies — 500 ml", pending],
+    cta: "Open BaBra Cosmetics",
+    ctaHref: "/cosmetics",
     formsHref: "/forms/cosmetics"
   },
-  farm: {
-    name: "BaBra Farm",
-    eyebrow: "Agriculture and East Africa expansion",
-    route: "/farm",
-    theme: "from-[#4ade80]/24 via-[#0c1b12] to-[#080606]",
-    accent: "#4ade80",
-    description:
-      "BaBra Farm is the agriculture division for farmer registration, supplier networks, produce marketplace, livestock systems, and regional supply-chain growth.",
-    image: "/photos/farm-crops.jpg",
-    imageAlt: "Real farm crop field photograph",
-    serviceImages: ["/photos/farm-crops.jpg", "/photos/farm-greenhouse.jpg", "/photos/farm-greenhouse.jpg", "/photos/farm-crops.jpg"],
-    points: ["Farmer registration", "Supplier onboarding", "Produce marketplace", "Agriculture partnerships"],
-    cta: "Open BaBra Farm forms",
-    ctaHref: "/forms/farm",
-    formsHref: "/forms/farm"
-  },
-  schools: {
-    name: "BaBra Schools",
-    eyebrow: "Future education systems",
-    route: "/schools",
-    theme: "from-[#7dd3fc]/24 via-[#07172c] to-[#080606]",
-    accent: "#7dd3fc",
-    description:
-      "BaBra Schools represents the long-term education vision for nursery, primary, secondary, university, digital learning, admissions, teachers, and scholarships.",
-    image: "/photos/school-classroom.jpg",
-    imageAlt: "Real classroom with students and teacher",
-    serviceImages: ["/photos/school-classroom.jpg", "/photos/school-classroom.jpg", "/photos/foundation-community.jpg", "/photos/mobile-workstation.jpg"],
-    points: ["Student applications", "Teacher applications", "Scholarship requests", "Digital school registration"],
-    cta: "Open BaBra Schools forms",
-    ctaHref: "/forms/schools",
-    formsHref: "/forms/schools"
-  },
+  farm: createPendingDivision("BaBra Farm", "Agriculture division", "/farm", "from-[#4ade80]/24 via-[#0c1b12] to-[#080606]", "#4ade80", "/forms/farm"),
+  schools: createPendingDivision("BaBra Schools", "Education division", "/schools", "from-[#7dd3fc]/24 via-[#07172c] to-[#080606]", "#7dd3fc", "/forms/schools"),
   foundation: {
     name: "BaBra Foundation",
-    eyebrow: "Community impact and family support",
+    eyebrow: "Foundation division",
     route: "/foundation",
     theme: "from-[#c084fc]/24 via-[#1c102a] to-[#080606]",
     accent: "#c084fc",
-    description:
-      "BaBra Foundation is the community impact division for volunteers, family-based support requests, donations, and community partner applications.",
-    image: "/photos/foundation-community.jpg",
-    imageAlt: "Real community-support photograph",
-    serviceImages: ["/photos/foundation-volunteers.jpg", "/photos/foundation-community.jpg", "/photos/foundation-volunteers.jpg", "/photos/foundation-community.jpg"],
-    points: ["Volunteer registration", "Child and family support", "Donation form", "Community partner application"],
-    cta: "Open Foundation forms",
+    description: "Official foundation mission, education, health, and community program details are pending approval.",
+    image: "",
+    imageAlt: pending,
+    serviceImages: ["", "", "", ""],
+    points: ["Mission", "Education", "Health", "Community"],
+    cta: "Donation CTA",
     ctaHref: "/forms/foundation",
     formsHref: "/forms/foundation"
   },
-  hospital: {
-    name: "BaBra Hospital",
-    eyebrow: "Future healthcare systems",
-    route: "/hospital",
-    theme: "from-[#38bdf8]/22 via-[#07101e] to-[#080606]",
-    accent: "#38bdf8",
-    description:
-      "BaBra Hospital is the long-term healthcare vision for trusted medical services, patient systems, care access, and community health support.",
-    image: "/photos/hospital-doctor.jpg",
-    imageAlt: "Real hospital ward photograph",
-    serviceImages: ["/photos/hospital-ward.jpg", "/photos/medical-lab.jpg", "/photos/hospital-doctor.jpg", "/photos/hospital-ward.jpg"],
-    points: ["Future hospital roadmap", "Healthcare systems", "Patient trust", "Community health"],
-    cta: "Contact EI BaBra",
-    ctaHref: "/contact",
-    formsHref: "/forms/foundation"
-  },
+  hospital: createPendingDivision("BaBra Hospital", "Healthcare division", "/hospital", "from-[#38bdf8]/22 via-[#07101e] to-[#080606]", "#38bdf8", "/forms/foundation"),
   "rwanda-mobile-hub": {
     name: "Rwanda Mobile Hub",
-    eyebrow: "Technology and mobile commerce",
+    eyebrow: "Technology division",
     route: "/rwanda-mobile-hub",
     theme: "from-[#4ebeff]/22 via-[#071722] to-[#080606]",
     accent: "#4ebeff",
-    description:
-      "Rwanda Mobile Hub is the technology division for mobile devices, repair, digital trade, youth skills, and future digital business systems.",
-    image: "/photos/mobile-smartphone.jpg",
-    imageAlt: "Real smartphone and mobile technology photograph",
-    serviceImages: ["/photos/mobile-smartphone.jpg", "/photos/mobile-workstation.jpg", "/photos/mobile-accessories.jpg", "/photos/mobile-workstation.jpg"],
-    points: ["Mobile commerce", "Device support", "Digital jobs", "Youth technology skills"],
+    description: "Official Rwanda Mobile Hub office media and detailed service information are pending approval.",
+    image: "",
+    imageAlt: pending,
+    serviceImages: ["", "", "", "", ""],
+    points: ["Repairs", "Accessories", "Software", "Hardware", "Training"],
     cta: "Open Rwanda Mobile Hub forms",
     ctaHref: "/forms/rwanda-mobile-hub",
     formsHref: "/forms/rwanda-mobile-hub"
   }
 } as const;
+
+function createPendingDivision(name: string, eyebrow: string, route: string, theme: string, accent: string, formsHref: string) {
+  return {
+    name,
+    eyebrow,
+    route,
+    theme,
+    accent,
+    description: pending,
+    image: "",
+    imageAlt: pending,
+    serviceImages: ["", "", "", ""],
+    points: [pending],
+    cta: `Open ${name} forms`,
+    ctaHref: formsHref,
+    formsHref
+  };
+}
 
 export type DivisionKey = keyof typeof divisionContent;

@@ -20,16 +20,16 @@ export default function manifest(): MetadataRoute.Manifest {
     dir: "ltr",
     icons: [
       {
-        src: "/icons/icon.svg",
-        sizes: "any",
-        type: "image/svg+xml",
+        src: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
         purpose: "maskable"
       },
       {
-        src: "/brand/logo.jpeg",
+        src: "/android-chrome-512x512.png",
         sizes: "512x512",
-        type: "image/jpeg",
-        purpose: "any"
+        type: "image/png",
+        purpose: "maskable"
       }
     ],
     shortcuts: [
@@ -38,21 +38,21 @@ export default function manifest(): MetadataRoute.Manifest {
         short_name: "Shop",
         description: "Open BaBra Store products.",
         url: `${site.url}/store`,
-        icons: [{ src: "/icons/icon.svg", sizes: "any", type: "image/svg+xml" }]
+        icons: [{ src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" }]
       },
       {
         name: "Request Samples",
         short_name: "Samples",
         description: "Open BaBra Cosmetics sample and wholesale forms.",
         url: `${site.url}/forms/cosmetics`,
-        icons: [{ src: "/icons/icon.svg", sizes: "any", type: "image/svg+xml" }]
+        icons: [{ src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" }]
       },
       {
         name: "Contact BaBra",
         short_name: "Contact",
         description: "Contact BaBra support.",
         url: `${site.url}/contact`,
-        icons: [{ src: "/icons/icon.svg", sizes: "any", type: "image/svg+xml" }]
+        icons: [{ src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" }]
       }
     ]
   };

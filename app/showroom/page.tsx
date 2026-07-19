@@ -1,3 +1,5 @@
+import { officialMediaPendingLabel } from "../data/official-media";
+
 const showroomFeatures = [
   ["Luxury product displays", "Clean shelves, gold accents, and grouped product families help customers understand the full BaBra line quickly."],
   ["Customer waiting area", "A calm premium space for consultation, wholesale appointments, and customer support."],
@@ -27,12 +29,14 @@ export default function ShowroomPage() {
                 A future premium showroom for product discovery, customer support, wholesale meetings, franchise onboarding, digital screens, and official product verification.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="https://wa.me/250788351482" target="_blank">Book showroom support</a>
+                <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="https://wa.me/250788351482" target="_blank" rel="noopener noreferrer">Book showroom support</a>
                 <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href="/products">View products</a>
               </div>
             </div>
             <figure className="overflow-hidden rounded-lg border border-[#d6ad57]/25 shadow-2xl shadow-black/40">
-              <img className="h-[520px] w-full object-cover" src="/showroom/showroom.png" alt="BaBra luxury showroom concept" />
+              <div className="grid h-[520px] w-full place-items-center p-6 text-center text-sm font-black uppercase tracking-[0.14em] text-[#f1d58b]">
+                {officialMediaPendingLabel}
+              </div>
             </figure>
           </div>
         </div>
@@ -61,7 +65,7 @@ export default function ShowroomPage() {
               <h2 className="mt-3 font-serif text-5xl leading-none">Photos, videos, and franchise proof.</h2>
             </div>
             <p className="text-lg leading-8 text-white/66">
-              This page is ready for future showroom photos, customer videos, product testing clips, and partner testimonials. Sensitive QR/barcode data should remain private; the public showroom only explains that official verification exists.
+              This page is ready for official showroom media after approval. No showroom photos, customer videos, product testing clips, or testimonials are published until approved.
             </p>
           </div>
         </div>

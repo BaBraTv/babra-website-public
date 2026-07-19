@@ -90,7 +90,7 @@ export function ContentStudioClient() {
       "Note: I will attach the image/video in WhatsApp for review."
     ].join("\n");
 
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   }
 
   return (
