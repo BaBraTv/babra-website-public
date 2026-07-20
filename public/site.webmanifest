@@ -1,13 +1,19 @@
 {
-  "name": "BaBra Store",
+  "name": "BaBra — EI BaBra Holding",
   "short_name": "BaBra",
-  "description": "Official BaBra Store and BaBra Holding Ltd platform.",
-  "start_url": "/store?source=pwa",
+  "description": "Official EI BaBra Holding platform for cosmetics, technology, education, healthcare, agriculture, media, and community impact.",
+  "id": "/",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "handle_links": "preferred",
   "background_color": "#090706",
   "theme_color": "#090706",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
