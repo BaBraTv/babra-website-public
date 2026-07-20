@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 const officialWebsite = "https://dentalexpertsclinic.rw/";
-const appointmentUrl = "https://dentalexpertsclinic.rw/contact/";
+const appointmentUrl = "https://dentalexpertsclinic.rw/appointment.php";
 
 export const metadata: Metadata = {
   title: "Dental Experts Clinic Kigali | Featured Healthcare Partner",
