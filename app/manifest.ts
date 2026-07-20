@@ -3,18 +3,18 @@ import { site } from "./commerce-data";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "BaBra Store",
+    name: "BaBra — EI BaBra Holding",
     short_name: "BaBra",
     description:
       "Official BaBra Store for BaBra Cosmetics, BaBra Lotion, samples, wholesale, LifeTalk TV, BaBra Farm, BaBra Schools, and BaBra Group services.",
-    id: site.url,
-    start_url: `${site.url}/store?source=pwa`,
-    scope: `${site.url}/`,
+    id: "/",
+    start_url: "/?source=pwa",
+    scope: "/",
     display: "standalone",
     display_override: ["window-controls-overlay", "standalone", "minimal-ui"],
     background_color: "#090706",
     theme_color: "#090706",
-    orientation: "portrait-primary",
+    orientation: "any",
     categories: ["business", "shopping", "beauty"],
     lang: "en-RW",
     dir: "ltr",

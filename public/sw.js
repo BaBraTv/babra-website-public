@@ -1,37 +1,23 @@
-const CACHE_NAME = "babra-ecosystem-v6";
+const CACHE_NAME = "babra-ecosystem-v7";
 const OFFLINE_URL = "/offline";
 const PRECACHE = [
   "/",
-  "/cosmetics",
   "/store",
-  "/products",
-  "/lost-and-found",
-  "/rwanda-mobile-hub",
-  "/lifetalk-tv",
-  "/farm",
-  "/schools",
-  "/schools/masterplan",
-  "/investor-sponsor-access",
-  "/foundation",
-  "/account",
+  "/dental-experts-clinic",
   OFFLINE_URL,
-  "/manifest.webmanifest",
   "/site.webmanifest",
   "/favicon.ico",
-  "/favicon-16x16.png",
-  "/favicon-32x32.png",
-  "/apple-touch-icon.png",
   "/android-chrome-192x192.png",
   "/android-chrome-512x512.png",
-  "/media/logos/babra-logo.jpeg",
-  "/media/products/babra-lotion-women-500ml.png",
-  "/media/products/babra-lotion-men-500ml.png",
-  "/media/products/babra-lotion-babies-500ml.png"
+  "/media/logos/babra-logo.jpeg"
 ];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE)).then(() => self.skipWaiting())
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => Promise.all(PRECACHE.map((url) => cache.add(url).catch(() => null))))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -47,13 +33,23 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
+  const requestUrl = new URL(event.request.url);
+  if (requestUrl.origin !== self.location.origin) return;
+
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        if (response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        }
         return response;
       })
-      .catch(() => caches.match(event.request).then((cached) => cached || caches.match(OFFLINE_URL)))
+      .catch(async () => {
+        const cached = await caches.match(event.request);
+        if (cached) return cached;
+        if (event.request.mode === "navigate") return caches.match(OFFLINE_URL);
+        return Response.error();
+      })
   );
 });

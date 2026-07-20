@@ -8,9 +8,23 @@ export function ServiceWorkerRegistration() {
       return;
     }
 
-    navigator.serviceWorker.register("/sw.js").catch(() => {
-      // PWA should never block the store if registration fails.
-    });
+    let reloading = false;
+
+    navigator.serviceWorker
+      .register("/sw.js", { scope: "/", updateViaCache: "none" })
+      .then((registration) => registration.update())
+      .catch(() => {
+        // PWA updates should never block the website.
+      });
+
+    function activateUpdatedWorker() {
+      if (reloading) return;
+      reloading = true;
+      window.location.reload();
+    }
+
+    navigator.serviceWorker.addEventListener("controllerchange", activateUpdatedWorker);
+    return () => navigator.serviceWorker.removeEventListener("controllerchange", activateUpdatedWorker);
   }, []);
 
   return null;
