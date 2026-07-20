@@ -105,27 +105,48 @@ enum AdminAction {
   SECURITY_EVENT
 }
 
+enum AcademyRole {
+  CANDIDATE
+  INSTRUCTOR
+  CONTENT_EDITOR
+  EXAMINER
+  HR_RECRUITER
+  HR_MANAGER
+  EMPLOYER_USER
+  EMPLOYER_ADMIN
+  FINANCE
+  ACADEMY_ADMIN
+  SUPER_ADMIN
+}
+
+enum AcademyUserStatus {
+  PENDING_VERIFICATION
+  ACTIVE
+  SUSPENDED
+  DELETED
+}
+
 model User {
-  id              String             @id @default(cuid())
-  email           String?            @unique
-  phone           String?            @unique
+  id              String     @id @default(cuid())
+  email           String?    @unique
+  phone           String?    @unique
   passwordHash    String?
   fullName        String
-  role            UserRole           @default(CUSTOMER)
-  status          UserStatus         @default(PENDING_VERIFICATION)
+  role            UserRole   @default(CUSTOMER)
+  status          UserStatus @default(PENDING_VERIFICATION)
   emailVerifiedAt DateTime?
   phoneVerifiedAt DateTime?
   lastLoginAt     DateTime?
-  preferredLocale String             @default("en")
-  createdAt       DateTime           @default(now())
-  updatedAt       DateTime           @updatedAt
+  preferredLocale String     @default("en")
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
 
   profile             CustomerProfile?
   sessions            Session[]
   passwordResetTokens PasswordResetToken[]
-  orders              Order[]              @relation("CustomerOrders")
-  adminLogs           AdminActivityLog[]   @relation("AdminActor")
-  messagesAssigned    ContactMessage[]     @relation("MessageAssignee")
+  orders              Order[]                 @relation("CustomerOrders")
+  adminLogs           AdminActivityLog[]      @relation("AdminActor")
+  messagesAssigned    ContactMessage[]        @relation("MessageAssignee")
   jobApplications     JobApplication[]
   lostFoundReports    LostFoundReport[]
   investorRequests    InvestorAccessRequest[]
@@ -135,20 +156,20 @@ model User {
 }
 
 model CustomerProfile {
-  id              String   @id @default(cuid())
-  userId          String   @unique
-  customerType    String   @default("Retail")
-  province        String?
-  district        String?
-  sector          String?
-  cell            String?
-  village         String?
-  landmark        String?
-  deliveryNotes   String?
-  rewardPoints    Int      @default(0)
-  marketingOptIn  Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  customerType   String   @default("Retail")
+  province       String?
+  district       String?
+  sector         String?
+  cell           String?
+  village        String?
+  landmark       String?
+  deliveryNotes  String?
+  rewardPoints   Int      @default(0)
+  marketingOptIn Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -208,30 +229,30 @@ model Product {
 }
 
 model Order {
-  id              String      @id @default(cuid())
-  orderNumber     String      @unique
-  customerId      String?
-  customerName    String
-  customerEmail   String?
-  customerPhone   String
-  status          OrderStatus @default(QUOTE_REQUESTED)
-  subtotalCents   Int         @default(0)
-  deliveryCents   Int         @default(0)
-  discountCents   Int         @default(0)
-  totalCents      Int         @default(0)
-  currency        String      @default("RWF")
-  province        String?
-  district        String?
-  sector          String?
-  cell            String?
-  village         String?
-  landmark        String?
-  deliveryNotes   String?
-  adminNotes      String?
-  submittedAt     DateTime    @default(now())
-  completedAt     DateTime?
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  id            String      @id @default(cuid())
+  orderNumber   String      @unique
+  customerId    String?
+  customerName  String
+  customerEmail String?
+  customerPhone String
+  status        OrderStatus @default(QUOTE_REQUESTED)
+  subtotalCents Int         @default(0)
+  deliveryCents Int         @default(0)
+  discountCents Int         @default(0)
+  totalCents    Int         @default(0)
+  currency      String      @default("RWF")
+  province      String?
+  district      String?
+  sector        String?
+  cell          String?
+  village       String?
+  landmark      String?
+  deliveryNotes String?
+  adminNotes    String?
+  submittedAt   DateTime    @default(now())
+  completedAt   DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 
   customer User?       @relation("CustomerOrders", fields: [customerId], references: [id], onDelete: SetNull)
   items    OrderItem[]
@@ -261,24 +282,24 @@ model OrderItem {
 }
 
 model Payment {
-  id                    String          @id @default(cuid())
-  orderId               String?
-  provider              PaymentProvider
-  status                PaymentStatus   @default(PENDING)
-  amountCents           Int
-  currency              String          @default("RWF")
-  customerPhone         String?
-  providerReference     String?
-  internalReference     String          @unique
-  callbackUrl           String?
-  callbackPayload       Json?
-  callbackReceivedAt    DateTime?
-  failureReason         String?
-  manualReviewNotes     String?
-  requestedAt           DateTime        @default(now())
-  paidAt                DateTime?
-  createdAt             DateTime        @default(now())
-  updatedAt             DateTime        @updatedAt
+  id                 String          @id @default(cuid())
+  orderId            String?
+  provider           PaymentProvider
+  status             PaymentStatus   @default(PENDING)
+  amountCents        Int
+  currency           String          @default("RWF")
+  customerPhone      String?
+  providerReference  String?
+  internalReference  String          @unique
+  callbackUrl        String?
+  callbackPayload    Json?
+  callbackReceivedAt DateTime?
+  failureReason      String?
+  manualReviewNotes  String?
+  requestedAt        DateTime        @default(now())
+  paidAt             DateTime?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
 
   order Order? @relation(fields: [orderId], references: [id], onDelete: SetNull)
 
@@ -288,17 +309,17 @@ model Payment {
 }
 
 model ContactMessage {
-  id          String        @id @default(cuid())
-  fullName    String
-  email       String?
-  phone       String?
-  subject     String?
-  message     String
-  sourcePage  String?
-  status      MessageStatus @default(NEW)
+  id           String        @id @default(cuid())
+  fullName     String
+  email        String?
+  phone        String?
+  subject      String?
+  message      String
+  sourcePage   String?
+  status       MessageStatus @default(NEW)
   assignedToId String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 
   assignedTo User? @relation("MessageAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
 
@@ -307,21 +328,21 @@ model ContactMessage {
 }
 
 model JobApplication {
-  id            String               @id @default(cuid())
-  userId        String?
-  fullName      String
-  email         String?
-  phone         String
-  roleApplied   String
-  division      String?
-  province      String?
-  district      String?
-  experience    String?
-  coverMessage  String?
-  resumeUrl     String?
-  status        JobApplicationStatus @default(SUBMITTED)
-  createdAt     DateTime             @default(now())
-  updatedAt     DateTime             @updatedAt
+  id           String               @id @default(cuid())
+  userId       String?
+  fullName     String
+  email        String?
+  phone        String
+  roleApplied  String
+  division     String?
+  province     String?
+  district     String?
+  experience   String?
+  coverMessage String?
+  resumeUrl    String?
+  status       JobApplicationStatus @default(SUBMITTED)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
 
   user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
@@ -365,21 +386,21 @@ model LostFoundReport {
 }
 
 model InvestorAccessRequest {
-  id             String        @id @default(cuid())
-  userId         String?
-  fullName       String
-  organization   String?
-  position       String?
-  country        String?
-  email          String
-  phone          String?
-  projectArea    String?
-  message        String?
-  status         MessageStatus @default(NEW)
-  reviewedAt     DateTime?
-  adminNotes     String?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  id           String        @id @default(cuid())
+  userId       String?
+  fullName     String
+  organization String?
+  position     String?
+  country      String?
+  email        String
+  phone        String?
+  projectArea  String?
+  message      String?
+  status       MessageStatus @default(NEW)
+  reviewedAt   DateTime?
+  adminNotes   String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 
   user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
@@ -388,16 +409,16 @@ model InvestorAccessRequest {
 }
 
 model AdminActivityLog {
-  id          String      @id @default(cuid())
-  actorId     String?
-  action      AdminAction
-  entityType  String
-  entityId    String?
-  summary     String
-  metadata    Json?
-  ipAddress   String?
-  userAgent   String?
-  createdAt   DateTime    @default(now())
+  id         String      @id @default(cuid())
+  actorId    String?
+  action     AdminAction
+  entityType String
+  entityId   String?
+  summary    String
+  metadata   Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime    @default(now())
 
   actor User? @relation("AdminActor", fields: [actorId], references: [id], onDelete: SetNull)
 
@@ -433,4 +454,95 @@ model RateLimitEvent {
 
   @@unique([key, route])
   @@index([resetAt])
+}
+
+model AcademyUser {
+  id              String            @id @default(cuid())
+  email           String            @unique
+  passwordHash    String
+  fullName        String
+  status          AcademyUserStatus @default(PENDING_VERIFICATION)
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  roles               AcademyUserRole[]
+  sessions            AcademySession[]
+  verificationTokens  AcademyVerificationToken[]
+  passwordResetTokens AcademyPasswordResetToken[]
+  auditEvents         AcademyAuditLog[]           @relation("AcademyAuditActor")
+
+  @@index([status, createdAt])
+}
+
+model AcademyUserRole {
+  userId    String
+  role      AcademyRole
+  grantedAt DateTime    @default(now())
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, role])
+  @@index([role])
+}
+
+model AcademySession {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  userAgent String?
+  ipAddress String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model AcademyVerificationToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+}
+
+model AcademyPasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+}
+
+model AcademyAuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  action     String
+  entityType String
+  entityId   String?
+  outcome    String   @default("SUCCESS")
+  metadata   Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  actor AcademyUser? @relation("AcademyAuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId, createdAt])
+  @@index([entityType, entityId])
+  @@index([action, createdAt])
 }

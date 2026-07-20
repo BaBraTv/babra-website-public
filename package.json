@@ -14,6 +14,8 @@
     "db:deploy": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "production:env-check": "node scripts/check-production-env.mjs",
     "production:migrate": "node scripts/apply-production-migrations.mjs",
     "verify:api": "node scripts/verify-production-api.mjs"
@@ -42,5 +44,6 @@
     "prisma": "^7.8.0",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.0"
+    ,"vitest": "^3.2.4"
   }
 }
