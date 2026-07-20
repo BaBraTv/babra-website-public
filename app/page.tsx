@@ -309,9 +309,23 @@ export default function HomePage() {
             ))}
           </div>
 
-          <a className="shrink-0 rounded-full bg-[#f1d58b] px-5 py-2.5 text-sm font-black text-[#130d08] shadow-lg shadow-[#d6ad57]/10" href="#ecosystem">
-            Explore BaBra
-          </a>
+          <div className="flex shrink-0 items-center gap-2">
+            <details className="group relative">
+              <summary className="cursor-pointer list-none rounded-full border border-white/15 bg-white/[0.06] px-4 py-2.5 text-sm font-black text-white transition hover:border-[#d6ad57]/55 hover:text-[#f1d58b]">
+                My Account
+              </summary>
+              <div className="absolute right-0 top-[calc(100%+0.75rem)] w-64 overflow-hidden rounded-2xl border border-white/12 bg-[#100c0a] p-2 shadow-2xl shadow-black/60">
+                <a className="block rounded-xl px-4 py-3 text-sm font-black text-white hover:bg-white/[0.08]" href="/login">Login</a>
+                <a className="block rounded-xl bg-[#f1d58b] px-4 py-3 text-sm font-black text-[#130d08]" href="/signup">Sign Up</a>
+                <div className="my-2 h-px bg-white/10" />
+                <a className="block rounded-xl px-4 py-3 text-sm font-semibold text-white/65 hover:bg-white/[0.08] hover:text-white" href="/dashboard">Dashboard</a>
+                <a className="block rounded-xl px-4 py-3 text-sm font-semibold text-white/65 hover:bg-white/[0.08] hover:text-white" href="/profile">Profile</a>
+              </div>
+            </details>
+            <a className="hidden rounded-full bg-[#f1d58b] px-5 py-2.5 text-sm font-black text-[#130d08] shadow-lg shadow-[#d6ad57]/10 md:inline-flex" href="#ecosystem">
+              Explore BaBra
+            </a>
+          </div>
         </div>
       </nav>
 
