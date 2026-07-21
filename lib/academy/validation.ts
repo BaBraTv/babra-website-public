@@ -14,5 +14,14 @@ export const academyLoginSchema = z.object({
   password: z.string().min(1).max(128)
 });
 
+export const academyForgotPasswordSchema = z.object({
+  email: z.string().trim().toLowerCase().email().max(254)
+});
+
+export const academyResetPasswordSchema = z.object({
+  token: z.string().min(32).max(256),
+  password: academyRegisterSchema.shape.password
+});
+
 export type AcademyRegisterInput = z.infer<typeof academyRegisterSchema>;
 export type AcademyLoginInput = z.infer<typeof academyLoginSchema>;

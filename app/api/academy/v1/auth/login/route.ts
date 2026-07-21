@@ -4,9 +4,11 @@ import { createAcademySession, verifyAcademyPassword } from "../../../../../../l
 import { requireAcademyEnabled } from "../../../../../../lib/academy/feature";
 import { academyLoginSchema } from "../../../../../../lib/academy/validation";
 import { writeAcademyAudit } from "../../../../../../lib/academy/audit";
+import { enforceAcademyRateLimit } from "../../../../../../lib/academy/rate-limit";
 
 export async function POST(request: Request) {
   try { requireAcademyEnabled(); } catch { return NextResponse.json({ error: "Not found" }, { status: 404 }); }
+  try { await enforceAcademyRateLimit("academy-login", 10, 15); } catch { return NextResponse.json({ error: "Too many requests" }, { status: 429 }); }
   const parsed = academyLoginSchema.safeParse(Object.fromEntries(await request.formData()));
   if (!parsed.success) return NextResponse.json({ error: "Invalid credentials" }, { status: 400 });
   const user = await getPrisma().academyUser.findUnique({ where: { email: parsed.data.email } });
