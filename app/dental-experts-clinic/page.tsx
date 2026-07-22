@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 const officialWebsite = "https://dentalexpertsclinic.rw/";
 const appointmentUrl = "https://dentalexpertsclinic.rw/appointment.php";
+const receptionistPhone = "+250 788 688 501";
+const receptionistPhoneHref = "tel:+250788688501";
 
 export const metadata: Metadata = {
   title: "Dental Experts Clinic Kigali | Featured Healthcare Partner",
@@ -33,6 +35,11 @@ export default function DentalExpertsClinicPage() {
     name: "Dental Experts Clinic",
     url: officialWebsite,
     telephone: "+250790719688",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "receptionist",
+      telephone: "+250788688501"
+    },
     email: "info@dentalexpertsclinic.rw",
     address: {
       "@type": "PostalAddress",
@@ -63,7 +70,7 @@ export default function DentalExpertsClinicPage() {
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68">Dental Experts Clinic is a modern dental healthcare facility in Kimironko, Kigali, offering patient-focused care for adults and children.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="rounded-full bg-[#55e6d0] px-6 py-3 font-black text-[#06191b]" href={appointmentUrl} target="_blank" rel="noopener noreferrer">Book appointment</a>
-              <a className="rounded-full border border-white/25 px-6 py-3 font-black" href="tel:+250790719688">Call +250 790 719 688</a>
+              <a className="rounded-full border border-white/25 px-6 py-3 font-black" href={receptionistPhoneHref}>Receptionist · {receptionistPhone}</a>
               <a className="rounded-full border border-white/25 px-6 py-3 font-black" href={officialWebsite} target="_blank" rel="noopener noreferrer">Official website</a>
             </div>
           </div>
@@ -91,7 +98,7 @@ export default function DentalExpertsClinicPage() {
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
           <article className="rounded-lg border border-white/12 bg-white/[0.05] p-7"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#55e6d0]">Opening hours</p><h2 className="mt-4 font-serif text-3xl">Monday–Saturday</h2><p className="mt-3 text-white/65">8:00 AM–8:00 PM</p></article>
           <article className="rounded-lg border border-white/12 bg-white/[0.05] p-7"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#55e6d0]">Clinic location</p><h2 className="mt-4 font-serif text-3xl">Kimironko, Kigali</h2><p className="mt-3 text-white/65">Kigali City · Gasabo · KG 4 St</p></article>
-          <article className="rounded-lg border border-white/12 bg-white/[0.05] p-7"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#55e6d0]">Email</p><h2 className="mt-4 font-serif text-3xl">Contact the clinic</h2><a className="mt-3 inline-block text-[#55e6d0]" href="mailto:info@dentalexpertsclinic.rw">info@dentalexpertsclinic.rw</a></article>
+          <article className="rounded-lg border border-white/12 bg-white/[0.05] p-7"><p className="text-xs font-black uppercase tracking-[0.18em] text-[#55e6d0]">Contact</p><h2 className="mt-4 font-serif text-3xl">Receptionist</h2><a className="mt-3 inline-block text-[#55e6d0]" href={receptionistPhoneHref}>{receptionistPhone}</a><a className="mt-2 block break-words text-sm text-white/65" href="mailto:info@dentalexpertsclinic.rw">info@dentalexpertsclinic.rw</a></article>
         </div>
       </section>
 

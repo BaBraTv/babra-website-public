@@ -461,7 +461,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="rounded-full bg-[#55e6d0] px-6 py-3 font-black text-[#06191b]" href="/dental-experts-clinic">Explore the clinic</a>
               <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href="https://dentalexpertsclinic.rw/appointment.php" target="_blank" rel="noopener noreferrer">Book appointment</a>
-              <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href="tel:+250790719688">Call clinic</a>
+              <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href="tel:+250788688501">Receptionist · +250 788 688 501</a>
             </div>
           </div>
           <a href="/dental-experts-clinic" className="group overflow-hidden rounded-lg border border-white/15 bg-white/[0.06] p-5 shadow-2xl shadow-black/30">
