@@ -1,6 +1,7 @@
 import { officialMediaPendingLabel } from "./data/official-media";
 
 const pending = officialMediaPendingLabel;
+const emptyMedia: string[] = [];
 
 export const divisionContent = {
   cosmetics: {
@@ -13,7 +14,9 @@ export const divisionContent = {
     image: "",
     imageAlt: pending,
     serviceImages: ["", "", "", ""],
-    points: ["BaBra Lotion Women — 500 ml", "BaBra Lotion Men — 500 ml", "BaBra Lotion Babies — 500 ml", pending],
+    galleryImages: emptyMedia,
+    videoSources: emptyMedia,
+    points: ["BaBra Lotion Women - 500 ml", "BaBra Lotion Men - 500 ml", "BaBra Lotion Babies - 500 ml", pending],
     cta: "Open BaBra Cosmetics",
     ctaHref: "/cosmetics",
     formsHref: "/forms/cosmetics"
@@ -30,6 +33,8 @@ export const divisionContent = {
     image: "",
     imageAlt: pending,
     serviceImages: ["", "", "", ""],
+    galleryImages: emptyMedia,
+    videoSources: emptyMedia,
     points: ["Mission", "Education", "Health", "Community"],
     cta: "Donation CTA",
     ctaHref: "/forms/foundation",
@@ -42,10 +47,23 @@ export const divisionContent = {
     route: "/rwanda-mobile-hub",
     theme: "from-[#4ebeff]/22 via-[#071722] to-[#080606]",
     accent: "#4ebeff",
-    description: "Official Rwanda Mobile Hub office media and detailed service information are pending approval.",
-    image: "",
-    imageAlt: pending,
-    serviceImages: ["", "", "", "", ""],
+    description: "Official Rwanda Mobile Hub media is now available for phone and computer service routes.",
+    image: "/media/mobile-hub/rwanda-mobile-hub-hero.jpg",
+    imageAlt: "Official Rwanda Mobile Hub signage and service workspace",
+    serviceImages: [
+      "/media/mobile-hub/rwanda-mobile-hub-repairs.jpg",
+      "/media/mobile-hub/rwanda-mobile-hub-accessories.jpg",
+      "/media/mobile-hub/rwanda-mobile-hub-software.jpg",
+      "/media/mobile-hub/rwanda-mobile-hub-hardware.jpg",
+      "/media/mobile-hub/rwanda-mobile-hub-training.jpg"
+    ],
+    galleryImages: [
+      "/media/mobile-hub/rwanda-mobile-hub-hero.jpg",
+      "/media/mobile-hub/rwanda-mobile-hub-about.jpg",
+      "/media/mobile-hub/rwanda-mobile-hub-repairs.jpg",
+      "/media/mobile-hub/rwanda-mobile-hub-gallery.jpg"
+    ],
+    videoSources: ["/media/mobile-hub/RMH%201.mp4", "/media/mobile-hub/RMH%202.mp4"],
     points: ["Repairs", "Accessories", "Software", "Hardware", "Training"],
     cta: "Open Rwanda Mobile Hub forms",
     ctaHref: "/forms/rwanda-mobile-hub",
@@ -64,6 +82,8 @@ function createPendingDivision(name: string, eyebrow: string, route: string, the
     image: "",
     imageAlt: pending,
     serviceImages: ["", "", "", ""],
+    galleryImages: emptyMedia,
+    videoSources: emptyMedia,
     points: [pending],
     cta: `Open ${name} forms`,
     ctaHref: formsHref,

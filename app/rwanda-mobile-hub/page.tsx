@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Rwanda Mobile Hub | Official Division",
-    description: "Official Rwanda Mobile Hub page. Office images and detailed service information are pending approval.",
-    images: [{ url: "/media/logos/babra-logo.jpeg", width: 1200, height: 630, alt: "Official BaBra logo" }]
+    description: "Official Rwanda Mobile Hub page with verified service workspace media.",
+    images: [{ url: "/media/mobile-hub/rwanda-mobile-hub-hero.jpg", width: 1200, height: 675, alt: "Official Rwanda Mobile Hub signage and service workspace" }]
   },
   twitter: {
     card: "summary_large_image",
     title: "Rwanda Mobile Hub | Official Division",
     description: "Official Rwanda Mobile Hub page.",
-    images: ["/media/logos/babra-logo.jpeg"]
+    images: ["/media/mobile-hub/rwanda-mobile-hub-hero.jpg"]
   }
 };
 
