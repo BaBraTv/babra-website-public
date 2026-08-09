@@ -4,9 +4,11 @@ import { getPrisma } from "../../../../lib/db";
 import { forgotPasswordSchema } from "../../../../lib/auth";
 import { queueNotification } from "../../../../lib/email-routing";
 import { fail } from "../../../../lib/api";
+import { enforceRateLimit } from "../../../../lib/rate-limit";
 
 export async function POST(request: NextRequest) {
   try {
+    await enforceRateLimit(request, { route: "auth.forgot-password", limit: 5, windowMs: 15 * 60_000 });
     const payload = forgotPasswordSchema.parse(await request.json());
     const prisma = getPrisma();
     const user = await prisma.user.findFirst({

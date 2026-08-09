@@ -16,7 +16,8 @@
     "db:studio": "prisma studio",
     "production:env-check": "node scripts/check-production-env.mjs",
     "production:migrate": "node scripts/apply-production-migrations.mjs",
-    "verify:api": "node scripts/verify-production-api.mjs"
+    "verify:api": "node scripts/verify-production-api.mjs",
+    "test:security": "node --experimental-strip-types --test tests/security.test.ts"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",

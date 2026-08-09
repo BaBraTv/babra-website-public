@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getPrisma } from "../../../../lib/db";
 import { requireAdminUser } from "../../../../lib/session";
-import { authFail } from "../../../../lib/api";
+import { authFail, redactOrder, redactPayment, redactUser } from "../../../../lib/api";
 
 export async function GET() {
   try {
@@ -28,9 +28,9 @@ export async function GET() {
         lostFoundReports: lostFoundReports.length,
         investorRequests: investorRequests.length
       },
-      users,
-      orders,
-      payments,
+      users: users.map(redactUser),
+      orders: orders.map(redactOrder),
+      payments: payments.map(redactPayment),
       contactMessages,
       jobApplications,
       lostFoundReports,

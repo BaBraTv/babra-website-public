@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { secretsMatch } from "./secrets";
 
 export const paymentCallbackSchema = z.object({
   provider: z.enum(["MTN_MOMO", "AIRTEL_MONEY", "BANK_TRANSFER", "CARD", "USDT", "MANUAL"]),
@@ -12,7 +13,7 @@ export const paymentCallbackSchema = z.object({
 
 export function assertValidPaymentCallbackSecret(receivedSecret: string | null) {
   const expectedSecret = process.env.PAYMENT_CALLBACK_SECRET;
-  if (!expectedSecret || receivedSecret !== expectedSecret) {
+  if (!secretsMatch(receivedSecret, expectedSecret)) {
     throw new Error("Invalid payment callback secret");
   }
 }

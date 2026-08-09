@@ -3,6 +3,7 @@ import "./load-production-env.mjs";
 const baseUrl = process.env.PRODUCTION_APP_URL || process.env.NEXT_PUBLIC_SITE_URL || "http://127.0.0.1:3000";
 const adminSetupSecret = process.env.ADMIN_SETUP_SECRET || "";
 const paymentCallbackSecret = process.env.PAYMENT_CALLBACK_SECRET || "";
+const applicationOrigin = new URL(baseUrl).origin;
 
 const unique = Date.now();
 const customer = {
@@ -29,6 +30,7 @@ async function request(path, options = {}) {
     ...options,
     headers: {
       "Content-Type": "application/json",
+      ...(options.method && options.method !== "GET" && options.method !== "HEAD" ? { Origin: applicationOrigin } : {}),
       ...(cookie ? { Cookie: cookie } : {}),
       ...(options.headers || {})
     }

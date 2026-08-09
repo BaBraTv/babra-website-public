@@ -2,6 +2,9 @@ import { randomBytes, createHash } from "crypto";
 import { cookies, headers } from "next/headers";
 import type { UserRole } from "@prisma/client";
 import { getPrisma } from "./db";
+import { isAdminRole, sessionCookieOptions } from "./security-policy";
+
+export { isAdminRole, sessionCookieOptions } from "./security-policy";
 
 export const sessionCookieName = "babra_session";
 
@@ -39,25 +42,25 @@ export async function createSession(userId: string) {
   const sessionToken = hashToken(rawToken);
   const expiresAt = new Date(Date.now() + sessionDays * 24 * 60 * 60 * 1000);
   const headerStore = await headers();
-
-  await prisma.session.create({
-    data: {
-      userId,
-      sessionToken,
-      expiresAt,
-      userAgent: headerStore.get("user-agent") ?? undefined,
-      ipAddress: headerStore.get("x-forwarded-for")?.split(",")[0]?.trim()
-    }
-  });
-
   const cookieStore = await cookies();
-  cookieStore.set(sessionCookieName, rawToken, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    expires: expiresAt
-  });
+  const previousToken = cookieStore.get(sessionCookieName)?.value;
+
+  await prisma.$transaction([
+    ...(previousToken
+      ? [prisma.session.deleteMany({ where: { sessionToken: hashToken(previousToken) } })]
+      : []),
+    prisma.session.create({
+      data: {
+        userId,
+        sessionToken,
+        expiresAt,
+        userAgent: headerStore.get("user-agent") ?? undefined,
+        ipAddress: headerStore.get("x-forwarded-for")?.split(",")[0]?.trim()
+      }
+    })
+  ]);
+
+  cookieStore.set(sessionCookieName, rawToken, sessionCookieOptions(expiresAt));
 }
 
 export async function destroyCurrentSession() {
@@ -99,7 +102,7 @@ export async function requireCurrentUser() {
 
 export async function requireAdminUser() {
   const user = await requireCurrentUser();
-  if (user.role !== "ADMIN" && user.role !== "STAFF") {
+  if (!isAdminRole(user.role)) {
     throw new Error("Admin access required");
   }
   return user;
