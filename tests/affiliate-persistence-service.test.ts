@@ -49,7 +49,14 @@ class FakePrisma {
             commissions: db.state.commissions.filter((row) => row.affiliateId === affiliate.id),
             withdrawals: db.state.withdrawals.filter((row) => row.affiliateId === affiliate.id)
           };
-        }
+        },
+        create: async ({ data }: { data: Row }) => {
+          if (db.state.affiliates.some((row) => row.userId === data.userId || row.code === data.code)) throw uniqueError();
+          const row = { ...data, id: db.nextId("affiliate") };
+          db.state.affiliates.push(row);
+          return row;
+        },
+        update: async ({ where, data }: { where: { id: string }; data: Row }) => db.update(db.state.affiliates, where.id, data)
       },
       order: {
         findUnique: async ({ where }: { where: { id: string } }) => db.state.orders.find((row) => row.id === where.id) ?? null
@@ -159,6 +166,18 @@ test("duplicate referral prevention", async () => {
   await createReferral(db);
   await expectCode(createReferral(db), "DUPLICATE_REFERRAL");
   assert.equal(db.state.referrals.length, 1);
+});
+
+test("affiliate application and approval require an administrator-selected rate", async () => {
+  const db = new FakePrisma({ affiliates: [] });
+  const created = await service(db).createAffiliateApplication({ userId: "owner-2" });
+  assert.equal(created.status, "PENDING");
+  assert.equal(created.commissionRateBasisPoints, 0);
+  await expectCode(service(db).reviewAffiliate({ affiliateId: String(created.id), status: "ACTIVE", commissionRateBasisPoints: 0, actorId: "admin-1" }), "INVALID_COMMISSION_SNAPSHOT");
+  const active = await service(db).reviewAffiliate({ affiliateId: String(created.id), status: "ACTIVE", commissionRateBasisPoints: 750, actorId: "admin-1" });
+  assert.equal(active.status, "ACTIVE");
+  assert.equal(active.commissionRateBasisPoints, 750);
+  assert.equal(db.state.auditLogs.length, 1);
 });
 
 test("duplicate commission prevention", async () => {

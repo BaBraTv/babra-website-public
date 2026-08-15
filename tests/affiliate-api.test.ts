@@ -4,6 +4,7 @@ import test from "node:test";
 import { AffiliatePersistenceError } from "../lib/affiliate-persistence.ts";
 import {
   affiliateErrorStatus,
+  affiliateReviewSchema,
   commissionTransitionSchema,
   publicAffiliateAccount,
   withdrawalPolicyFromEnvironment,
@@ -24,6 +25,12 @@ test("admin transition schemas allow only bounded lifecycle input", () => {
   assert.throws(() => commissionTransitionSchema.parse({ commissionId: "c", affiliateId: "a", status: "PENDING" }));
   assert.throws(() => withdrawalTransitionSchema.parse({ withdrawalId: "w", affiliateId: "a", status: "PAID" }), /Payout reference/);
   assert.equal(withdrawalTransitionSchema.parse({ withdrawalId: "w", affiliateId: "a", status: "PAID", payoutReference: "provider-1" }).status, "PAID");
+});
+
+test("affiliate approval requires an explicit non-zero rate", () => {
+  assert.equal(affiliateReviewSchema.parse({ affiliateId: "a", status: "ACTIVE", commissionRateBasisPoints: 500 }).commissionRateBasisPoints, 500);
+  assert.throws(() => affiliateReviewSchema.parse({ affiliateId: "a", status: "ACTIVE", commissionRateBasisPoints: 0 }), /approved commission rate/);
+  assert.equal(affiliateReviewSchema.parse({ affiliateId: "a", status: "REJECTED", reason: "Not eligible" }).status, "REJECTED");
 });
 
 test("withdrawal policy fails closed unless configured", () => {
@@ -67,9 +74,14 @@ test("affiliate routes enforce authentication, authorization, and rate limits", 
   const withdrawals = await readFile(new URL("app/api/affiliate/withdrawals/route.ts", root), "utf8");
   const commissions = await readFile(new URL("app/api/admin/affiliate-commissions/route.ts", root), "utf8");
   const adminWithdrawals = await readFile(new URL("app/api/admin/affiliate-withdrawals/route.ts", root), "utf8");
+  const application = await readFile(new URL("app/api/affiliate/application/route.ts", root), "utf8");
+  const affiliates = await readFile(new URL("app/api/admin/affiliates/route.ts", root), "utf8");
   assert.match(summary, /await requireCurrentUser\(\)/);
   assert.match(withdrawals, /await requireCurrentUser\(\)/);
   assert.match(withdrawals, /await enforceRateLimit\(/);
+  assert.match(application, /await requireCurrentUser\(\)/);
+  assert.match(application, /await enforceRateLimit\(/);
+  assert.match(affiliates, /await requireAdminUser\(\)/);
   for (const source of [commissions, adminWithdrawals]) {
     assert.match(source, /await requireAdminUser\(\)/);
     assert.match(source, /await enforceRateLimit\(/);

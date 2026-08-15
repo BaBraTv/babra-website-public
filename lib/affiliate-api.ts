@@ -10,6 +10,17 @@ export const withdrawalRequestSchema = z.object({
   currency: currency.default("RWF")
 }).strict();
 
+export const affiliateReviewSchema = z.object({
+  affiliateId: identifier,
+  status: z.enum(["ACTIVE", "REJECTED", "SUSPENDED"]),
+  commissionRateBasisPoints: z.number().int().min(0).max(10_000).optional(),
+  reason: z.string().trim().min(1).max(500).optional()
+}).strict().superRefine((value, context) => {
+  if (value.status === "ACTIVE" && (!value.commissionRateBasisPoints || value.commissionRateBasisPoints < 1)) {
+    context.addIssue({ code: "custom", path: ["commissionRateBasisPoints"], message: "Active affiliates require an approved commission rate" });
+  }
+});
+
 export const commissionCreateSchema = z.object({
   referralId: identifier,
   includeDelivery: z.boolean().default(false)
@@ -54,7 +65,7 @@ export function affiliateErrorStatus(error: unknown) {
   if (error instanceof Error && error.message === "Rate limit exceeded") return 429;
   if (!(error instanceof AffiliatePersistenceError)) return 500;
   if (["AFFILIATE_NOT_FOUND", "REFERRAL_NOT_FOUND", "COMMISSION_NOT_FOUND", "WITHDRAWAL_NOT_FOUND"].includes(error.code)) return 404;
-  if (["DUPLICATE_REFERRAL", "DUPLICATE_COMMISSION", "IDEMPOTENCY_CONFLICT", "CROSS_AFFILIATE_MISMATCH"].includes(error.code)) return 409;
+  if (["DUPLICATE_AFFILIATE", "DUPLICATE_REFERRAL", "DUPLICATE_COMMISSION", "IDEMPOTENCY_CONFLICT", "CROSS_AFFILIATE_MISMATCH"].includes(error.code)) return 409;
   return 422;
 }
 

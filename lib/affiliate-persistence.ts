@@ -6,6 +6,7 @@ import {
   decideWithdrawalEligibility,
   transitionCommission,
   transitionWithdrawal,
+  generateUniqueAffiliateCode,
   type CommissionStatus,
   type WithdrawalPolicy,
   type WithdrawalStatus
@@ -18,6 +19,7 @@ export type AffiliatePersistenceErrorCode =
   | "AFFILIATE_NOT_FOUND"
   | "REFERRAL_REJECTED"
   | "DUPLICATE_REFERRAL"
+  | "DUPLICATE_AFFILIATE"
   | "REFERRAL_NOT_FOUND"
   | "DUPLICATE_COMMISSION"
   | "INVALID_COMMISSION_SNAPSHOT"
@@ -87,6 +89,70 @@ export class AffiliatePersistenceService {
   private async lockAffiliate(tx: Prisma.TransactionClient, affiliateId: string) {
     const rows = await tx.$queryRaw<Array<{ id: string }>>`SELECT "id" FROM "Affiliate" WHERE "id" = ${affiliateId} FOR UPDATE`;
     if (rows.length !== 1) throw new AffiliatePersistenceError("AFFILIATE_NOT_FOUND", "Affiliate not found");
+  }
+
+  async createAffiliateApplication(input: { userId: string; now?: Date }) {
+    return this.serializable(async (tx) => {
+      const existing = await tx.affiliate.findUnique({ where: { userId: input.userId } });
+      if (existing) return existing;
+      const allocated = await generateUniqueAffiliateCode(
+        async (code) => Boolean(await tx.affiliate.findUnique({ where: { code }, select: { id: true } }))
+      );
+      try {
+        return await tx.affiliate.create({ data: {
+          userId: input.userId,
+          code: allocated.code,
+          status: "PENDING",
+          commissionRateBasisPoints: 0,
+          createdAt: input.now
+        } });
+      } catch (error) {
+        if (isUniqueConstraint(error)) throw new AffiliatePersistenceError("DUPLICATE_AFFILIATE", "Affiliate application already exists");
+        throw error;
+      }
+    });
+  }
+
+  async reviewAffiliate(input: {
+    affiliateId: string;
+    status: "ACTIVE" | "REJECTED" | "SUSPENDED";
+    commissionRateBasisPoints?: number;
+    actorId: string;
+    reason?: string;
+    now?: Date;
+  }) {
+    return this.serializable(async (tx) => {
+      await this.lockAffiliate(tx, input.affiliateId);
+      const affiliate = await tx.affiliate.findUnique({ where: { id: input.affiliateId } });
+      if (!affiliate) throw new AffiliatePersistenceError("AFFILIATE_NOT_FOUND", "Affiliate not found");
+      const allowed: Record<string, string[]> = {
+        PENDING: ["ACTIVE", "REJECTED"], ACTIVE: ["SUSPENDED"], SUSPENDED: ["ACTIVE"], REJECTED: []
+      };
+      if (affiliate.status !== input.status && !allowed[affiliate.status]?.includes(input.status)) {
+        throw new AffiliatePersistenceError("REFERRAL_REJECTED", `Invalid affiliate transition: ${affiliate.status} -> ${input.status}`);
+      }
+      const rate = input.commissionRateBasisPoints ?? affiliate.commissionRateBasisPoints;
+      if (!Number.isSafeInteger(rate) || rate < 0 || rate > 10_000 || (input.status === "ACTIVE" && rate === 0)) {
+        throw new AffiliatePersistenceError("INVALID_COMMISSION_SNAPSHOT", "An active affiliate requires an approved rate from 1 to 10000 basis points");
+      }
+      const now = input.now ?? new Date();
+      const updated = await tx.affiliate.update({ where: { id: affiliate.id }, data: {
+        status: input.status,
+        commissionRateBasisPoints: rate,
+        approvedAt: input.status === "ACTIVE" ? now : affiliate.approvedAt,
+        rejectedAt: input.status === "REJECTED" ? now : affiliate.rejectedAt,
+        suspendedAt: input.status === "SUSPENDED" ? now : affiliate.suspendedAt
+      } });
+      await tx.adminActivityLog.create({ data: {
+        actorId: input.actorId,
+        action: "STATUS_CHANGE",
+        entityType: "Affiliate",
+        entityId: affiliate.id,
+        summary: `Affiliate moved to ${input.status}`,
+        metadata: { previousStatus: affiliate.status, nextStatus: input.status, commissionRateBasisPoints: rate, reason: input.reason?.slice(0, 500) }
+      } });
+      return updated;
+    });
   }
 
   async getAccountSnapshot(userId: string) {
