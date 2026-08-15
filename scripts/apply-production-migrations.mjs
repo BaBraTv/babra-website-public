@@ -4,6 +4,11 @@ import "./load-production-env.mjs";
 const runtimeDatabaseUrl = process.env.DATABASE_URL || "";
 const migrationDatabaseUrl = process.env.DIRECT_URL || runtimeDatabaseUrl;
 
+if (process.env.PRODUCTION_MIGRATION_APPROVED !== "YES") {
+  console.error("Production migration approval is required. Set PRODUCTION_MIGRATION_APPROVED=YES only for the approved migration command.");
+  process.exit(1);
+}
+
 if (!runtimeDatabaseUrl) {
   console.error("DATABASE_URL is required before applying production migrations.");
   process.exit(1);

@@ -37,6 +37,8 @@ NEXTAUTH_SECRET=""
 PASSWORD_RESET_TOKEN_SECRET=""
 ADMIN_SETUP_SECRET=""
 PAYMENT_CALLBACK_SECRET=""
+AFFILIATE_WITHDRAWAL_MIN_MINOR=""
+AFFILIATE_WITHDRAWAL_MAX_MINOR=""
 EMAIL_FROM="BaBra Store <no-reply@babra.store>"
 SMTP_HOST=""
 SMTP_PORT="587"
@@ -64,7 +66,7 @@ pnpm exec tsc --noEmit
 pnpm build
 ```
 
-On Vercel production, `pnpm build` runs `prisma migrate deploy` before `next build` when `DIRECT_URL` or `DATABASE_URL` is available.
+Production builds never run migrations. After explicit approval and a verified backup, run `pnpm production:migrate` separately with the one-command `PRODUCTION_MIGRATION_APPROVED=YES` flag, verify migration status, and only then deploy the application.
 
 ## 5. API Verification
 
