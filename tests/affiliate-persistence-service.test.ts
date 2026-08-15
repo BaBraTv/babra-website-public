@@ -9,6 +9,7 @@ type State = {
   referrals: Row[];
   commissions: Row[];
   withdrawals: Row[];
+  auditLogs: Row[];
 };
 
 function uniqueError() {
@@ -25,7 +26,7 @@ class FakePrisma {
     this.state = {
       affiliates: [{ id: "affiliate-1", userId: "owner-1", code: "AFF-1234567890ABCDEF", status: "ACTIVE", commissionRateBasisPoints: 1_000, codeExpiresAt: null }],
       orders: [{ id: "order-1", customerId: "customer-1", subtotalCents: 10_000, discountCents: 0, deliveryCents: 500, currency: "RWF" }],
-      referrals: [], commissions: [], withdrawals: [], ...state
+      referrals: [], commissions: [], withdrawals: [], auditLogs: [], ...state
     };
   }
 
@@ -39,7 +40,16 @@ class FakePrisma {
     return {
       $queryRaw: async (_strings: TemplateStringsArray, affiliateId: string) => db.state.affiliates.filter((row) => row.id === affiliateId).map(({ id }) => ({ id })),
       affiliate: {
-        findUnique: async ({ where }: { where: { id?: string; code?: string } }) => db.state.affiliates.find((row) => row.id === where.id || row.code === where.code) ?? null
+        findUnique: async ({ where, include }: { where: { id?: string; code?: string; userId?: string }; include?: object }) => {
+          const affiliate = db.state.affiliates.find((row) => row.id === where.id || row.code === where.code || row.userId === where.userId);
+          if (!affiliate || !include) return affiliate ?? null;
+          return {
+            ...affiliate,
+            referrals: db.state.referrals.filter((row) => row.affiliateId === affiliate.id),
+            commissions: db.state.commissions.filter((row) => row.affiliateId === affiliate.id),
+            withdrawals: db.state.withdrawals.filter((row) => row.affiliateId === affiliate.id)
+          };
+        }
       },
       order: {
         findUnique: async ({ where }: { where: { id: string } }) => db.state.orders.find((row) => row.id === where.id) ?? null
@@ -98,6 +108,13 @@ class FakePrisma {
         aggregate: async ({ where }: { where: { affiliateId: string; currency: string; status: { in: string[] } } }) => ({
           _sum: { amountMinor: db.state.withdrawals.filter((row) => row.affiliateId === where.affiliateId && row.currency === where.currency && where.status.in.includes(String(row.status))).reduce((sum, row) => sum + Number(row.amountMinor), 0) || null }
         })
+      },
+      adminActivityLog: {
+        create: async ({ data }: { data: Row }) => {
+          const row = { ...data, id: db.nextId("audit") };
+          db.state.auditLogs.push(row);
+          return row;
+        }
       }
     };
   }
@@ -193,13 +210,15 @@ test("valid commission lifecycle preserves financial snapshots", async () => {
   const db = new FakePrisma();
   const referral = await createReferral(db);
   const created = await service(db).createCommission({ referralId: String(referral.id) });
-  const approved = await service(db).transitionCommission({ commissionId: String(created.id), affiliateId: "affiliate-1", to: "APPROVED" });
+  const approved = await service(db).transitionCommission({ commissionId: String(created.id), affiliateId: "affiliate-1", to: "APPROVED", actorId: "admin-1" });
   const paid = await service(db).transitionCommission({ commissionId: String(created.id), affiliateId: "affiliate-1", to: "PAID" });
   assert.equal(approved.status, "APPROVED");
   assert.equal(paid.status, "PAID");
   assert.equal(paid.amountMinor, created.amountMinor);
   assert.equal(paid.eligibleBaseMinor, created.eligibleBaseMinor);
   assert.equal(paid.rateBasisPoints, created.rateBasisPoints);
+  assert.equal(db.state.auditLogs.length, 1);
+  assert.equal(db.state.auditLogs[0].actorId, "admin-1");
 });
 
 test("valid withdrawal lifecycle remains consumed after payout", async () => {

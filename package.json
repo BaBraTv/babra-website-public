@@ -21,6 +21,7 @@
     "test:affiliate": "node --experimental-strip-types --test tests/affiliate-domain.test.ts",
     "test:affiliate-persistence": "node --experimental-strip-types --test tests/affiliate-persistence.test.ts",
     "test:affiliate-service": "node --experimental-strip-types --test tests/affiliate-persistence-service.test.ts",
+    "test:affiliate-api": "node --experimental-strip-types --test tests/affiliate-api.test.ts",
     "probe:affiliate-staging": "node scripts/probe-affiliate-constraints.mjs"
   },
   "dependencies": {

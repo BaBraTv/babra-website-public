@@ -89,6 +89,37 @@ export class AffiliatePersistenceService {
     if (rows.length !== 1) throw new AffiliatePersistenceError("AFFILIATE_NOT_FOUND", "Affiliate not found");
   }
 
+  async getAccountSnapshot(userId: string) {
+    return this.serializable(async (tx) => {
+      const identity = await tx.affiliate.findUnique({ where: { userId }, select: { id: true } });
+      if (!identity) throw new AffiliatePersistenceError("AFFILIATE_NOT_FOUND", "Affiliate not found");
+      await this.lockAffiliate(tx, identity.id);
+      const affiliate = await tx.affiliate.findUnique({
+        where: { userId },
+        include: {
+          referrals: { orderBy: { attributedAt: "desc" }, take: 100 },
+          commissions: { orderBy: { createdAt: "desc" }, take: 100 },
+          withdrawals: { orderBy: { requestedAt: "desc" }, take: 100 }
+        }
+      });
+      if (!affiliate) throw new AffiliatePersistenceError("AFFILIATE_NOT_FOUND", "Affiliate not found");
+      const currencies = [...new Set([
+        ...affiliate.commissions.map((item) => item.currency),
+        ...affiliate.withdrawals.map((item) => item.currency)
+      ])];
+      const balances = Object.fromEntries(currencies.map((currency) => {
+        const approved = affiliate.commissions
+          .filter((item) => item.currency === currency && item.status === "APPROVED")
+          .reduce((sum, item) => sum + item.amountMinor, 0);
+        const consumed = affiliate.withdrawals
+          .filter((item) => item.currency === currency && ["PENDING", "APPROVED", "PAID"].includes(item.status))
+          .reduce((sum, item) => sum + item.amountMinor, 0);
+        return [currency, { approvedMinor: approved, consumedMinor: consumed, availableMinor: Math.max(0, approved - consumed) }];
+      }));
+      return { affiliate, balances };
+    });
+  }
+
   async createReferral(input: {
     affiliateCode: string;
     orderId: string;
@@ -138,7 +169,7 @@ export class AffiliatePersistenceService {
     });
   }
 
-  async createCommission(input: { referralId: string; includeDelivery?: boolean; now?: Date }) {
+  async createCommission(input: { referralId: string; includeDelivery?: boolean; actorId?: string; now?: Date }) {
     return this.serializable(async (tx) => {
       const referral = await tx.affiliateReferral.findUnique({
         where: { id: input.referralId },
@@ -187,6 +218,16 @@ export class AffiliatePersistenceService {
         if (referral.status === "ATTRIBUTED") {
           await tx.affiliateReferral.update({ where: { id: referral.id }, data: { status: "CONVERTED", convertedAt: input.now ?? new Date() } });
         }
+        if (input.actorId) {
+          await tx.adminActivityLog.create({ data: {
+            actorId: input.actorId,
+            action: "CREATE",
+            entityType: "AffiliateCommission",
+            entityId: commission.id,
+            summary: "Affiliate commission created from verified referral",
+            metadata: { affiliateId: referral.affiliateId, amountMinor: commission.amountMinor, currency: commission.currency }
+          } });
+        }
         return commission;
       } catch (error) {
         if (isUniqueConstraint(error)) throw new AffiliatePersistenceError("DUPLICATE_COMMISSION", "Referral or order already has a commission");
@@ -195,7 +236,7 @@ export class AffiliatePersistenceService {
     });
   }
 
-  async transitionCommission(input: { commissionId: string; affiliateId: string; to: CommissionStatus; reason?: string; now?: Date }) {
+  async transitionCommission(input: { commissionId: string; affiliateId: string; to: CommissionStatus; reason?: string; actorId?: string; now?: Date }) {
     return this.serializable(async (tx) => {
       await this.lockAffiliate(tx, input.affiliateId);
       const commission = await tx.affiliateCommission.findUnique({ where: { id: input.commissionId }, include: { referral: true } });
@@ -206,7 +247,7 @@ export class AffiliatePersistenceService {
       assertCommissionSnapshot(commission);
       const decision = transitionCommission(commission.status, input.to, input.now ?? new Date());
       if (!decision.changed) return commission;
-      return tx.affiliateCommission.update({
+      const updated = await tx.affiliateCommission.update({
         where: { id: commission.id },
         data: {
           status: input.to,
@@ -216,6 +257,17 @@ export class AffiliatePersistenceService {
           voidReason: input.to === "VOIDED" ? input.reason?.trim().slice(0, 500) || "Commission voided" : commission.voidReason
         }
       });
+      if (input.actorId) {
+        await tx.adminActivityLog.create({ data: {
+          actorId: input.actorId,
+          action: "STATUS_CHANGE",
+          entityType: "AffiliateCommission",
+          entityId: commission.id,
+          summary: `Affiliate commission moved to ${input.to}`,
+          metadata: { affiliateId: input.affiliateId, previousStatus: commission.status, nextStatus: input.to, amountMinor: commission.amountMinor, currency: commission.currency }
+        } });
+      }
+      return updated;
     });
   }
 
@@ -288,6 +340,7 @@ export class AffiliatePersistenceService {
     to: WithdrawalStatus;
     adminReason?: string;
     payoutReference?: string;
+    actorId?: string;
     now?: Date;
   }) {
     return this.serializable(async (tx) => {
@@ -301,7 +354,7 @@ export class AffiliatePersistenceService {
       if (reason && reason.length > 500) throw new Error("Administrative reason is too long");
       const payoutReference = input.payoutReference?.trim();
       if (input.to === "PAID" && !payoutReference) throw new Error("A payout reference is required to mark a withdrawal paid");
-      return tx.affiliateWithdrawal.update({
+      const updated = await tx.affiliateWithdrawal.update({
         where: { id: withdrawal.id },
         data: {
           status: input.to,
@@ -313,6 +366,17 @@ export class AffiliatePersistenceService {
           cancelledAt: input.to === "CANCELLED" ? decision.occurredAt : withdrawal.cancelledAt
         }
       });
+      if (input.actorId) {
+        await tx.adminActivityLog.create({ data: {
+          actorId: input.actorId,
+          action: "STATUS_CHANGE",
+          entityType: "AffiliateWithdrawal",
+          entityId: withdrawal.id,
+          summary: `Affiliate withdrawal moved to ${input.to}`,
+          metadata: { affiliateId: input.affiliateId, previousStatus: withdrawal.status, nextStatus: input.to, amountMinor: withdrawal.amountMinor, currency: withdrawal.currency }
+        } });
+      }
+      return updated;
     });
   }
 }
