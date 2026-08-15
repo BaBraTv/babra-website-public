@@ -9,7 +9,15 @@ import { requireAdminUser } from "../../../../lib/session";
 export async function GET() {
   try {
     await requireAdminUser();
-    const affiliates = await getPrisma().affiliate.findMany({ orderBy: { createdAt: "desc" }, take: 100, include: { user: { select: { id: true, fullName: true, email: true, phone: true, status: true } } } });
+    const affiliates = await getPrisma().affiliate.findMany({
+      orderBy: { createdAt: "desc" }, take: 100,
+      include: {
+        user: { select: { id: true, fullName: true, email: true, phone: true, status: true } },
+        referrals: { orderBy: { attributedAt: "desc" }, take: 20 },
+        commissions: { orderBy: { createdAt: "desc" }, take: 50 },
+        withdrawals: { orderBy: { requestedAt: "desc" }, take: 50 }
+      }
+    });
     return NextResponse.json({ ok: true, affiliates });
   } catch (error) { return authFail(error); }
 }
