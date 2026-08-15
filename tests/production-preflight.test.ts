@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
+import { mkdtemp, mkdir, writeFile } from "node:fs/promises";
 import { readFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 import { evaluateProductionEnvironment } from "../lib/production-preflight.mjs";
+import { loadProductionEnvironment } from "../scripts/load-production-env.mjs";
 
 const valid = {
   DATABASE_URL: "postgresql://user:encoded@pool.example.com:6543/postgres",
@@ -21,6 +25,19 @@ test("production preflight rejects localhost, placeholders, and invalid affiliat
   assert.equal(evaluateProductionEnvironment({ ...valid, DATABASE_URL: "postgresql://u:p@localhost/db" }).ok, false);
   assert.equal(evaluateProductionEnvironment({ ...valid, AUTH_SESSION_SECRET: "replace-me" }).ok, false);
   assert.equal(evaluateProductionEnvironment({ ...valid, AFFILIATE_WITHDRAWAL_MIN_MINOR: "1000", AFFILIATE_WITHDRAWAL_MAX_MINOR: "500" }).ok, false);
+});
+
+test("production-local files override empty base placeholders", async () => {
+  const cwd = await mkdtemp(join(tmpdir(), "babra-production-env-"));
+  await mkdir(join(cwd, ".vercel"));
+  await writeFile(join(cwd, ".env"), "DATABASE_URL=\nAUTH_SESSION_SECRET=\n");
+  await writeFile(join(cwd, ".vercel", ".env.production.local"), "DATABASE_URL=postgresql://production.example/db\nAUTH_SESSION_SECRET=secure-production-secret\n");
+  const environment: Record<string, string> = {};
+
+  loadProductionEnvironment({ cwd, environment });
+
+  assert.equal(environment.DATABASE_URL, "postgresql://production.example/db");
+  assert.equal(environment.AUTH_SESSION_SECRET, "secure-production-secret");
 });
 
 test("production build cannot invoke migrations and migration script requires approval", async () => {
