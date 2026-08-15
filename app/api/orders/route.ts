@@ -7,6 +7,7 @@ import { queueNotification } from "../../../lib/email-routing";
 import { authFail, fail, redactOrder } from "../../../lib/api";
 import { z } from "zod";
 import { enforceRateLimit } from "../../../lib/rate-limit";
+import { AffiliatePersistenceService, AffiliatePersistenceError } from "../../../lib/affiliate-persistence";
 
 const paymentProviderMap = {
   CASH_ON_DELIVERY: "CASH_ON_DELIVERY",
@@ -98,6 +99,21 @@ export async function POST(request: NextRequest) {
       include: { items: true, payments: true }
     });
 
+    let affiliateAttributed = false;
+    if (payload.affiliateCode) {
+      try {
+        await new AffiliatePersistenceService(prisma).createReferral({
+          affiliateCode: payload.affiliateCode,
+          orderId: order.id,
+          customerUserId: user?.id,
+          landingPath: "/checkout"
+        });
+        affiliateAttributed = true;
+      } catch (error) {
+        if (!(error instanceof AffiliatePersistenceError)) throw error;
+      }
+    }
+
     await queueNotification({
       route: "orders",
       subject: `New BaBra order ${order.orderNumber}`,
@@ -105,7 +121,7 @@ export async function POST(request: NextRequest) {
       payload: { orderId: order.id, orderNumber: order.orderNumber, customerPhone: order.customerPhone }
     });
 
-    return NextResponse.json({ ok: true, order: redactOrder(order) });
+    return NextResponse.json({ ok: true, order: redactOrder(order), affiliateAttribution: { attributed: affiliateAttributed } });
   } catch (error) {
     return fail(error);
   }

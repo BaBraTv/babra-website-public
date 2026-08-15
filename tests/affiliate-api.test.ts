@@ -11,6 +11,7 @@ import {
   withdrawalRequestSchema,
   withdrawalTransitionSchema
 } from "../lib/affiliate-api.ts";
+import { orderSubmissionSchema } from "../lib/validation.ts";
 
 test("withdrawal request validation is strict and integer-minor-unit only", () => {
   assert.deepEqual(withdrawalRequestSchema.parse({ idempotencyKey: " payout-1 ", amountMinor: 500 }), {
@@ -18,6 +19,13 @@ test("withdrawal request validation is strict and integer-minor-unit only", () =
   });
   assert.throws(() => withdrawalRequestSchema.parse({ idempotencyKey: "x", amountMinor: 1.5 }));
   assert.throws(() => withdrawalRequestSchema.parse({ idempotencyKey: "x", amountMinor: 1, payoutAccount: "secret" }));
+});
+
+test("checkout accepts only a bounded affiliate code and no affiliate financial input", () => {
+  const base = { customerName: "Customer", customerPhone: "250700000000", items: [{ productSlug: "women", quantity: 1 }] };
+  assert.equal(orderSubmissionSchema.parse({ ...base, affiliateCode: " aff-1234567890abcdef " }).affiliateCode, "aff-1234567890abcdef");
+  assert.throws(() => orderSubmissionSchema.parse({ ...base, affiliateCode: "x".repeat(21) }));
+  assert.throws(() => orderSubmissionSchema.parse({ ...base, affiliateId: "attacker-selected" }));
 });
 
 test("admin transition schemas allow only bounded lifecycle input", () => {
@@ -76,12 +84,15 @@ test("affiliate routes enforce authentication, authorization, and rate limits", 
   const adminWithdrawals = await readFile(new URL("app/api/admin/affiliate-withdrawals/route.ts", root), "utf8");
   const application = await readFile(new URL("app/api/affiliate/application/route.ts", root), "utf8");
   const affiliates = await readFile(new URL("app/api/admin/affiliates/route.ts", root), "utf8");
+  const orders = await readFile(new URL("app/api/orders/route.ts", root), "utf8");
   assert.match(summary, /await requireCurrentUser\(\)/);
   assert.match(withdrawals, /await requireCurrentUser\(\)/);
   assert.match(withdrawals, /await enforceRateLimit\(/);
   assert.match(application, /await requireCurrentUser\(\)/);
   assert.match(application, /await enforceRateLimit\(/);
   assert.match(affiliates, /await requireAdminUser\(\)/);
+  assert.match(orders, /new AffiliatePersistenceService\(prisma\)\.createReferral\(/);
+  assert.doesNotMatch(orders, /affiliateId:\s*payload/);
   for (const source of [commissions, adminWithdrawals]) {
     assert.match(source, /await requireAdminUser\(\)/);
     assert.match(source, /await enforceRateLimit\(/);
