@@ -13,7 +13,7 @@ export async function GET() {
       orderBy: { createdAt: "desc" }, take: 100,
       include: {
         user: { select: { id: true, fullName: true, email: true, phone: true, status: true } },
-        referrals: { orderBy: { attributedAt: "desc" }, take: 20 },
+        referrals: { orderBy: { attributedAt: "desc" }, take: 20, include: { commission: { select: { id: true } } } },
         commissions: { orderBy: { createdAt: "desc" }, take: 50 },
         withdrawals: { orderBy: { requestedAt: "desc" }, take: 50 }
       }

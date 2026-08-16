@@ -24,6 +24,7 @@
     "test:affiliate-service": "node --experimental-strip-types --test tests/affiliate-persistence-service.test.ts",
     "test:affiliate-api": "node --experimental-strip-types --test tests/affiliate-api.test.ts",
     "test:affiliate-ui": "node --experimental-strip-types --test tests/affiliate-ui.test.ts",
+    "test:affiliate-workflow": "node --experimental-strip-types --test tests/affiliate-workflow.test.ts",
     "test:production-preflight": "node --experimental-strip-types --test tests/production-preflight.test.ts",
     "probe:affiliate-staging": "node scripts/probe-affiliate-constraints.mjs"
   },

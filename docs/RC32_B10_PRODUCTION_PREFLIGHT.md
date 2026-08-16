@@ -19,7 +19,7 @@ All four applied successfully from zero in disposable staging. The affiliate mig
 
 ## Required production environment
 
-`DATABASE_URL`, `DIRECT_URL`, `PRODUCTION_APP_URL`, `NEXT_PUBLIC_SITE_URL`, `AUTH_SESSION_SECRET`, `NEXTAUTH_SECRET`, `PASSWORD_RESET_TOKEN_SECRET`, `ADMIN_SETUP_SECRET`, `PAYMENT_CALLBACK_SECRET`, and an approved `AFFILIATE_WITHDRAWAL_MIN_MINOR` are required. `AFFILIATE_WITHDRAWAL_MAX_MINOR` is optional but must be no lower than the minimum. Email variables are required before real email delivery. External payment-provider variables remain disabled/empty until those providers receive a separate security review.
+`DATABASE_URL`, `DIRECT_URL`, `PRODUCTION_APP_URL`, `NEXT_PUBLIC_SITE_URL`, `PRODUCTION_SUPABASE_PROJECT_REF`, `PRODUCTION_DATABASE_HOST`, `PRODUCTION_DIRECT_DATABASE_HOST`, `ADMIN_SETUP_SECRET`, `PAYMENT_CALLBACK_SECRET`, and an approved `AFFILIATE_WITHDRAWAL_MIN_MINOR` are required. The database URLs must match the exact reviewed hosts and Supabase project identity. `AFFILIATE_WITHDRAWAL_MAX_MINOR` is optional but must be no lower than the minimum. Email variables are required before real email delivery. External payment-provider variables remain disabled/empty until those providers receive a separate security review. The custom random-token authentication and reset flows do not consume `AUTH_SESSION_SECRET`, `NEXTAUTH_SECRET`, or `PASSWORD_RESET_TOKEN_SECRET`; they are not production gates unless those implementations change.
 
 `PRODUCTION_MIGRATION_APPROVED=YES` is a one-command approval guard. It must not be persisted in Vercel or source control.
 

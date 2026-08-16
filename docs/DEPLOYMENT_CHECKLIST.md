@@ -32,9 +32,9 @@ DATABASE_URL=""
 DIRECT_URL=""
 PRODUCTION_APP_URL="https://www.babra.store"
 NEXT_PUBLIC_SITE_URL="https://www.babra.store"
-AUTH_SESSION_SECRET=""
-NEXTAUTH_SECRET=""
-PASSWORD_RESET_TOKEN_SECRET=""
+PRODUCTION_SUPABASE_PROJECT_REF=""
+PRODUCTION_DATABASE_HOST=""
+PRODUCTION_DIRECT_DATABASE_HOST=""
 ADMIN_SETUP_SECRET=""
 PAYMENT_CALLBACK_SECRET=""
 AFFILIATE_WITHDRAWAL_MIN_MINOR=""
@@ -53,7 +53,7 @@ MTN_MOMO_API_KEY=""
 
 Use `scripts/vercel-env-production-template.txt` as the copy checklist.
 
-Email and payment provider values can stay empty until configured, but `DATABASE_URL`, auth secrets, and `ADMIN_SETUP_SECRET` must be real before production use.
+Email and external payment-provider values can stay empty until configured. The database identity values, `DATABASE_URL`, `DIRECT_URL`, `ADMIN_SETUP_SECRET`, `PAYMENT_CALLBACK_SECRET`, and approved affiliate withdrawal policy must be real before production use. The current custom random-token session and password-reset implementations do not consume `AUTH_SESSION_SECRET`, `NEXTAUTH_SECRET`, or `PASSWORD_RESET_TOKEN_SECRET`, so obsolete placeholders for them are intentionally not production gates.
 
 ## 4. Build Verification
 

@@ -112,6 +112,7 @@ class FakePrisma {
           return row;
         },
         update: async ({ where, data }: { where: { id: string }; data: Row }) => db.update(db.state.withdrawals, where.id, data),
+        count: async ({ where }: { where: { affiliateId: string; currency: string; status: { in: string[] } } }) => db.state.withdrawals.filter((row) => row.affiliateId === where.affiliateId && row.currency === where.currency && where.status.in.includes(String(row.status))).length,
         aggregate: async ({ where }: { where: { affiliateId: string; currency: string; status: { in: string[] } } }) => ({
           _sum: { amountMinor: db.state.withdrawals.filter((row) => row.affiliateId === where.affiliateId && row.currency === where.currency && where.status.in.includes(String(row.status))).reduce((sum, row) => sum + Number(row.amountMinor), 0) || null }
         })
@@ -230,7 +231,7 @@ test("valid commission lifecycle preserves financial snapshots", async () => {
   const referral = await createReferral(db);
   const created = await service(db).createCommission({ referralId: String(referral.id) });
   const approved = await service(db).transitionCommission({ commissionId: String(created.id), affiliateId: "affiliate-1", to: "APPROVED", actorId: "admin-1" });
-  const paid = await service(db).transitionCommission({ commissionId: String(created.id), affiliateId: "affiliate-1", to: "PAID" });
+  const paid = await service(db).transitionCommission({ commissionId: String(created.id), affiliateId: "affiliate-1", to: "PAID", reason: "direct-settlement-1" });
   assert.equal(approved.status, "APPROVED");
   assert.equal(paid.status, "PAID");
   assert.equal(paid.amountMinor, created.amountMinor);
@@ -238,6 +239,17 @@ test("valid commission lifecycle preserves financial snapshots", async () => {
   assert.equal(paid.rateBasisPoints, created.rateBasisPoints);
   assert.equal(db.state.auditLogs.length, 1);
   assert.equal(db.state.auditLogs[0].actorId, "admin-1");
+});
+
+test("direct commission settlement cannot overlap a withdrawal and rolls back", async () => {
+  const db = new FakePrisma({
+    referrals: [{ id: "referral-1", affiliateId: "affiliate-1", orderId: "order-1", status: "CONVERTED", affiliateCodeSnapshot: "AFF-1234567890ABCDEF" }],
+    commissions: [{ id: "commission-1", referralId: "referral-1", affiliateId: "affiliate-1", orderId: "order-1", amountMinor: 1_000, eligibleBaseMinor: 10_000, rateBasisPoints: 1_000, currency: "RWF", status: "APPROVED", approvedAt: new Date(), voidedAt: null, paidAt: null }],
+    withdrawals: [{ id: "withdrawal-1", affiliateId: "affiliate-1", idempotencyKey: "existing", amountMinor: 500, currency: "RWF", status: "PENDING" }]
+  });
+  await expectCode(service(db).transitionCommission({ commissionId: "commission-1", affiliateId: "affiliate-1", to: "PAID", reason: "direct-settlement-2" }), "SETTLEMENT_CONFLICT");
+  assert.equal(db.state.commissions[0].status, "APPROVED");
+  assert.equal(db.state.commissions[0].paidAt, null);
 });
 
 test("valid withdrawal lifecycle remains consumed after payout", async () => {

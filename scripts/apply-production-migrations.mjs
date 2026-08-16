@@ -1,11 +1,19 @@
 import { spawnSync } from "node:child_process";
 import "./load-production-env.mjs";
+import { evaluateProductionEnvironment } from "../lib/production-preflight.mjs";
 
 const runtimeDatabaseUrl = process.env.DATABASE_URL || "";
 const migrationDatabaseUrl = process.env.DIRECT_URL || runtimeDatabaseUrl;
 
 if (process.env.PRODUCTION_MIGRATION_APPROVED !== "YES") {
   console.error("Production migration approval is required. Set PRODUCTION_MIGRATION_APPROVED=YES only for the approved migration command.");
+  process.exit(1);
+}
+
+const preflight = evaluateProductionEnvironment(process.env);
+if (!preflight.ok) {
+  console.error("Production environment preflight failed; migration was not started.");
+  console.error(JSON.stringify(preflight.checks, null, 2));
   process.exit(1);
 }
 

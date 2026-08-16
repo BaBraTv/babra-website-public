@@ -7,7 +7,7 @@ The application code is ready for production infrastructure connection, but the 
 - Supabase production `DATABASE_URL`
 - Vercel project environment access
 - `ADMIN_SETUP_SECRET`
-- auth/password reset/payment callback secrets
+- payment callback secret
 - email provider credentials
 
 ## What Is Ready
@@ -16,7 +16,7 @@ The application code is ready for production infrastructure connection, but the 
 - PostgreSQL migration files exist.
 - Prisma migration lock is set to PostgreSQL.
 - Production migration script exists: `pnpm production:migrate`.
-- Vercel production builds run `prisma migrate deploy` automatically when `DIRECT_URL` or `DATABASE_URL` is configured.
+- Vercel production builds never run database migrations. Migrations require a separate, explicitly approved `pnpm production:migrate` command after preflight and backup verification.
 - Production env validation script exists: `pnpm production:env-check`.
 - API verification script exists: `pnpm verify:api`.
 - Vercel env template exists: `scripts/vercel-env-production-template.txt`.

@@ -31,7 +31,11 @@ export const commissionTransitionSchema = z.object({
   affiliateId: identifier,
   status: z.enum(["APPROVED", "VOIDED", "PAID"]),
   reason: z.string().trim().min(1).max(500).optional()
-}).strict();
+}).strict().superRefine((value, context) => {
+  if (value.status === "PAID" && !value.reason) {
+    context.addIssue({ code: "custom", path: ["reason"], message: "A non-secret direct settlement reference is required" });
+  }
+});
 
 export const withdrawalTransitionSchema = z.object({
   withdrawalId: identifier,
@@ -65,7 +69,7 @@ export function affiliateErrorStatus(error: unknown) {
   if (error instanceof Error && error.message === "Rate limit exceeded") return 429;
   if (!(error instanceof AffiliatePersistenceError)) return 500;
   if (["AFFILIATE_NOT_FOUND", "REFERRAL_NOT_FOUND", "COMMISSION_NOT_FOUND", "WITHDRAWAL_NOT_FOUND"].includes(error.code)) return 404;
-  if (["DUPLICATE_AFFILIATE", "DUPLICATE_REFERRAL", "DUPLICATE_COMMISSION", "IDEMPOTENCY_CONFLICT", "CROSS_AFFILIATE_MISMATCH"].includes(error.code)) return 409;
+  if (["DUPLICATE_AFFILIATE", "DUPLICATE_REFERRAL", "DUPLICATE_COMMISSION", "IDEMPOTENCY_CONFLICT", "CROSS_AFFILIATE_MISMATCH", "SETTLEMENT_CONFLICT"].includes(error.code)) return 409;
   return 422;
 }
 

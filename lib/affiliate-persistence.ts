@@ -25,6 +25,7 @@ export type AffiliatePersistenceErrorCode =
   | "INVALID_COMMISSION_SNAPSHOT"
   | "CROSS_AFFILIATE_MISMATCH"
   | "COMMISSION_NOT_FOUND"
+  | "SETTLEMENT_CONFLICT"
   | "WITHDRAWAL_NOT_FOUND"
   | "WITHDRAWAL_REJECTED"
   | "IDEMPOTENCY_CONFLICT";
@@ -313,6 +314,19 @@ export class AffiliatePersistenceService {
       assertCommissionSnapshot(commission);
       const decision = transitionCommission(commission.status, input.to, input.now ?? new Date());
       if (!decision.changed) return commission;
+      if (input.to === "PAID") {
+        if (!input.reason?.trim()) throw new AffiliatePersistenceError("SETTLEMENT_CONFLICT", "A non-secret direct settlement reference is required");
+        const withdrawalCount = await tx.affiliateWithdrawal.count({
+          where: {
+            affiliateId: input.affiliateId,
+            currency: commission.currency,
+            status: { in: ["PENDING", "APPROVED", "PAID"] }
+          }
+        });
+        if (withdrawalCount > 0) {
+          throw new AffiliatePersistenceError("SETTLEMENT_CONFLICT", "Direct commission settlement cannot be mixed with an existing withdrawal");
+        }
+      }
       const updated = await tx.affiliateCommission.update({
         where: { id: commission.id },
         data: {
@@ -330,7 +344,7 @@ export class AffiliatePersistenceService {
           entityType: "AffiliateCommission",
           entityId: commission.id,
           summary: `Affiliate commission moved to ${input.to}`,
-          metadata: { affiliateId: input.affiliateId, previousStatus: commission.status, nextStatus: input.to, amountMinor: commission.amountMinor, currency: commission.currency }
+          metadata: { affiliateId: input.affiliateId, previousStatus: commission.status, nextStatus: input.to, amountMinor: commission.amountMinor, currency: commission.currency, ...(input.to === "PAID" ? { settlementReference: input.reason?.trim().slice(0, 191) } : {}) }
         } });
       }
       return updated;

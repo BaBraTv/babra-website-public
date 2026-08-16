@@ -31,6 +31,8 @@ test("checkout accepts only a bounded affiliate code and no affiliate financial 
 test("admin transition schemas allow only bounded lifecycle input", () => {
   assert.equal(commissionTransitionSchema.parse({ commissionId: "c", affiliateId: "a", status: "APPROVED" }).status, "APPROVED");
   assert.throws(() => commissionTransitionSchema.parse({ commissionId: "c", affiliateId: "a", status: "PENDING" }));
+  assert.throws(() => commissionTransitionSchema.parse({ commissionId: "c", affiliateId: "a", status: "PAID" }), /settlement reference/);
+  assert.equal(commissionTransitionSchema.parse({ commissionId: "c", affiliateId: "a", status: "PAID", reason: "direct-1" }).status, "PAID");
   assert.throws(() => withdrawalTransitionSchema.parse({ withdrawalId: "w", affiliateId: "a", status: "PAID" }), /Payout reference/);
   assert.equal(withdrawalTransitionSchema.parse({ withdrawalId: "w", affiliateId: "a", status: "PAID", payoutReference: "provider-1" }).status, "PAID");
 });
@@ -60,6 +62,7 @@ test("withdrawal policy fails closed unless configured", () => {
 test("affiliate errors map to safe HTTP classes", () => {
   assert.equal(affiliateErrorStatus(new AffiliatePersistenceError("AFFILIATE_NOT_FOUND", "internal")), 404);
   assert.equal(affiliateErrorStatus(new AffiliatePersistenceError("IDEMPOTENCY_CONFLICT", "internal")), 409);
+  assert.equal(affiliateErrorStatus(new AffiliatePersistenceError("SETTLEMENT_CONFLICT", "internal")), 409);
   assert.equal(affiliateErrorStatus(new AffiliatePersistenceError("WITHDRAWAL_REJECTED", "internal")), 422);
   assert.equal(affiliateErrorStatus(new Error("unexpected")), 500);
 });
