@@ -2,7 +2,7 @@ export const divisionForms = {
   cosmetics: {
     name: "BaBra Cosmetics forms",
     accent: "#f1d58b",
-    description: "Official BaBra Cosmetics forms for beauty commerce, showroom, samples, wholesale, and customer support.",
+    description: "Official BaBra Cosmetics forms for beauty commerce, showroom, samples, international wholesale, distribution, and customer support.",
     items: [
       ["Sales Representative Application", "whatsapp", "Apply for cosmetics sales work, field activation, retail visits, and customer onboarding."],
       ["Beauty Consultant Application", "whatsapp", "Apply to advise customers on BaBra skincare routines and showroom support."],
@@ -10,7 +10,7 @@ export const divisionForms = {
       ["Branch Manager Application", "whatsapp", "Apply for branch leadership, stock coordination, staff supervision, and sales reporting."],
       ["Marketing Officer Application", "whatsapp", "Apply for cosmetics campaigns, content, market activation, and brand growth."],
       ["Customer Support Application", "whatsapp", "Apply for order support, WhatsApp care, product guidance, and customer follow-up."],
-      ["Wholesale Distributor Application", "/wholesale-distributor", "Apply as a reseller, wholesaler, distributor, shop, salon, or beauty partner."],
+      ["Wholesale & International Distributor Inquiry", "/wholesale-distributor", "Request reseller, wholesale, importer, distributor, bulk, or container supply. Qualifying large orders can be reviewed for direct shipment from China to the buyer's destination country."],
       ["Sample Request", "/sample-request", "Request BaBra Lotion and skincare samples through the official WhatsApp flow."],
       ["Showroom Visit Booking", "/contact-showroom", "Book showroom support, product consultation, or partner onboarding."],
       ["Product Verification / Customer Support", "/contact-showroom", "Ask for product support while keeping QR, barcode, and batch details private."]

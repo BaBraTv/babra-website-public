@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/products", "weekly", 0.95],
     ["/store", "weekly", 0.95],
     ["/cosmetics", "weekly", 0.9],
+    ["/wholesale-distributor", "weekly", 0.95],
     ["/schools", "monthly", 0.85],
     ["/rwanda-mobile-hub", "monthly", 0.85],
     ["/dental-experts-clinic", "monthly", 0.9],
