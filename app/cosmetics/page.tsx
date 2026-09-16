@@ -50,6 +50,24 @@ export default function CosmeticsPage() {
         </div>
       </section>
 
+      <section className="border-y border-[#d6ad57]/20 bg-[#15100d] px-5 py-14 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 rounded-[2rem] border border-[#d6ad57]/25 bg-black/20 p-7 md:grid-cols-[1fr_auto] md:items-center md:p-10">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#f1d58b]">International business</p>
+            <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none">Wholesale, distributor or container inquiry?</h2>
+            <p className="mt-5 max-w-3xl leading-8 text-white/64">
+              BaBra welcomes serious importers, wholesalers and distributors. Qualifying large-volume orders can be reviewed for production through our China manufacturing supply chain and direct shipment to the buyer&apos;s destination country.
+            </p>
+          </div>
+          <a
+            className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#f1d58b] px-7 font-black text-[#130d08]"
+            href="/wholesale-distributor"
+          >
+            Request Wholesale Quote
+          </a>
+        </div>
+      </section>
+
       <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl rounded-lg border border-black/10 bg-white p-7">
           <p className="text-sm font-black uppercase tracking-[0.18em] text-[#a9141d]">Pending official content</p>
