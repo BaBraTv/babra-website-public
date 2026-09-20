@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { OfficialMedia } from "../components/OfficialMedia";
 import { officialMediaById } from "../data/official-media";
 import { cosmetics, products, whatsappOrderUrl } from "../commerce-data";
@@ -13,6 +14,13 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "BaBra Cosmetics | Luxury in Every Touch", description, images: ["/media/logos/babra-logo.jpeg"] }
 };
 const enquiry = whatsappOrderUrl("Hello BaBra Cosmetics, I would like to order BaBra Lotion. Please help me choose Women, Men or Kids and confirm the price, stock and delivery options.");
+
+const campaigns = [
+  { image: "for-her", title: "Signature for Her", slug: "women", alt: "BaBra Signature for Her lotion advertisement with a pink background and flowers", size: 1080 },
+  { image: "for-kids", title: "Soft Care for Kids", slug: "babies", alt: "BaBra Soft Care for Kids lotion advertisement with a rainbow and teddy bear", size: 1080 },
+  { image: "for-him", title: "Signature for Him", slug: "men", alt: "BaBra Signature for Him lotion advertisement in navy and gold", size: 1254 },
+  { image: "for-him-care", title: "Care That Defines You", slug: "men", alt: "BaBra men's lotion advertisement showing a man applying lotion", size: 1254 },
+];
 
 export default function CosmeticsPage() {
   return (
@@ -54,6 +62,20 @@ export default function CosmeticsPage() {
           </div>
         </section>
       </div>
+      <section id="campaigns" className={`${styles.wrap} ${styles.section}`} aria-labelledby="campaigns-title">
+        <p className={styles.eyebrow}>BaBra campaigns</p>
+        <h2 id="campaigns-title" className={styles.heading}>A touch for everyone.</h2>
+        <div className={styles.campaignGrid}>
+          {campaigns.map((campaign) => (
+            <figure key={campaign.image} className={styles.campaign}>
+              <a href={`/products/${campaign.slug}`} aria-label={`Explore ${campaign.title}`}>
+                <Image src={`/media/campaigns/${campaign.image}.jpeg`} alt={campaign.alt} width={campaign.size} height={campaign.size} sizes="(min-width: 1240px) 586px, (min-width: 768px) 47vw, 92vw" className={styles.campaignImage} />
+              </a>
+              <figcaption><a href={`/products/${campaign.slug}`}>{campaign.title} <span aria-hidden="true">↗</span></a></figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
       <section id="partnerships" className={`${styles.partnerships} ${styles.section}`}>
         <div className={styles.wrap}>
           <p className={styles.eyebrow}>Our partnerships</p>

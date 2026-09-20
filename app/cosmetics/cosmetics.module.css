@@ -52,7 +52,12 @@
 .business { border-top: 1px solid #d1c4af; margin-top: 24px; padding-top: 20px; }
 .business a { display: inline-flex; padding: 12px 0; font-weight: 700; }
 .mobileBar { display: none; }
+.campaignGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 26px; margin-top: 32px; }
+.campaign { min-width: 0; margin: 0; }
+.campaignImage { display: block; width: 100%; height: auto; border-radius: 4px; }
+.campaign figcaption a { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; font-size: 18px; border-bottom: 1px solid #d8cfbe; }
 @media (max-width: 767px) {
+  .campaignGrid { grid-template-columns: 1fr; gap: 24px; }
   .wrap { width: calc(100% - 36px); }
   .nav { gap: 12px; padding: 14px 0; }
   .navLinks { gap: 14px; font-size: 12px; }
