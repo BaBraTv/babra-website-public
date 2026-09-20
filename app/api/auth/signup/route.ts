@@ -3,9 +3,12 @@ import { getPrisma } from "../../../../lib/db";
 import { signupSchema, hashPassword } from "../../../../lib/auth";
 import { createSession, publicUser } from "../../../../lib/session";
 import { fail } from "../../../../lib/api";
+import { enforceRateLimit } from "../../../../lib/rate-limit";
+import { secretsMatch } from "../../../../lib/secrets";
 
 export async function POST(request: NextRequest) {
   try {
+    await enforceRateLimit(request, { route: "auth.signup", limit: 5, windowMs: 10 * 60_000 });
     const payload = signupSchema.parse(await request.json());
     if (!payload.email && !payload.phone) {
       throw new Error("Email or phone is required");
@@ -25,7 +28,9 @@ export async function POST(request: NextRequest) {
       throw new Error("Account already exists. Please login.");
     }
 
-    const isAdminSetup = payload.role !== "CUSTOMER" && request.headers.get("x-babra-admin-setup-secret") === process.env.ADMIN_SETUP_SECRET;
+    const isAdminSetup =
+      payload.role !== "CUSTOMER" &&
+      secretsMatch(request.headers.get("x-babra-admin-setup-secret"), process.env.ADMIN_SETUP_SECRET);
     const user = await prisma.user.create({
       data: {
         fullName: payload.fullName,

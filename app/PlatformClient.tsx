@@ -331,6 +331,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   const [manualStatus, setManualStatus] = useState<OrderStatus>("Quote requested");
   const [priceOverrides, setPriceOverrides] = useState<Record<string, number>>({});
   const [trackingCode, setTrackingCode] = useState("");
+  const [affiliateCode, setAffiliateCode] = useState("");
   const [loginIdentifier, setLoginIdentifier] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [forgotIdentifier, setForgotIdentifier] = useState("");
@@ -540,6 +541,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
           customerPhone: account.phone,
           items: cartLines.map((item) => ({ productSlug: item.product.slug, quantity: item.quantity })),
           paymentProvider: uiPaymentToApi[method],
+          affiliateCode: affiliateCode || undefined,
           province: account.province,
           district: account.district,
           sector: account.sector,
@@ -822,6 +824,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                 <div className="mt-6 grid gap-5">
                   <h3 className="font-serif text-3xl">Customer information</h3>
                   {accountForm}
+                  <Field label="Affiliate code (optional)" value={affiliateCode} onChange={setAffiliateCode} />
                   <h3 className="mt-2 font-serif text-3xl">Payment method</h3>
                   <SelectField label="Payment method" value={method} options={paymentMethods} onChange={(value) => setMethod(value as PaymentMethod)} />
                   {method !== "Cash on Delivery" ? (

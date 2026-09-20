@@ -15,8 +15,18 @@
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "production:env-check": "node scripts/check-production-env.mjs",
+    "production:preflight": "node scripts/production-readiness-preflight.mjs",
     "production:migrate": "node scripts/apply-production-migrations.mjs",
-    "verify:api": "node scripts/verify-production-api.mjs"
+    "verify:api": "node scripts/verify-production-api.mjs",
+    "test:security": "node --experimental-strip-types --test tests/security.test.ts",
+    "test:affiliate": "node --experimental-strip-types --test tests/affiliate-domain.test.ts",
+    "test:affiliate-persistence": "node --experimental-strip-types --test tests/affiliate-persistence.test.ts",
+    "test:affiliate-service": "node --experimental-strip-types --test tests/affiliate-persistence-service.test.ts",
+    "test:affiliate-api": "node --experimental-strip-types --test tests/affiliate-api.test.ts",
+    "test:affiliate-ui": "node --experimental-strip-types --test tests/affiliate-ui.test.ts",
+    "test:affiliate-workflow": "node --experimental-strip-types --test tests/affiliate-workflow.test.ts",
+    "test:production-preflight": "node --experimental-strip-types --test tests/production-preflight.test.ts",
+    "probe:affiliate-staging": "node scripts/probe-affiliate-constraints.mjs"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",

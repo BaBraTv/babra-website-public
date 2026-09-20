@@ -10,3 +10,5 @@ tsconfig.tsbuildinfo
 app/generated/prisma/
 .vercel
 .env*
+public/media/founder/Baine & Brandon.jpeg
+public/media/mobile-hub/RMH 3.mp4

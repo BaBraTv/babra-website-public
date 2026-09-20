@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { divisionContent, type DivisionKey } from "./division-content";
 import { officialMediaPendingLabel } from "./data/official-media";
 
@@ -59,8 +60,25 @@ const divisionMenus: Record<DivisionKey, string[][]> = {
 const serviceAnchors: Partial<Record<DivisionKey, Array<string | undefined>>> = {
   farm: ["farmers", "suppliers", "marketplace", "partnerships"],
   schools: ["admissions", "teachers", "scholarships", "digital-school"],
-  hospital: ["roadmap", "systems", "trust", "partnerships"]
+  hospital: ["roadmap", "systems", "trust", "partnerships"],
+  "rwanda-mobile-hub": ["repairs", "accessories", "software", "hardware", "training"]
 };
+
+function DivisionImage({
+  src,
+  alt,
+  className,
+  priority = false,
+  sizes = "(max-width: 768px) 100vw, 50vw"
+}: {
+  src: string;
+  alt: string;
+  className: string;
+  priority?: boolean;
+  sizes?: string;
+}) {
+  return <Image className={className} src={src} alt={alt} width={1200} height={675} sizes={sizes} priority={priority} />;
+}
 
 export function DivisionPage({ division }: { division: DivisionKey }) {
   const data = divisionContent[division];
@@ -93,7 +111,7 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-2xl shadow-black/30">
             <figure className="border-b border-white/10 bg-black/25">
               {data.image ? (
-                <img className="h-72 w-full object-cover" src={data.image} alt={data.imageAlt} />
+                <DivisionImage className="h-72 w-full object-cover" src={data.image} alt={data.imageAlt} priority sizes="(max-width: 1024px) 100vw, 44vw" />
               ) : (
                 <div className="grid h-72 w-full place-items-center p-6 text-center text-sm font-black uppercase tracking-[0.14em] text-[#f1d58b]">
                   {officialMediaPendingLabel}
@@ -127,7 +145,7 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
                   className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055]"
                 >
                   {data.serviceImages[index] || data.image ? (
-                    <img className="h-40 w-full object-cover" src={data.serviceImages[index] || data.image} alt={`${data.name} - ${point}`} loading="lazy" />
+                    <DivisionImage className="h-40 w-full object-cover" src={data.serviceImages[index] || data.image} alt={`${data.name} - ${point}`} sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw" />
                   ) : (
                     <div className="grid h-40 w-full place-items-center p-4 text-center text-xs font-black uppercase tracking-[0.12em] text-[#f1d58b]">
                       {officialMediaPendingLabel}
@@ -154,6 +172,44 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
             </div>
           </div>
         </section>
+      ) : null}
+
+      {division === "rwanda-mobile-hub" ? (
+        <>
+          <section id="about" className="bg-[#f7fbff] px-5 py-16 text-[#081018] md:px-8">
+            <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.24em] text-[#0369a1]">Official media</p>
+                <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Rwanda Mobile Hub workspace.</h2>
+                <p className="mt-5 max-w-2xl text-lg leading-8 text-black/62">
+                  Verified Rwanda Mobile Hub video frames now support this page across the hero, about, service, and gallery sections.
+                </p>
+              </div>
+              <div className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl shadow-black/10">
+                <DivisionImage className="h-80 w-full object-cover" src="/media/mobile-hub/rwanda-mobile-hub-about.jpg" alt="Official Rwanda Mobile Hub service workbench and BaBra workspace" sizes="(max-width: 1024px) 100vw, 52vw" />
+              </div>
+            </div>
+          </section>
+
+          <section id="gallery" className="px-5 py-16 md:px-8">
+            <div className="mx-auto max-w-7xl">
+              <p className="text-sm font-black uppercase tracking-[0.24em]" style={{ color: data.accent }}>Gallery</p>
+              <h2 className="mt-3 font-serif text-4xl leading-none md:text-6xl">Official Rwanda Mobile Hub frames.</h2>
+              <div className="mt-10 grid gap-4 md:grid-cols-2">
+                {data.galleryImages.map((image, index) => (
+                  <figure key={image} className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055]">
+                    <DivisionImage className="h-64 w-full object-cover transition duration-500 hover:scale-[1.025]" src={image} alt={`Official Rwanda Mobile Hub gallery frame ${index + 1}`} sizes="(max-width: 768px) 100vw, 50vw" />
+                  </figure>
+                ))}
+              </div>
+              <div className="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-black/35">
+                <video className="aspect-video w-full bg-black" controls preload="metadata" poster="/media/mobile-hub/rwanda-mobile-hub-hero.jpg">
+                  <source src={data.videoSources[0]} type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </section>
+        </>
       ) : null}
 
       {division === "cosmetics" ? (

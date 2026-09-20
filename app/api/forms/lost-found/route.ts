@@ -4,9 +4,11 @@ import { lostFoundReportSchema } from "../../../../lib/validation";
 import { getCurrentUser } from "../../../../lib/session";
 import { queueNotification } from "../../../../lib/email-routing";
 import { fail } from "../../../../lib/api";
+import { enforceRateLimit } from "../../../../lib/rate-limit";
 
 export async function POST(request: NextRequest) {
   try {
+    await enforceRateLimit(request, { route: "forms.lost-found", limit: 10, windowMs: 60 * 60_000 });
     const payload = lostFoundReportSchema.parse(await request.json());
     const user = await getCurrentUser();
     const report = await getPrisma().lostFoundReport.create({

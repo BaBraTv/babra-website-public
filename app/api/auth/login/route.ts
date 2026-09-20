@@ -3,9 +3,11 @@ import { getPrisma } from "../../../../lib/db";
 import { loginSchema, verifyPassword } from "../../../../lib/auth";
 import { createSession, publicUser } from "../../../../lib/session";
 import { fail } from "../../../../lib/api";
+import { enforceRateLimit } from "../../../../lib/rate-limit";
 
 export async function POST(request: NextRequest) {
   try {
+    await enforceRateLimit(request, { route: "auth.login", limit: 10, windowMs: 60_000 });
     const payload = loginSchema.parse(await request.json());
     const prisma = getPrisma();
     const user = await prisma.user.findFirst({

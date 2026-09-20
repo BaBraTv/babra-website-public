@@ -4,8 +4,10 @@ import { orderSubmissionSchema } from "../../../lib/validation";
 import { getCurrentUser, requireAdminUser } from "../../../lib/session";
 import { catalogName, catalogPriceCents, ensureCatalogProduct } from "../../../lib/catalog";
 import { queueNotification } from "../../../lib/email-routing";
-import { authFail, fail } from "../../../lib/api";
+import { authFail, fail, redactOrder } from "../../../lib/api";
 import { z } from "zod";
+import { enforceRateLimit } from "../../../lib/rate-limit";
+import { AffiliatePersistenceService, AffiliatePersistenceError } from "../../../lib/affiliate-persistence";
 
 const paymentProviderMap = {
   CASH_ON_DELIVERY: "CASH_ON_DELIVERY",
@@ -33,7 +35,7 @@ export async function GET(request: NextRequest) {
       include: { items: true, payments: true }
     });
 
-    return NextResponse.json({ ok: true, orders });
+    return NextResponse.json({ ok: true, orders: orders.map(redactOrder) });
   } catch (error) {
     return authFail(error);
   }
@@ -41,6 +43,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    await enforceRateLimit(request, { route: "orders.create", limit: 20, windowMs: 10 * 60_000 });
     const payload = orderSubmissionSchema.parse(await request.json());
     const user = await getCurrentUser();
     const prisma = getPrisma();
@@ -96,6 +99,21 @@ export async function POST(request: NextRequest) {
       include: { items: true, payments: true }
     });
 
+    let affiliateAttributed = false;
+    if (payload.affiliateCode) {
+      try {
+        await new AffiliatePersistenceService(prisma).createReferral({
+          affiliateCode: payload.affiliateCode,
+          orderId: order.id,
+          customerUserId: user?.id,
+          landingPath: "/checkout"
+        });
+        affiliateAttributed = true;
+      } catch (error) {
+        if (!(error instanceof AffiliatePersistenceError)) throw error;
+      }
+    }
+
     await queueNotification({
       route: "orders",
       subject: `New BaBra order ${order.orderNumber}`,
@@ -103,7 +121,7 @@ export async function POST(request: NextRequest) {
       payload: { orderId: order.id, orderNumber: order.orderNumber, customerPhone: order.customerPhone }
     });
 
-    return NextResponse.json({ ok: true, order });
+    return NextResponse.json({ ok: true, order: redactOrder(order), affiliateAttribution: { attributed: affiliateAttributed } });
   } catch (error) {
     return fail(error);
   }
@@ -139,7 +157,7 @@ export async function PATCH(request: NextRequest) {
       }
     });
 
-    return NextResponse.json({ ok: true, order });
+    return NextResponse.json({ ok: true, order: redactOrder(order) });
   } catch (error) {
     return authFail(error);
   }

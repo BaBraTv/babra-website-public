@@ -47,6 +47,8 @@ Do not run destructive reset commands against production.
 
 - `20260629120000_init`
 - `20260629190000_add_investor_access_requests`
+- `20260809120000_add_affiliate_program`
+- `20260809130000_add_affiliate_withdrawals`
 
 ## Production Verification
 

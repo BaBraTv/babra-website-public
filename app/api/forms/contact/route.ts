@@ -3,9 +3,11 @@ import { getPrisma } from "../../../../lib/db";
 import { contactMessageSchema } from "../../../../lib/validation";
 import { queueNotification } from "../../../../lib/email-routing";
 import { fail } from "../../../../lib/api";
+import { enforceRateLimit } from "../../../../lib/rate-limit";
 
 export async function POST(request: NextRequest) {
   try {
+    await enforceRateLimit(request, { route: "forms.contact", limit: 10, windowMs: 10 * 60_000 });
     const payload = contactMessageSchema.parse(await request.json());
     const message = await getPrisma().contactMessage.create({ data: payload });
     await queueNotification({

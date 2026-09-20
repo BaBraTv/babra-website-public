@@ -3,7 +3,8 @@ import { z } from "zod";
 import { getPrisma } from "../../../../lib/db";
 import { requireCurrentUser } from "../../../../lib/session";
 import { queueNotification } from "../../../../lib/email-routing";
-import { fail } from "../../../../lib/api";
+import { fail, redactPayment } from "../../../../lib/api";
+import { enforceRateLimit } from "../../../../lib/rate-limit";
 
 const manualPaymentSchema = z.object({
   orderId: z.string().min(1),
@@ -14,6 +15,7 @@ const manualPaymentSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
+    await enforceRateLimit(request, { route: "payments.manual", limit: 10, windowMs: 10 * 60_000 });
     const user = await requireCurrentUser();
     const payload = manualPaymentSchema.parse(await request.json());
     const prisma = getPrisma();
@@ -53,7 +55,7 @@ export async function POST(request: NextRequest) {
       payload: { orderId: order.id, paymentId: payment.id, provider: payload.provider }
     });
 
-    return NextResponse.json({ ok: true, payment });
+    return NextResponse.json({ ok: true, payment: redactPayment(payment) });
   } catch (error) {
     return fail(error);
   }

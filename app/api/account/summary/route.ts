@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getPrisma } from "../../../../lib/db";
 import { requireCurrentUser, publicUser } from "../../../../lib/session";
 import { rwandaAddressSchema } from "../../../../lib/validation";
-import { fail, authFail } from "../../../../lib/api";
+import { fail, authFail, redactOrder, redactPayment } from "../../../../lib/api";
 
 export async function GET() {
   try {
@@ -18,11 +18,11 @@ export async function GET() {
     return NextResponse.json({
       ok: true,
       user: publicUser(user),
-      orders,
+      orders: orders.map(redactOrder),
       jobApplications,
       lostFoundReports,
       investorRequests,
-      payments: orders.flatMap((order) => order.payments)
+      payments: orders.flatMap((order) => order.payments).map(redactPayment)
     });
   } catch (error) {
     return authFail(error);
