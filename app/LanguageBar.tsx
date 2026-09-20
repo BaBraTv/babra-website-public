@@ -553,7 +553,7 @@ export function LanguageBar() {
   }
 
   return (
-    <div className="sticky top-0 z-[60] h-11 border-b border-white/10 bg-[#050404]/96 px-4 text-white backdrop-blur-xl" data-no-translate="true">
+    <div className="sticky top-0 z-[60] h-11 border-b border-white/10 bg-[#050404]/[0.96] px-4 text-white backdrop-blur-xl" data-no-translate="true">
       <div className="mx-auto flex h-full max-w-[1500px] items-center justify-between gap-3">
         <span className="hidden text-[0.65rem] font-black uppercase tracking-[0.18em] text-[#f1d58b] sm:block">{selectedCopy.language}</span>
         <div className="flex items-center gap-1 text-[0.68rem] font-black">
