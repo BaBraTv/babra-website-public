@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const description = `${product.name} by BaBra Cosmetics. View the 500 ml lotion and contact BaBra for price, availability and ordering.`;
 
   return {
-    title: `${product.name} | ${site.domain}`,
+    title: product.name,
     description,
     alternates: {
       canonical: `${site.url}/products/${product.slug}`
