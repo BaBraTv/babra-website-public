@@ -14,6 +14,14 @@ export const site = {
   positioning: "Official information pending"
 };
 
+export const cosmetics = {
+  company: "BaBra Cosmetics Ltd",
+  tin: "149358983",
+  phone: "+250788351482",
+  email: "babracosmeticsltd@gmail.com",
+  manufacturer: "Guangzhou Pallas Cosmetics Co., Ltd."
+} as const;
+
 export const PRICE_INQUIRY_LABEL = "Price on request";
 export const PRICE_INQUIRY_NOTE = "Official price, stock, delivery, reseller, wholesale, and distributor details are confirmed by BaBra.";
 export const OFFICIAL_INFORMATION_PENDING = "Official information pending";
@@ -48,11 +56,11 @@ export const products: StoreProduct[] = [
     image: approvedProductMedia.women.path,
     price: 0,
     size: "500 ml",
-    description: "Official 500 ml BaBra Lotion for women. Detailed product information is pending official approval.",
-    audience: OFFICIAL_INFORMATION_PENDING,
-    benefits: ["Official benefits pending approval"],
-    usage: "Official usage directions pending approval",
-    fragrance: "Official fragrance information pending approval",
+    description: "Official 500 ml BaBra Lotion for women. Contact BaBra for current price, stock and delivery options.",
+    audience: "Check the product label and contact BaBra for suitability guidance",
+    benefits: [],
+    usage: "Follow the directions on the product label",
+    fragrance: "Ask BaBra about the current variant before ordering",
     gallery: [approvedProductMedia.women.path],
     ctaLabel: "Request official details",
     alt: approvedProductMedia.women.alt,
@@ -66,11 +74,11 @@ export const products: StoreProduct[] = [
     image: approvedProductMedia.men.path,
     price: 0,
     size: "500 ml",
-    description: "Official 500 ml BaBra Lotion for men. Detailed product information is pending official approval.",
-    audience: OFFICIAL_INFORMATION_PENDING,
-    benefits: ["Official benefits pending approval"],
-    usage: "Official usage directions pending approval",
-    fragrance: "Official fragrance information pending approval",
+    description: "Official 500 ml BaBra Lotion for men. Contact BaBra for current price, stock and delivery options.",
+    audience: "Check the product label and contact BaBra for suitability guidance",
+    benefits: [],
+    usage: "Follow the directions on the product label",
+    fragrance: "Ask BaBra about the current variant before ordering",
     gallery: [approvedProductMedia.men.path],
     ctaLabel: "Request official details",
     alt: approvedProductMedia.men.alt,
@@ -78,17 +86,17 @@ export const products: StoreProduct[] = [
   },
   {
     slug: "babies",
-    name: "BaBra Lotion Babies — 500 ml",
-    shortName: "Babies Lotion",
-    category: "Babies",
+    name: "BaBra Lotion Kids — 500 ml",
+    shortName: "Kids Lotion",
+    category: "Kids",
     image: approvedProductMedia.babies.path,
     price: 0,
     size: "500 ml",
-    description: "Official 500 ml BaBra Lotion for babies. Detailed product information is pending official approval.",
-    audience: OFFICIAL_INFORMATION_PENDING,
-    benefits: ["Official benefits pending approval"],
-    usage: "Official usage directions pending approval",
-    fragrance: "Official fragrance information pending approval",
+    description: "BaBra Lotion Kids, 500 ml. Soft Care for Kids, as shown on the package. Contact BaBra for current price, stock and delivery options.",
+    audience: "Check the product label and contact BaBra for suitability guidance",
+    benefits: [],
+    usage: "Follow the directions on the product label",
+    fragrance: "Ask BaBra about the current variant before ordering",
     gallery: [approvedProductMedia.babies.path],
     ctaLabel: "Request official details",
     alt: approvedProductMedia.babies.alt,

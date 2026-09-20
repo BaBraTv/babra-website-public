@@ -51,10 +51,10 @@ export const officialMedia: OfficialMediaItem[] = [
   },
   {
     id: "babra-lotion-babies-500ml",
-    title: "BaBra Lotion Babies — 500 ml",
+    title: "BaBra Lotion Kids — 500 ml",
     category: "product",
     path: "/media/products/babra-lotion-babies-500ml.png",
-    alt: "Official BaBra Lotion Babies 500 ml bottle",
+    alt: "Official BaBra Lotion Kids 500 ml bottle",
     status: "approved",
     approved: true,
     usage: ["homepage hero", "featured products", "store", "product cards", "product detail pages", "cart", "checkout"],

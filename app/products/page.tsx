@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import { OfficialMedia } from "../components/OfficialMedia";
 import { officialMediaById } from "../data/official-media";
-import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products } from "../commerce-data";
+import { whatsappOrderUrl, PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products } from "../commerce-data";
 
 const commerceBlocks = [
-  ["Official products only", "This catalog displays only approved BaBra product media currently verified in the repository."],
+  ["Official products only", "Explore BaBra Lotion Women, Men and Kids in their original packaging."],
   ["Pricing", PRICE_INQUIRY_NOTE],
-  ["Ingredients", "Official information pending"],
-  ["Reviews", "Official information pending"]
+  ["Directions", "Follow the directions on the product label"],
+  ["Personal assistance", "Contact BaBra for product guidance and ordering support"]
 ];
 
 export const metadata: Metadata = {
-  title: "BaBra Cosmetics Products | babra.store",
-  description: "Official BaBra Lotion Women, Men, and Babies 500 ml product catalog."
+  title: "BaBra Cosmetics Products",
+  description: "Official BaBra Lotion Women, Men, and Kids 500 ml product catalog."
 };
 
 export default function ProductsPage() {
@@ -24,9 +24,9 @@ export default function ProductsPage() {
           <div>
             <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
             <p className="mt-10 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Cosmetics Division</p>
-            <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-[0.9] md:text-8xl">Official BaBra Lotion catalog.</h1>
+            <h1 className="mt-4 max-w-5xl font-serif text-5xl leading-[1.05] md:text-7xl">Official BaBra Lotion catalog.</h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/66">
-              Official BaBra bottles only. Product details remain pending until approved.
+              Discover BaBra Lotion Women, Men and Kids. Ask our team about current prices, availability and delivery.
             </p>
           </div>
           <figure className="overflow-hidden rounded-[2rem] border border-[#d6ad57]/25 bg-[radial-gradient(circle_at_50%_15%,#ffffff,#fff8e6_52%,#c99f37)] p-6 shadow-2xl shadow-black/40">
@@ -45,10 +45,11 @@ export default function ProductsPage() {
               </figure>
               <div className="p-6">
                 <span className="inline-flex whitespace-nowrap text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">{product.category}</span>
-                <h2 className="mt-3 font-serif text-5xl leading-none">{product.name}</h2>
+                <h2 className="mt-3 font-serif text-4xl leading-tight">{product.name}</h2>
                 <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-white/55">{product.size}</p>
                 <p className="mt-3 text-xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
-                <a className="mt-6 inline-flex min-h-11 items-center rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b] transition hover:bg-[#f1d58b] hover:text-[#130d08]" href={`/products/${product.slug}`}>View Details</a>
+                <a className="mt-6 flex min-h-12 items-center justify-center rounded-full bg-[#f1d58b] px-5 py-3 text-center font-bold text-[#130d08]" href={whatsappOrderUrl(`Hello BaBra Cosmetics, I would like to order ${product.name}. Quantity: __. Delivery location: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer">Order on WhatsApp</a>
+                <a className="mt-3 inline-flex min-h-11 items-center rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b] transition hover:bg-[#f1d58b] hover:text-[#130d08]" href={`/products/${product.slug}`}>View Details</a>
               </div>
             </article>
           ))}
@@ -57,8 +58,8 @@ export default function ProductsPage() {
 
       <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Official data status</p>
-          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Approved media now, pending details later.</h2>
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Care and ordering</p>
+          <h2 className="mt-3 max-w-4xl font-serif text-4xl leading-tight md:text-7xl">A little guidance for your order.</h2>
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {commerceBlocks.map(([title, text]) => (
               <article key={title} className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
