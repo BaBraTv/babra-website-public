@@ -1,4 +1,4 @@
-const CACHE_NAME = "babra-ecosystem-v7";
+const CACHE_NAME = "babra-ecosystem-v8";
 const OFFLINE_URL = "/offline";
 const PRECACHE = [
   "/",
@@ -35,11 +35,13 @@ self.addEventListener("fetch", (event) => {
 
   const requestUrl = new URL(event.request.url);
   if (requestUrl.origin !== self.location.origin) return;
+  // Never cache private APIs, admin pages or authenticated account surfaces.
+  if (/^\/(api|admin|account|dashboard|profile|orders|affiliate)(\/|$)/.test(requestUrl.pathname)) return;
 
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        if (response.ok) {
+        if (response.ok && !/no-store|private/i.test(response.headers.get("cache-control") || "")) {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
         }

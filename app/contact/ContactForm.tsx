@@ -1,10 +1,13 @@
 "use client";
 
 import { FormEvent } from "react";
+import { trackAnalytics } from "../analytics-client";
 
 export function ContactForm() {
   function sendWhatsApp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    trackAnalytics("contact_handoff");
+    trackAnalytics("whatsapp_click");
     const form = new FormData(event.currentTarget);
     const message = `BaBra Website Message\nName: ${form.get("name")}\nPhone: ${form.get("phone")}\nInterest: ${form.get("interest")}\n\nMessage:\n${form.get("message")}`;
     window.open(`https://wa.me/250788351482?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");

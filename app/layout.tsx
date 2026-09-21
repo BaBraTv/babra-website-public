@@ -4,6 +4,7 @@ import { site } from "./commerce-data";
 import { OfficialFooter } from "./components/OfficialFooter";
 import { ServiceWorkerRegistration } from "./ServiceWorkerRegistration";
 import { LanguageBar } from "./LanguageBar";
+import { VisitorAnalytics } from "./components/VisitorAnalytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -88,6 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LanguageBar />
         {children}
         <OfficialFooter />
+        <VisitorAnalytics enabled={process.env.ANALYTICS_ENABLED === "true" && (process.env.ANALYTICS_HASH_SECRET?.length ?? 0) >= 32} campaigns={(process.env.ANALYTICS_CAMPAIGNS || "").split(",").filter(Boolean)} />
       </body>
     </html>
   );

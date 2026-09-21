@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, type ChangeEvent, type ReactNode } from "react";
 import Image from "next/image";
+import { trackAnalytics } from "./analytics-client";
 import {
   PRICE_INQUIRY_LABEL,
   PRICE_INQUIRY_NOTE,
@@ -516,6 +517,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
     const existing = cart.find((item) => item.slug === slug);
     const next = existing ? cart.map((item) => (item.slug === slug ? { ...item, quantity: item.quantity + 1 } : item)) : [...cart, { slug, quantity: 1 }];
     saveCart(next);
+    trackAnalytics("add_to_cart");
   }
 
   function updateQuantity(slug: string, quantity: number) {
@@ -552,6 +554,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
         })
       });
       const savedOrder = orderFromApi(result.order);
+      trackAnalytics("order_requested");
       const next = [savedOrder, ...orders];
       setOrders(next);
       saveJson(storageKeys.orders, next);
@@ -867,6 +870,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
           <section className="mt-10">
             <h1 className="font-serif text-5xl">BaBra Admin Dashboard</h1>
             <p className="mt-4 text-white/64">Manual operations center for Phase 1: orders, payments, delivery, rewards, products, and customer intelligence.</p>
+            <a className="mt-4 inline-block rounded-full border border-white/20 px-5 py-3" href="/admin/analytics">Website visitor analytics</a>
             <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               <Metric label="Users" value={(adminSummary?.counts?.users ?? 0).toString()} />
               <Metric label="Orders" value={(adminSummary?.counts?.orders ?? orders.length).toString()} />

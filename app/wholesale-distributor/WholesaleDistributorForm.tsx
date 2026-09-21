@@ -1,4 +1,5 @@
 "use client";
+import { trackAnalytics } from "../analytics-client";
 
 import { FormEvent } from "react";
 
@@ -16,6 +17,8 @@ const inputClass =
 export function WholesaleDistributorForm() {
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    trackAnalytics("wholesale_handoff");
+    trackAnalytics("whatsapp_click");
     const form = new FormData(event.currentTarget);
 
     openWhatsApp(

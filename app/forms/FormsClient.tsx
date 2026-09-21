@@ -1,4 +1,5 @@
 "use client";
+import { trackAnalytics } from "../analytics-client";
 
 import { FormEvent, useState } from "react";
 import { RwandaLocationPicker } from "./RwandaLocationPicker";
@@ -12,6 +13,10 @@ function formatLocation(label: string, location: LocationValue) {
 }
 
 function openWhatsApp(message: string) {
+  trackAnalytics("whatsapp_click");
+  if (location.pathname === "/sample-request") trackAnalytics("sample_handoff");
+  if (location.pathname === "/wholesale-distributor") trackAnalytics("wholesale_handoff");
+  if (location.pathname === "/contact-showroom") trackAnalytics("contact_handoff");
   window.open(`https://wa.me/250788351482?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
 }
 

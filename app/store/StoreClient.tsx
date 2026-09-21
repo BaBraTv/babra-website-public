@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { trackAnalytics } from "../analytics-client";
 import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaLocations, site, whatsappOrderUrl } from "../commerce-data";
 import { InstallAppButton } from "../InstallAppButton";
 
@@ -93,6 +94,7 @@ export function StoreClient() {
     const existing = cart.find((item) => item.slug === slug);
     const next = existing ? cart.map((item) => (item.slug === slug ? { ...item, quantity: item.quantity + 1 } : item)) : [...cart, { slug, quantity: 1 }];
     saveCart(next);
+    trackAnalytics("add_to_cart");
   }
 
   function updateQuantity(slug: string, quantityValue: number) {

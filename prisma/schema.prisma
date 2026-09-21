@@ -2,6 +2,41 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model AnalyticsVisit {
+  id                String @id
+  visitor           String
+  day               DateTime @db.Date
+  startedAt         DateTime @db.Timestamptz
+  lastSeen          DateTime @db.Timestamptz
+  source            String
+  campaign          String
+  country           String
+  device            String
+  browser           String
+  os                String
+  lastPath          String
+  pageViews         Int @default(0)
+  eventCount        Int @default(0)
+  engagementSeconds Int @default(0)
+  pages             Json @default("{}")
+  events            Json @default("{}")
+  @@index([day, visitor])
+  @@index([lastSeen])
+}
+
+model AnalyticsReceipt {
+  id        String @id
+  createdAt DateTime @db.Timestamptz
+  @@index([createdAt])
+}
+
+model AnalyticsRate {
+  id        String @id
+  count     Int
+  updatedAt DateTime @db.Timestamptz
+  @@index([updatedAt])
+}
+
 datasource db {
   provider = "postgresql"
 }
