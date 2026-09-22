@@ -63,6 +63,8 @@ Both client and server allowlist routes/events. Request bodies are streamed with
 
 Migration: `20260921000000_visitor_analytics` adds only three analytics tables and indexes.
 
+Follow-up `20260922000000_analytics_private_tables` enables RLS with no public policies and revokes table privileges from PUBLIC and, when present, Supabase `anon`/`authenticated` roles. The server connection must use the table owner or a trusted BYPASSRLS role; public API roles cannot read these tables. A disposable-database test verifies revocation and denial even after accidental SELECT grants, with actual rows present.
+
 - `AnalyticsVisit`: one aggregate row per visit/day. Bounded JSON counters for approved pages/events, scalar counts, broad attribution/device dimensions and keyed browser hash. No permanent raw-event log.
 - `AnalyticsReceipt`: short-lived keyed event UUID, unique primary key; accepted event retries within 24 hours count once. Receipt and visit increments share a transaction. Concurrent updates use database row locking/atomic JSON increments.
 - `AnalyticsRate`: one short-lived bucket per keyed IP/day, fixed one-minute windows.
@@ -80,6 +82,7 @@ Existing `DATABASE_URL` points to the current verified PostgreSQL database. Migr
 | `ANALYTICS_HASH_SECRET` | Independent cryptographically random server secret, 32+ characters. Never `NEXT_PUBLIC_*`. |
 | `ANALYTICS_ALLOWED_ORIGINS` | Exact comma-separated origins; defaults to https://www.babra.store and https://babra.store. Local test origin must be explicit. |
 | `ANALYTICS_CAMPAIGNS` | Optional comma-separated approved non-personal campaign identifiers. This allowlist is intentionally public. |
+| `CRON_SECRET` | Independent random server-only secret, 32+ characters, for scheduled retention authentication. |
 | `ANALYTICS_TRUST_VERCEL_GEO` | `false` unless platform header provenance is verified; requires `VERCEL=1` too. |
 
 Activation order: verify the production database identity and existing environment preflight, apply the reviewed migration through the repository's approved migration process, configure the independent secret/origins, configure and verify daily retention cleanup, then enable and rebuild/redeploy (the shared layout's configuration is built into public pages). Verify admin access, consent behavior and an authorized real visit. Never seed demonstration traffic into production.
@@ -114,3 +117,11 @@ Completed checks:
 Verification limit: the development browser was blocked by the existing production CSP (`unsafe-eval` is disallowed), so the CSP was preserved. Automatic approval review then rejected starting the production-mode local preview with “blocked by policy”, including a loopback-only retry, without a more specific reason. Responsive CSS is implemented and compiled, but interactive consent behavior and mobile dashboard rendering have **not** been visually verified. Do not report that browser QA passed.
 
 All synthetic fixtures were confined to a disposable loopback-only local database. No live visitor, payment or form data was used in tests.
+
+## 11. September 22 readiness follow-up
+
+Signed-in Vercel settings confirm `DATABASE_URL` is configured for Production, and `DIRECT_URL` for Production and Preview. Analytics variables and `CRON_SECRET` are absent. Values were not revealed. Production remains commit `8030f35`; analytics remains a draft PR. Supabase still presents a sign-in screen, so database identity, production migrations and runtime role ownership remain unverified.
+
+`vercel.json` now defines daily retention at 03:00 UTC through `/api/cron/analytics-retention`. This is source configuration, not an active or verified production job. Before enabling analytics, deploy with `CRON_SECRET`, apply migrations and verify a successful run in Vercel logs. The endpoint requires a 32+ character secret, compares the bearer token in constant time, returns no-store responses, and exposes no database errors. It deletes at most 100,000 expired rows per table per run and continues even when collection is disabled. The existing CLI is available for a larger backlog. A 503 or a growing backlog requires operator attention; do not assume physical retention is enforced merely because the schedule exists. See [Vercel cron authentication](https://vercel.com/docs/cron-jobs/manage-cron-jobs).
+
+Validation: all six migrations applied locally; 22 policy, database, client, retention-route, RLS and existing security tests passed, and TypeScript passed. This run did not repeat the earlier HTTP integration test. Production and mobile browser QA remain outstanding.
