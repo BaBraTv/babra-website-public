@@ -1,16 +1,18 @@
 # RC34 — first-party visitor analytics
 
-## Latest readiness — 25 September 2026
+## Current production status — 25 September 2026
 
-Verified the user-provided production connection with certificate-verified TLS: PostgreSQL accepts the connection, and public table count remains zero. Vercel CLI authentication and linking to `babratvs-projects/babra-website-public-uzcw` succeeded. Production environment pull returned `[SENSITIVE]` placeholders for all 19 Secret values; it did not reveal existing credentials. `ADMIN_SETUP_SECRET` and `PAYMENT_CALLBACK_SECRET` remain unavailable locally; migration preflight still blocks until real matching values are supplied. No production migration or analytics deployment has occurred.
+The four Cosmetics campaign images and visitor analytics code are deployed to www.babra.store. Live administrator login, protected dashboard/API access and authenticated retention execution passed. ANALYTICS_ENABLED is now configured true for the activation deployment. All seven migrations have been applied to the user-confirmed Supabase production project jccklyygohtykpqmnptl. The 23 public tables (including the migration ledger) have RLS enabled and no anon/authenticated table access. No synthetic visitors were inserted.
 
-The user confirmed that affiliate withdrawal limits are not approved. No amount was invented. Added an explicit `AFFILIATE_WITHDRAWALS_ENABLED=false` mode: the request API returns 503 before creating any withdrawal, the policy function rejects calls even with a configured minimum, and preflight waives only the monetary minimum in this disabled mode. All database identity and security-secret checks remain required. The flag has been added locally; it has not yet been configured on Vercel. Sixteen affiliate API/preflight tests passed.
+The user authorized fresh server secrets and selected njohnpeter2002@gmail.com for the administrator account. Vercel is linked to babratvs-projects/babra-website-public-uzcw. The first live signup attempt failed before user creation because the production runtime lacked the Supabase root CA. DATABASE_SSL_CA now supplies that public CA with rejectUnauthorized=true; deployment 505e068 is Ready and live signup/login succeeded. The requested administrator was created successfully and its login details were saved privately on the user’s computer. Credentials remain in ignored local files and are never included in this report.
 
-## Release truth — 21 September 2026
+Affiliate withdrawals are explicitly disabled because the user has not approved the withdrawal limits. No monetary threshold was invented. Vercel confirms the daily retention cron is registered at 03:00 UTC (05:00 Kigali); an authenticated manual invocation succeeded, while an anonymous invocation returned 401. A scheduled invocation has not yet been observed.
 
-Implemented on `codex/rc34-visitor-analytics`, based on production commit `8030f35`. **Not deployed or enabled in production.** No production migration, environment changes, paid services or synthetic production traffic were introduced.
+The four-image Cosmetics release is live at https://www.babra.store/cosmetics#campaigns; all four image URLs and the page returned HTTP 200 on September 25.
 
-The separate four-image Cosmetics release is live at https://www.babra.store/cosmetics#campaigns. Vercel reported success for `8030f35`; the live browser loaded all four images.
+Sections dated before September 25 below are historical evidence; this current status supersedes their deployment and readiness statements.
+
+Latest checks: TypeScript and lint passed after the TLS correction. The production dashboard returns HTTP 200 for the administrator; the report API is private/no-store and returns 401 anonymously. Withdrawal requests return 503 as intended. Earlier combined security, analytics, RLS, retention, client and affiliate/preflight tests passed (38 tests). Browser visual QA remains unverified because the available browser runtime failed to initialize. No synthetic production analytics events were sent.
 
 ## 1. Before RC34
 
@@ -105,11 +107,11 @@ Reporting excludes visit rows older than 90 calendar days. Each ingest performs 
 
 `node --experimental-strip-types scripts/analytics-retention.ts`
 
-It deletes expired visit rows (>90 days) and receipts/rate keys (>24 hours), up to one million per table per run. Monitor successful runs and table growth; repeat if an exceptional backlog exceeds that bound. Do not claim exact physical deletion deadlines if the scheduler fails or is not configured. Database backup retention is governed by the existing database operator and must be aligned separately. The scheduler was not configured in production by this change.
+It deletes expired visit rows (>90 days) and receipts/rate keys (>24 hours), up to one million per table per run. Monitor successful runs and table growth; repeat if an exceptional backlog exceeds that bound. Do not claim exact physical deletion deadlines if the scheduler fails or is not configured. Database backup retention is governed by the existing database operator and must be aligned separately. The production scheduler registration is confirmed in the current status above.
 
 ## 10. Administrator access and validation
 
-Sign in with an existing active ADMIN or STAFF account, then use **Website visitor analytics** in `/admin` or open `/admin/analytics`. No additional admin user is created in production.
+Sign in with an existing active ADMIN or STAFF account, then use **Website visitor analytics** in `/admin` or open `/admin/analytics`. The user has requested a real administrator account; provisioning status is recorded above.
 
 Completed checks:
 
