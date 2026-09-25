@@ -22,22 +22,21 @@ export function getPrisma() {
     globalForPrisma.prismaPool ??
     new Pool({
       connectionString,
+      max: 2,
+      idleTimeoutMillis: 1000,
+      connectionTimeoutMillis: 10000,
       ...(process.env.DATABASE_SSL_CA ? { ssl: { ca: process.env.DATABASE_SSL_CA.replace(/\\n/g, "\n"), rejectUnauthorized: true } } : {})
     });
   const adapter = new PrismaPg(pool);
 
-  if (process.env.NODE_ENV !== "production") {
-    globalForPrisma.prismaPool = pool;
-  }
+  globalForPrisma.prismaPool = pool;
 
   const prisma = new PrismaClient({
     adapter,
     log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"]
   });
 
-  if (process.env.NODE_ENV !== "production") {
-    globalForPrisma.prisma = prisma;
-  }
+  globalForPrisma.prisma = prisma;
 
   return prisma;
 }

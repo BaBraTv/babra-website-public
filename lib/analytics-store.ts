@@ -7,7 +7,7 @@ import type { AnalyticsPayload } from "./analytics-policy.ts";
 const globalAnalytics = globalThis as unknown as { analyticsPool?: Pool };
 export function analyticsPool() {
   if (!process.env.DATABASE_URL) throw new Error("Analytics database unavailable");
-  return globalAnalytics.analyticsPool ??= new Pool({ connectionString: process.env.DATABASE_URL, max: 2, connectionTimeoutMillis: 3000, statement_timeout: 5000,
+  return globalAnalytics.analyticsPool ??= new Pool({ connectionString: process.env.DATABASE_URL, max: 2, idleTimeoutMillis: 1000, connectionTimeoutMillis: 3000, statement_timeout: 5000,
     ...(process.env.DATABASE_SSL_CA ? { ssl: { ca: process.env.DATABASE_SSL_CA.replace(/\\n/g, "\n"), rejectUnauthorized: true } } : {}) });
 }
 export function analyticsEnabled() { return process.env.ANALYTICS_ENABLED === "true" && (process.env.ANALYTICS_HASH_SECRET?.length ?? 0) >= 32; }
