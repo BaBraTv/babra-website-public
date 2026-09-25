@@ -59,6 +59,19 @@ test("withdrawal policy fails closed unless configured", () => {
   }
 });
 
+test("explicitly disabled withdrawals cannot obtain a policy even with a configured minimum", () => {
+  const oldEnabled = process.env.AFFILIATE_WITHDRAWALS_ENABLED;
+  const oldMinimum = process.env.AFFILIATE_WITHDRAWAL_MIN_MINOR;
+  try {
+    process.env.AFFILIATE_WITHDRAWALS_ENABLED = "false";
+    process.env.AFFILIATE_WITHDRAWAL_MIN_MINOR = "100";
+    assert.throws(withdrawalPolicyFromEnvironment, /not enabled/);
+  } finally {
+    if (oldEnabled == null) delete process.env.AFFILIATE_WITHDRAWALS_ENABLED; else process.env.AFFILIATE_WITHDRAWALS_ENABLED = oldEnabled;
+    if (oldMinimum == null) delete process.env.AFFILIATE_WITHDRAWAL_MIN_MINOR; else process.env.AFFILIATE_WITHDRAWAL_MIN_MINOR = oldMinimum;
+  }
+});
+
 test("affiliate errors map to safe HTTP classes", () => {
   assert.equal(affiliateErrorStatus(new AffiliatePersistenceError("AFFILIATE_NOT_FOUND", "internal")), 404);
   assert.equal(affiliateErrorStatus(new AffiliatePersistenceError("IDEMPOTENCY_CONFLICT", "internal")), 409);

@@ -13,6 +13,9 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return authFail(error);
   }
+  if (process.env.AFFILIATE_WITHDRAWALS_ENABLED === "false") {
+    return NextResponse.json({ ok: false, error: "Affiliate withdrawal requests are not available yet." }, { status: 503, headers: { "Cache-Control": "private, no-store" } });
+  }
   try {
     await enforceRateLimit(request, { route: "affiliate.withdrawals.create", limit: 10, windowMs: 60 * 60_000 });
     const payload = withdrawalRequestSchema.parse(await request.json());

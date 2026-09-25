@@ -23,6 +23,14 @@ test("production preflight accepts complete remote configuration without returni
   assert.equal(JSON.stringify(result).includes("encoded"), false);
 });
 
+test("unapproved withdrawal policy is permitted only when withdrawals are explicitly disabled", () => {
+  const unapproved = { ...valid, AFFILIATE_WITHDRAWAL_MIN_MINOR: "" };
+  assert.equal(evaluateProductionEnvironment(unapproved).ok, false);
+  assert.equal(evaluateProductionEnvironment({ ...unapproved, AFFILIATE_WITHDRAWALS_ENABLED: "true" }).ok, false);
+  assert.equal(evaluateProductionEnvironment({ ...unapproved, AFFILIATE_WITHDRAWALS_ENABLED: "false" }).ok, true);
+  assert.equal(evaluateProductionEnvironment({ ...unapproved, AFFILIATE_WITHDRAWALS_ENABLED: "false", PAYMENT_CALLBACK_SECRET: "" }).ok, false);
+});
+
 test("production preflight rejects localhost, placeholders, and invalid affiliate policy", () => {
   assert.equal(evaluateProductionEnvironment({ ...valid, DATABASE_URL: "postgresql://u:p@localhost/db" }).ok, false);
   assert.equal(evaluateProductionEnvironment({ ...valid, ADMIN_SETUP_SECRET: "replace-me" }).ok, false);

@@ -57,6 +57,7 @@ function positiveIntegerSetting(name: string) {
 }
 
 export function withdrawalPolicyFromEnvironment() {
+  if (process.env.AFFILIATE_WITHDRAWALS_ENABLED === "false") throw new Error("Affiliate withdrawals are not enabled");
   const minimumAmount = positiveIntegerSetting("AFFILIATE_WITHDRAWAL_MIN_MINOR");
   const maximumRaw = process.env.AFFILIATE_WITHDRAWAL_MAX_MINOR;
   const maximumAmount = maximumRaw ? positiveIntegerSetting("AFFILIATE_WITHDRAWAL_MAX_MINOR") : null;

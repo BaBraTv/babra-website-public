@@ -1,5 +1,11 @@
 # RC34 — first-party visitor analytics
 
+## Latest readiness — 25 September 2026
+
+Verified the user-provided production connection with certificate-verified TLS: PostgreSQL accepts the connection, and public table count remains zero. Vercel CLI authentication and linking to `babratvs-projects/babra-website-public-uzcw` succeeded. Production environment pull returned `[SENSITIVE]` placeholders for all 19 Secret values; it did not reveal existing credentials. `ADMIN_SETUP_SECRET` and `PAYMENT_CALLBACK_SECRET` remain unavailable locally; migration preflight still blocks until real matching values are supplied. No production migration or analytics deployment has occurred.
+
+The user confirmed that affiliate withdrawal limits are not approved. No amount was invented. Added an explicit `AFFILIATE_WITHDRAWALS_ENABLED=false` mode: the request API returns 503 before creating any withdrawal, the policy function rejects calls even with a configured minimum, and preflight waives only the monetary minimum in this disabled mode. All database identity and security-secret checks remain required. The flag has been added locally; it has not yet been configured on Vercel. Sixteen affiliate API/preflight tests passed.
+
 ## Release truth — 21 September 2026
 
 Implemented on `codex/rc34-visitor-analytics`, based on production commit `8030f35`. **Not deployed or enabled in production.** No production migration, environment changes, paid services or synthetic production traffic were introduced.
