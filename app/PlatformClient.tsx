@@ -694,6 +694,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
             <a className="rounded-full border border-white/10 px-4 py-2" href="/checkout">Checkout</a>
             <a className="rounded-full border border-white/10 px-4 py-2" href="/orders">Orders</a>
             <a className="rounded-full border border-white/10 px-4 py-2" href="/profile">Profile</a>
+            <a className="rounded-full border border-white/10 px-4 py-2" href="/account/security">Change password / Hindura password</a>
           </nav>
         </header>
         {statusMessage ? (

@@ -1,39 +1,24 @@
-import { NextResponse, type NextRequest } from "next/server";
-import { randomBytes, createHash } from "crypto";
+import { NextResponse, after, type NextRequest } from "next/server";
+import { z } from "zod";
 import { getPrisma } from "../../../../lib/db";
-import { forgotPasswordSchema } from "../../../../lib/auth";
-import { queueNotification } from "../../../../lib/email-routing";
-import { fail } from "../../../../lib/api";
 import { enforceRateLimit } from "../../../../lib/rate-limit";
-
+import { recoveryMessage, requestRecovery } from "../../../../lib/password-recovery";
+import { recoveryEmailConfigured, sendRecoveryEmail } from "../../../../lib/password-email";
+export const maxDuration = 30;
 export async function POST(request: NextRequest) {
+  const headers = { "Cache-Control": "private, no-store" };
   try {
     await enforceRateLimit(request, { route: "auth.forgot-password", limit: 5, windowMs: 15 * 60_000 });
-    const payload = forgotPasswordSchema.parse(await request.json());
-    const prisma = getPrisma();
-    const user = await prisma.user.findFirst({
-      where: { OR: [{ email: payload.identifier }, { phone: payload.identifier }] }
+    const { identifier } = z.object({ identifier: z.string().trim().email().max(254) }).parse(await request.json());
+    if (!recoveryEmailConfigured()) return NextResponse.json({ error: "Email recovery is not available yet. Contact support@babra.store. / Kwakira link kuri email ntibirafungurwa." }, { status: 503, headers });
+    // Account lookup and delivery happen after the same generic response for everyone.
+    after(async () => {
+      try { await requestRecovery(getPrisma(), identifier, sendRecoveryEmail); }
+      catch { console.error("Password recovery processing failed"); }
     });
-
-    if (user) {
-      const rawToken = randomBytes(32).toString("hex");
-      await prisma.passwordResetToken.create({
-        data: {
-          userId: user.id,
-          tokenHash: createHash("sha256").update(rawToken).digest("hex"),
-          expiresAt: new Date(Date.now() + 60 * 60 * 1000)
-        }
-      });
-      await queueNotification({
-        route: "contact",
-        subject: "BaBra password reset request",
-        templateKey: "auth.forgot_password",
-        payload: { userId: user.id, identifier: payload.identifier }
-      });
-    }
-
-    return NextResponse.json({ ok: true, message: "If the account exists, BaBra support will review the reset request." });
+    return NextResponse.json({ ok: true, message: recoveryMessage }, { headers });
   } catch (error) {
-    return fail(error);
+    const limited = error instanceof Error && error.message === "Rate limit exceeded";
+    return NextResponse.json({ error: limited ? "Too many requests. Try again in 15 minutes." : "Enter a valid email address, or try again later." }, { status: limited ? 429 : 400, headers });
   }
 }

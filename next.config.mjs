@@ -30,6 +30,13 @@ const nextConfig = {
           { key: "X-Frame-Options", value: "DENY" },
           { key: "Cross-Origin-Opener-Policy", value: "same-origin" }
         ]
+      },
+      {
+        source: "/:path(forgot-password|reset-password)",
+        headers: [
+          { key: "Referrer-Policy", value: "no-referrer" },
+          { key: "Cache-Control", value: "private, no-store" }
+        ]
       }
     ];
   }

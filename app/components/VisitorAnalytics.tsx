@@ -51,7 +51,7 @@ export function VisitorAnalytics({ enabled, campaigns }: { enabled: boolean; cam
     document.addEventListener("pointerdown", activityListener); document.addEventListener("keydown", activityListener); document.addEventListener("scroll", activityListener, { passive: true });
     return () => { clearInterval(interval); document.removeEventListener("click", click); document.removeEventListener("focusin", focus); document.removeEventListener("pointerdown", activityListener); document.removeEventListener("keydown", activityListener); document.removeEventListener("scroll", activityListener); };
   }, [enabled, allowed, path]);
-  if (!enabled || /^\/(admin|account|profile|orders|dashboard|affiliate|login|signup)(\/|$)/.test(path)) return null;
+  if (!enabled || /^\/(admin|account|profile|orders|dashboard|affiliate|login|signup|forgot-password|reset-password)(\/|$)/.test(path)) return null;
   function choose(value: boolean) { setAnalyticsConsent(value); setOpen(false); }
   return <aside className={styles.privacy} aria-label="Analytics privacy preferences">
     <button type="button" onClick={() => setOpen(!open)} aria-expanded={open}>Analytics privacy settings</button>
