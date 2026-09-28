@@ -106,6 +106,8 @@ enum AdminAction {
 }
 
 enum AcademyRole {
+  STUDENT
+  PARENT
   CANDIDATE
   INSTRUCTOR
   CONTENT_EDITOR
@@ -472,8 +474,53 @@ model AcademyUser {
   verificationTokens  AcademyVerificationToken[]
   passwordResetTokens AcademyPasswordResetToken[]
   auditEvents         AcademyAuditLog[]           @relation("AcademyAuditActor")
+  learnerProfiles     AcademyLearnerProfile[]     @relation("LearnerAccount")
+  guardianLinks       AcademyGuardianLink[]       @relation("GuardianAccount")
+  lessonProgress      AcademyLessonProgress[]
 
   @@index([status, createdAt])
+}
+
+model AcademyLearnerProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  birthYear       Int?
+  currentLevel    String   @default("level-1")
+  preferredLocale String   @default("en")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user      AcademyUser           @relation("LearnerAccount", fields: [userId], references: [id], onDelete: Cascade)
+  guardians AcademyGuardianLink[]
+
+  @@index([currentLevel])
+}
+
+model AcademyGuardianLink {
+  guardianId String
+  learnerId  String
+  createdAt  DateTime @default(now())
+
+  guardian AcademyUser           @relation("GuardianAccount", fields: [guardianId], references: [id], onDelete: Cascade)
+  learner  AcademyLearnerProfile @relation(fields: [learnerId], references: [id], onDelete: Cascade)
+
+  @@id([guardianId, learnerId])
+  @@index([learnerId])
+}
+
+model AcademyLessonProgress {
+  id          String    @id @default(cuid())
+  userId      String
+  lessonId    String
+  score       Int       @default(0)
+  attempts    Int       @default(1)
+  completedAt DateTime?
+  updatedAt   DateTime  @updatedAt
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId, completedAt])
 }
 
 model AcademyUserRole {

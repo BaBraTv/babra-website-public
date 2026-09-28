@@ -35,6 +35,7 @@ const topNav = [
   ["About", "/holding"],
   ["Cosmetics", "/cosmetics"],
   ["Mobile Hub", "/rwanda-mobile-hub"],
+  ["AI Academy", "/academy"],
   ["Schools", "/schools"],
   ["Dental Clinic", "/dental-experts-clinic"],
   ["Store", "/store"],
@@ -65,6 +66,14 @@ const ecosystemCards = [
     href: "/rwanda-mobile-hub",
     image: "/photos/mobile-smartphone.jpg",
     accent: "#4ebeff"
+  },
+  {
+    title: "BaBra AI Academy",
+    label: "AI learning · Ages 10–17",
+    text: "Safe, structured artificial-intelligence lessons, quizzes, progress tracking, and guided learning for Africa's next generation.",
+    href: "/academy",
+    image: "/photos/school-classroom.jpg",
+    accent: "#55e6d0"
   },
   {
     title: "BaBra Schools",

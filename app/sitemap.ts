@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/store", "weekly", 0.95],
     ["/cosmetics", "weekly", 0.9],
     ["/schools", "monthly", 0.85],
+    ["/academy", "weekly", 0.9],
     ["/rwanda-mobile-hub", "monthly", 0.85],
     ["/dental-experts-clinic", "monthly", 0.9],
     ["/foundation", "monthly", 0.85],

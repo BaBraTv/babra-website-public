@@ -26,6 +26,8 @@ export const metadata: Metadata = {
     "EI BaBra Holding Ltd",
     "Rwanda Mobile Hub",
     "BaBra Schools",
+    "BaBra AI Academy",
+    "Learn AI Rwanda",
     "BaBra Foundation",
     "BaBra Hospital",
     "BaBra Farm",
@@ -73,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       { "@type": "Brand", name: "BaBra Cosmetics" },
       { "@type": "Brand", name: "Rwanda Mobile Hub" },
       { "@type": "Brand", name: "BaBra Schools" },
+      { "@type": "Brand", name: "BaBra AI Academy" },
       { "@type": "Brand", name: "BaBra Foundation" },
       { "@type": "Brand", name: "LifeTalk TV" },
       { "@type": "Brand", name: "BaBra TV" }

@@ -1,5 +1,5 @@
 export function isAcademyEnabled() {
-  return process.env.ACADEMY_ENABLED === "true";
+  return process.env.ACADEMY_ENABLED !== "false";
 }
 
 export function requireAcademyEnabled() {

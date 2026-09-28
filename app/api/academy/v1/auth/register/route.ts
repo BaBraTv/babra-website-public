@@ -17,7 +17,8 @@ export async function POST(request: Request) {
   const existing = await getPrisma().academyUser.findUnique({ where: { email: parsed.data.email } });
   if (existing) return NextResponse.json({ error: "An account already exists for this email" }, { status: 409 });
   const token = createAcademyToken();
-  const user = await getPrisma().academyUser.create({ data: { fullName: parsed.data.fullName, email: parsed.data.email, passwordHash: await hashAcademyPassword(parsed.data.password), roles: { create: { role: "CANDIDATE" } }, verificationTokens: { create: { tokenHash: token.hash, expiresAt: new Date(Date.now() + 86_400_000) } } } });
+  const role = parsed.data.accountType === "parent" ? "PARENT" : "STUDENT";
+  const user = await getPrisma().academyUser.create({ data: { fullName: parsed.data.fullName, email: parsed.data.email, passwordHash: await hashAcademyPassword(parsed.data.password), roles: { create: { role } }, learnerProfiles: role === "STUDENT" ? { create: { birthYear: parsed.data.birthYear } } : undefined, verificationTokens: { create: { tokenHash: token.hash, expiresAt: new Date(Date.now() + 86_400_000) } } } });
   await sendAcademyVerification(user.email, token.raw);
   await writeAcademyAudit({ actorId: user.id, action: "AUTH_REGISTER", entityType: "AcademyUser", entityId: user.id });
   return NextResponse.redirect(new URL("/academy/check-email", request.url), 303);
