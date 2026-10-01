@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type ChangeEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { trackAnalytics } from "./analytics-client";
 import {
@@ -53,6 +53,7 @@ type OrderItem = {
 
 type Order = {
   id: string;
+  databaseId?: string;
   items: OrderItem[];
   customer: Omit<Account, "password">;
   subtotal: number;
@@ -281,7 +282,8 @@ function orderFromApi(order: BackendOrder): Order {
           : "Cash on Delivery";
 
   return {
-    id: order.id,
+    id: order.orderNumber,
+    databaseId: order.id,
     items,
     customer: normalizeAccount({
       fullName: order.customerName,
@@ -328,7 +330,6 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [method, setMethod] = useState<PaymentMethod>("Cash on Delivery");
-  const [paymentReference, setPaymentReference] = useState("");
   const [manualStatus, setManualStatus] = useState<OrderStatus>("Quote requested");
   const [priceOverrides, setPriceOverrides] = useState<Record<string, number>>({});
   const [trackingCode, setTrackingCode] = useState("");
@@ -567,46 +568,6 @@ export function PlatformClient({ mode }: { mode: Mode }) {
       setIsBusy(false);
       return;
     }
-    const order: Order = {
-      id: `BABRA-${Date.now().toString().slice(-8)}`,
-      items: cartLines.map((item) => ({
-        slug: item.product.slug,
-        name: item.product.name,
-        quantity: item.quantity,
-        unitPrice: priceFor(item.product.slug, item.product.price)
-      })),
-      customer: {
-        fullName: account.fullName,
-        phone: account.phone,
-        email: account.email,
-        preferredLanguage: account.preferredLanguage,
-        customerType: account.customerType,
-        province: account.province,
-        district: account.district,
-        sector: account.sector,
-        cell: account.cell,
-        village: account.village,
-        landmark: account.landmark,
-        deliveryNotes: account.deliveryNotes
-      },
-      subtotal,
-      deliveryFee,
-      total,
-      method,
-      paymentReference,
-      status,
-      createdAt: nowLabel(),
-      updatedAt: nowLabel(),
-      rewardPoints
-    };
-    const next = [order, ...orders];
-    setOrders(next);
-    saveJson(storageKeys.orders, next);
-    setTrackingCode(order.id);
-    setManualStatus(status);
-    saveJson(storageKeys.paymentStatus, status);
-    clearCart();
-    window.location.href = status === "Quote requested" ? "/orders" : "/payment-confirmation";
   }
 
   function savePrice(slug: string, value: number) {
@@ -615,29 +576,24 @@ export function PlatformClient({ mode }: { mode: Mode }) {
     saveJson(storageKeys.priceOverrides, next);
   }
 
-  async function updateOrderStatus(id: string, status: OrderStatus) {
+  async function updateOrderStatus(order: Order, status: OrderStatus) {
     setStatusMessage("");
     try {
       await apiRequest("/api/orders", {
         method: "PATCH",
-        body: JSON.stringify({ orderId: id, status: uiStatusToApi[status] })
+        body: JSON.stringify({ orderId: order.databaseId ?? order.id, status: uiStatusToApi[status] })
       });
     } catch (error) {
       setStatusMessage(error instanceof Error ? error.message : "Order status update failed");
       return;
     }
-    const next = orders.map((order) => (order.id === id ? { ...order, status, updatedAt: nowLabel() } : order));
+    const next = orders.map((item) => (item.id === order.id ? { ...item, status, updatedAt: nowLabel() } : item));
     setOrders(next);
     saveJson(storageKeys.orders, next);
-    if (id === latestOrder?.id) {
+    if (order.id === latestOrder?.id) {
       setManualStatus(status);
       saveJson(storageKeys.paymentStatus, status);
     }
-  }
-
-  function handleFileInput(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    setPaymentReference(file ? `${paymentReference || "Attachment"} - ${file.name}` : paymentReference);
   }
 
   async function requestPasswordReset() {
@@ -770,7 +726,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
               <Panel className="mt-0">
                 <h2 className="font-serif text-4xl">My Orders</h2>
                 <div className="mt-5 grid gap-3">
-                  {orders.slice(0, 4).map((order) => <OrderCard key={order.id} order={order} onStatusChange={(nextStatus) => updateOrderStatus(order.id, nextStatus)} />)}
+                  {orders.slice(0, 4).map((order) => <OrderCard key={order.id} order={order} onStatusChange={(nextStatus) => updateOrderStatus(order, nextStatus)} />)}
                   {orders.length === 0 ? <p className="text-white/62">No database orders yet.</p> : null}
                 </div>
               </Panel>
@@ -830,17 +786,15 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                   {accountForm}
                   <Field label="Affiliate code (optional)" value={affiliateCode} onChange={setAffiliateCode} />
                   <h3 className="mt-2 font-serif text-3xl">Payment method</h3>
+                  <p className="rounded-xl border border-amber-300/25 bg-amber-300/10 p-4 text-sm leading-6 text-amber-50">Submitting an order does not charge your phone or bank account. Wait for official BaBra payment instructions; every payment stays pending until manual verification.</p>
                   <SelectField label="Payment method" value={method} options={paymentMethods} onChange={(value) => setMethod(value as PaymentMethod)} />
                   {method !== "Cash on Delivery" ? (
-                    <div className="grid gap-3">
-                      <Field label={method === "Bank Transfer" ? "Bank / account reference" : "Payer phone number"} value={paymentReference} onChange={setPaymentReference} />
-                      <input className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white" type="file" onChange={handleFileInput} />
-                    </div>
+                    <p className="rounded-xl border border-white/10 bg-black/25 p-4 text-white/64">BaBra support will provide the verified {method} instructions after reviewing your order. No payment proof is uploaded on this page.</p>
                   ) : (
                     <p className="rounded-xl border border-white/10 bg-black/25 p-4 text-white/64">Cash on Delivery remains pending until BaBra confirms delivery and payment.</p>
                   )}
                   <button className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" onClick={() => submitOrder("Pending payment confirmation")} type="button" disabled={cartLines.length === 0 || isBusy}>
-                    {isBusy ? "Saving order..." : "Submit order"}
+                    {isBusy ? "Saving order..." : "Submit order for review"}
                   </button>
                   <a className="rounded-full border border-white/20 px-6 py-3 text-center font-black text-white" href={whatsappOrderUrl(quoteMessage)} target="_blank" rel="noopener noreferrer">
                     Send on WhatsApp
@@ -854,14 +808,14 @@ export function PlatformClient({ mode }: { mode: Mode }) {
         {(mode === "orders" || mode === "payment") && (
           <section className="mt-10 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <Panel className="mt-0">
-              <h1 className="font-serif text-5xl">{mode === "payment" ? "Payment confirmation" : "Order tracking"}</h1>
-              <p className="mt-4 text-white/64">Track the newest order or enter an order code saved on this device.</p>
+              <h1 className="font-serif text-5xl">{mode === "payment" ? "Payment review" : "Order tracking"}</h1>
+              <p className="mt-4 text-white/64">Track the newest order or enter its public order number. Payment remains pending until BaBra verifies it.</p>
               <input className="mt-6 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white" value={trackingCode} onChange={(event) => setTrackingCode(event.target.value)} placeholder="BABRA-00000000" />
               {trackedOrder ? <OrderTimeline order={trackedOrder} /> : <p className="mt-6 text-white/62">No order saved yet.</p>}
             </Panel>
             <div className="grid gap-4">
               {orders.map((order) => (
-                <OrderCard key={order.id} order={order} onStatusChange={(status) => updateOrderStatus(order.id, status)} editable={mode === "payment"} />
+                <OrderCard key={order.id} order={order} onStatusChange={(status) => updateOrderStatus(order, status)} />
               ))}
             </div>
           </section>
@@ -905,7 +859,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
             <section className="mt-8 grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
               <div className="grid gap-4">
                 {orders.length === 0 ? <Panel className="mt-0"><p className="text-white/62">No orders saved yet. Place a checkout order to see admin workflow.</p></Panel> : null}
-                {orders.map((order) => <OrderCard key={order.id} order={order} onStatusChange={(status) => updateOrderStatus(order.id, status)} editable />)}
+                {orders.map((order) => <OrderCard key={order.id} order={order} onStatusChange={(status) => updateOrderStatus(order, status)} editable />)}
               </div>
               <Panel className="mt-0">
                 <h2 className="font-serif text-4xl">Intelligence</h2>

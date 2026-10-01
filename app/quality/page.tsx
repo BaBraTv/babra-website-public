@@ -1,13 +1,13 @@
 const qualitySignals = [
   ["Approved public media", "Only verified BaBra logo and official BaBra Lotion bottle media are displayed publicly."],
-  ["Pending documentation", "Official certifications and quality documents are pending approval before public display."],
+  ["Documentation access", "Certifications and quality documents are shared only through verified BaBra channels when authorized."],
   ["Protected details", "Ingredients, production details, batch records, and private labels are not published until approved."],
   ["Partner review", "Verified partners can request official documentation through BaBra contact channels when available."]
 ];
 
 export const metadata = {
   title: "BaBra Quality & Official Information",
-  description: "BaBra quality page with approved public media and pending official documentation status."
+  description: "BaBra quality page with approved public media and controlled access to official documentation."
 };
 
 export default function QualityPage() {
@@ -19,7 +19,7 @@ export default function QualityPage() {
           <div className="mt-12 grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Quality and official information</p>
-              <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">Official information pending.</h1>
+              <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">Verified information only.</h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/66">
                 This page avoids publishing unapproved certifications, ingredients, medical claims, production details, reviews, or testimonials.
               </p>
@@ -28,7 +28,7 @@ export default function QualityPage() {
               <p className="text-sm font-black uppercase tracking-[0.2em] text-[#a9141d]">Public wording rule</p>
               <h2 className="mt-3 font-serif text-4xl leading-none">Approved evidence only.</h2>
               <p className="mt-5 leading-8 text-black/64">
-                Official BaBra documentation will be added after approval. Until then, sensitive or unverified information stays private.
+                Sensitive or unverified information stays private. Authorized partners can request the appropriate documentation through official BaBra contact channels.
               </p>
             </div>
           </div>

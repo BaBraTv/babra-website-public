@@ -4,7 +4,7 @@ const footerGroups = [
     links: [
       ["Holding", "/holding"],
       ["Founder", "/founder"],
-      ["Careers", "/job-application"],
+      ["Careers", "/jobs"],
       ["Contact", "/contact"]
     ]
   },

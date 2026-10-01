@@ -13,7 +13,7 @@ export type OfficialMediaItem = {
   sourceNote: string;
 };
 
-export const officialMediaPendingLabel = "Official media coming soon.";
+export const officialMediaPendingLabel = "Official BaBra division";
 
 export const officialMedia: OfficialMediaItem[] = [
   {

@@ -1,8 +1,14 @@
 .privacy { padding: 16px 24px; background: #121212; color: #fff; font-size: 14px; }
 .privacy button, .privacy a { text-decoration: underline; text-underline-offset: 4px; min-height: 44px; }
-.panel { position: fixed; z-index: 60; bottom: 20px; right: 20px; width: min(450px, calc(100vw - 40px)); padding: 24px; border: 1px solid #d6ad57; border-radius: 12px; background: #171512; color: #fff; box-shadow: 0 10px 40px #0008; max-height: 80vh; overflow: auto; }
+.panel { box-sizing: border-box; position: fixed; z-index: 60; bottom: 20px; right: 20px; width: min(450px, calc(100vw - 40px)); padding: 24px; border: 1px solid #d6ad57; border-radius: 12px; background: #171512; color: #fff; box-shadow: 0 10px 40px #0008; max-height: 80vh; overflow: auto; }
 .panel h2 { font-size: 22px; font-weight: 700; }
 .panel p { margin: 14px 0; font-size: 16px; line-height: 1.6; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .actions button { flex: 1; padding: 12px; border: 1px solid #d6ad57; border-radius: 6px; text-decoration: none; }
 .privacy button:focus-visible, .privacy a:focus-visible { outline: 3px solid #d6ad57; outline-offset: 3px; }
+
+@media (max-width: 520px) {
+  .privacy { padding: 12px 16px; }
+  .panel { right: 12px; bottom: 12px; left: 12px; width: auto; padding: 20px; max-height: calc(100vh - 24px); }
+  .actions { display: grid; grid-template-columns: 1fr; }
+}

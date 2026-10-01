@@ -8,49 +8,23 @@ const founderImageAlt = "Official portrait of the BaBra Founder and CEO";
 const verifiedProfile = [
   ["Role", "Founder & CEO"],
   ["Organization", "BaBra Holding Ltd"],
-  ["Public platform", "babra.store"],
-  ["Official profile status", "Official biography pending approval"]
-];
-
-const sections = [
-  {
-    title: "Biography",
-    text: "Official founder biography, education, career history, and public profile details are pending approval."
-  },
-  {
-    title: "Vision",
-    text: "Official founder vision statement is pending approval."
-  },
-  {
-    title: "Leadership Philosophy",
-    text: "Official leadership philosophy is pending approval."
-  },
-  {
-    title: "Core Values",
-    text: "Official founder values are pending approval."
-  },
-  {
-    title: "Future Vision",
-    text: "Official future vision statement is pending approval."
-  }
+  ["Public platform", "babra.store"]
 ];
 
 const verifiedJourney = [
   {
-    label: "Legacy public contact",
-    detail: "The repository identifies the old Kimisagara Orphanage public profile as connected to the same founder/contact."
+    label: "Founder leadership",
+    detail: "Founder and CEO of BaBra Holding Ltd."
   },
   {
-    label: "Community support evolution",
-    detail: "The repository states that the work now continues under BaBra / RI BaBra community support."
+    label: "BaBra ecosystem",
+    detail: "Leadership across BaBra's public business, education, health, technology, media, agriculture, and community-impact divisions."
   },
   {
     label: "Current public platform",
     detail: "The official BaBra public platform is published through babra.store."
   }
 ];
-
-const gallery = [] as const;
 
 export const metadata: Metadata = {
   title: "Founder & CEO | BaBra Holding Ltd",
@@ -84,7 +58,7 @@ export default function FounderPage() {
             <p className="mt-10 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Founder & CEO</p>
             <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">Official founder profile.</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/66">
-              A premium official founder page prepared for approved BaBra leadership content. Only verified repository information is displayed.
+              The official public leadership profile for BaBra Holding Ltd and the BaBra ecosystem.
             </p>
             <div className="mt-8 flex flex-wrap gap-3" aria-label="Founder page actions">
               <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#101010] transition hover:-translate-y-0.5 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f1d58b]" href="/holding">
@@ -119,7 +93,7 @@ export default function FounderPage() {
       <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Verified profile</p>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
             {verifiedProfile.map(([label, value]) => (
               <article key={label} className="rounded-2xl border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
                 <h2 className="text-sm font-black uppercase tracking-[0.18em] text-black/45">{label}</h2>
@@ -127,17 +101,6 @@ export default function FounderPage() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-16 md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {sections.map((section) => (
-            <article key={section.title} className="rounded-2xl border border-white/10 bg-white/[0.055] p-7 shadow-xl shadow-black/20">
-              <h2 className="font-serif text-4xl">{section.title}</h2>
-              <p className="mt-4 leading-7 text-white/62">{section.text}</p>
-            </article>
-          ))}
         </div>
       </section>
 
@@ -159,23 +122,6 @@ export default function FounderPage() {
         </div>
       </section>
 
-      <section className="px-5 py-16 md:px-8">
-        <div className="mx-auto max-w-5xl rounded-[2rem] border border-[#d6ad57]/25 bg-[#f1d58b] p-8 text-[#130d08] shadow-2xl shadow-black/25 md:p-12">
-          <p className="text-sm font-black uppercase tracking-[0.24em]">Premium quote</p>
-          <blockquote className="mt-5 font-serif text-4xl leading-tight md:text-6xl">
-            Official founder quote pending approval.
-          </blockquote>
-          <p className="mt-6 text-sm font-black uppercase tracking-[0.16em] text-black/55">Founder & CEO, BaBra Holding Ltd</p>
-        </div>
-      </section>
-
-      {gallery.length > 0 ? (
-        <section className="px-5 pb-16 md:px-8" aria-label="Founder gallery">
-          <div className="mx-auto max-w-7xl">
-            <h2 className="font-serif text-5xl leading-none">Founder gallery.</h2>
-          </div>
-        </section>
-      ) : null}
     </main>
   );
 }

@@ -36,7 +36,7 @@ self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
   if (requestUrl.origin !== self.location.origin) return;
   // Never cache private APIs, admin pages or authenticated account surfaces.
-  if (/^\/(api|admin|account|dashboard|profile|orders|affiliate|login|signup|forgot-password|reset-password)(\/|$)/.test(requestUrl.pathname)) return;
+  if (/^\/(api|admin|account|dashboard|profile|orders|affiliate|academy|login|signup|forgot-password|reset-password)(\/|$)/.test(requestUrl.pathname)) return;
 
   event.respondWith(
     fetch(event.request)

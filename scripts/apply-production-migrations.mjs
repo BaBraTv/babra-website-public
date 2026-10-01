@@ -39,19 +39,26 @@ if (!migrationDatabaseUrl.startsWith("postgresql://") && !migrationDatabaseUrl.s
 
 const childEnv = {
   ...process.env,
-  DATABASE_URL: migrationDatabaseUrl
+  DATABASE_URL: migrationDatabaseUrl,
+  RUST_LOG: process.env.RUST_LOG || "info"
 };
+if (!process.env.npm_execpath) {
+  console.error("npm_execpath is required to run the project package manager safely.");
+  process.exit(1);
+}
+const pnpmCommand = process.execPath;
+const pnpmArgs = [process.env.npm_execpath, "exec", "prisma"];
 
 console.log("Validating Prisma schema...");
-let result = spawnSync("pnpm", ["exec", "prisma", "validate"], { stdio: "inherit", shell: true, env: childEnv });
+let result = spawnSync(pnpmCommand, [...pnpmArgs, "validate"], { stdio: "inherit", env: childEnv });
 if (result.status !== 0) process.exit(result.status ?? 1);
 
 console.log("Applying Prisma migrations with prisma migrate deploy...");
-result = spawnSync("pnpm", ["exec", "prisma", "migrate", "deploy"], { stdio: "inherit", shell: true, env: childEnv });
+result = spawnSync(pnpmCommand, [...pnpmArgs, "migrate", "deploy"], { stdio: "inherit", env: childEnv });
 if (result.status !== 0) process.exit(result.status ?? 1);
 
 console.log("Generating Prisma client...");
-result = spawnSync("pnpm", ["exec", "prisma", "generate"], { stdio: "inherit", shell: true, env: childEnv });
+result = spawnSync(pnpmCommand, [...pnpmArgs, "generate"], { stdio: "inherit", env: childEnv });
 if (result.status !== 0) process.exit(result.status ?? 1);
 
 console.log("Production migrations applied successfully.");

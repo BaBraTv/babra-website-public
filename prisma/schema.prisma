@@ -169,6 +169,29 @@ enum AffiliateWithdrawalStatus {
   CANCELLED
 }
 
+enum AcademyRole {
+  STUDENT
+  PARENT
+  CANDIDATE
+  INSTRUCTOR
+  CONTENT_EDITOR
+  EXAMINER
+  HR_RECRUITER
+  HR_MANAGER
+  EMPLOYER_USER
+  EMPLOYER_ADMIN
+  FINANCE
+  ACADEMY_ADMIN
+  SUPER_ADMIN
+}
+
+enum AcademyUserStatus {
+  PENDING_VERIFICATION
+  ACTIVE
+  SUSPENDED
+  DELETED
+}
+
 model User {
   id              String     @id @default(cuid())
   email           String?    @unique
@@ -596,4 +619,140 @@ model AffiliateWithdrawal {
   @@unique([affiliateId, idempotencyKey])
   @@index([affiliateId, status, requestedAt])
   @@index([status, requestedAt])
+}
+
+model AcademyUser {
+  id              String            @id @default(cuid())
+  email           String            @unique
+  passwordHash    String
+  fullName        String
+  status          AcademyUserStatus @default(PENDING_VERIFICATION)
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  roles               AcademyUserRole[]
+  sessions            AcademySession[]
+  verificationTokens  AcademyVerificationToken[]
+  passwordResetTokens AcademyPasswordResetToken[]
+  auditEvents         AcademyAuditLog[]           @relation("AcademyAuditActor")
+  learnerProfiles     AcademyLearnerProfile[]     @relation("LearnerAccount")
+  guardianLinks       AcademyGuardianLink[]       @relation("GuardianAccount")
+  lessonProgress      AcademyLessonProgress[]
+
+  @@index([status, createdAt])
+}
+
+model AcademyLearnerProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  birthYear       Int?
+  currentLevel    String   @default("level-1")
+  preferredLocale String   @default("en")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user      AcademyUser           @relation("LearnerAccount", fields: [userId], references: [id], onDelete: Cascade)
+  guardians AcademyGuardianLink[]
+
+  @@index([currentLevel])
+}
+
+model AcademyGuardianLink {
+  guardianId String
+  learnerId  String
+  createdAt  DateTime @default(now())
+
+  guardian AcademyUser           @relation("GuardianAccount", fields: [guardianId], references: [id], onDelete: Cascade)
+  learner  AcademyLearnerProfile @relation(fields: [learnerId], references: [id], onDelete: Cascade)
+
+  @@id([guardianId, learnerId])
+  @@index([learnerId])
+}
+
+model AcademyLessonProgress {
+  id          String    @id @default(cuid())
+  userId      String
+  lessonId    String
+  score       Int       @default(0)
+  attempts    Int       @default(1)
+  completedAt DateTime?
+  updatedAt   DateTime  @updatedAt
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId, completedAt])
+}
+
+model AcademyUserRole {
+  userId    String
+  role      AcademyRole
+  grantedAt DateTime    @default(now())
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, role])
+  @@index([role])
+}
+
+model AcademySession {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  userAgent String?
+  ipAddress String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model AcademyVerificationToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+}
+
+model AcademyPasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user AcademyUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+}
+
+model AcademyAuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  action     String
+  entityType String
+  entityId   String?
+  outcome    String   @default("SUCCESS")
+  metadata   Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  actor AcademyUser? @relation("AcademyAuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId, createdAt])
+  @@index([entityType, entityId])
+  @@index([action, createdAt])
 }

@@ -35,6 +35,7 @@ const topNav = [
   ["About", "/holding"],
   ["Cosmetics", "/cosmetics"],
   ["Mobile Hub", "/rwanda-mobile-hub"],
+  ["AI Academy", "/academy"],
   ["Schools", "/schools"],
   ["Dental Clinic", "/dental-experts-clinic"],
   ["Store", "/store"],
@@ -65,6 +66,14 @@ const ecosystemCards = [
     href: "/rwanda-mobile-hub",
     image: "/photos/mobile-smartphone.jpg",
     accent: "#4ebeff"
+  },
+  {
+    title: "BaBra AI Academy",
+    label: "AI learning · Ages 10–17",
+    text: "Safe, structured artificial-intelligence lessons, quizzes, progress tracking, and guided learning for Africa's next generation.",
+    href: "/academy",
+    image: "/photos/school-classroom.jpg",
+    accent: "#55e6d0"
   },
   {
     title: "BaBra Schools",
@@ -249,32 +258,32 @@ const addressLevels = [
 
 const platformSystems = [
   ["Marketplace", "Retail, wholesale, vendor onboarding, product discovery, and order tracking."],
-  ["Payment Hub", "MTN MoMo, Airtel Money, USDT-ready checkout, wallets, escrow, PIN confirmation, and EBM receipts."],
+  ["Payment Review", "Cash on Delivery, MTN MoMo, Airtel Money, and bank-transfer choices are recorded as pending until BaBra verifies them."],
   ["Affiliate Matrix", "Legal transaction-based rewards, rank progress, referral wallets, and fraud controls."],
   ["Delivery Engine", "Location-first Rwanda address flow by province, district, sector, cell, village, plus global addresses."],
-  ["AI Command", "Shopping support, customer care, analytics, fraud alerts, and business automation."],
-  ["Admin Control", "Sales, users, payments, school, farm, media, inventory, and growth dashboards."]
+  ["Academy AI", "The Academy learning assistant is available to signed-in learners when its AI service is configured."],
+  ["Admin Control", "Authorized staff can review users, orders, payments, forms, affiliates, and consent-aware website analytics."]
 ];
 
 const paymentFlows = [
-  ["Wallet balance", "Customers can keep money in BaBra Wallet, withdraw it, or use it to buy BaBra products."],
-  ["Phone money", "MTN MoMo or Airtel Money checkout sends a confirmation popup before payment is approved."],
-  ["USDT-ready", "Crypto checkout can be routed through a verified provider before order confirmation."],
-  ["PIN + EBM", "After PIN/password confirmation, the system verifies payment and generates an EBM-ready receipt."]
+  ["Pending by default", "Every submitted order remains pending until BaBra verifies availability, the final price, delivery, and payment."],
+  ["Phone money review", "MTN MoMo and Airtel Money are manual-review choices; this website does not trigger or claim an automatic payment."],
+  ["Bank or delivery", "Bank transfer and Cash on Delivery details are confirmed through official BaBra support before fulfillment."],
+  ["Verified status", "Only authorized staff can mark a payment received or move an order into packing and delivery."]
 ];
 
 const deliverySteps = [
   ["Detect location", "The system asks for customer location and starts with Rwanda address structure."],
   ["Rwanda address", "Province, district, sector, cell, village, phone number, and landmark are confirmed step by step."],
   ["Global address", "Customers outside Rwanda enter country, city, postal code, street, and delivery notes."],
-  ["Delivery proof", "The order keeps address, payment status, EBM receipt, and delivery confirmation in one record."]
+  ["Delivery record", "The order keeps the submitted address, payment-review status, and delivery progress in one record."]
 ];
 
 const wholesaleTiers = [
-  ["Retail", "1-11 units", "Standard price with simple MoMo or wallet checkout."],
+  ["Retail", "1-11 units", "Standard quote with the same manual payment-verification process."],
   ["Starter reseller", "12+ units", "Small discount for first-time resellers."],
   ["Wholesale", "48+ units", "MOQ-based pricing for shops and salons."],
-  ["Distributor", "120+ units", "Best margin, invoice, payment confirmation, and EBM-ready receipt."]
+  ["Distributor", "120+ units", "Best margin, invoice, payment confirmation, and agreed fulfillment terms."]
 ];
 
 const proofPoints = [
@@ -292,7 +301,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#090706] text-white">
       <nav className="sticky top-11 z-50 border-b border-white/10 bg-[#090706]/95 backdrop-blur-2xl">
-        <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-5 py-3 md:px-8">
+        <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-2 px-4 py-3 sm:gap-6 md:px-8">
           <a className="flex shrink-0 items-center gap-3" href="#top" aria-label="EI BaBra Holding Ltd home">
             <img className="h-11 w-11 rounded-full border border-[#d6ad57]/45 object-cover shadow-lg shadow-[#d6ad57]/15" src="/media/logos/babra-logo.jpeg" alt="BaBra official logo" />
             <span className="hidden sm:block">
@@ -311,7 +320,7 @@ export default function HomePage() {
 
           <div className="flex shrink-0 items-center gap-2">
             <details className="group relative">
-              <summary className="cursor-pointer list-none rounded-full border border-white/15 bg-white/[0.06] px-4 py-2.5 text-sm font-black text-white transition hover:border-[#d6ad57]/55 hover:text-[#f1d58b]">
+              <summary className="cursor-pointer list-none whitespace-nowrap rounded-full border border-white/15 bg-white/[0.06] px-3 py-2.5 text-xs font-black text-white transition hover:border-[#d6ad57]/55 hover:text-[#f1d58b] sm:px-4 sm:text-sm">
                 My Account
               </summary>
               <div className="absolute right-0 top-[calc(100%+0.75rem)] w-64 overflow-hidden rounded-2xl border border-white/12 bg-[#100c0a] p-2 shadow-2xl shadow-black/60">
@@ -461,7 +470,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a className="rounded-full bg-[#55e6d0] px-6 py-3 font-black text-[#06191b]" href="/dental-experts-clinic">Explore the clinic</a>
               <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href="https://dentalexpertsclinic.rw/appointment.php" target="_blank" rel="noopener noreferrer">Book appointment</a>
-              <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href="tel:+250790719688">Call clinic</a>
+              <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href="tel:+250788688501">Receptionist · +250 788 688 501</a>
             </div>
           </div>
           <a href="/dental-experts-clinic" className="group overflow-hidden rounded-lg border border-white/15 bg-white/[0.06] p-5 shadow-2xl shadow-black/30">
@@ -735,7 +744,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">babra.store platform</p>
           <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">
-            Commerce, payments, rewards, delivery, and intelligence in one account.
+            Commerce, manual payment review, delivery, and account tools in one place.
           </h2>
 
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -751,9 +760,9 @@ export default function HomePage() {
 
       <section className="bg-[#fffaf1] px-5 py-20 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Smart payment logic</p>
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">Transparent payment status</p>
           <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">
-            Wallet, phone money, USDT-ready checkout, and EBM receipts.
+            No automatic payment success before human verification.
           </h2>
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {paymentFlows.map(([title, text]) => (

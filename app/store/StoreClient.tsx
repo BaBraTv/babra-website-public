@@ -170,7 +170,7 @@ export function StoreClient() {
                 <Image key={product.slug} className="h-52 w-full rounded-2xl bg-white/70 object-contain p-3 drop-shadow-xl" src={product.image} alt={product.alt} width={520} height={1024} sizes="(min-width: 1024px) 24vw, 45vw" />
               ))}
             </div>
-            <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-[#a9141d]">Official product information pending approval.</p>
+            <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-[#a9141d]">Official BaBra Lotion collection · Price confirmed by BaBra support.</p>
           </div>
         </div>
       </section>

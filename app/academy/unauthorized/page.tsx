@@ -1,0 +1,1 @@
+export default function UnauthorizedPage() { return <main className="mx-auto max-w-xl px-6 py-20"><h1 className="text-3xl font-bold">Access not permitted</h1><p className="mt-4 text-slate-300">Your Academy role does not allow access to this workspace.</p></main>; }

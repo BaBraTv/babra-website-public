@@ -21,27 +21,6 @@ const categories = [
   "Announcement"
 ];
 
-const samplePosts = [
-  {
-    type: "Video",
-    title: "Factory production update",
-    text: "Short production clips can be reviewed, approved, and published after brand checks.",
-    tag: "Review first"
-  },
-  {
-    type: "Image",
-    title: "Product launch photo",
-    text: "New BaBra product photos can be prepared for store, social media, and homepage sections.",
-    tag: "Visual content"
-  },
-  {
-    type: "Text",
-    title: "Founder message",
-    text: "Short text updates can become website news, LifeTalk TV notes, or social captions.",
-    tag: "Story content"
-  }
-];
-
 export function ContentStudioClient() {
   const [media, setMedia] = useState<MediaPreview | null>(null);
   const [postType, setPostType] = useState("Image + Text");
@@ -216,18 +195,6 @@ export function ContentStudioClient() {
           </ul>
         </section>
 
-        <section className="grid gap-3">
-          {samplePosts.map((post) => (
-            <article key={post.title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <span className="rounded-full border border-[#f1d58b]/25 px-3 py-1 text-xs font-black text-[#f1d58b]">{post.type}</span>
-                <span className="text-xs font-black uppercase tracking-[0.14em] text-white/38">{post.tag}</span>
-              </div>
-              <h3 className="mt-4 font-serif text-2xl">{post.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-white/58">{post.text}</p>
-            </article>
-          ))}
-        </section>
       </aside>
     </div>
   );

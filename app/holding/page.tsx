@@ -11,15 +11,15 @@ const companies = [
 
 const pillars = [
   ["About", "BaBra Holding Ltd is the public platform for the official BaBra company ecosystem."],
-  ["Vision", "Official vision statement pending approval."],
-  ["Mission", "Official mission statement pending approval."],
-  ["Values", "Official values pending approval."]
+  ["Portfolio", "Public routes connect BaBra's commerce, technology, education, healthcare, agriculture, media, and community-impact work."],
+  ["Digital access", "Customers, applicants, partners, and communities can reach the appropriate BaBra division through official forms and contact routes."],
+  ["Trust", "The platform publishes approved information and clearly labels services that require manual verification."]
 ];
 
 const roadmap = [
-  ["Current", "Official public platform, approved product media, and official content intake foundation."],
-  ["Next", "Official division media, founder content, and approved company information."],
-  ["Future", "Official roadmap pending approval."]
+  ["Explore", "Open the official page for each BaBra company or public service."],
+  ["Request", "Use the relevant form, account flow, or WhatsApp contact for your request."],
+  ["Verify", "Wait for BaBra staff to confirm prices, availability, payments, appointments, or application status."]
 ];
 
 export const metadata: Metadata = {
@@ -66,7 +66,7 @@ export default function HoldingPage() {
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Official holding platform</p>
             <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">BaBra Holding Ltd.</h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/66">
-              Official public page for the BaBra company ecosystem. Detailed company history and leadership information are pending approval.
+              The official public gateway to BaBra companies, products, services, forms, and verified contact routes.
             </p>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function HoldingPage() {
 
       <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">About, vision, mission, values</p>
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">About the platform</p>
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {pillars.map(([title, text]) => (
               <article key={title} className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
@@ -103,8 +103,8 @@ export default function HoldingPage() {
 
       <section className="bg-[#090706] px-5 py-16 text-white md:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Future roadmap</p>
-          <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">Official roadmap status.</h2>
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">How to use BaBra</p>
+          <h2 className="mt-3 max-w-5xl font-serif text-5xl leading-none md:text-7xl">Clear routes from interest to confirmation.</h2>
           <div className="mt-10 grid gap-5">
             {roadmap.map(([phase, text]) => (
               <article key={phase} className="grid gap-4 rounded-lg border border-white/10 bg-[#18110f] p-6 md:grid-cols-[180px_1fr] md:items-center">
