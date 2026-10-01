@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OfficialMedia } from "../components/OfficialMedia";
 import { officialMediaById } from "../data/official-media";
-import { whatsappOrderUrl, PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products } from "../commerce-data";
+import { whatsappOrderUrl, rwandaOrderUrl, PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products } from "../commerce-data";
 
 const commerceBlocks = [
   ["Official products only", "Explore BaBra Lotion Women, Men and Kids in their original packaging."],
@@ -48,7 +48,8 @@ export default function ProductsPage() {
                 <h2 className="mt-3 font-serif text-4xl leading-tight">{product.name}</h2>
                 <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-white/55">{product.size}</p>
                 <p className="mt-3 text-xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
-                <a className="mt-6 flex min-h-12 items-center justify-center rounded-full bg-[#f1d58b] px-5 py-3 text-center font-bold text-[#130d08]" href={whatsappOrderUrl(`Hello BaBra Cosmetics, I would like to order ${product.name}. Quantity: __. Delivery location: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer">Order on WhatsApp</a>
+                <a className="mt-6 flex min-h-12 items-center justify-center rounded-full bg-[#f1d58b] px-5 py-3 text-center font-bold text-[#130d08]" href={rwandaOrderUrl(`Hello Vida Pharmacy, I would like to order ${product.name} from BaBra. Quantity: __. Delivery location: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer">Rwanda order · Vida Pharmacy</a>
+                <a className="mt-3 flex min-h-12 items-center justify-center rounded-full border border-white/20 px-5 py-3 text-center font-bold text-white" href={whatsappOrderUrl(`Hello BaBra Cosmetics, I would like to order ${product.name} internationally. Quantity: __. Destination country/city: __. Please confirm price, stock and delivery options.`)} target="_blank" rel="noopener noreferrer">International order · BaBra</a>
                 <a className="mt-3 inline-flex min-h-11 items-center rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b] transition hover:bg-[#f1d58b] hover:text-[#130d08]" href={`/products/${product.slug}`}>View Details</a>
               </div>
             </article>

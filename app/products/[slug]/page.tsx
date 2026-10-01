@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { cosmetics, PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, getProduct, products, site, whatsappOrderUrl } from "../../commerce-data";
+import { cosmetics, PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, getProduct, products, rwandaOrderUrl, rwandaOrders, site, whatsappOrderUrl } from "../../commerce-data";
 import { OfficialMedia } from "../../components/OfficialMedia";
 import { officialMediaById } from "../../data/official-media";
 
@@ -90,8 +90,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="/store">
                 Explore the store
               </a>
+              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href={rwandaOrderUrl(message)} target="_blank" rel="noopener noreferrer">
+                Rwanda order · {rwandaOrders.partner}
+              </a>
               <a className="rounded-full border border-white/20 px-6 py-3 font-black text-white" href={whatsappOrderUrl(message)} target="_blank" rel="noopener noreferrer">
-                Order on WhatsApp
+                International order · BaBra
               </a>
             </div>
             <p className="mt-5 text-sm leading-7 text-white/75">Manufacturing partner: {cosmetics.manufacturer}, China.</p>
