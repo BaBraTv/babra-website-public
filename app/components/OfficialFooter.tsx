@@ -33,7 +33,7 @@ export function OfficialFooter() {
     <footer className="border-t border-white/10 bg-[#070504] px-5 py-12 text-white md:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.1fr_1.9fr]">
         <div>
-          <p className="font-serif text-3xl">BaBra Holding Ltd</p>
+          <p className="font-serif text-3xl">EI BaBra Holding Ltd</p>
           <p className="mt-4 max-w-md leading-7 text-white/58">
             Official BaBra public platform. Only approved media and official-safe information are published.
           </p>
