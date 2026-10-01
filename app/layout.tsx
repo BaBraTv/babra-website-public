@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }]
   },
   openGraph: {
-    title: "BaBra Holding Ltd | Luxury. Innovation. African Excellence.",
+    title: "EI BaBra Holding Ltd | Luxury. Innovation. African Excellence.",
     description:
       "Official BaBra platform using approved BaBra media only.",
     url: site.url,
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BaBra Holding Ltd | Luxury. Innovation. African Excellence.",
+    title: "EI BaBra Holding Ltd | Luxury. Innovation. African Excellence.",
     description: "Official BaBra platform using approved BaBra media only.",
     images: ["/media/logos/babra-logo.jpeg"]
   }
@@ -71,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "BaBra Holding Ltd",
+    name: "EI BaBra Holding Ltd",
     url: site.url,
     logo: `${site.url}/media/logos/babra-logo.jpeg`,
     brand: [

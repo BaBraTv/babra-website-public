@@ -10,7 +10,7 @@ const companies = [
 ];
 
 const pillars = [
-  ["About", "BaBra Holding Ltd is the public platform for the official BaBra company ecosystem."],
+  ["About", "EI BaBra Holding Ltd is the public platform for the official BaBra company ecosystem."],
   ["Portfolio", "Public routes connect BaBra's commerce, technology, education, healthcare, agriculture, media, and community-impact work."],
   ["Digital access", "Customers, applicants, partners, and communities can reach the appropriate BaBra division through official forms and contact routes."],
   ["Trust", "The platform publishes approved information and clearly labels services that require manual verification."]
@@ -23,20 +23,20 @@ const roadmap = [
 ];
 
 export const metadata: Metadata = {
-  title: "BaBra Holding Ltd | Official Companies",
-  description: "Official BaBra Holding Ltd page for BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Foundation, and LifeTalk TV.",
+  title: "EI BaBra Holding Ltd | Official Companies",
+  description: "Official EI BaBra Holding Ltd page for BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Foundation, and LifeTalk TV.",
   alternates: {
     canonical: `${site.url}/holding`
   },
   openGraph: {
-    title: "BaBra Holding Ltd | Official Companies",
-    description: "Official BaBra Holding Ltd company structure.",
+    title: "EI BaBra Holding Ltd | Official Companies",
+    description: "Official EI BaBra Holding Ltd company structure.",
     images: [{ url: "/media/logos/babra-logo.jpeg", width: 1200, height: 630, alt: "Official BaBra logo" }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "BaBra Holding Ltd | Official Companies",
-    description: "Official BaBra Holding Ltd company structure.",
+    title: "EI BaBra Holding Ltd | Official Companies",
+    description: "Official EI BaBra Holding Ltd company structure.",
     images: ["/media/logos/babra-logo.jpeg"]
   }
 };
@@ -45,7 +45,7 @@ export default function HoldingPage() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "BaBra Holding Ltd",
+    name: "EI BaBra Holding Ltd",
     url: site.url,
     logo: `${site.url}/media/logos/babra-logo.jpeg`,
     subOrganization: companies.map(([name, description, route]) => ({
@@ -64,7 +64,7 @@ export default function HoldingPage() {
           <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
           <div className="mt-12 max-w-5xl">
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Official holding platform</p>
-            <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">BaBra Holding Ltd.</h1>
+            <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">EI BaBra Holding Ltd.</h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/66">
               The official public gateway to BaBra companies, products, services, forms, and verified contact routes.
             </p>

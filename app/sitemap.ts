@@ -25,8 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/holding", "monthly", 0.8],
     ["/child-family-support", "monthly", 0.75],
     ["/quality", "monthly", 0.85],
-    ["/marketplace", "weekly", 0.9],
-    ["/wallet", "monthly", 0.7]
   ] as const;
 
   return routes.map(([path, changeFrequency, priority]) => ({

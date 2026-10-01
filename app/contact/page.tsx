@@ -32,12 +32,9 @@ const businessEmails = [
 ];
 
 const contactReadiness = [
-  ["Google Maps", "Official map pin pending approval"],
   ["Phone", "+250 788 351 482"],
   ["Email", companyEmail],
-  ["WhatsApp", "+250 788 351 482"],
-  ["Business hours", "Official business hours pending approval"],
-  ["Social links", "Official social links pending approval"]
+  ["WhatsApp", "+250 788 351 482"]
 ];
 
 export const metadata = {
@@ -115,7 +112,7 @@ export default function ContactPage() {
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Official contact readiness</p>
-          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Phone, email, WhatsApp, map, and hours.</h2>
+          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Official customer contact channels.</h2>
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {contactReadiness.map(([label, value]) => (
               <article key={label} className="rounded-lg border border-white/10 bg-[#18110f] p-6">
