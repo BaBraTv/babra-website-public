@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { trackAnalytics } from "../analytics-client";
-import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaLocations, site, whatsappOrderUrl } from "../commerce-data";
+import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaLocations, rwandaOrderUrl, rwandaOrders, site } from "../commerce-data";
 import { InstallAppButton } from "../InstallAppButton";
 
 type CartItem = {
@@ -137,7 +137,7 @@ export function StoreClient() {
             </a>
             <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Store commerce app</p>
             <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-[0.9] md:text-8xl">Shop official BaBra products.</h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/68">Official products. Approved media. Price confirmed by BaBra.</p>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/68">Official products and approved media. Rwanda orders are routed through Vida Pharmacy; BaBra handles international and partnership enquiries.</p>
             <div className="mt-7 flex flex-wrap gap-3">
               {(["en", "rw", "fr"] as Lang[]).map((lang) => (
                 <button
@@ -223,7 +223,7 @@ export function StoreClient() {
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">{copy.cart}</p>
             <h2 className="mt-3 font-serif text-5xl leading-none">Quote request.</h2>
               <p className="mt-5 leading-8 text-black/64">
-                Add products you want, then ask BaBra to confirm today&apos;s price, delivery, reseller, wholesale, or distributor offer.
+                Add products you want. Rwanda retail orders are routed to Vida Pharmacy for current price, stock and delivery confirmation; wholesale and international enquiries remain with BaBra.
               </p>
           </div>
           <div className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
@@ -251,7 +251,7 @@ export function StoreClient() {
             )}
             <div className="mt-6 rounded-lg bg-[#090706] p-5 text-white">
               <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]">Price confirmation</p>
-              <p className="mt-2 text-white/62">BaBra support confirms price after checking product, quantity, delivery location, and customer type.</p>
+              <p className="mt-2 text-white/62">For Rwanda retail orders, Vida Pharmacy confirms current price, stock and delivery. BaBra handles wholesale and international enquiries.</p>
               <p className="mt-4 text-3xl font-black">{PRICE_INQUIRY_LABEL}</p>
             </div>
           </div>
@@ -300,7 +300,7 @@ export function StoreClient() {
               </label>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href={whatsappOrderUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
+              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href={rwandaOrderUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
                 {copy.fallback}
               </a>
               <button className="rounded-full border border-white/20 px-6 py-3 font-black text-white" type="button" onClick={saveDraftOrder}>
@@ -337,9 +337,9 @@ export function StoreClient() {
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 xl:grid-cols-4">
           {[
             [site.company, site.address],
-            ["Phone / WhatsApp", site.phone],
-            ["Email", site.email],
-            ["Trust status", `${site.license} ${site.manufacturing} ${site.positioning}`]
+            ["Rwanda orders · Vida Pharmacy", rwandaOrders.phone],
+            ["BaBra Call / WhatsApp · international", site.phone],
+            ["Email", site.email]
           ].map(([title, text]) => (
             <article key={title} className="rounded-lg border border-white/10 bg-[#18110f] p-6">
               <h3 className="font-serif text-3xl">{title}</h3>
