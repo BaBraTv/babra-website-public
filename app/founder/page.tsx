@@ -7,14 +7,14 @@ const founderImageAlt = "Official portrait of the BaBra Founder and CEO";
 
 const verifiedProfile = [
   ["Role", "Founder & CEO"],
-  ["Organization", "BaBra Holding Ltd"],
+  ["Organization", "EI BaBra Holding Ltd"],
   ["Public platform", "babra.store"]
 ];
 
 const verifiedJourney = [
   {
     label: "Founder leadership",
-    detail: "Founder and CEO of BaBra Holding Ltd."
+    detail: "Founder and CEO of EI BaBra Holding Ltd."
   },
   {
     label: "BaBra ecosystem",
@@ -27,20 +27,20 @@ const verifiedJourney = [
 ];
 
 export const metadata: Metadata = {
-  title: "Founder & CEO | BaBra Holding Ltd",
-  description: "Official Founder and CEO page for BaBra Holding Ltd with verified official founder portrait.",
+  title: "Founder & CEO | EI BaBra Holding Ltd",
+  description: "Official Founder and CEO page for EI BaBra Holding Ltd with verified official founder portrait.",
   alternates: {
     canonical: `${site.url}/founder`
   },
   openGraph: {
-    title: "Founder & CEO | BaBra Holding Ltd",
-    description: "Official Founder and CEO page for BaBra Holding Ltd.",
+    title: "Founder & CEO | EI BaBra Holding Ltd",
+    description: "Official Founder and CEO page for EI BaBra Holding Ltd.",
     images: [{ url: founderImage, width: 384, height: 384, alt: founderImageAlt }]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Founder & CEO | BaBra Holding Ltd",
-    description: "Official Founder and CEO page for BaBra Holding Ltd.",
+    title: "Founder & CEO | EI BaBra Holding Ltd",
+    description: "Official Founder and CEO page for EI BaBra Holding Ltd.",
     images: [founderImage]
   }
 };
@@ -53,12 +53,12 @@ export default function FounderPage() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <a className="rounded-full text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f1d58b]" href="/">
-              BaBra Holding Ltd
+              EI BaBra Holding Ltd
             </a>
             <p className="mt-10 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Founder & CEO</p>
             <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">Official founder profile.</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/66">
-              The official public leadership profile for BaBra Holding Ltd and the BaBra ecosystem.
+              The official public leadership profile for EI BaBra Holding Ltd and the BaBra ecosystem.
             </p>
             <div className="mt-8 flex flex-wrap gap-3" aria-label="Founder page actions">
               <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#101010] transition hover:-translate-y-0.5 hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f1d58b]" href="/holding">
