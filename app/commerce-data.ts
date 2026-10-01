@@ -17,9 +17,16 @@ export const site = {
 export const cosmetics = {
   company: "BaBra Cosmetics Ltd",
   tin: "149358983",
-  phone: "+250788351482",
+  phone: "+250 788 351 482",
+  whatsapp: "250788351482",
   email: "babracosmeticsltd@gmail.com",
   manufacturer: "Guangzhou Pallas Cosmetics Co., Ltd."
+} as const;
+
+export const rwandaOrders = {
+  partner: "Vida Pharmacy",
+  phone: "0734 299 777",
+  whatsapp: "250734299777"
 } as const;
 
 export const PRICE_INQUIRY_LABEL = "Price on request";
@@ -137,4 +144,8 @@ export function formatUsdEstimate(_value?: number) {
 
 export function whatsappOrderUrl(message: string) {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
+export function rwandaOrderUrl(message: string) {
+  return `https://wa.me/${rwandaOrders.whatsapp}?text=${encodeURIComponent(message)}`;
 }
