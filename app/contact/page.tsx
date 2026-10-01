@@ -8,7 +8,8 @@ const contactOptions = [
 ];
 
 const quickFacts = [
-  ["Phone / WhatsApp", "+250 788 351 482"],
+  ["Rwanda orders · Vida Pharmacy", "0734 299 777"],
+  ["BaBra Call / WhatsApp", "+250 788 351 482"],
   ["Company email", "info@babra.store"],
   ["Backup email", "babracosmeticsltd@gmail.com"],
   ["Location", "Kigali, Rwanda"],
