@@ -5,6 +5,8 @@ import { OfficialFooter } from "./components/OfficialFooter";
 import { ServiceWorkerRegistration } from "./ServiceWorkerRegistration";
 import { LanguageBar } from "./LanguageBar";
 import { VisitorAnalytics } from "./components/VisitorAnalytics";
+import { GoogleAnalytics } from "./components/GoogleAnalytics";
+import { googleAnalyticsMeasurementId } from "../lib/google-analytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -83,13 +85,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
+      <head>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementId}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});gtag('js',new Date());gtag('config','${googleAnalyticsMeasurementId}',{send_page_view:false,allow_google_signals:false,allow_ad_personalization_signals:false});`
+          }}
+        />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
         <ServiceWorkerRegistration />
         <LanguageBar />
         {children}
         <OfficialFooter />
-        <VisitorAnalytics enabled={process.env.ANALYTICS_ENABLED === "true" && (process.env.ANALYTICS_HASH_SECRET?.length ?? 0) >= 32} campaigns={(process.env.ANALYTICS_CAMPAIGNS || "").split(",").filter(Boolean)} />
+        <GoogleAnalytics />
+        <VisitorAnalytics enabled={process.env.ANALYTICS_ENABLED === "true" && (process.env.ANALYTICS_HASH_SECRET?.length ?? 0) >= 32} googleAnalyticsEnabled campaigns={(process.env.ANALYTICS_CAMPAIGNS || "").split(",").filter(Boolean)} />
       </body>
     </html>
   );

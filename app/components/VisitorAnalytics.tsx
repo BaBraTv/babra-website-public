@@ -6,29 +6,30 @@ import type { AnalyticsEvent } from "../../lib/analytics-policy";
 import { configureAnalytics, consentAllowed, consentKey, privacySignal, setAnalyticsConsent, trackAnalytics } from "../analytics-client";
 import styles from "./visitor-analytics.module.css";
 
-export function VisitorAnalytics({ enabled, campaigns }: { enabled: boolean; campaigns: string[] }) {
+export function VisitorAnalytics({ enabled, googleAnalyticsEnabled, campaigns }: { enabled: boolean; googleAnalyticsEnabled: boolean; campaigns: string[] }) {
   const path = usePathname();
+  const collectionEnabled = enabled || googleAnalyticsEnabled;
   const [open, setOpen] = useState(false), [allowed, setAllowed] = useState(false), [signal, setSignal] = useState(false);
   const lastView = useRef("");
   useEffect(() => {
     configureAnalytics(enabled, campaigns);
-    if (!enabled) return;
+    if (!collectionEnabled) return;
     const refresh = () => { const permitted = consentAllowed(); setAllowed(permitted); setSignal(privacySignal()); if (!permitted) lastView.current = ""; };
     refresh();
     try { const c = JSON.parse(localStorage.getItem(consentKey) || "null"); setOpen(!privacySignal() && (!c || c.expires < Date.now())); } catch { setOpen(false); }
     window.addEventListener("babra-analytics-consent", refresh); window.addEventListener("storage", refresh);
     return () => { window.removeEventListener("babra-analytics-consent", refresh); window.removeEventListener("storage", refresh); configureAnalytics(false, []); };
-  }, [enabled, campaigns]);
+  }, [enabled, collectionEnabled, campaigns]);
   useEffect(() => {
-    if (!enabled || !allowed || !safePath(path)) { lastView.current = ""; return; }
+    if (!collectionEnabled || !allowed || !safePath(path)) { lastView.current = ""; return; }
     if (lastView.current === path) return;
     lastView.current = path;
     trackAnalytics("page_view", path);
     if (path.startsWith("/products/")) trackAnalytics("product_view", path);
     if (path === "/checkout") trackAnalytics("checkout_started", path);
-  }, [path, allowed, enabled]);
+  }, [path, allowed, collectionEnabled]);
   useEffect(() => {
-    if (!enabled || !allowed || !safePath(path)) return;
+    if (!collectionEnabled || !allowed || !safePath(path)) return;
     let activity = Date.now(); let wholesaleStarted = false;
     const activityListener = () => { activity = Date.now(); };
     const click = (event: MouseEvent) => {
@@ -50,14 +51,14 @@ export function VisitorAnalytics({ enabled, campaigns }: { enabled: boolean; cam
     document.addEventListener("click", click); document.addEventListener("focusin", focus);
     document.addEventListener("pointerdown", activityListener); document.addEventListener("keydown", activityListener); document.addEventListener("scroll", activityListener, { passive: true });
     return () => { clearInterval(interval); document.removeEventListener("click", click); document.removeEventListener("focusin", focus); document.removeEventListener("pointerdown", activityListener); document.removeEventListener("keydown", activityListener); document.removeEventListener("scroll", activityListener); };
-  }, [enabled, allowed, path]);
-  if (!enabled || /^\/(admin|account|profile|orders|dashboard|affiliate|login|signup|forgot-password|reset-password)(\/|$)/.test(path)) return null;
+  }, [collectionEnabled, allowed, path]);
+  if (!collectionEnabled || /^\/(admin|account|profile|orders|dashboard|affiliate|login|signup|forgot-password|reset-password)(\/|$)/.test(path)) return null;
   function choose(value: boolean) { setAnalyticsConsent(value); setOpen(false); }
   return <aside className={styles.privacy} aria-label="Analytics privacy preferences">
     <button type="button" onClick={() => setOpen(!open)} aria-expanded={open}>Analytics privacy settings</button>
     {open && <div className={styles.panel}>
       <h2>Help improve BaBra?</h2>
-      <p>With your permission, we measure pages and button clicks using a random browser identifier. We do not collect form contents, messages or precise location. You can withdraw at any time.</p>
+      <p>With your permission, we measure pages and button clicks using Google Analytics 4 and, when enabled, BaBra&apos;s first-party analytics. We do not collect form contents, messages or precise location. You can withdraw at any time.</p>
       <p><a href="/privacy#analytics">How analytics works</a></p>
       {signal ? <p>Your browser privacy preference is respected. Analytics is off.</p> : <div className={styles.actions}><button type="button" onClick={() => choose(true)}>Allow analytics</button><button type="button" onClick={() => choose(false)}>{allowed ? "Withdraw consent" : "Decline analytics"}</button></div>}
       <button type="button" onClick={() => setOpen(false)}>Close</button>

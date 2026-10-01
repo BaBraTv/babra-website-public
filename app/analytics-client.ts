@@ -18,7 +18,12 @@ export function setAnalyticsConsent(allowed: boolean) {
   window.dispatchEvent(new Event("babra-analytics-consent"));
 }
 export function trackAnalytics(event: AnalyticsEvent, path = location.pathname) {
-  if (!active || !consentAllowed() || !safePath(path)) return;
+  const approvedPath = safePath(path);
+  if (!approvedPath) return;
+  try {
+    (window as Window & { babraTrackGoogleAnalytics?: (event: AnalyticsEvent, path?: string) => void }).babraTrackGoogleAnalytics?.(event, approvedPath);
+  } catch {}
+  if (!active || !consentAllowed()) return;
   try {
     const now = Date.now();
     let identity = JSON.parse(localStorage.getItem(identityKey) || "null");
@@ -29,7 +34,7 @@ export function trackAnalytics(event: AnalyticsEvent, path = location.pathname) 
       visit = { id: crypto.randomUUID(), source: trafficSource(document.referrer, params.get("utm_source") || ""), campaign: campaigns.includes(campaign) ? campaign : "", last: now };
     }
     visit.last = now; sessionStorage.setItem(visitKey, JSON.stringify(visit));
-    const body = JSON.stringify({ id: crypto.randomUUID(), visit: visit.id, visitor: identity.id, consent: true, path: safePath(path), event, source: visit.source, campaign: visit.campaign });
+    const body = JSON.stringify({ id: crypto.randomUUID(), visit: visit.id, visitor: identity.id, consent: true, path: approvedPath, event, source: visit.source, campaign: visit.campaign });
     void fetch("/api/analytics", { method: "POST", headers: { "Content-Type": "application/json" }, body, keepalive: true, credentials: "same-origin" }).catch(() => {});
   } catch { /* Analytics must never interrupt shopping or forms. */ }
 }

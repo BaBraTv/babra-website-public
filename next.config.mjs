@@ -13,12 +13,12 @@ const nextConfig = {
               "object-src 'none'",
               "frame-ancestors 'none'",
               "form-action 'self'",
-              "script-src 'self' 'unsafe-inline'",
+              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https:",
               "media-src 'self' blob:",
               "font-src 'self' data:",
-              "connect-src 'self'",
+              "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com",
               "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
               "upgrade-insecure-requests"
             ].join("; ")
