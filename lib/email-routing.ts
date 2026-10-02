@@ -10,7 +10,8 @@ export const divisionEmailRoutes = {
   foundation: "foundation@babra.store",
   schools: "schools@babra.store",
   hospital: "hospital@babra.store",
-  rwandaMobileHub: "mobilehub@babra.store"
+  rwandaMobileHub: "mobilehub@babra.store",
+  testimonials: "support@babra.store"
 } as const;
 
 export async function queueNotification(input: {
