@@ -4,7 +4,7 @@ import type { analyticsReport } from "../../../lib/analytics-store";
 import { kigaliDay } from "../../../lib/analytics-policy";
 import styles from "./analytics.module.css";
 type Report = Awaited<ReturnType<typeof analyticsReport>>;
-const names: Record<string, string> = { page_view: "Page views", product_view: "Product views", whatsapp_click: "WhatsApp outbound clicks", rwanda_order_click: "Rwanda order CTA clicks", partnership_click: "Partnership CTA clicks", add_to_cart: "Add to cart", checkout_started: "Checkout started", order_requested: "Order requests saved", wholesale_started: "Wholesale form started", wholesale_handoff: "Wholesale WhatsApp handoffs", sample_handoff: "Sample WhatsApp handoffs", contact_handoff: "Contact WhatsApp handoffs", foundation_interaction: "Foundation link clicks", tv_outbound: "TV outbound clicks", engagement: "Engagement heartbeats" };
+const names: Record<string, string> = { page_view: "Page views", product_view: "Product views", whatsapp_click: "WhatsApp outbound clicks", rwanda_order_click: "Rwanda order CTA clicks", partnership_click: "Partnership CTA clicks", add_to_cart: "Add to cart", checkout_started: "Checkout started", order_requested: "Order requests saved", wholesale_started: "Wholesale form started", wholesale_handoff: "Wholesale WhatsApp handoffs", sample_handoff: "Sample WhatsApp handoffs", contact_handoff: "Contact WhatsApp handoffs", foundation_interaction: "Foundation link clicks", tv_outbound: "TV outbound clicks", testimonial_submitted: "Testimonial submissions saved", engagement: "Engagement heartbeats" };
 const number = (value: number) => value.toLocaleString();
 export function AnalyticsDashboard() {
   const today = kigaliDay();

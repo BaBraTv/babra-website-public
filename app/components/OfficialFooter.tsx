@@ -14,7 +14,8 @@ const footerGroups = [
       ["Products", "/products"],
       ["Store", "/store"],
       ["Samples", "/sample-request"],
-      ["Cosmetics", "/cosmetics"]
+      ["Cosmetics", "/cosmetics"],
+      ["Real BaBra Stories", "/testimonials"]
     ]
   },
   {
