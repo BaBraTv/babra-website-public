@@ -13,7 +13,7 @@ export const rwandaAddressSchema = z.object({
 export const contactMessageSchema = z.object({
   fullName: z.string().trim().min(2).max(120),
   email: z.string().trim().email().optional().or(z.literal("")),
-  phone: z.string().trim().max(32).optional().or(z.literal("")),
+  phone: z.string().trim().min(7).max(32).optional().or(z.literal("")),
   subject: z.string().trim().max(160).optional(),
   message: z.string().trim().min(5).max(4000),
   sourcePage: z.string().trim().max(240).optional()
