@@ -25,6 +25,11 @@ export default function PrivacyPage() {
             <p className="mt-3 leading-7 text-white/64">{text}</p>
           </article>
         ))}
+        <article id="testimonials" className="mt-6 rounded-lg border border-white/10 bg-[#18110f] p-6">
+          <h2 className="font-serif text-3xl">Customer stories and publication consent</h2>
+          <p className="mt-3 leading-7 text-white/64">When you submit a Real BaBra Story, your full name and private contact details are used only for review and verification and are not published. If you give publication permission and BaBra approves the story, the public version may show your chosen public name, optional city/country, product, story, optional rating, and a purchase-verification label only when BaBra can verify a matching order record.</p>
+          <p className="mt-3 leading-7 text-white/64">Submissions remain private while pending or rejected. BaBra may hide an approved story later if consent, accuracy, privacy, legal, or safety concerns arise. Do not submit passwords, payment credentials, medical records, or another person&apos;s private information.</p>
+        </article>
         <article id="analytics" className="mt-6 rounded-lg border border-white/10 bg-[#18110f] p-6">
           <h2 className="font-serif text-3xl">Optional visitor analytics</h2>
           <p className="mt-3 leading-7 text-white/64">Analytics starts only after you choose Allow analytics. We use Google Analytics 4 and, when enabled, BaBra&apos;s first-party analytics. Google Analytics may use cookies or similar browser identifiers to measure visits and actions. BaBra&apos;s first-party random browser identifier expires after 30 days; a visit ends after 30 minutes of inactivity. Your preference is remembered for 180 days. Use Analytics privacy settings at the bottom of this website to decline or withdraw permission.</p>
