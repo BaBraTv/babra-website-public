@@ -825,7 +825,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
           <section className="mt-10">
             <h1 className="font-serif text-5xl">BaBra Admin Dashboard</h1>
             <p className="mt-4 text-white/64">Manual operations center for Phase 1: orders, payments, delivery, rewards, products, and customer intelligence.</p>
-            <a className="mt-4 inline-block rounded-full border border-white/20 px-5 py-3" href="/admin/analytics">Website visitor analytics</a>
+            <div className="mt-4 flex flex-wrap gap-3"><a className="inline-block rounded-full border border-white/20 px-5 py-3" href="/admin/analytics">Website visitor analytics</a><a className="inline-block rounded-full border border-[#d6ad57]/40 px-5 py-3 text-[#f1d58b]" href="/admin/testimonials">Review customer stories</a></div>
             <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               <Metric label="Users" value={(adminSummary?.counts?.users ?? 0).toString()} />
               <Metric label="Orders" value={(adminSummary?.counts?.orders ?? orders.length).toString()} />
