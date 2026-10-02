@@ -18,6 +18,7 @@ export default function TermsPage() {
           ["Official store", `${site.domain} is the official public commerce and information website for ${site.company}.`],
           ["Product information", "Public product pages provide safe benefits, usage direction, pricing, and ordering paths. Complete formulas and supplier-sensitive records are not published."],
           ["Orders", "Orders are confirmed after customer details, delivery location, availability, and payment status are verified by BaBra Store."],
+          ["Customer stories", "Real BaBra Stories are customer-submitted experiences reviewed before publication. A published story is not a guarantee that another customer will have the same result. BaBra may edit for privacy, spelling, length, legal, or safety clarity without changing the submitted meaning, and may hide content that no longer meets publication requirements."],
           ["Intellectual property", "BaBra names, product visuals, copy, and brand assets may not be copied, repackaged, or used to misrepresent unofficial products."]
         ].map(([title, text]) => (
           <article key={title} className="mt-6 rounded-lg border border-white/10 bg-[#18110f] p-6">
