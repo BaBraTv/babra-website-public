@@ -84,14 +84,17 @@ export default function CosmeticsPage() {
         <p className={styles.sectionIntro}>
           Real customer stories are being collected and reviewed. BaBra does not publish invented testimonials, fake ratings, or fabricated before-and-after claims.
         </p>
-        <a
-          className={styles.primary}
-          href={whatsappOrderUrl("Hello BaBra Cosmetics, I would like to share my genuine BaBra Lotion experience.")}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Share your BaBra story on WhatsApp
-        </a>
+        <div className={styles.actions}>
+          <a className={styles.primary} href="/testimonials">Read & share Real BaBra Stories</a>
+          <a
+            className={styles.secondary}
+            href={whatsappOrderUrl("Hello BaBra Cosmetics, I would like to share my genuine BaBra Lotion experience.")}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Share by WhatsApp
+          </a>
+        </div>
       </section>
       <section id="partnerships" className={`${styles.partnerships} ${styles.section}`}>
         <div className={styles.wrap}>
