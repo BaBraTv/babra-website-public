@@ -14,7 +14,7 @@ export const divisionEmailRoutes = {
   testimonials: "support@babra.store"
 } as const;
 
-async function tryDeliverInternalNotification(notification: {
+export async function tryDeliverInternalNotification(notification: {
   id: string;
   recipient: string;
   subject: string;
