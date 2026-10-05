@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getPrisma } from "../../../lib/db";
 import { testimonialSubmissionSchema } from "../../../lib/validation";
-import { divisionEmailRoutes } from "../../../lib/email-routing";
+import { divisionEmailRoutes, tryDeliverInternalNotification } from "../../../lib/email-routing";
 import { enforceRateLimit } from "../../../lib/rate-limit";
 import { fail } from "../../../lib/api";
 
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     const payload = testimonialSubmissionSchema.parse(await request.json());
 
     const prisma = getPrisma();
-    const testimonial = await prisma.$transaction(async (tx) => {
+    const { testimonial, notification } = await prisma.$transaction(async (tx) => {
       const created = await tx.testimonial.create({
         data: {
           fullName: payload.fullName,
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
         select: { id: true, status: true, createdAt: true }
       });
 
-      await tx.emailNotification.create({
+      const notification = await tx.emailNotification.create({
         data: {
           recipient: divisionEmailRoutes.testimonials,
           subject: "New BaBra customer story awaiting review",
@@ -72,9 +72,10 @@ export async function POST(request: NextRequest) {
         }
       });
 
-      return created;
+      return { testimonial: created, notification };
     });
 
+    await tryDeliverInternalNotification(notification);
     return NextResponse.json({ ok: true, submission: testimonial }, { status: 201 });
   } catch (error) {
     return fail(error);
