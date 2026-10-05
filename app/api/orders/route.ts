@@ -4,7 +4,7 @@ import { orderSubmissionSchema } from "../../../lib/validation";
 import { getCurrentUser, requireAdminUser } from "../../../lib/session";
 import { catalogName, catalogPriceCents, ensureCatalogProduct } from "../../../lib/catalog";
 import { queueNotification } from "../../../lib/email-routing";
-import { authFail, fail, redactOrder } from "../../../lib/api";
+import { authFail, fail, redactOrder, redactOrderForCustomer } from "../../../lib/api";
 import { z } from "zod";
 import { enforceRateLimit } from "../../../lib/rate-limit";
 import { AffiliatePersistenceService, AffiliatePersistenceError } from "../../../lib/affiliate-persistence";
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
       include: { items: true, payments: true }
     });
 
-    return NextResponse.json({ ok: true, orders: orders.map(redactOrder) });
+    return NextResponse.json({ ok: true, orders: orders.map((order) => user.role === "ADMIN" || user.role === "STAFF" ? redactOrder(order) : redactOrderForCustomer(order)) });
   } catch (error) {
     return authFail(error);
   }
@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
       payload: { orderId: order.id, orderNumber: order.orderNumber, customerPhone: order.customerPhone }
     });
 
-    return NextResponse.json({ ok: true, order: redactOrder(order), affiliateAttribution: { attributed: affiliateAttributed } });
+    return NextResponse.json({ ok: true, order: redactOrderForCustomer(order), affiliateAttribution: { attributed: affiliateAttributed } });
   } catch (error) {
     return fail(error);
   }

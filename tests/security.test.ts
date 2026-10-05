@@ -6,7 +6,15 @@ import nextConfig from "../next.config.mjs";
 import { middleware } from "../middleware.ts";
 import { isAdminRole, isRateLimited, sessionCookieOptions } from "../lib/security-policy.ts";
 import { secretsMatch } from "../lib/secrets.ts";
-import { publicErrorMessage, redactPayment, redactUser } from "../lib/api.ts";
+import {
+  publicErrorMessage,
+  redactInvestorRequestForCustomer,
+  redactLostFoundForCustomer,
+  redactOrderForCustomer,
+  redactPayment,
+  redactPaymentForCustomer,
+  redactUser
+} from "../lib/api.ts";
 
 function request(path: string, init: ConstructorParameters<typeof NextRequest>[1] = {}) {
   return new NextRequest(`https://www.babra.store${path}`, init);
@@ -84,6 +92,28 @@ test("internal errors and sensitive record fields are not exposed", () => {
   assert.equal(publicErrorMessage(new Error("password authentication failed for postgres"), 500), "Service temporarily unavailable");
   assert.deepEqual(redactUser({ id: "user-1", passwordHash: "secret-hash" }), { id: "user-1" });
   assert.deepEqual(redactPayment({ id: "payment-1", callbackPayload: { token: "secret" } }), { id: "payment-1" });
+  assert.deepEqual(
+    redactPaymentForCustomer({
+      id: "payment-1",
+      callbackPayload: { token: "secret" },
+      callbackUrl: "https://private.example/callback",
+      internalReference: "PAY-PRIVATE",
+      failureReason: "internal processor detail",
+      manualReviewNotes: "private admin note",
+      providerReference: "CUSTOMER-REF"
+    }),
+    { id: "payment-1", providerReference: "CUSTOMER-REF" }
+  );
+  assert.deepEqual(
+    redactOrderForCustomer({
+      id: "order-1",
+      adminNotes: "private admin note",
+      payments: [{ id: "payment-1", manualReviewNotes: "private note", internalReference: "PAY-PRIVATE" }]
+    }),
+    { id: "order-1", payments: [{ id: "payment-1" }] }
+  );
+  assert.deepEqual(redactLostFoundForCustomer({ id: "lost-1", adminNotes: "private note", status: "SUBMITTED" }), { id: "lost-1", status: "SUBMITTED" });
+  assert.deepEqual(redactInvestorRequestForCustomer({ id: "investor-1", adminNotes: "private note", status: "NEW" }), { id: "investor-1", status: "NEW" });
 });
 
 test("protected route sources enforce server-side authentication and authorization", async () => {

@@ -60,3 +60,52 @@ export function redactOrder<T extends { payments?: Array<{ callbackPayload?: unk
     ? { ...order, payments: order.payments.map(redactPayment) }
     : order;
 }
+
+
+export function redactPaymentForCustomer<
+  T extends {
+    callbackPayload?: unknown;
+    callbackUrl?: unknown;
+    internalReference?: unknown;
+    failureReason?: unknown;
+    manualReviewNotes?: unknown;
+  }
+>(payment: T) {
+  const {
+    callbackPayload: _callbackPayload,
+    callbackUrl: _callbackUrl,
+    internalReference: _internalReference,
+    failureReason: _failureReason,
+    manualReviewNotes: _manualReviewNotes,
+    ...safePayment
+  } = payment;
+  return safePayment;
+}
+
+export function redactOrderForCustomer<
+  T extends {
+    adminNotes?: unknown;
+    payments?: Array<{
+      callbackPayload?: unknown;
+      callbackUrl?: unknown;
+      internalReference?: unknown;
+      failureReason?: unknown;
+      manualReviewNotes?: unknown;
+    }>;
+  }
+>(order: T) {
+  const { adminNotes: _adminNotes, payments, ...safeOrder } = order;
+  return payments
+    ? { ...safeOrder, payments: payments.map(redactPaymentForCustomer) }
+    : safeOrder;
+}
+
+export function redactLostFoundForCustomer<T extends { adminNotes?: unknown }>(report: T) {
+  const { adminNotes: _adminNotes, ...safeReport } = report;
+  return safeReport;
+}
+
+export function redactInvestorRequestForCustomer<T extends { adminNotes?: unknown }>(request: T) {
+  const { adminNotes: _adminNotes, ...safeRequest } = request;
+  return safeRequest;
+}

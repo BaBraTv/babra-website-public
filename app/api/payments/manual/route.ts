@@ -3,7 +3,7 @@ import { z } from "zod";
 import { getPrisma } from "../../../../lib/db";
 import { requireCurrentUser } from "../../../../lib/session";
 import { queueNotification } from "../../../../lib/email-routing";
-import { fail, redactPayment } from "../../../../lib/api";
+import { fail, redactPaymentForCustomer } from "../../../../lib/api";
 import { enforceRateLimit } from "../../../../lib/rate-limit";
 
 const manualPaymentSchema = z.object({
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
       payload: { orderId: order.id, paymentId: payment.id, provider: payload.provider }
     });
 
-    return NextResponse.json({ ok: true, payment: redactPayment(payment) });
+    return NextResponse.json({ ok: true, payment: redactPaymentForCustomer(payment) });
   } catch (error) {
     return fail(error);
   }
