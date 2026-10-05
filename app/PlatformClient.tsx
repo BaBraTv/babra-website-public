@@ -337,6 +337,8 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   const [loginIdentifier, setLoginIdentifier] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [forgotIdentifier, setForgotIdentifier] = useState("");
+  const [paymentReferenceInput, setPaymentReferenceInput] = useState("");
+  const [paymentNotes, setPaymentNotes] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [isBusy, setIsBusy] = useState(false);
   const [currentUser, setCurrentUser] = useState<ApiUser | null>(null);
@@ -567,6 +569,51 @@ export function PlatformClient({ mode }: { mode: Mode }) {
       setStatusMessage(error instanceof Error ? error.message : "Order could not be saved to the database");
       setIsBusy(false);
       return;
+    }
+  }
+
+  async function submitManualPayment(order: Order) {
+    if (!order.databaseId) {
+      setStatusMessage("This order is not linked to the production database. Open Orders and select a saved BaBra order.");
+      return;
+    }
+    if (order.method !== "Cash on Delivery" && !paymentReferenceInput.trim()) {
+      setStatusMessage("Enter the transaction or bank reference supplied after payment.");
+      return;
+    }
+
+    setIsBusy(true);
+    setStatusMessage("");
+    try {
+      await apiRequest<{ payment: { providerReference?: string | null; status?: string } }>("/api/payments/manual", {
+        method: "POST",
+        body: JSON.stringify({
+          orderId: order.databaseId,
+          provider: uiPaymentToApi[order.method],
+          providerReference: paymentReferenceInput.trim(),
+          notes: paymentNotes.trim()
+        })
+      });
+
+      const next = orders.map((item) =>
+        item.id === order.id
+          ? {
+              ...item,
+              paymentReference: paymentReferenceInput.trim(),
+              status: "Pending payment confirmation" as OrderStatus,
+              updatedAt: nowLabel()
+            }
+          : item
+      );
+      setOrders(next);
+      saveJson(storageKeys.orders, next);
+      setStatusMessage("Payment details submitted. BaBra will verify them before marking the order as paid.");
+      setPaymentReferenceInput("");
+      setPaymentNotes("");
+    } catch (error) {
+      setStatusMessage(error instanceof Error ? error.message : "Payment details could not be submitted.");
+    } finally {
+      setIsBusy(false);
     }
   }
 
@@ -808,10 +855,55 @@ export function PlatformClient({ mode }: { mode: Mode }) {
         {(mode === "orders" || mode === "payment") && (
           <section className="mt-10 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
             <Panel className="mt-0">
-              <h1 className="font-serif text-5xl">{mode === "payment" ? "Payment review" : "Order tracking"}</h1>
+              <h1 className="font-serif text-5xl">{mode === "payment" ? "Payment confirmation" : "Order tracking"}</h1>
               <p className="mt-4 text-white/64">Track the newest order or enter its public order number. Payment remains pending until BaBra verifies it.</p>
               <input className="mt-6 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white" value={trackingCode} onChange={(event) => setTrackingCode(event.target.value)} placeholder="BABRA-00000000" />
               {trackedOrder ? <OrderTimeline order={trackedOrder} /> : <p className="mt-6 text-white/62">No order saved yet.</p>}
+              {mode === "payment" && trackedOrder ? (
+                <div className="mt-6 rounded-2xl border border-[#f1d58b]/20 bg-white/[0.04] p-5">
+                  <h2 className="font-serif text-3xl">Submit payment details</h2>
+                  <p className="mt-3 text-sm leading-6 text-white/62">
+                    This does not automatically mark the order as paid. BaBra reviews the reference first. Never enter a PIN, password, card number, or mobile-money secret code here.
+                  </p>
+                  <div className="mt-4 rounded-xl border border-white/10 bg-black/25 p-4 text-sm text-white/70">
+                    <p><strong>Order:</strong> {trackedOrder.id}</p>
+                    <p className="mt-1"><strong>Method:</strong> {trackedOrder.method}</p>
+                    <p className="mt-1"><strong>Amount reference:</strong> {formatRwf(trackedOrder.total)}</p>
+                  </div>
+                  {trackedOrder.method !== "Cash on Delivery" ? (
+                    <label className="mt-4 grid gap-2 text-sm font-bold text-white/78">
+                      Transaction / bank reference
+                      <input
+                        className="rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white"
+                        value={paymentReferenceInput}
+                        onChange={(event) => setPaymentReferenceInput(event.target.value)}
+                        maxLength={160}
+                        placeholder="Enter the reference shown on your payment receipt"
+                      />
+                    </label>
+                  ) : (
+                    <p className="mt-4 rounded-xl border border-white/10 bg-black/25 p-4 text-sm text-white/62">Cash on Delivery does not require a transaction reference. Submit only after BaBra has confirmed this payment method for the order.</p>
+                  )}
+                  <label className="mt-4 grid gap-2 text-sm font-bold text-white/78">
+                    Note · optional
+                    <textarea
+                      className="min-h-24 rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white"
+                      value={paymentNotes}
+                      onChange={(event) => setPaymentNotes(event.target.value)}
+                      maxLength={1000}
+                      placeholder="Optional note for the BaBra payment reviewer"
+                    />
+                  </label>
+                  <button
+                    className="mt-5 w-full rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] disabled:opacity-50"
+                    onClick={() => void submitManualPayment(trackedOrder)}
+                    type="button"
+                    disabled={isBusy || !trackedOrder.databaseId}
+                  >
+                    {isBusy ? "Submitting..." : "Submit for manual verification"}
+                  </button>
+                </div>
+              ) : null}
             </Panel>
             <div className="grid gap-4">
               {orders.map((order) => (
