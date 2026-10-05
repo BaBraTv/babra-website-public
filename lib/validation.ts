@@ -13,7 +13,7 @@ export const rwandaAddressSchema = z.object({
 export const contactMessageSchema = z.object({
   fullName: z.string().trim().min(2).max(120),
   email: z.string().trim().email().optional().or(z.literal("")),
-  phone: z.string().trim().max(32).optional().or(z.literal("")),
+  phone: z.string().trim().min(7).max(32).optional().or(z.literal("")),
   subject: z.string().trim().max(160).optional(),
   message: z.string().trim().min(5).max(4000),
   sourcePage: z.string().trim().max(240).optional()
@@ -72,4 +72,27 @@ export const investorAccessRequestSchema = z.object({
   phone: z.string().trim().max(32).optional().or(z.literal("")),
   projectArea: z.string().trim().max(160).optional().or(z.literal("")),
   message: z.string().trim().max(4000).optional().or(z.literal(""))
+});
+
+
+export const testimonialSubmissionSchema = z.object({
+  fullName: z.string().trim().min(2).max(120),
+  publicName: z.string().trim().min(2).max(80),
+  email: z.string().trim().email().optional().or(z.literal("")),
+  phone: z.string().trim().max(32).optional().or(z.literal("")),
+  country: z.string().trim().max(120).optional().or(z.literal("")),
+  city: z.string().trim().max(120).optional().or(z.literal("")),
+  productSlug: z.enum(["women", "men", "babies", "other"]),
+  story: z.string().trim().min(30).max(3000),
+  rating: z.number().int().min(1).max(5).optional(),
+  permissionToPublish: z.literal(true)
+}).refine((value) => Boolean(value.email || value.phone), {
+  message: "Email or phone is required",
+  path: ["email"]
+});
+
+export const testimonialModerationSchema = z.object({
+  status: z.enum(["PENDING", "APPROVED", "REJECTED", "HIDDEN"]),
+  purchaseVerified: z.boolean().optional(),
+  adminNotes: z.string().trim().max(1000).optional().or(z.literal(""))
 });
