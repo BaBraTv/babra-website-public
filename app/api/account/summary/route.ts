@@ -2,13 +2,13 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getPrisma } from "../../../../lib/db";
 import { requireCurrentUser, publicUser } from "../../../../lib/session";
 import { rwandaAddressSchema } from "../../../../lib/validation";
-import { fail, authFail, redactOrder, redactPayment } from "../../../../lib/api";
+import { fail, authFail, redactInvestorRequestForCustomer, redactLostFoundForCustomer, redactOrderForCustomer, redactPaymentForCustomer } from "../../../../lib/api";
 
 export async function GET() {
   try {
     const user = await requireCurrentUser();
     const prisma = getPrisma();
-    const [orders, jobApplications, lostFoundReports, investorRequests] = await Promise.all([
+    const [orders, jobApplications, lostFoundReports: lostFoundReports.map(redactLostFoundForCustomer), investorRequests] = await Promise.all([
       prisma.order.findMany({ where: { customerId: user.id }, orderBy: { createdAt: "desc" }, include: { items: true, payments: true } }),
       prisma.jobApplication.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" } }),
       prisma.lostFoundReport.findMany({ where: { userId: user.id }, orderBy: { createdAt: "desc" } }),
@@ -18,11 +18,11 @@ export async function GET() {
     return NextResponse.json({
       ok: true,
       user: publicUser(user),
-      orders: orders.map(redactOrder),
+      orders: orders.map(redactOrderForCustomer),
       jobApplications,
       lostFoundReports,
-      investorRequests,
-      payments: orders.flatMap((order) => order.payments).map(redactPayment)
+      investorRequests: investorRequests.map(redactInvestorRequestForCustomer),
+      payments: orders.flatMap((order) => order.payments).map(redactPaymentForCustomer)
     });
   } catch (error) {
     return authFail(error);
