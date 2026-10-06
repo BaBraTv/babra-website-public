@@ -10,7 +10,7 @@ const productSlug = z.enum(["women", "men", "babies"]);
 const updateSchema = z.object({
   products: z.array(z.object({
     slug: productSlug,
-    priceRwf: z.number().int().min(0).max(10_000_000),
+    priceRwf: z.number().int().min(0).max(1_000_000),
     stockQuantity: z.number().int().min(0).max(10_000_000).optional()
   })).min(1).max(3)
 });
@@ -58,10 +58,10 @@ export async function PATCH(request: NextRequest) {
     const payload = updateSchema.parse(await request.json());
     const prisma = getPrisma();
 
+    await Promise.all(payload.products.map((item) => ensureCatalogProduct(item.slug)));
     const updated = await prisma.$transaction(async (tx) => {
       const results = [];
       for (const item of payload.products) {
-        await ensureCatalogProduct(item.slug);
         const product = await tx.product.update({
           where: { slug: item.slug },
           data: {
@@ -93,7 +93,7 @@ export async function PATCH(request: NextRequest) {
       });
 
       return results;
-    });
+    }, { isolationLevel: "Serializable" });
 
     return NextResponse.json({
       ok: true,
