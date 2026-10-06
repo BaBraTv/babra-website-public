@@ -87,20 +87,16 @@ export async function POST(request: NextRequest) {
         landmark: payload.landmark,
         deliveryNotes: payload.deliveryNotes,
         items: { create: enrichedItems },
-        ...(isQuoteOnly
-          ? {}
-          : {
-              payments: {
-                create: {
-                  provider,
-                  status: "PENDING",
-                  amountCents: totalCents,
-                  currency: "RWF",
-                  customerPhone: payload.customerPhone,
-                  internalReference: `PAY-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`
-                }
-              }
-            })
+        payments: {
+          create: {
+            provider,
+            status: "PENDING",
+            amountCents: totalCents,
+            currency: "RWF",
+            customerPhone: payload.customerPhone,
+            internalReference: `PAY-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`
+          }
+        }
       },
       include: { items: true, payments: true }
     });
@@ -143,17 +139,91 @@ export async function PATCH(request: NextRequest) {
   try {
     const admin = await requireAdminUser();
     const payload = orderStatusUpdateSchema.parse(await request.json());
-    const order = await getPrisma().order.update({
+    const prisma = getPrisma();
+    const existing = await prisma.order.findUnique({
       where: { id: payload.orderId },
-      data: {
-        status: payload.status,
-        adminNotes: payload.adminNotes || undefined,
-        completedAt: payload.status === "COMPLETED" ? new Date() : undefined
-      },
       include: { items: true, payments: true }
     });
+    if (!existing) throw new Error("Order not found");
 
-    await getPrisma().adminActivityLog.create({
+    const postQuoteStatuses = new Set(["PENDING_PAYMENT", "PAYMENT_RECEIVED", "PROCESSING", "PACKING", "OUT_FOR_DELIVERY", "DELIVERED", "COMPLETED"]);
+    let order;
+
+    if (payload.status === "PENDING_PAYMENT" && existing.totalCents <= 0) {
+      const productRows = await prisma.product.findMany({
+        where: { slug: { in: existing.items.map((item) => item.productSlug) } },
+        select: { slug: true, priceCents: true }
+      });
+      const priceBySlug = new Map(productRows.map((product) => [product.slug, product.priceCents ?? 0]));
+      const pricedItems = existing.items.map((item) => {
+        const unitPriceCents = priceBySlug.get(item.productSlug) ?? 0;
+        if (unitPriceCents <= 0) throw new Error(`Set a production price for ${item.productName} before requesting payment.`);
+        return {
+          ...item,
+          unitPriceCents,
+          totalCents: unitPriceCents * item.quantity
+        };
+      });
+      const subtotalCents = pricedItems.reduce((sum, item) => sum + item.totalCents, 0);
+      const deliveryCents = subtotalCents > 0 ? 1500 * 100 : 0;
+      const totalCents = subtotalCents + deliveryCents;
+
+      order = await prisma.$transaction(async (tx) => {
+        for (const item of pricedItems) {
+          await tx.orderItem.update({
+            where: { id: item.id },
+            data: { unitPriceCents: item.unitPriceCents, totalCents: item.totalCents }
+          });
+        }
+
+        if (existing.payments[0]) {
+          await tx.payment.update({
+            where: { id: existing.payments[0].id },
+            data: { amountCents: totalCents, status: "PENDING" }
+          });
+        } else {
+          await tx.payment.create({
+            data: {
+              orderId: existing.id,
+              provider: "CASH_ON_DELIVERY",
+              status: "PENDING",
+              amountCents: totalCents,
+              currency: existing.currency,
+              customerPhone: existing.customerPhone,
+              internalReference: `PAY-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`
+            }
+          });
+        }
+
+        return tx.order.update({
+          where: { id: existing.id },
+          data: {
+            status: "PENDING_PAYMENT",
+            subtotalCents,
+            deliveryCents,
+            totalCents,
+            adminNotes: payload.adminNotes || undefined
+          },
+          include: { items: true, payments: true }
+        });
+      });
+    } else {
+      if (existing.totalCents <= 0 && postQuoteStatuses.has(payload.status)) {
+        throw new Error("Confirm production pricing before moving this quote into payment or fulfilment.");
+      }
+
+      order = await prisma.order.update({
+        where: { id: payload.orderId },
+        data: {
+          status: payload.status,
+          adminNotes: payload.adminNotes || undefined,
+          completedAt: payload.status === "COMPLETED" ? new Date() : undefined
+        },
+        include: { items: true, payments: true }
+      });
+    }
+
+    await prisma.adminActivityLog.create({
       data: {
         actorId: admin.id,
         action: "STATUS_CHANGE",
