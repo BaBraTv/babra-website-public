@@ -1,4 +1,4 @@
-import { officialMediaPendingLabel } from "../data/official-media";
+import Image from "next/image";
 
 const showroomFeatures = [
   ["Luxury product displays", "Clean shelves, gold accents, and grouped product families help customers understand the full BaBra line quickly."],
@@ -26,7 +26,7 @@ export default function ShowroomPage() {
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Retail experience</p>
               <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">BaBra Showroom.</h1>
               <p className="mt-6 text-lg leading-8 text-white/66">
-                A future premium showroom for product discovery, customer support, wholesale meetings, franchise onboarding, digital screens, and official product verification.
+                A proposed premium showroom for product discovery, customer support, wholesale meetings, franchise onboarding, digital screens, and official product verification.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href="https://wa.me/250788351482" target="_blank" rel="noopener noreferrer">Book showroom support</a>
@@ -34,8 +34,17 @@ export default function ShowroomPage() {
               </div>
             </div>
             <figure className="overflow-hidden rounded-lg border border-[#d6ad57]/25 shadow-2xl shadow-black/40">
-              <div className="grid h-[520px] w-full place-items-center p-6 text-center text-sm font-black uppercase tracking-[0.14em] text-[#f1d58b]">
-                {officialMediaPendingLabel}
+              <div className="flex min-h-[520px] flex-col items-center justify-center bg-[radial-gradient(circle_at_50%_50%,rgba(214,173,87,0.24),transparent_70%),linear-gradient(135deg,#201711,#090706)] p-6">
+                <div className="flex w-full items-center justify-center gap-2 sm:gap-4">
+                  {[
+                    ["/media/products/babra-lotion-women-500ml.png", "BaBra Lotion Women"],
+                    ["/media/products/babra-lotion-men-500ml.png", "BaBra Lotion Men"],
+                    ["/media/products/babra-lotion-babies-500ml.png", "BaBra Lotion Kids"]
+                  ].map(([src, alt]) => (
+                    <Image key={src} className="h-[300px] min-w-0 flex-1 object-contain sm:h-[360px]" src={src} alt={alt} width={520} height={1024} />
+                  ))}
+                </div>
+                <p className="mt-6 text-center text-sm font-bold uppercase tracking-[0.18em] text-[#f1d58b]">Official BaBra Lotion collection · Product photography</p>
               </div>
             </figure>
           </div>
@@ -65,7 +74,7 @@ export default function ShowroomPage() {
               <h2 className="mt-3 font-serif text-5xl leading-none">Photos, videos, and franchise proof.</h2>
             </div>
             <p className="text-lg leading-8 text-white/66">
-              This page is ready for official showroom media after approval. No showroom photos, customer videos, product testing clips, or testimonials are published until approved.
+              The product images above show BaBra Lotion packaging, not an operating showroom. Actual location photography will appear only after it has been supplied and approved.
             </p>
           </div>
         </div>
