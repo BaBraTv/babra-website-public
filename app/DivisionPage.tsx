@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { divisionContent, type DivisionKey } from "./division-content";
-import { officialMediaPendingLabel } from "./data/official-media";
 
 const divisionMenus: Record<DivisionKey, string[][]> = {
   cosmetics: [
@@ -111,10 +110,10 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-2xl shadow-black/30">
             <figure className="border-b border-white/10 bg-black/25">
               {data.image ? (
-                <DivisionImage className="h-72 w-full object-cover" src={data.image} alt={data.imageAlt} priority sizes="(max-width: 1024px) 100vw, 44vw" />
+                <DivisionImage className={data.image === "/media/logos/babra-logo.jpeg" ? "h-72 w-full object-contain p-10" : "h-72 w-full object-cover"} src={data.image} alt={data.imageAlt} priority sizes="(max-width: 1024px) 100vw, 44vw" />
               ) : (
                 <div className="grid h-72 w-full place-items-center p-6 text-center text-sm font-black uppercase tracking-[0.14em] text-[#f1d58b]">
-                  {officialMediaPendingLabel}
+                  {data.name}
                 </div>
               )}
             </figure>
@@ -144,11 +143,12 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
                   id={serviceAnchors[division]?.[index]}
                   className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055]"
                 >
-                  {data.serviceImages[index] || data.image ? (
-                    <DivisionImage className="h-40 w-full object-cover" src={data.serviceImages[index] || data.image} alt={`${data.name} - ${point}`} sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw" />
+                  {data.serviceImages[index] ? (
+                    <DivisionImage className="h-40 w-full object-cover" src={data.serviceImages[index]} alt={`${data.name} - ${point}`} sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw" />
                   ) : (
-                    <div className="grid h-40 w-full place-items-center p-4 text-center text-xs font-black uppercase tracking-[0.12em] text-[#f1d58b]">
-                      {officialMediaPendingLabel}
+                    <div className="flex h-40 flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_50%_50%,rgba(214,173,87,0.16),transparent_75%),linear-gradient(135deg,#211712,#090706)] p-4 text-center">
+                      <span className="font-serif text-2xl text-[#f1d58b]">{point}</span>
+                      <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/55">{data.name}</span>
                     </div>
                   )}
                   <div className="p-6">
