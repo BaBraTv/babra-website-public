@@ -651,20 +651,20 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   async function updateOrderStatus(order: Order, status: OrderStatus) {
     setStatusMessage("");
     try {
-      await apiRequest("/api/orders", {
+      const result = await apiRequest<{ order: BackendOrder }>("/api/orders", {
         method: "PATCH",
         body: JSON.stringify({ orderId: order.databaseId ?? order.id, status: uiStatusToApi[status] })
       });
+      const refreshedOrder = orderFromApi(result.order);
+      const next = orders.map((item) => (item.id === order.id ? refreshedOrder : item));
+      setOrders(next);
+      saveJson(storageKeys.orders, next);
+      if (order.id === latestOrder?.id) {
+        setManualStatus(refreshedOrder.status);
+        saveJson(storageKeys.paymentStatus, refreshedOrder.status);
+      }
     } catch (error) {
       setStatusMessage(error instanceof Error ? error.message : "Order status update failed");
-      return;
-    }
-    const next = orders.map((item) => (item.id === order.id ? { ...item, status, updatedAt: nowLabel() } : item));
-    setOrders(next);
-    saveJson(storageKeys.orders, next);
-    if (order.id === latestOrder?.id) {
-      setManualStatus(status);
-      saveJson(storageKeys.paymentStatus, status);
     }
   }
 
@@ -975,6 +975,14 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                   </label>
                 ))}
               </div>
+              <button
+                className="mt-5 rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] disabled:opacity-50"
+                type="button"
+                onClick={() => void saveProductionPrices()}
+                disabled={isBusy}
+              >
+                {isBusy ? "Saving..." : "Save production pricing"}
+              </button>
             </section>
             <section className="mt-8 grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
               <div className="grid gap-4">
