@@ -37,7 +37,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ ok: true, orders: orders.map((order) => user.role === "ADMIN" || user.role === "STAFF" ? redactOrder(order) : redactOrderForCustomer(order)) });
   } catch (error) {
-    return authFail(error);
+    const message = error instanceof Error ? error.message : "";
+    if (message.includes("Authentication") || message.includes("Admin")) return authFail(error);
+    return fail(error);
   }
 }
 
@@ -149,7 +151,7 @@ export async function PATCH(request: NextRequest) {
     const postQuoteStatuses = new Set(["PENDING_PAYMENT", "PAYMENT_RECEIVED", "PROCESSING", "PACKING", "OUT_FOR_DELIVERY", "DELIVERED", "COMPLETED"]);
     let order;
 
-    if (payload.status === "PENDING_PAYMENT" && existing.totalCents <= 0) {
+    if (payload.status === "PENDING_PAYMENT" && existing.status === "QUOTE_REQUESTED") {
       const productRows = await prisma.product.findMany({
         where: { slug: { in: existing.items.map((item) => item.productSlug) } },
         select: { slug: true, priceCents: true }
@@ -157,7 +159,7 @@ export async function PATCH(request: NextRequest) {
       const priceBySlug = new Map(productRows.map((product) => [product.slug, product.priceCents ?? 0]));
       const pricedItems = existing.items.map((item) => {
         const unitPriceCents = priceBySlug.get(item.productSlug) ?? 0;
-        if (unitPriceCents <= 0) throw new Error(`Set a production price for ${item.productName} before requesting payment.`);
+        if (unitPriceCents <= 0) throw new Error("Set production pricing before requesting payment.");
         return {
           ...item,
           unitPriceCents,
