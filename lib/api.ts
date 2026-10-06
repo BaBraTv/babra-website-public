@@ -31,6 +31,8 @@ const safeMessages = new Set([
   "Set production pricing before requesting payment.",
   "Confirm production pricing before moving this quote into payment or fulfilment.",
   "This order is still awaiting a confirmed price. Payment details cannot be submitted yet.",
+  "This order is not approved for payment review yet.",
+  "Order amount exceeds the supported limit.",
   "Rate limit exceeded"
 ]);
 
