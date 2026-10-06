@@ -19,6 +19,14 @@ const paymentProviderMap = {
   MANUAL: "MANUAL"
 } as const;
 
+const MAX_ORDER_CENTS = 2_147_483_647;
+
+function assertSafeOrderAmount(...amounts: number[]) {
+  if (amounts.some((amount) => !Number.isSafeInteger(amount) || amount < 0 || amount > MAX_ORDER_CENTS)) {
+    throw new Error("Order amount exceeds the supported limit.");
+  }
+}
+
 function orderNumber() {
   return `BABRA-${Date.now().toString().slice(-8)}-${Math.random().toString(36).slice(2, 5).toUpperCase()}`;
 }
@@ -63,10 +71,12 @@ export async function POST(request: NextRequest) {
         };
       })
     );
+    for (const item of enrichedItems) assertSafeOrderAmount(item.unitPriceCents, item.totalCents);
     const subtotalCents = enrichedItems.reduce((sum, item) => sum + item.totalCents, 0);
     const hasUnpricedItems = enrichedItems.some((item) => item.unitPriceCents <= 0);
     const deliveryCents = !hasUnpricedItems && subtotalCents > 0 ? 1500 * 100 : 0;
     const totalCents = hasUnpricedItems ? 0 : subtotalCents + deliveryCents;
+    assertSafeOrderAmount(subtotalCents, deliveryCents, totalCents);
     const provider = paymentProviderMap[payload.paymentProvider];
     const isQuoteOnly = payload.quoteOnly || hasUnpricedItems || totalCents <= 0;
 
@@ -142,35 +152,36 @@ export async function PATCH(request: NextRequest) {
     const admin = await requireAdminUser();
     const payload = orderStatusUpdateSchema.parse(await request.json());
     const prisma = getPrisma();
-    const existing = await prisma.order.findUnique({
-      where: { id: payload.orderId },
-      include: { items: true, payments: true }
-    });
-    if (!existing) throw new Error("Order not found");
+    const postQuoteStatuses = new Set([
+      "PENDING_PAYMENT", "PAYMENT_RECEIVED", "PROCESSING", "PACKING",
+      "OUT_FOR_DELIVERY", "DELIVERED", "COMPLETED"
+    ]);
 
-    const postQuoteStatuses = new Set(["PENDING_PAYMENT", "PAYMENT_RECEIVED", "PROCESSING", "PACKING", "OUT_FOR_DELIVERY", "DELIVERED", "COMPLETED"]);
-    let order;
-
-    if (payload.status === "PENDING_PAYMENT" && existing.status === "QUOTE_REQUESTED") {
-      const productRows = await prisma.product.findMany({
-        where: { slug: { in: existing.items.map((item) => item.productSlug) } },
-        select: { slug: true, priceCents: true }
+    const order = await prisma.$transaction(async (tx) => {
+      const existing = await tx.order.findUnique({
+        where: { id: payload.orderId },
+        include: { items: true, payments: true }
       });
-      const priceBySlug = new Map(productRows.map((product) => [product.slug, product.priceCents ?? 0]));
-      const pricedItems = existing.items.map((item) => {
-        const unitPriceCents = priceBySlug.get(item.productSlug) ?? 0;
-        if (unitPriceCents <= 0) throw new Error("Set production pricing before requesting payment.");
-        return {
-          ...item,
-          unitPriceCents,
-          totalCents: unitPriceCents * item.quantity
-        };
-      });
-      const subtotalCents = pricedItems.reduce((sum, item) => sum + item.totalCents, 0);
-      const deliveryCents = subtotalCents > 0 ? 1500 * 100 : 0;
-      const totalCents = subtotalCents + deliveryCents;
+      if (!existing) throw new Error("Order not found");
 
-      order = await prisma.$transaction(async (tx) => {
+      if (existing.status === "QUOTE_REQUESTED" && payload.status === "PENDING_PAYMENT") {
+        const productRows = await tx.product.findMany({
+          where: { slug: { in: existing.items.map((item) => item.productSlug) } },
+          select: { slug: true, priceCents: true }
+        });
+        const priceBySlug = new Map(productRows.map((product) => [product.slug, product.priceCents ?? 0]));
+        const pricedItems = existing.items.map((item) => {
+          const unitPriceCents = priceBySlug.get(item.productSlug) ?? 0;
+          if (unitPriceCents <= 0) throw new Error("Set production pricing before requesting payment.");
+          const totalCents = unitPriceCents * item.quantity;
+          assertSafeOrderAmount(unitPriceCents, totalCents);
+          return { id: item.id, unitPriceCents, totalCents };
+        });
+        const subtotalCents = pricedItems.reduce((sum, item) => sum + item.totalCents, 0);
+        const deliveryCents = subtotalCents > 0 ? 1500 * 100 : 0;
+        const totalCents = subtotalCents + deliveryCents;
+        assertSafeOrderAmount(subtotalCents, deliveryCents, totalCents);
+
         for (const item of pricedItems) {
           await tx.orderItem.update({
             where: { id: item.id },
@@ -208,13 +219,13 @@ export async function PATCH(request: NextRequest) {
           },
           include: { items: true, payments: true }
         });
-      });
-    } else {
-      if (existing.totalCents <= 0 && postQuoteStatuses.has(payload.status)) {
+      }
+
+      if ((existing.status === "QUOTE_REQUESTED" || existing.totalCents <= 0) && postQuoteStatuses.has(payload.status)) {
         throw new Error("Confirm production pricing before moving this quote into payment or fulfilment.");
       }
 
-      order = await prisma.order.update({
+      return tx.order.update({
         where: { id: payload.orderId },
         data: {
           status: payload.status,
@@ -223,7 +234,7 @@ export async function PATCH(request: NextRequest) {
         },
         include: { items: true, payments: true }
       });
-    }
+    }, { isolationLevel: "Serializable" });
 
     await prisma.adminActivityLog.create({
       data: {
@@ -237,6 +248,8 @@ export async function PATCH(request: NextRequest) {
 
     return NextResponse.json({ ok: true, order: redactOrder(order) });
   } catch (error) {
-    return authFail(error);
+    const message = error instanceof Error ? error.message : "";
+    if (message.includes("Authentication") || message.includes("Admin")) return authFail(error);
+    return fail(error);
   }
 }
