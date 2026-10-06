@@ -332,6 +332,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   const [method, setMethod] = useState<PaymentMethod>("Cash on Delivery");
   const [manualStatus, setManualStatus] = useState<OrderStatus>("Quote requested");
   const [priceOverrides, setPriceOverrides] = useState<Record<string, number>>({});
+  const [pricesLoaded, setPricesLoaded] = useState(false);
   const [trackingCode, setTrackingCode] = useState("");
   const [affiliateCode, setAffiliateCode] = useState("");
   const [loginIdentifier, setLoginIdentifier] = useState("");
@@ -353,7 +354,6 @@ export function PlatformClient({ mode }: { mode: Mode }) {
     setCart(readJson(storageKeys.cart, []));
     setOrders(savedOrders);
     setManualStatus(readJson<OrderStatus>(storageKeys.paymentStatus, "Quote requested"));
-    setPriceOverrides(readJson(storageKeys.priceOverrides, {}));
     setTrackingCode(savedOrders[0]?.id ?? "");
   }, []);
 
@@ -391,7 +391,11 @@ export function PlatformClient({ mode }: { mode: Mode }) {
           setAdminSummary(summary);
           const nextOrders = (summary.orders ?? []).map(orderFromApi);
           setOrders(nextOrders);
+          if (!products.every((product) => pricing.products.some((row) => row.slug === product.slug))) {
+            throw new Error("Production pricing data is incomplete.");
+          }
           setPriceOverrides(Object.fromEntries(pricing.products.map((product) => [product.slug, product.priceRwf])));
+          setPricesLoaded(true);
         }
       } catch (error) {
         if (mode === "admin" || mode === "account" || mode === "profile") {
@@ -413,7 +417,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   );
 
   function priceFor(slug: string, fallback: number) {
-    return priceOverrides[slug] || fallback;
+    return priceOverrides[slug] ?? fallback;
   }
 
   const subtotal = cartLines.reduce((sum, item) => sum + priceFor(item.product.slug, item.product.price) * item.quantity, 0);
@@ -578,6 +582,10 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   }
 
   async function submitManualPayment(order: Order) {
+    if (order.status === "Quote requested") {
+      setStatusMessage("BaBra must first confirm the quote and move it to Pending payment.");
+      return;
+    }
     if (!order.databaseId) {
       setStatusMessage("This order is not linked to the production database. Open Orders and select a saved BaBra order.");
       return;
@@ -627,6 +635,10 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   }
 
   async function saveProductionPrices() {
+    if (!pricesLoaded || !products.every((product) => Number.isFinite(priceOverrides[product.slug]))) {
+      setStatusMessage("Wait until all production prices have loaded before saving.");
+      return;
+    }
     setIsBusy(true);
     setStatusMessage("");
     try {
@@ -919,14 +931,14 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                       placeholder="Optional note for the BaBra payment reviewer"
                     />
                   </label>
-                  {trackedOrder.total <= 0 ? (
+                  {trackedOrder.total <= 0 || trackedOrder.status === "Quote requested" ? (
                     <p className="mt-5 rounded-xl border border-amber-300/25 bg-amber-300/10 p-4 text-sm leading-6 text-amber-50">This quote does not have a confirmed payable amount yet. BaBra must confirm pricing before payment details can be submitted.</p>
                   ) : null}
                   <button
                     className="mt-5 w-full rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] disabled:opacity-50"
                     onClick={() => void submitManualPayment(trackedOrder)}
                     type="button"
-                    disabled={isBusy || !trackedOrder.databaseId || trackedOrder.total <= 0}
+                    disabled={isBusy || !trackedOrder.databaseId || trackedOrder.total <= 0 || trackedOrder.status === "Quote requested"}
                   >
                     {isBusy ? "Submitting..." : "Submit for manual verification"}
                   </button>
@@ -971,6 +983,8 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                       type="number"
                       value={priceFor(product.slug, product.price)}
                       onChange={(event) => savePrice(product.slug, Number(event.target.value))}
+                      disabled={!pricesLoaded || isBusy}
+                      max="1000000"
                     />
                   </label>
                 ))}
@@ -979,9 +993,9 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                 className="mt-5 rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] disabled:opacity-50"
                 type="button"
                 onClick={() => void saveProductionPrices()}
-                disabled={isBusy}
+                disabled={isBusy || !pricesLoaded}
               >
-                {isBusy ? "Saving..." : "Save production pricing"}
+                {isBusy ? "Saving..." : pricesLoaded ? "Save production pricing" : "Loading production prices..."}
               </button>
             </section>
             <section className="mt-8 grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
