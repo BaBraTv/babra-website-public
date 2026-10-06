@@ -46,7 +46,9 @@ export async function GET() {
       { headers: { "Cache-Control": "private, no-store" } }
     );
   } catch (error) {
-    return authFail(error);
+    const message = error instanceof Error ? error.message : "";
+    if (message.includes("Authentication") || message.includes("Admin")) return authFail(error);
+    return fail(error, 503);
   }
 }
 
