@@ -57,7 +57,7 @@ export default function HomePage() {
   const reducedMotion = useReducedMotion();
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#0b0908] text-[#f9f5ed]">
+    <main className="min-h-screen bg-[#0b0908] text-[#f9f5ed]">
       <header className="sticky top-10 z-50 border-b border-white/10 bg-[#100c0b]/95 shadow-[0_10px_40px_rgba(0,0,0,0.16)] backdrop-blur-xl">
         <div className="mx-auto flex h-[80px] w-full max-w-[1500px] items-center justify-between gap-5 px-5 md:px-9">
           <a href="/" className="flex shrink-0 items-center gap-3" aria-label="EI BaBra Holding Ltd · Home">
