@@ -31,6 +31,7 @@ export const orderSubmissionSchema = z
     customerPhone: z.string().trim().min(7).max(32),
     items: z.array(orderItemSchema).min(1),
     affiliateCode: z.string().trim().min(1).max(20).optional().or(z.literal("")),
+    quoteOnly: z.boolean().optional().default(false),
     paymentProvider: z.enum(["CASH_ON_DELIVERY", "MTN_MOMO", "AIRTEL_MONEY", "BANK_TRANSFER", "CARD", "USDT", "MANUAL"]).default("CASH_ON_DELIVERY")
   })
   .merge(rwandaAddressSchema)
