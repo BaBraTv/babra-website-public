@@ -24,7 +24,7 @@ export const cosmetics = {
 } as const;
 
 export const rwandaOrders = {
-  partner: "Vida Pharmacy",
+  partner: "VIDAPHARMA",
   phone: "0734 299 777",
   whatsapp: "250734299777"
 } as const;
