@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
     const deliveryCents = !hasUnpricedItems && subtotalCents > 0 ? 1500 * 100 : 0;
     const totalCents = hasUnpricedItems ? 0 : subtotalCents + deliveryCents;
     const provider = paymentProviderMap[payload.paymentProvider];
-    const isQuoteOnly = hasUnpricedItems || totalCents <= 0;
+    const isQuoteOnly = payload.quoteOnly || hasUnpricedItems || totalCents <= 0;
 
     const order = await prisma.order.create({
       data: {
