@@ -62,9 +62,11 @@ export async function POST(request: NextRequest) {
       })
     );
     const subtotalCents = enrichedItems.reduce((sum, item) => sum + item.totalCents, 0);
-    const deliveryCents = subtotalCents > 0 ? 1500 * 100 : 0;
-    const totalCents = subtotalCents + deliveryCents;
+    const hasUnpricedItems = enrichedItems.some((item) => item.unitPriceCents <= 0);
+    const deliveryCents = !hasUnpricedItems && subtotalCents > 0 ? 1500 * 100 : 0;
+    const totalCents = hasUnpricedItems ? 0 : subtotalCents + deliveryCents;
     const provider = paymentProviderMap[payload.paymentProvider];
+    const isQuoteOnly = hasUnpricedItems || totalCents <= 0;
 
     const order = await prisma.order.create({
       data: {
@@ -73,7 +75,7 @@ export async function POST(request: NextRequest) {
         customerName: payload.customerName,
         customerEmail: payload.customerEmail || null,
         customerPhone: payload.customerPhone,
-        status: provider === "CASH_ON_DELIVERY" ? "PENDING_PAYMENT" : "PENDING_PAYMENT",
+        status: isQuoteOnly ? "QUOTE_REQUESTED" : "PENDING_PAYMENT",
         subtotalCents,
         deliveryCents,
         totalCents,
@@ -85,16 +87,20 @@ export async function POST(request: NextRequest) {
         landmark: payload.landmark,
         deliveryNotes: payload.deliveryNotes,
         items: { create: enrichedItems },
-        payments: {
-          create: {
-            provider,
-            status: "PENDING",
-            amountCents: totalCents,
-            currency: "RWF",
-            customerPhone: payload.customerPhone,
-            internalReference: `PAY-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`
-          }
-        }
+        ...(isQuoteOnly
+          ? {}
+          : {
+              payments: {
+                create: {
+                  provider,
+                  status: "PENDING",
+                  amountCents: totalCents,
+                  currency: "RWF",
+                  customerPhone: payload.customerPhone,
+                  internalReference: `PAY-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`
+                }
+              }
+            })
       },
       include: { items: true, payments: true }
     });
@@ -116,9 +122,9 @@ export async function POST(request: NextRequest) {
 
     await queueNotification({
       route: "orders",
-      subject: `New BaBra order ${order.orderNumber}`,
-      templateKey: "orders.created",
-      payload: { orderId: order.id, orderNumber: order.orderNumber, customerPhone: order.customerPhone }
+      subject: `${isQuoteOnly ? "New BaBra quote request" : "New BaBra order"} ${order.orderNumber}`,
+      templateKey: isQuoteOnly ? "orders.quote_requested" : "orders.created",
+      payload: { orderId: order.id, orderNumber: order.orderNumber, customerPhone: order.customerPhone, quoteOnly: isQuoteOnly }
     });
 
     return NextResponse.json({ ok: true, order: redactOrderForCustomer(order), affiliateAttribution: { attributed: affiliateAttributed } });
