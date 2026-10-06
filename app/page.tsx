@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 
-const gold = "#d6ad57";
-
 const collection = [
   {
     name: "For Her",
@@ -54,8 +52,6 @@ const navLinks = [
   ["Store", "/store"],
   ["Contact", "/contact"]
 ] as const;
-
-const eleganceEase = [0.22, 1, 0.36, 1] as const;
 
 export default function HomePage() {
   const reducedMotion = useReducedMotion();
@@ -116,7 +112,7 @@ export default function HomePage() {
           <motion.div
             initial={reducedMotion ? false : { opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: eleganceEase }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
             className="relative z-10 py-6 lg:py-12"
           >
             <div className="flex items-center gap-4">
@@ -152,7 +148,7 @@ export default function HomePage() {
           <motion.div
             initial={reducedMotion ? false : { opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.0, delay: 0.15, ease: eleganceEase }}
+            transition={{ duration: 1.0, delay: 0.15, ease: "easeOut" }}
             className="relative isolate mx-auto flex min-h-[490px] w-full max-w-[710px] items-end justify-center pb-10 pt-14 sm:min-h-[570px] lg:min-h-[680px]"
             aria-label="The official BaBra Lotion collection: Women, Men and Kids"
           >
