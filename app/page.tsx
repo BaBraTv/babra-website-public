@@ -48,7 +48,7 @@ const ecosystemCards = [
     label: "Group structure",
     text: "The parent ecosystem connecting commerce, technology, education, healthcare, agriculture, media, and social impact.",
     href: "/holding",
-    image: "/showroom/showroom.png",
+    image: "/media/logos/babra-logo.jpeg",
     accent: "#f1d58b"
   },
   {
@@ -56,7 +56,7 @@ const ecosystemCards = [
     label: "Beauty and products",
     text: "BaBra Lotion, soap, pads, pocket fresh, showroom, samples, wholesale, and Rwanda-first store operations.",
     href: "/cosmetics",
-    image: "/brand/official-babra-bottle.png",
+    image: "/media/products/babra-lotion-women-500ml.png",
     accent: "#d6ad57"
   },
   {
@@ -64,7 +64,7 @@ const ecosystemCards = [
     label: "Technology division",
     text: "Mobile commerce, device support, repairs, accessories, spare parts, technicians, and youth technology skills.",
     href: "/rwanda-mobile-hub",
-    image: "/photos/mobile-smartphone.jpg",
+    image: "/media/mobile-hub/rwanda-mobile-hub-hero.jpg",
     accent: "#4ebeff"
   },
   {
@@ -72,7 +72,7 @@ const ecosystemCards = [
     label: "AI learning · Ages 10–17",
     text: "Safe, structured artificial-intelligence lessons, quizzes, progress tracking, and guided learning for Africa's next generation.",
     href: "/academy",
-    image: "/photos/school-classroom.jpg",
+    image: "",
     accent: "#55e6d0"
   },
   {
@@ -80,7 +80,7 @@ const ecosystemCards = [
     label: "Education systems",
     text: "Future nursery, primary, secondary, university, digital learning, admissions, teachers, and scholarships.",
     href: "/schools",
-    image: "/photos/school-classroom.jpg",
+    image: "",
     accent: "#7dd3fc"
   },
   {
@@ -88,7 +88,7 @@ const ecosystemCards = [
     label: "Healthcare vision",
     text: "Trusted healthcare systems, patient care access, medical services, and community health planning.",
     href: "/hospital",
-    image: "/photos/hospital-doctor.jpg",
+    image: "",
     accent: "#38bdf8"
   },
   {
@@ -104,7 +104,7 @@ const ecosystemCards = [
     label: "Agriculture network",
     text: "Farmers, suppliers, greenhouse production, livestock roadmap, produce marketplace, and supply chains.",
     href: "/farm",
-    image: "/photos/farm-crops.jpg",
+    image: "",
     accent: "#4ade80"
   },
   {
@@ -112,7 +112,7 @@ const ecosystemCards = [
     label: "Community impact",
     text: "Volunteers, donations, family-based support, vulnerable children support, and community partnerships.",
     href: "/foundation",
-    image: "/photos/foundation-community.jpg",
+    image: "",
     accent: "#c084fc"
   },
   {
@@ -120,7 +120,7 @@ const ecosystemCards = [
     label: "Media and storytelling",
     text: "Brand storytelling, interviews, business education, social impact content, and original productions.",
     href: "/lifetalk-tv",
-    image: "/brand/homepage-video-poster.webp",
+    image: "/media/logos/babra-logo.jpeg",
     accent: "#fb7185"
   },
   {
@@ -128,7 +128,7 @@ const ecosystemCards = [
     label: "Public service",
     text: "Independent lost documents, found items, claims, searches, finder process, and support routing.",
     href: "/lost-and-found",
-    image: "/photos/mobile-workstation.jpg",
+    image: "",
     accent: "#fb923c"
   },
   {
@@ -136,7 +136,7 @@ const ecosystemCards = [
     label: "Private review",
     text: "Structured access requests for verified partners, sponsors, investors, and institutional stakeholders.",
     href: "/investor-sponsor-access",
-    image: "/photos/foundation-volunteers.jpg",
+    image: "",
     accent: "#facc15"
   },
   {
@@ -144,7 +144,7 @@ const ecosystemCards = [
     label: "Commerce",
     text: "Product catalog, cart, checkout, Rwanda delivery flow, order tracking, and manual payment review.",
     href: "/store",
-    image: "/brand/official-babra-bottle-kids.png",
+    image: "/media/products/babra-lotion-babies-500ml.png",
     accent: "#f1d58b"
   },
   {
@@ -152,7 +152,7 @@ const ecosystemCards = [
     label: "Operations gateway",
     text: "Division forms, contact messages, job applications, lost/found submissions, and support channels.",
     href: "/forms",
-    image: "/photos/mobile-accessories.jpg",
+    image: "",
     accent: "#60a5fa"
   }
 ];
@@ -162,28 +162,21 @@ const products = [
     name: "BaBra Soft Care for Kids",
     tag: "Family Care",
     note: "Gentle comfort for children and family skincare routines without exposing full label details online.",
-    image: "/products/kids-lotion.jpg",
-    fit: "contain"
-  },
-  {
-    name: "BaBra Anti-Wrinkle Serum",
-    tag: "Advanced Care",
-    note: "A premium serum presentation with bottle and retail box for strong shelf presence.",
-    image: "/products/serum-safe-preview.jpg",
+    image: "/media/products/babra-lotion-babies-500ml.png",
     fit: "contain"
   },
   {
     name: "BaBra Lotion for Women",
     tag: "Signature for Her",
     note: "Soft hydration with refined fragrance and a premium daily care feel.",
-    image: "/products/women-lotion.jpg",
+    image: "/media/products/babra-lotion-women-500ml.png",
     fit: "contain"
   },
   {
     name: "BaBra Lotion for Men",
     tag: "Signature for Him",
     note: "Clean freshness and premium body care for a confident routine.",
-    image: "/products/men-lotion.jpg",
+    image: "/media/products/babra-lotion-men-500ml.png",
     fit: "contain"
   }
 ];
@@ -191,15 +184,15 @@ const products = [
 const heroBottles = [
   {
     name: "BaBra Lotion for Women official bottle",
-    image: "/brand/official-babra-bottle.png"
+    image: "/media/products/babra-lotion-women-500ml.png"
   },
   {
     name: "BaBra Lotion for Men official bottle",
-    image: "/brand/official-babra-bottle-men.png"
+    image: "/media/products/babra-lotion-men-500ml.png"
   },
   {
     name: "BaBra Lotion Baby official bottle",
-    image: "/brand/official-babra-bottle-kids.png"
+    image: "/media/products/babra-lotion-babies-500ml.png"
   }
 ];
 
@@ -339,15 +332,9 @@ export default function HomePage() {
       </nav>
 
       <section id="top" className="relative min-h-[calc(100vh-69px)] overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src="/videos/skin-hero.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/products/kids-lotion.jpg"
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_75%_40%,rgba(214,173,87,0.24),transparent_30rem),radial-gradient(circle_at_30%_90%,rgba(136,38,49,0.16),transparent_35rem),linear-gradient(135deg,#130d0b,#090706)]"
+          aria-hidden="true"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#090706]/95 via-[#090706]/76 to-[#090706]/35" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#090706] via-transparent to-[#090706]/45" />
@@ -438,7 +425,19 @@ export default function HomePage() {
             {ecosystemCards.map((item) => (
               <a key={item.title} href={item.href} className="group overflow-hidden rounded-lg border border-black/10 bg-white shadow-xl shadow-black/5 transition hover:-translate-y-1 hover:shadow-2xl">
                 <figure className="relative h-56 overflow-hidden bg-[#090706]">
-                  <img className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]" src={item.image} alt={item.title} loading="lazy" />
+                  {item.image ? (
+                    <img
+                      className="h-full w-full object-contain p-5 transition duration-700 group-hover:scale-[1.04]"
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[radial-gradient(circle_at_50%_50%,rgba(214,173,87,0.16),transparent_65%),linear-gradient(135deg,#15100d,#090706)] px-6 text-center">
+                      <span className="font-serif text-5xl text-[#f1d58b]" aria-hidden="true">BaBra</span>
+                      <span className="max-w-xs text-xs font-bold uppercase tracking-[0.22em] text-white/70">{item.title}</span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/84 via-black/18 to-transparent" />
                   <span className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-2 text-xs font-black uppercase tracking-[0.16em] text-white backdrop-blur">
                     {item.label}
@@ -578,9 +577,9 @@ export default function HomePage() {
 
           <div className="mt-12 grid gap-5 lg:grid-cols-2">
             {[
-              ["Skin barrier layers", "/science/skin-layers-luxury.jpg", "A premium visual of layered skin structure and hydration barrier support."],
-              ["Hydration and fragrance", "/science/hydration-fragrance-luxury.jpg", "A luxury visual showing moisture, smoothness, botanical care, and signature fragrance."]
-            ].map(([title, image, text], index) => (
+              ["Skin barrier basics", "Understanding how skin retains moisture is the first step in selecting a suitable daily moisturiser."],
+              ["Hydration and fragrance", "Fragrance adds a sensory experience but can irritate sensitive skin. Patch-testing and reading the label matter."]
+            ].map(([title, text], index) => (
               <motion.figure
                 key={title}
                 initial={{ opacity: 0, y: 35, scale: 0.98 }}
@@ -590,7 +589,10 @@ export default function HomePage() {
                 className="overflow-hidden rounded-lg border border-black/10 bg-white shadow-2xl shadow-black/10"
               >
                 <div className="relative h-[310px] overflow-hidden md:h-[430px]">
-                  <img className="parallax-soft h-full w-full object-cover transition duration-700 hover:scale-[1.04]" src={image} alt={title} loading="lazy" />
+                  <div className="flex h-full min-h-[310px] flex-col items-center justify-center gap-5 bg-[radial-gradient(circle_at_50%_30%,rgba(214,173,87,0.20),transparent_65%),linear-gradient(135deg,#17100f,#382a1f)] px-8 text-center md:min-h-[430px]">
+                    <span className="font-serif text-5xl text-[#f1d58b] md:text-6xl">{index === 0 ? "Skin care" : "Daily ritual"}</span>
+                    <span className="text-sm font-bold uppercase tracking-[0.2em] text-white/65">BaBra skincare education</span>
+                  </div>
                 </div>
                 <figcaption className="p-5">
                   <h3 className="font-serif text-3xl">{title}</h3>
@@ -730,13 +732,16 @@ export default function HomePage() {
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Production story</p>
           <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">From formulation to shelf-ready confidence.</h2>
           <p className="mt-6 text-lg leading-8 text-white/66">
-            Factory footage, product mockups, and founder storytelling should work together as a premium trust signal.
-            The hosted montage presents BaBra production without Alibaba branding; the raw CEO video is too large for direct hosting and should be compressed or embedded through LifeTalk TV.
+            BaBra works with a manufacturing partner on its lotion range. We show approved product packaging
+            while factory footage and production documentation are reviewed before publication.
           </p>
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-[#d6ad57]/25 bg-black shadow-2xl shadow-black/40">
-          <video className="aspect-video w-full object-cover" src="/videos/babra-production-ad.mp4" muted controls playsInline poster="/brand/homepage-video-poster.webp" />
+          <figure className="flex aspect-video flex-col items-center justify-center gap-4 bg-[radial-gradient(circle_at_50%_40%,rgba(214,173,87,0.25),transparent_65%),linear-gradient(135deg,#26170f,#090706)] p-8">
+            <img className="h-4/5 max-h-[360px] w-full object-contain" src="/media/products/babra-lotion-women-500ml.png" alt="Official BaBra Lotion Women 500 ml bottle" loading="lazy" />
+            <figcaption className="text-center text-xs font-bold uppercase tracking-[0.18em] text-[#f1d58b]">BaBra Cosmetics · Official product packaging</figcaption>
+          </figure>
         </div>
       </section>
 
