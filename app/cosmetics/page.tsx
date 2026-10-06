@@ -17,10 +17,9 @@ const internationalEnquiry = whatsappOrderUrl("Hello BaBra Cosmetics, I would li
 const rwandaEnquiry = rwandaOrderUrl("Hello Vida Pharmacy, I would like to order BaBra Lotion in Rwanda. Please help me choose Women, Men or Kids and confirm the current price, stock and delivery options.");
 
 const campaigns = [
-  { image: "for-her", title: "Signature for Her", slug: "women", alt: "BaBra Signature for Her lotion advertisement with a pink background and flowers", size: 1080 },
-  { image: "for-kids", title: "Soft Care for Kids", slug: "babies", alt: "BaBra Soft Care for Kids lotion advertisement with a rainbow and teddy bear", size: 1080 },
-  { image: "for-him", title: "Signature for Him", slug: "men", alt: "BaBra Signature for Him lotion advertisement in navy and gold", size: 1254 },
-  { image: "for-him-care", title: "Care That Defines You", slug: "men", alt: "BaBra men's lotion advertisement showing a man applying lotion", size: 1254 },
+  { image: "/media/products/babra-lotion-women-500ml.png", title: "Signature for Her", slug: "women", alt: "Official BaBra Lotion Women 500 ml bottle" },
+  { image: "/media/products/babra-lotion-men-500ml.png", title: "Signature for Him", slug: "men", alt: "Official BaBra Lotion Men 500 ml bottle" },
+  { image: "/media/products/babra-lotion-babies-500ml.png", title: "Soft Care for Kids", slug: "babies", alt: "Official BaBra Lotion Kids 500 ml bottle" }
 ];
 
 export default function CosmeticsPage() {
@@ -66,12 +65,12 @@ export default function CosmeticsPage() {
       </div>
       <section id="campaigns" className={`${styles.wrap} ${styles.section}`} aria-labelledby="campaigns-title">
         <p className={styles.eyebrow}>BaBra campaigns</p>
-        <h2 id="campaigns-title" className={styles.heading}>A touch for everyone.</h2>
+        <h2 id="campaigns-title" className={styles.heading}>The original BaBra collection.</h2>
         <div className={styles.campaignGrid}>
           {campaigns.map((campaign) => (
             <figure key={campaign.image} className={styles.campaign}>
               <a href={`/products/${campaign.slug}`} aria-label={`Explore ${campaign.title}`}>
-                <Image src={`/media/campaigns/${campaign.image}.jpeg`} alt={campaign.alt} width={campaign.size} height={campaign.size} sizes="(min-width: 1240px) 586px, (min-width: 768px) 47vw, 92vw" className={styles.campaignImage} />
+                <Image src={campaign.image} alt={campaign.alt} width={520} height={1024} sizes="(min-width: 1240px) 586px, (min-width: 768px) 47vw, 92vw" className={styles.campaignImage} />
               </a>
               <figcaption><a href={`/products/${campaign.slug}`}>{campaign.title} <span aria-hidden="true">↗</span></a></figcaption>
             </figure>
