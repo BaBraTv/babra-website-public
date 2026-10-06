@@ -384,10 +384,14 @@ export function PlatformClient({ mode }: { mode: Mode }) {
         }
 
         if (mode === "admin") {
-          const summary = await apiRequest<AdminSummary>("/api/admin/summary");
+          const [summary, pricing] = await Promise.all([
+            apiRequest<AdminSummary>("/api/admin/summary"),
+            apiRequest<{ products: Array<{ slug: string; priceRwf: number }> }>("/api/admin/products")
+          ]);
           setAdminSummary(summary);
           const nextOrders = (summary.orders ?? []).map(orderFromApi);
           setOrders(nextOrders);
+          setPriceOverrides(Object.fromEntries(pricing.products.map((product) => [product.slug, product.priceRwf])));
         }
       } catch (error) {
         if (mode === "admin" || mode === "account" || mode === "profile") {
@@ -547,6 +551,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
           items: cartLines.map((item) => ({ productSlug: item.product.slug, quantity: item.quantity })),
           paymentProvider: uiPaymentToApi[method],
           affiliateCode: affiliateCode || undefined,
+          quoteOnly: status === "Quote requested",
           province: account.province,
           district: account.district,
           sector: account.sector,
@@ -618,9 +623,29 @@ export function PlatformClient({ mode }: { mode: Mode }) {
   }
 
   function savePrice(slug: string, value: number) {
-    const next = { ...priceOverrides, [slug]: Math.max(0, value) };
-    setPriceOverrides(next);
-    saveJson(storageKeys.priceOverrides, next);
+    setPriceOverrides((current) => ({ ...current, [slug]: Math.max(0, value) }));
+  }
+
+  async function saveProductionPrices() {
+    setIsBusy(true);
+    setStatusMessage("");
+    try {
+      const result = await apiRequest<{ products: Array<{ slug: string; priceRwf: number }> }>("/api/admin/products", {
+        method: "PATCH",
+        body: JSON.stringify({
+          products: products.map((product) => ({
+            slug: product.slug,
+            priceRwf: Math.max(0, Math.round(priceOverrides[product.slug] ?? 0))
+          }))
+        })
+      });
+      setPriceOverrides(Object.fromEntries(result.products.map((product) => [product.slug, product.priceRwf])));
+      setStatusMessage("Production pricing saved. A price of 0 keeps that product in Price on request mode.");
+    } catch (error) {
+      setStatusMessage(error instanceof Error ? error.message : "Production pricing could not be saved.");
+    } finally {
+      setIsBusy(false);
+    }
   }
 
   async function updateOrderStatus(order: Order, status: OrderStatus) {
@@ -840,8 +865,8 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                   ) : (
                     <p className="rounded-xl border border-white/10 bg-black/25 p-4 text-white/64">Cash on Delivery remains pending until BaBra confirms delivery and payment.</p>
                   )}
-                  <button className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" onClick={() => submitOrder("Pending payment confirmation")} type="button" disabled={cartLines.length === 0 || isBusy}>
-                    {isBusy ? "Saving order..." : "Submit order for review"}
+                  <button className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" onClick={() => submitOrder(total > 0 ? "Pending payment confirmation" : "Quote requested")} type="button" disabled={cartLines.length === 0 || isBusy}>
+                    {isBusy ? "Saving order..." : total > 0 ? "Submit order for review" : "Submit quote request"}
                   </button>
                   <a className="rounded-full border border-white/20 px-6 py-3 text-center font-black text-white" href={whatsappOrderUrl(quoteMessage)} target="_blank" rel="noopener noreferrer">
                     Send on WhatsApp
@@ -894,11 +919,14 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                       placeholder="Optional note for the BaBra payment reviewer"
                     />
                   </label>
+                  {trackedOrder.total <= 0 ? (
+                    <p className="mt-5 rounded-xl border border-amber-300/25 bg-amber-300/10 p-4 text-sm leading-6 text-amber-50">This quote does not have a confirmed payable amount yet. BaBra must confirm pricing before payment details can be submitted.</p>
+                  ) : null}
                   <button
                     className="mt-5 w-full rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08] disabled:opacity-50"
                     onClick={() => void submitManualPayment(trackedOrder)}
                     type="button"
-                    disabled={isBusy || !trackedOrder.databaseId}
+                    disabled={isBusy || !trackedOrder.databaseId || trackedOrder.total <= 0}
                   >
                     {isBusy ? "Submitting..." : "Submit for manual verification"}
                   </button>
@@ -931,8 +959,8 @@ export function PlatformClient({ mode }: { mode: Mode }) {
               <Metric label="Revenue reference" value={formatRwf(orders.filter((order) => order.status !== "Rejected").reduce((sum, order) => sum + order.total, 0))} />
             </section>
             <section className="mt-8 rounded-[2rem] border border-[#f1d58b]/20 bg-white/[0.055] p-6">
-              <h2 className="font-serif text-4xl">Product price controls</h2>
-              <p className="mt-3 text-white/62">Local admin prices are used for checkout estimates until database pricing is connected.</p>
+              <h2 className="font-serif text-4xl">Production price controls</h2>
+              <p className="mt-3 text-white/62">These values are saved to the production database. Use 0 to keep a product in Price on request mode. Zero-value quote requests cannot enter payment review.</p>
               <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {products.map((product) => (
                   <label key={product.slug} className="grid gap-2 rounded-2xl border border-white/10 bg-black/20 p-4 text-sm font-bold text-white/78">
