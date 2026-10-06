@@ -28,6 +28,9 @@ const safeMessages = new Set([
   "Email or phone is required",
   "Account already exists. Please login.",
   "Order not found",
+  "Set production pricing before requesting payment.",
+  "Confirm production pricing before moving this quote into payment or fulfilment.",
+  "This order is still awaiting a confirmed price. Payment details cannot be submitted yet.",
   "Rate limit exceeded"
 ]);
 
