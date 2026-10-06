@@ -14,8 +14,6 @@ export async function ensureCatalogProduct(slug: string) {
       size: product.size,
       category: product.category,
       status: "ACTIVE",
-      priceCents: product.price * 100,
-      currency: "RWF",
       imageUrl: product.image,
       imageAlt: product.alt
     },
