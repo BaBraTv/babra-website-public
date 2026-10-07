@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "BaBra Cosmetics | Luxury in Every Touch", description, images: ["/media/logos/babra-logo.jpeg"] }
 };
 const internationalEnquiry = whatsappOrderUrl("Hello BaBra Cosmetics, I would like to order BaBra Lotion outside Rwanda or discuss an international partnership. Please help me choose Women, Men or Kids and confirm the available options.");
-const rwandaEnquiry = rwandaOrderUrl("Hello Vida Pharmacy, I would like to order BaBra Lotion in Rwanda. Please help me choose Women, Men or Kids and confirm the current price, stock and delivery options.");
+const rwandaEnquiry = rwandaOrderUrl("Hello VIDAPHARMA, I would like to order BaBra Lotion in Rwanda. Please help me choose Women, Men or Kids and confirm the current price, stock and delivery options.");
 
 const campaigns = [
   { mediaId: "babra-lotion-women-500ml", title: "Signature for Her", slug: "women" },
@@ -35,7 +35,7 @@ export default function CosmeticsPage() {
             <h1>BaBra<br />Cosmetics.</h1>
             <p className={styles.slogan}>Luxury in Every Touch.</p>
             <p className={styles.intro}>Discover the BaBra Lotion collection for Women, Men and Kids. A personal touch, from choosing your lotion to arranging your order with our team.</p>
-            <div className={styles.actions}><a href="#collection" className={styles.primary}>Explore the collection <span aria-hidden="true">&nbsp;↗</span></a><a href={rwandaEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">Rwanda order · Vida Pharmacy</a><a href={internationalEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">International · BaBra</a></div>
+            <div className={styles.actions}><a href="#collection" className={styles.primary}>Explore the collection <span aria-hidden="true">&nbsp;↗</span></a><a href={rwandaEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">Rwanda order · VIDAPHARMA</a><a href={internationalEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">International · BaBra</a></div>
           </div>
           <figure className={styles.heroVisual}>
             <OfficialMedia className={styles.heroImage} media={officialMediaById["babra-lotion-women-500ml"]} priority sizes="(min-width: 768px) 46vw, 92vw" />
@@ -54,7 +54,7 @@ export default function CosmeticsPage() {
                 <div className={styles.productMeta}><span>{product.category}</span><span>{product.size}</span></div>
                 <h3>BaBra Lotion {product.category}</h3>
                 <p>{product.slug === "babies" ? "Soft Care for Kids, as shown on the BaBra packaging. Check the label and ask our team about age suitability before use." : `Explore the ${product.category.toLowerCase()} edition. See the product label for directions and contact our team for help choosing your lotion.`}</p>
-                <a className={styles.primary} href={rwandaOrderUrl(`Hello Vida Pharmacy, I would like to order ${product.name} from BaBra. Quantity: __. Delivery location in Rwanda: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer">Rwanda order · {rwandaOrders.partner}</a>
+                <a className={styles.primary} href={rwandaOrderUrl(`Hello VIDAPHARMA, I would like to order ${product.name} from BaBra. Quantity: __. Delivery location in Rwanda: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer">Rwanda order · {rwandaOrders.partner}</a>
                 <a className={styles.secondary} href={whatsappOrderUrl(`Hello BaBra Cosmetics, I would like to order ${product.name} internationally. Quantity: __. Destination country/city: __. Please confirm price, stock and delivery options.`)} target="_blank" rel="noopener noreferrer">International order · BaBra</a>
                 <a className={styles.detail} href={`/products/${product.slug}`}>View product details <span aria-hidden="true">↗</span></a>
               </article>
@@ -106,11 +106,11 @@ export default function CosmeticsPage() {
       </section>
       <section id="order" className={styles.section}>
         <div className={`${styles.wrap} ${styles.orderGrid}`}>
-          <div><p className={styles.eyebrow}>Let’s make it personal</p><h2 className={styles.heading}>Your next order.<br />One conversation away.</h2><ol className={styles.steps}><li>Choose Women, Men or Kids.</li><li>For Rwanda orders, contact Vida Pharmacy. For international orders or partnerships, contact BaBra directly.</li><li>Share quantity and delivery location, then review the confirmed price, stock and delivery details. Opening WhatsApp does not place or pay for an order.</li></ol><p className={`${styles.sectionIntro} mt-6`}>Rwanda orders: Vida Pharmacy — {rwandaOrders.phone}. Official BaBra Call/WhatsApp and international partnerships: {cosmetics.phone}.</p></div>
+          <div><p className={styles.eyebrow}>Let’s make it personal</p><h2 className={styles.heading}>Your next order.<br />One conversation away.</h2><ol className={styles.steps}><li>Choose Women, Men or Kids.</li><li>For Rwanda orders, contact VIDAPHARMA. For international orders or partnerships, contact BaBra directly.</li><li>Share quantity and delivery location, then review the confirmed price, stock and delivery details. Opening WhatsApp does not place or pay for an order.</li></ol><p className={`${styles.sectionIntro} mt-6`}>Rwanda orders: VIDAPHARMA — {rwandaOrders.phone}. Official BaBra Call/WhatsApp and international partnerships: {cosmetics.phone}.</p></div>
           <aside className={styles.contact}><p className={styles.eyebrow}>Official contact</p><h3>BaBra Cosmetics Ltd</h3><p>TIN {cosmetics.tin}</p><p>Rwanda orders · {rwandaOrders.partner}</p><a className={styles.contactLink} href={rwandaEnquiry} target="_blank" rel="noopener noreferrer">{rwandaOrders.phone}</a><p>BaBra Call / WhatsApp & international partnerships</p><a className={styles.contactLink} href={`tel:${cosmetics.phone}`}>{cosmetics.phone}</a><a className={styles.contactLink} href={`mailto:${cosmetics.email}`}>{cosmetics.email}</a><div className={styles.actions}><a href={rwandaEnquiry} className={styles.primary} target="_blank" rel="noopener noreferrer">Rwanda order</a><a href={internationalEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">International enquiry</a></div><div className={styles.business}><p>Wholesale, distributor or international enquiry?</p><a href="/wholesale-distributor">Request a wholesale quote <span aria-hidden="true">&nbsp;↗</span></a></div></aside>
         </div>
       </section>
-      <div className={styles.mobileBar} aria-label="Quick ordering"><a className={styles.secondary} href={internationalEnquiry} target="_blank" rel="noopener noreferrer">International · BaBra</a><a className={styles.primary} href={rwandaEnquiry} target="_blank" rel="noopener noreferrer">Rwanda · Vida</a></div>
+      <div className={styles.mobileBar} aria-label="Quick ordering"><a className={styles.secondary} href={internationalEnquiry} target="_blank" rel="noopener noreferrer">International · BaBra</a><a className={styles.primary} href={rwandaEnquiry} target="_blank" rel="noopener noreferrer">Rwanda · VIDAPHARMA</a></div>
     </main>
   );
 }
