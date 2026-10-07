@@ -19,6 +19,14 @@ const paymentProviderMap = {
   MANUAL: "MANUAL"
 } as const;
 
+const MAX_ORDER_CENTS = 2_147_483_647;
+
+function assertSafeOrderAmount(...amounts: number[]) {
+  if (amounts.some((amount) => !Number.isSafeInteger(amount) || amount < 0 || amount > MAX_ORDER_CENTS)) {
+    throw new Error("Order amount exceeds the supported limit.");
+  }
+}
+
 function orderNumber() {
   return `BABRA-${Date.now().toString().slice(-8)}-${Math.random().toString(36).slice(2, 5).toUpperCase()}`;
 }
@@ -37,7 +45,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ ok: true, orders: orders.map((order) => user.role === "ADMIN" || user.role === "STAFF" ? redactOrder(order) : redactOrderForCustomer(order)) });
   } catch (error) {
-    return authFail(error);
+    const message = error instanceof Error ? error.message : "";
+    if (message.includes("Authentication") || message.includes("Admin")) return authFail(error);
+    return fail(error);
   }
 }
 
@@ -61,10 +71,14 @@ export async function POST(request: NextRequest) {
         };
       })
     );
+    for (const item of enrichedItems) assertSafeOrderAmount(item.unitPriceCents, item.totalCents);
     const subtotalCents = enrichedItems.reduce((sum, item) => sum + item.totalCents, 0);
-    const deliveryCents = subtotalCents > 0 ? 1500 * 100 : 0;
-    const totalCents = subtotalCents + deliveryCents;
+    const hasUnpricedItems = enrichedItems.some((item) => item.unitPriceCents <= 0);
+    const deliveryCents = !hasUnpricedItems && subtotalCents > 0 ? 1500 * 100 : 0;
+    const totalCents = hasUnpricedItems ? 0 : subtotalCents + deliveryCents;
+    assertSafeOrderAmount(subtotalCents, deliveryCents, totalCents);
     const provider = paymentProviderMap[payload.paymentProvider];
+    const isQuoteOnly = payload.quoteOnly || hasUnpricedItems || totalCents <= 0;
 
     const order = await prisma.order.create({
       data: {
@@ -73,7 +87,7 @@ export async function POST(request: NextRequest) {
         customerName: payload.customerName,
         customerEmail: payload.customerEmail || null,
         customerPhone: payload.customerPhone,
-        status: provider === "CASH_ON_DELIVERY" ? "PENDING_PAYMENT" : "PENDING_PAYMENT",
+        status: isQuoteOnly ? "QUOTE_REQUESTED" : "PENDING_PAYMENT",
         subtotalCents,
         deliveryCents,
         totalCents,
@@ -116,9 +130,9 @@ export async function POST(request: NextRequest) {
 
     await queueNotification({
       route: "orders",
-      subject: `New BaBra order ${order.orderNumber}`,
-      templateKey: "orders.created",
-      payload: { orderId: order.id, orderNumber: order.orderNumber, customerPhone: order.customerPhone }
+      subject: `${isQuoteOnly ? "New BaBra quote request" : "New BaBra order"} ${order.orderNumber}`,
+      templateKey: isQuoteOnly ? "orders.quote_requested" : "orders.created",
+      payload: { orderId: order.id, orderNumber: order.orderNumber, customerPhone: order.customerPhone, quoteOnly: isQuoteOnly }
     });
 
     return NextResponse.json({ ok: true, order: redactOrderForCustomer(order), affiliateAttribution: { attributed: affiliateAttributed } });
@@ -137,17 +151,92 @@ export async function PATCH(request: NextRequest) {
   try {
     const admin = await requireAdminUser();
     const payload = orderStatusUpdateSchema.parse(await request.json());
-    const order = await getPrisma().order.update({
-      where: { id: payload.orderId },
-      data: {
-        status: payload.status,
-        adminNotes: payload.adminNotes || undefined,
-        completedAt: payload.status === "COMPLETED" ? new Date() : undefined
-      },
-      include: { items: true, payments: true }
-    });
+    const prisma = getPrisma();
+    const postQuoteStatuses = new Set([
+      "PENDING_PAYMENT", "PAYMENT_RECEIVED", "PROCESSING", "PACKING",
+      "OUT_FOR_DELIVERY", "DELIVERED", "COMPLETED"
+    ]);
 
-    await getPrisma().adminActivityLog.create({
+    const order = await prisma.$transaction(async (tx) => {
+      const existing = await tx.order.findUnique({
+        where: { id: payload.orderId },
+        include: { items: true, payments: true }
+      });
+      if (!existing) throw new Error("Order not found");
+
+      if (existing.status === "QUOTE_REQUESTED" && payload.status === "PENDING_PAYMENT") {
+        const productRows = await tx.product.findMany({
+          where: { slug: { in: existing.items.map((item) => item.productSlug) } },
+          select: { slug: true, priceCents: true }
+        });
+        const priceBySlug = new Map(productRows.map((product) => [product.slug, product.priceCents ?? 0]));
+        const pricedItems = existing.items.map((item) => {
+          const unitPriceCents = priceBySlug.get(item.productSlug) ?? 0;
+          if (unitPriceCents <= 0) throw new Error("Set production pricing before requesting payment.");
+          const totalCents = unitPriceCents * item.quantity;
+          assertSafeOrderAmount(unitPriceCents, totalCents);
+          return { id: item.id, unitPriceCents, totalCents };
+        });
+        const subtotalCents = pricedItems.reduce((sum, item) => sum + item.totalCents, 0);
+        const deliveryCents = subtotalCents > 0 ? 1500 * 100 : 0;
+        const totalCents = subtotalCents + deliveryCents;
+        assertSafeOrderAmount(subtotalCents, deliveryCents, totalCents);
+
+        for (const item of pricedItems) {
+          await tx.orderItem.update({
+            where: { id: item.id },
+            data: { unitPriceCents: item.unitPriceCents, totalCents: item.totalCents }
+          });
+        }
+
+        if (existing.payments[0]) {
+          await tx.payment.update({
+            where: { id: existing.payments[0].id },
+            data: { amountCents: totalCents, status: "PENDING" }
+          });
+        } else {
+          await tx.payment.create({
+            data: {
+              orderId: existing.id,
+              provider: "CASH_ON_DELIVERY",
+              status: "PENDING",
+              amountCents: totalCents,
+              currency: existing.currency,
+              customerPhone: existing.customerPhone,
+              internalReference: `PAY-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`
+            }
+          });
+        }
+
+        return tx.order.update({
+          where: { id: existing.id },
+          data: {
+            status: "PENDING_PAYMENT",
+            subtotalCents,
+            deliveryCents,
+            totalCents,
+            adminNotes: payload.adminNotes || undefined
+          },
+          include: { items: true, payments: true }
+        });
+      }
+
+      if ((existing.status === "QUOTE_REQUESTED" || existing.totalCents <= 0) && postQuoteStatuses.has(payload.status)) {
+        throw new Error("Confirm production pricing before moving this quote into payment or fulfilment.");
+      }
+
+      return tx.order.update({
+        where: { id: payload.orderId },
+        data: {
+          status: payload.status,
+          adminNotes: payload.adminNotes || undefined,
+          completedAt: payload.status === "COMPLETED" ? new Date() : undefined
+        },
+        include: { items: true, payments: true }
+      });
+    }, { isolationLevel: "Serializable" });
+
+    await prisma.adminActivityLog.create({
       data: {
         actorId: admin.id,
         action: "STATUS_CHANGE",
@@ -159,6 +248,8 @@ export async function PATCH(request: NextRequest) {
 
     return NextResponse.json({ ok: true, order: redactOrder(order) });
   } catch (error) {
-    return authFail(error);
+    const message = error instanceof Error ? error.message : "";
+    if (message.includes("Authentication") || message.includes("Admin")) return authFail(error);
+    return fail(error);
   }
 }
