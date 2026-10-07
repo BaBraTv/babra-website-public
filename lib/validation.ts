@@ -20,7 +20,7 @@ export const contactMessageSchema = z.object({
 });
 
 export const orderItemSchema = z.object({
-  productSlug: z.string().trim().min(1).max(120),
+  productSlug: z.enum(["women", "men", "babies"]),
   quantity: z.number().int().min(1).max(500)
 });
 
