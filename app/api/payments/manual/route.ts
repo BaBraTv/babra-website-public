@@ -25,6 +25,8 @@ export async function POST(request: NextRequest) {
     });
 
     if (!order) throw new Error("Order not found");
+    if (order.status !== "PENDING_PAYMENT") throw new Error("This order is not approved for payment review yet.");
+    if (order.totalCents <= 0) throw new Error("This order is still awaiting a confirmed price. Payment details cannot be submitted yet.");
 
     const payment = await prisma.payment.upsert({
       where: { internalReference: order.payments[0]?.internalReference ?? `missing-${order.id}` },
