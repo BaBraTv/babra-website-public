@@ -384,18 +384,22 @@ export function PlatformClient({ mode }: { mode: Mode }) {
         }
 
         if (mode === "admin") {
-          const [summary, pricing] = await Promise.all([
-            apiRequest<AdminSummary>("/api/admin/summary"),
-            apiRequest<{ products: Array<{ slug: string; priceRwf: number }> }>("/api/admin/products")
-          ]);
+          const summary = await apiRequest<AdminSummary>("/api/admin/summary");
           setAdminSummary(summary);
           const nextOrders = (summary.orders ?? []).map(orderFromApi);
           setOrders(nextOrders);
-          if (!products.every((product) => pricing.products.some((row) => row.slug === product.slug))) {
-            throw new Error("Production pricing data is incomplete.");
+
+          try {
+            const pricing = await apiRequest<{ products: Array<{ slug: string; priceRwf: number }> }>("/api/admin/products");
+            if (!products.every((product) => pricing.products.some((row) => row.slug === product.slug))) {
+              throw new Error("Production pricing data is incomplete.");
+            }
+            setPriceOverrides(Object.fromEntries(pricing.products.map((product) => [product.slug, product.priceRwf])));
+            setPricesLoaded(true);
+          } catch (pricingError) {
+            setPricesLoaded(false);
+            setStatusMessage(pricingError instanceof Error ? pricingError.message : "Production pricing could not be loaded.");
           }
-          setPriceOverrides(Object.fromEntries(pricing.products.map((product) => [product.slug, product.priceRwf])));
-          setPricesLoaded(true);
         }
       } catch (error) {
         if (mode === "admin" || mode === "account" || mode === "profile") {
@@ -572,7 +576,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
       saveJson(storageKeys.orders, next);
       setTrackingCode(savedOrder.id);
       clearCart();
-      window.location.href = status === "Quote requested" ? "/orders" : "/payment-confirmation";
+      window.location.href = savedOrder.status === "Quote requested" ? "/orders" : "/payment-confirmation";
       return;
     } catch (error) {
       setStatusMessage(error instanceof Error ? error.message : "Order could not be saved to the database");
@@ -877,8 +881,8 @@ export function PlatformClient({ mode }: { mode: Mode }) {
                   ) : (
                     <p className="rounded-xl border border-white/10 bg-black/25 p-4 text-white/64">Cash on Delivery remains pending until BaBra confirms delivery and payment.</p>
                   )}
-                  <button className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" onClick={() => submitOrder(total > 0 ? "Pending payment confirmation" : "Quote requested")} type="button" disabled={cartLines.length === 0 || isBusy}>
-                    {isBusy ? "Saving order..." : total > 0 ? "Submit order for review" : "Submit quote request"}
+                  <button className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" onClick={() => submitOrder("Pending payment confirmation")} type="button" disabled={cartLines.length === 0 || isBusy}>
+                    {isBusy ? "Saving order..." : "Submit order for review"}
                   </button>
                   <a className="rounded-full border border-white/20 px-6 py-3 text-center font-black text-white" href={whatsappOrderUrl(quoteMessage)} target="_blank" rel="noopener noreferrer">
                     Send on WhatsApp
