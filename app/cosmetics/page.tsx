@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { OfficialMedia } from "../components/OfficialMedia";
+import { BaBraProductFilms } from "./BaBraProductFilms";
 import { officialMediaById } from "../data/official-media";
 import { cosmetics, products, rwandaOrderUrl, rwandaOrders, whatsappOrderUrl } from "../commerce-data";
 import styles from "./cosmetics.module.css";
@@ -76,6 +77,7 @@ export default function CosmeticsPage() {
           ))}
         </div>
       </section>
+      <BaBraProductFilms />
       <section id="stories" className={`${styles.wrap} ${styles.section}`} aria-labelledby="stories-title">
         <p className={styles.eyebrow}>Real BaBra Stories</p>
         <h2 id="stories-title" className={styles.heading}>Customer experiences, reviewed before publication.</h2>
