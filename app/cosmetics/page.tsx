@@ -3,6 +3,7 @@ import { OfficialMedia } from "../components/OfficialMedia";
 import { officialMediaById } from "../data/official-media";
 import { cosmetics, products, rwandaOrderUrl, rwandaOrders, whatsappOrderUrl } from "../commerce-data";
 import styles from "./cosmetics.module.css";
+import { ProductFilms } from "../components/ProductFilms";
 
 const description = "BaBra Cosmetics — Luxury in Every Touch. Explore BaBra Lotion Women, Men and Kids, meet our manufacturing and development partners, and order directly by phone or WhatsApp.";
 export const metadata: Metadata = {
@@ -75,6 +76,13 @@ export default function CosmeticsPage() {
             </figure>
           ))}
         </div>
+      </section>
+      <section id="product-films" className={`${styles.wrap} ${styles.section}`} aria-labelledby="product-films-title">
+        <p className={styles.eyebrow}>BaBra on film</p>
+        <h2 id="product-films-title" className={styles.heading}>Signature for Her. A closer look.</h2>
+        <p className={styles.sectionIntro}>Two short views of the original BaBra Body Lotion bottle: the front packaging and the back label. Read the physical label for complete product information.</p>
+        <ProductFilms />
+        <div className={styles.actions}><a className={styles.primary} href="/products/women">Explore Signature for Her <span aria-hidden="true">↗</span></a></div>
       </section>
       <section id="stories" className={`${styles.wrap} ${styles.section}`} aria-labelledby="stories-title">
         <p className={styles.eyebrow}>Real BaBra Stories</p>

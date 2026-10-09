@@ -1,0 +1,13 @@
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-top: 32px; }
+.film { min-width: 0; margin: 0; }
+.player { aspect-ratio: 16 / 9; overflow: hidden; background: #0b0908; border: 1px solid #b89558; border-radius: 4px; }
+.player video, .play, .play img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.play { position: relative; padding: 0; border: 0; background: #0b0908; cursor: pointer; }
+.play:focus-visible { outline: 3px solid #f6dfac; outline-offset: -5px; }
+.playLabel { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 12px; padding: 14px 22px; border: 1px solid #d6ad57; border-radius: 100px; color: #fff9ee; background: #100c0bea; font-size: 14px; white-space: nowrap; }
+.play:hover .playLabel { background: #7c2127; }
+.film h3 { margin: 18px 0 10px; font: 400 25px/1.3 Georgia, serif; }
+.film p { color: #62594e; font-size: 14px; line-height: 1.8; }
+.silent { color: #785d35; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
+.film a { display: inline-block; margin-left: 16px; padding: 12px 0; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 767px) { .grid { grid-template-columns: 1fr; gap: 28px; } }
