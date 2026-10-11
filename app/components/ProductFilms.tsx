@@ -40,5 +40,18 @@ function Film({ film }: { film: (typeof films)[number] }) {
 }
 
 export function ProductFilms() {
-  return <div className={styles.grid}>{films.map(film => <Film key={film.slug} film={film} />)}</div>;
+  return (
+    <div className={styles.showcase}>
+      <div className={styles.joyHeader}>
+        <div>
+          <span className={styles.goldRule} aria-hidden="true">✦</span>
+          <p className={styles.joyEyebrow}>A LITTLE EVERYDAY JOY</p>
+          <h3>Akanya kawe kabe keza.</h3>
+          <p>Small moments of self-care deserve a beautiful touch. Explore real BaBra product footage, then tell us about your own experience.</p>
+        </div>
+        <a className={styles.storyLink} href="/testimonials">Share your real BaBra story <span aria-hidden="true">↗</span></a>
+      </div>
+      <div className={styles.grid}>{films.map(film => <Film key={film.slug} film={film} />)}</div>
+    </div>
+  );
 }
