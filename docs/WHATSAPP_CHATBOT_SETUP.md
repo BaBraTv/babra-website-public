@@ -11,7 +11,8 @@ Quotes are stored in the existing Order table with `QUOTE_REQUESTED`, zero amoun
 and product/quantity/delivery details. Staff must confirm stock, pricing and delivery
 before requesting payment. Inbound enquiries and the reply are saved in the existing
 ContactMessage table and remain `IN_REVIEW` after automated replies so staff can
-follow up. No schema migration, payment collection or stock changes are introduced.
+follow up at `/admin/whatsapp` (authenticated ADMIN/STAFF only). The admin dashboard links
+to that inbox, and OrderCard displays the delivery notes containing the supplied address. No schema migration, payment collection or stock changes are introduced.
 
 The API verifies raw HMAC-SHA256 signatures before processing, filters by the configured
 business phone ID, skips events older than 23 hours, bounds payload size, and serializes
