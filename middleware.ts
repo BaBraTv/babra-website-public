@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server.js";
 
 const unsafeMethods = new Set(["POST", "PUT", "PATCH", "DELETE"]);
-const originExemptPaths = new Set(["/api/payments/callback"]);
+const originExemptPaths = new Set(["/api/payments/callback", "/api/whatsapp/webhook"]);
 
 export function isJsonContentType(value: string | null) {
   if (!value) return false;

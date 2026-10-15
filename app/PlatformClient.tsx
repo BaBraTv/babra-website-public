@@ -975,6 +975,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
               <Metric label="Revenue reference" value={formatRwf(orders.filter((order) => order.status !== "Rejected").reduce((sum, order) => sum + order.total, 0))} />
             </section>
             <section className="mt-8 rounded-[2rem] border border-[#f1d58b]/20 bg-white/[0.055] p-6">
+              <a href="/admin/whatsapp" className="mb-6 inline-block font-bold text-[#f1d58b]">Open WhatsApp customer requests →</a>
               <h2 className="font-serif text-4xl">Production price controls</h2>
               <p className="mt-3 text-white/62">These values are saved to the production database. Use 0 to keep a product in Price on request mode. Zero-value quote requests cannot enter payment review.</p>
               <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -1099,6 +1100,7 @@ function OrderCard({ order, editable, onStatusChange }: { order: Order; editable
         <span>Customer: {order.customer.fullName || "Not provided"}</span>
         <span>Phone: {order.customer.phone || "Not provided"}</span>
         <span>Location: {[order.customer.province, order.customer.district, order.customer.sector, order.customer.cell, order.customer.village].filter(Boolean).join(", ")}</span>
+        <span>Delivery notes: {order.customer.deliveryNotes || "Not provided"}</span>
         <span>Total reference: {formatRwf(order.total)}</span>
         <span>Rewards: {order.rewardPoints} points</span>
         <span>Updated: {order.updatedAt}</span>
