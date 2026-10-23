@@ -1,4 +1,5 @@
 import { approvedProductMedia } from "./data/official-media";
+import { productKnowledge } from "../lib/product-knowledge";
 
 export const site = {
   name: "BaBra Store",
@@ -42,7 +43,7 @@ export type StoreProduct = {
   category: string;
   image: string;
   price: number;
-  size: "500 ml";
+  size: "500 mL";
   description: string;
   audience: string;
   benefits: string[];
@@ -57,17 +58,17 @@ export type StoreProduct = {
 export const products: StoreProduct[] = [
   {
     slug: "women",
-    name: "BaBra Lotion Women — 500 ml",
-    shortName: "Women Lotion",
-    category: "Women",
+    name: "BaBra Lotion Signature for Her — 500 mL",
+    shortName: "Signature for Her",
+    category: "For Her",
     image: approvedProductMedia.women.path,
     price: 0,
-    size: "500 ml",
-    description: "Official 500 ml BaBra Lotion for women. Contact BaBra for current price, stock and delivery options.",
-    audience: "Check the product label and contact BaBra for suitability guidance",
-    benefits: [],
-    usage: "Follow the directions on the product label",
-    fragrance: "Ask BaBra about the current variant before ordering",
+    size: "500 mL",
+    description: productKnowledge.women.overview,
+    audience: productKnowledge.women.intendedUse,
+    benefits: productKnowledge.women.ingredientHighlights.filter((ingredient) => ingredient.state !== "requires-product-specific-review").slice(0, 4).map((ingredient) => ingredient.displayName || ingredient.name),
+    usage: productKnowledge.women.usage,
+    fragrance: "Fragrance is listed in the current product documents; the fragrance composition and allergen disclosure remain under final review.",
     gallery: [approvedProductMedia.women.path],
     ctaLabel: "Request official details",
     alt: approvedProductMedia.women.alt,
@@ -75,17 +76,17 @@ export const products: StoreProduct[] = [
   },
   {
     slug: "men",
-    name: "BaBra Lotion Men — 500 ml",
-    shortName: "Men Lotion",
-    category: "Men",
+    name: "BaBra Lotion Signature for Him — 500 mL",
+    shortName: "Signature for Him",
+    category: "For Him",
     image: approvedProductMedia.men.path,
     price: 0,
-    size: "500 ml",
-    description: "Official 500 ml BaBra Lotion for men. Contact BaBra for current price, stock and delivery options.",
-    audience: "Check the product label and contact BaBra for suitability guidance",
-    benefits: [],
-    usage: "Follow the directions on the product label",
-    fragrance: "Ask BaBra about the current variant before ordering",
+    size: "500 mL",
+    description: productKnowledge.men.overview,
+    audience: productKnowledge.men.intendedUse,
+    benefits: productKnowledge.men.ingredientHighlights.filter((ingredient) => ingredient.state !== "requires-product-specific-review").slice(0, 4).map((ingredient) => ingredient.displayName || ingredient.name),
+    usage: productKnowledge.men.usage,
+    fragrance: "Fragrance is listed in the current product documents; the fragrance composition and allergen disclosure remain under final review.",
     gallery: [approvedProductMedia.men.path],
     ctaLabel: "Request official details",
     alt: approvedProductMedia.men.alt,
@@ -93,17 +94,17 @@ export const products: StoreProduct[] = [
   },
   {
     slug: "babies",
-    name: "BaBra Lotion Kids — 500 ml",
-    shortName: "Kids Lotion",
+    name: "BaBra Lotion Soft Care for Kids — 500 mL",
+    shortName: "Soft Care for Kids",
     category: "Kids",
     image: approvedProductMedia.babies.path,
     price: 0,
-    size: "500 ml",
-    description: "BaBra Lotion Kids, 500 ml. Soft Care for Kids, as shown on the package. Contact BaBra for current price, stock and delivery options.",
-    audience: "Check the product label and contact BaBra for suitability guidance",
-    benefits: [],
-    usage: "Follow the directions on the product label",
-    fragrance: "Ask BaBra about the current variant before ordering",
+    size: "500 mL",
+    description: productKnowledge.babies.overview,
+    audience: productKnowledge.babies.intendedUse,
+    benefits: productKnowledge.babies.ingredientHighlights.slice(0, 4).map((ingredient) => ingredient.displayName || ingredient.name),
+    usage: productKnowledge.babies.usage,
+    fragrance: "Fragrance is listed in the current product documents; age-specific allergen and safety substantiation remain under final review.",
     gallery: [approvedProductMedia.babies.path],
     ctaLabel: "Request official details",
     alt: approvedProductMedia.babies.alt,

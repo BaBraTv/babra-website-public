@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { OfficialMedia } from "../components/OfficialMedia";
 import { officialMediaById } from "../data/official-media";
-import { cosmetics, products, rwandaOrderUrl, rwandaOrders, whatsappOrderUrl } from "../commerce-data";
+import { cosmetics, products, rwandaOrderUrl, rwandaOrders, site, whatsappOrderUrl } from "../commerce-data";
 import styles from "./cosmetics.module.css";
 import { ProductFilms } from "../components/ProductFilms";
 
-const description = "BaBra Cosmetics — Luxury in Every Touch. Explore BaBra Lotion Women, Men and Kids, meet our manufacturing and development partners, and order directly by phone or WhatsApp.";
+const description = "BaBra Cosmetics — Luxury in Every Touch. Explore BaBra Lotion Signature for Her, Signature for Him and Soft Care for Kids, all 500 mL, with official ordering channels.";
 export const metadata: Metadata = {
   title: "BaBra Cosmetics | Luxury in Every Touch",
   description,
-  alternates: { canonical: "https://www.babra.store/cosmetics" },
+  alternates: { canonical: `${site.url}/cosmetics`, languages: { "en-RW": `${site.url}/cosmetics`, "x-default": `${site.url}/cosmetics` } },
   openGraph: { title: "BaBra Cosmetics | Luxury in Every Touch", description, url: "https://www.babra.store/cosmetics", images: [{ url: "/media/logos/babra-logo.jpeg", alt: "Official BaBra logo" }] },
   twitter: { card: "summary_large_image", title: "BaBra Cosmetics | Luxury in Every Touch", description, images: ["/media/logos/babra-logo.jpeg"] }
 };
@@ -28,14 +28,14 @@ export default function CosmeticsPage() {
       <div className={styles.wrap}>
         <nav className={styles.nav} aria-label="Cosmetics navigation">
           <a href="/" aria-label="BaBra Holding home"><OfficialMedia media={officialMediaById["babra-logo-primary"]} className={styles.logo} sizes="100px" /></a>
-          <div className={styles.navLinks}><a href="/">BaBra Holding</a><a href="#collection">The collection</a><a href="#order">Contact & order</a></div>
+          <div className={styles.navLinks}><a href="/">BaBra Holding</a><a href="#collection">The collection</a><a href="/ingredients">Ingredients</a><a href="#order">Contact &amp; order</a></div>
         </nav>
         <section className={styles.hero}>
           <div>
             <p className={styles.eyebrow}>EI BaBra Holding Ltd · Cosmetics</p>
             <h1>BaBra<br />Cosmetics.</h1>
             <p className={styles.slogan}>Luxury in Every Touch.</p>
-            <p className={styles.intro}>Discover the BaBra Lotion collection for Women, Men and Kids. A personal touch, from choosing your lotion to arranging your order with our team.</p>
+            <p className={styles.intro}>Discover Signature for Her, Signature for Him and Soft Care for Kids. Explore evidence-labelled product information before arranging your order with our team.</p>
             <div className={styles.actions}><a href="#collection" className={styles.primary}>Explore the collection <span aria-hidden="true">&nbsp;↗</span></a><a href={rwandaEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">Rwanda order · VIDAPHARMA</a><a href={internationalEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">International · BaBra</a></div>
           </div>
           <figure className={styles.heroVisual}>
@@ -47,14 +47,14 @@ export default function CosmeticsPage() {
         <section id="collection" className={styles.section}>
           <p className={styles.eyebrow}>The collection</p>
           <h2 className={styles.heading}>Find your BaBra.</h2>
-          <p className={styles.sectionIntro}>Three lotion editions, each presented in its original BaBra packaging. Contact our team for current prices, availability and delivery before confirming your order.</p>
+          <p className={styles.sectionIntro}>Three 500 mL body-lotion editions, each presented in original BaBra packaging. Product pages separate verified identity, current document matches and facts that still require final approval.</p>
           <div className={styles.grid}>
             {products.map((product) => (
               <article key={product.slug} className={styles.card}>
                 <a href={`/products/${product.slug}`} aria-label={`View ${product.name}`}><figure className={styles.productPhoto}><OfficialMedia className={styles.productImage} media={officialMediaById[product.mediaId]} sizes="(min-width: 768px) 30vw, 92vw" /></figure></a>
                 <div className={styles.productMeta}><span>{product.category}</span><span>{product.size}</span></div>
-                <h3>BaBra Lotion {product.category}</h3>
-                <p>{product.slug === "babies" ? "Soft Care for Kids, as shown on the BaBra packaging. Check the label and ask our team about age suitability before use." : `Explore the ${product.category.toLowerCase()} edition. See the product label for directions and contact our team for help choosing your lotion.`}</p>
+                <h3>BaBra Lotion {product.shortName}</h3>
+                <p>{product.description} Read the product page for current usage, ingredient and suitability status.</p>
                 <a className={styles.primary} href={rwandaOrderUrl(`Hello VIDAPHARMA, I would like to order ${product.name} from BaBra. Quantity: __. Delivery location in Rwanda: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer">Rwanda order · {rwandaOrders.partner}</a>
                 <a className={styles.secondary} href={whatsappOrderUrl(`Hello BaBra Cosmetics, I would like to order ${product.name} internationally. Quantity: __. Destination country/city: __. Please confirm price, stock and delivery options.`)} target="_blank" rel="noopener noreferrer">International order · BaBra</a>
                 <a className={styles.detail} href={`/products/${product.slug}`}>View product details <span aria-hidden="true">↗</span></a>
@@ -75,6 +75,15 @@ export default function CosmeticsPage() {
               <figcaption><a href={`/products/${campaign.slug}`}>{campaign.title} <span aria-hidden="true">↗</span></a></figcaption>
             </figure>
           ))}
+        </div>
+      </section>
+      <section id="knowledge" className={`${styles.wrap} ${styles.section}`} aria-labelledby="knowledge-title">
+        <p className={styles.eyebrow}>Product knowledge</p>
+        <h2 id="knowledge-title" className={styles.heading}>Luxury, with a clear evidence trail.</h2>
+        <p className={styles.sectionIntro}>BaBra protects confidential formula percentages while making product identity, ingredient functions, usage status and quality documentation easier to understand.</p>
+        <div className={styles.partnerGrid}>
+          <article className={styles.card}><h3>Ingredients &amp; Science</h3><p>Understand evidence-labelled highlights and general cosmetic functions without treating ingredient studies as clinical proof of the finished lotion.</p><a className={styles.detail} href="/ingredients" data-analytics-event="ingredient_science_view">Explore ingredient science <span aria-hidden="true">↗</span></a></article>
+          <article className={styles.card}><h3>Product facts &amp; FAQ</h3><p>Read a compact facts record plus careful answers on facial use, daily use, retinol, age guidance and official buying channels.</p><a className={styles.detail} href="/product-facts" data-analytics-event="product_facts_view">Open product facts <span aria-hidden="true">↗</span></a><a className={styles.detail} href="/faq">Read the factual FAQ <span aria-hidden="true">↗</span></a></article>
         </div>
       </section>
       <section id="product-films" className={`${styles.wrap} ${styles.section}`} aria-labelledby="product-films-title">
@@ -107,7 +116,7 @@ export default function CosmeticsPage() {
           <p className={styles.eyebrow}>Our partnerships</p>
           <h2 className={styles.heading}>A shared commitment to the next chapter.</h2>
           <div className={styles.partnerGrid}>
-            <article className={styles.partner}><span className={styles.status}>Lotion manufacturing · China</span><h3>Guangzhou Pallas<br />Cosmetics Co., Ltd.</h3><p>Our manufacturing partner in China for BaBra Lotion Women, Men and Kids.</p><p>For international partnerships and manufacturing enquiries, speak directly with BaBra Cosmetics.</p></article>
+            <article className={styles.partner}><span className={styles.status}>Lotion manufacturing · China</span><h3>Guangzhou Pallas<br />Cosmetics Co., Ltd.</h3><p>Our manufacturing partner in China for the three BaBra Lotion variants.</p><p>Facility certificates, the Rwanda company premises licence and product-registration status are reported separately on the <a className={styles.detail} href="/quality">Quality page <span aria-hidden="true">↗</span></a>.</p></article>
             <article className={styles.partner}><span className={styles.status}>In development · India</span><h3>Harish Ram /<br />HCP Wellness</h3><p>We are collaborating on new product development and samples, including soaps, skincare and oral care.</p><p className={styles.development}>These projects are in development. They are not confirmed launches and are not offered for sale.</p></article>
           </div>
         </div>

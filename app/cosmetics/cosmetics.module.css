@@ -61,7 +61,7 @@
   .wrap { width: calc(100% - 36px); }
   .nav { gap: 12px; padding: 14px 0; }
   .navLinks { gap: 14px; font-size: 12px; }
-  .navLinks a:first-child { display: none; }
+  .navLinks a:nth-child(-n+2) { display: none; }
   .hero { grid-template-columns: 1fr; gap: 32px; padding: 38px 0; }
   .hero h1 { max-width: 450px; }
   .heroVisual { border-radius: 110px 110px 4px 4px; }

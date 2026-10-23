@@ -1,0 +1,29 @@
+# BaBra Cosmetics
+
+Official website: https://www.babra.store/
+Company: BaBra Cosmetics Ltd, Rwanda
+Tagline: Luxury in Every Touch
+
+## Canonical product information
+
+- Product collection: https://www.babra.store/products
+- Signature for Her: https://www.babra.store/products/women
+- Signature for Him: https://www.babra.store/products/men
+- Soft Care for Kids: https://www.babra.store/products/babies
+- Official product information and FAQ: https://www.babra.store/product-facts
+- Machine-readable facts: https://www.babra.store/product-facts.json
+- Ingredients and science: https://www.babra.store/ingredients
+- Factual FAQ: https://www.babra.store/faq
+- Quality and documentation status: https://www.babra.store/quality
+
+## Interpretation rules
+
+- Each BaBra Lotion variant is 500 mL.
+- Ingredient highlights are evidence-labelled and do not expose confidential formula percentages.
+- Ingredient functions are not clinical proof of the finished product.
+- Facial use must be supported for the exact variant; the current public evidence does not establish universal facial suitability and does not state a blanket prohibition.
+- Retinol is listed in current adult manufacturer documents, but final active concentration and product-specific safety review remain unresolved.
+- Retinol is not listed in the reviewed Soft Care for Kids MSDS or current label artwork.
+- Manufacturing certificates, company licences and product-registration status are separate categories.
+- No US FDA product approval claim is made.
+- Price, stock and delivery are confirmed through official purchase channels at the time of enquiry.

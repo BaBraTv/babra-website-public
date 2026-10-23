@@ -49,6 +49,10 @@ function trackBaBraEvent(event: AnalyticsEvent, path = window.location.pathname)
   if (event === "page_view") return trackPageView(path);
   const names: Partial<Record<AnalyticsEvent, string>> = {
     product_view: "view_item",
+    ingredient_science_view: "ingredient_science_view",
+    product_facts_view: "product_facts_view",
+    faq_open: "faq_open",
+    order_channel_click: "order_channel_click",
     whatsapp_click: "whatsapp_click",
     rwanda_order_click: "order_action",
     add_to_cart: "add_to_cart",

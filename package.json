@@ -23,6 +23,8 @@
     "production:migrate": "node scripts/apply-production-migrations.mjs",
     "verify:api": "node scripts/verify-production-api.mjs",
     "test:security": "node --experimental-strip-types --test tests/security.test.ts",
+    "test:product-knowledge": "node --experimental-strip-types --test tests/product-knowledge.test.ts",
+    "audit:public-site": "node scripts/audit-public-site.mjs",
     "test:affiliate": "node --experimental-strip-types --test tests/affiliate-domain.test.ts",
     "test:affiliate-persistence": "node --experimental-strip-types --test tests/affiliate-persistence.test.ts",
     "test:affiliate-service": "node --experimental-strip-types --test tests/affiliate-persistence-service.test.ts",

@@ -5,34 +5,34 @@ import { motion, useReducedMotion } from "framer-motion";
 
 const collection = [
   {
-    name: "For Her",
+    name: "Signature for Her",
     title: "The signature of elegance.",
-    description: "An everyday body-care ritual presented with the refinement of BaBra Lotion Women.",
+    description: "A 500 mL body-lotion edition with evidence-labelled usage and ingredient information.",
     image: "/media/products/babra-lotion-women-500ml.png",
-    alt: "Official BaBra Lotion Women 500 ml bottle",
+    alt: "Official BaBra Lotion Signature for Her 500 mL bottle",
     href: "/products/women",
     number: "01",
-    category: "BABRA LOTION WOMEN"
+    category: "BABRA LOTION · SIGNATURE FOR HER"
   },
   {
-    name: "For Him",
+    name: "Signature for Him",
     title: "Confidence, quietly expressed.",
-    description: "Discover the BaBra Lotion Men edition, designed for a simple daily care experience.",
+    description: "A 500 mL body-lotion edition with evidence-labelled usage and ingredient information.",
     image: "/media/products/babra-lotion-men-500ml.png",
-    alt: "Official BaBra Lotion Men 500 ml bottle",
+    alt: "Official BaBra Lotion Signature for Him 500 mL bottle",
     href: "/products/men",
     number: "02",
-    category: "BABRA LOTION MEN"
+    category: "BABRA LOTION · SIGNATURE FOR HIM"
   },
   {
-    name: "For Kids",
+    name: "Soft Care for Kids",
     title: "Care for little moments.",
-    description: "Explore BaBra Soft Care for Kids and read the original label for suitability and directions.",
+    description: "A 500 mL children's body-lotion edition with age and ingredient status kept product-specific.",
     image: "/media/products/babra-lotion-babies-500ml.png",
-    alt: "Official BaBra Lotion Kids 500 ml bottle",
+    alt: "Official BaBra Lotion Soft Care for Kids 500 mL bottle",
     href: "/products/babies",
     number: "03",
-    category: "BABRA LOTION KIDS"
+    category: "BABRA LOTION · SOFT CARE FOR KIDS"
   }
 ] as const;
 
@@ -48,6 +48,7 @@ const universe = [
 const navLinks = [
   ["Our Story", "/holding"],
   ["Cosmetics", "/cosmetics"],
+  ["Product Facts", "/product-facts"],
   ["Our World", "#our-world"],
   ["Store", "/store"],
   ["Contact", "/contact"]
@@ -85,7 +86,7 @@ export default function HomePage() {
             <a className="hidden text-[11px] font-semibold uppercase tracking-[0.12em] text-white/70 transition hover:text-white sm:inline" href="/login">
               My account
             </a>
-            <a className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ecd192] px-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#23180e] transition hover:bg-[#f8e3b5] md:px-6" href="/cosmetics">
+            <a className="hidden min-h-11 items-center justify-center rounded-full bg-[#ecd192] px-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#23180e] transition hover:bg-[#f8e3b5] sm:inline-flex md:px-6" href="/cosmetics">
               Discover BaBra <span className="ml-2 text-base" aria-hidden="true">↗</span>
             </a>
             <details className="group relative lg:hidden">
@@ -141,7 +142,7 @@ export default function HomePage() {
             </div>
             <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-[#d6ad57]/20 pt-6">
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d5b879]">Rwanda · Global ambition</span>
-              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#eadfd1]/55">Women · Men · Kids</span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#eadfd1]/55">Signature for Her · Signature for Him · Soft Care for Kids</span>
             </div>
           </motion.div>
 
@@ -150,7 +151,7 @@ export default function HomePage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.0, delay: 0.15, ease: "easeOut" }}
             className="relative isolate mx-auto flex min-h-[490px] w-full max-w-[710px] items-end justify-center pb-10 pt-14 sm:min-h-[570px] lg:min-h-[680px]"
-            aria-label="The official BaBra Lotion collection: Women, Men and Kids"
+            aria-label="The official BaBra Lotion collection: Signature for Her, Signature for Him and Soft Care for Kids"
           >
             <div className="pointer-events-none absolute inset-x-[7%] bottom-[4%] top-[5%] rounded-[48%_48%_12%_12%] border border-[#d6ad57]/20 bg-[radial-gradient(ellipse_at_50%_42%,rgba(242,208,154,0.34),rgba(123,69,38,0.18)_42%,rgba(18,12,12,0.04)_70%)] shadow-[inset_0_0_130px_rgba(217,165,88,0.08)]" />
             <div className="pointer-events-none absolute inset-x-[14%] bottom-[16%] top-[12%] rounded-[50%] border border-[#d6ad57]/20" />
@@ -181,7 +182,7 @@ export default function HomePage() {
                 src="/media/products/babra-lotion-women-500ml.png"
                 width={518}
                 height={1024}
-                alt="Official BaBra Lotion Women 500 ml bottle"
+                alt="Official BaBra Lotion Signature for Her 500 mL bottle"
                 className="h-[370px] w-full object-contain drop-shadow-[18px_30px_24px_rgba(0,0,0,0.65)] sm:h-[475px] lg:h-[550px]"
                 priority
                 sizes="(min-width: 1024px) 22vw, 42vw"
@@ -221,7 +222,7 @@ export default function HomePage() {
             </div>
             <p className="max-w-xl text-base leading-8 text-[#51463f] md:pb-2">
               Meet the three BaBra Lotion editions in their original packaging.
-              Elegant presentation, thoughtful daily care and an experience worth discovering.
+              Elegant presentation, thoughtful moisture care and an experience worth discovering.
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
@@ -347,12 +348,16 @@ export default function HomePage() {
           </div>
           <div className="relative grid min-h-[440px] overflow-hidden border border-[#b89e77]/50 bg-[#f7f0e4] p-7 shadow-[0_30px_80px_rgba(80,50,26,0.13)] sm:grid-cols-[1fr_1fr] sm:gap-8 sm:p-10">
             <div className="relative z-10 flex items-center justify-center">
-              <Image src="/media/products/babra-lotion-women-500ml.png" alt="Original BaBra Lotion Women 500 ml packaging" width={518} height={1024} className="h-[350px] w-full object-contain drop-shadow-[16px_24px_14px_rgba(55,33,18,0.2)]" sizes="(min-width: 768px) 28vw, 70vw" />
+              <Image src="/media/products/babra-lotion-women-500ml.png" alt="Original BaBra Lotion Signature for Her 500 mL packaging" width={518} height={1024} className="h-[350px] w-full object-contain drop-shadow-[16px_24px_14px_rgba(55,33,18,0.2)]" sizes="(min-width: 768px) 28vw, 70vw" />
             </div>
             <div className="relative z-10 flex flex-col justify-center border-t border-[#bba17c]/40 py-8 sm:border-l sm:border-t-0 sm:py-0 sm:pl-9">
               <p className="font-serif text-4xl leading-[1.1] text-[#33261e]">Original.<br />Considered.<br /><em className="font-normal text-[#a07742]">Distinctly BaBra.</em></p>
-              <p className="mt-6 text-sm leading-7 text-[#685749]">The official bottle and label are the reference for product directions and suitability. Contact BaBra for confirmed pricing and availability.</p>
-              <a href="/quality" className="mt-7 text-[11px] font-bold uppercase tracking-[0.14em] text-[#80603a] underline decoration-[#a88a5f] underline-offset-8">Quality & product information ↗</a>
+              <p className="mt-6 text-sm leading-7 text-[#685749]">Product pages now distinguish verified identity, current document matches and facts still awaiting final label or safety approval.</p>
+              <div className="mt-7 grid gap-4 text-[11px] font-bold uppercase tracking-[0.14em] text-[#80603a]">
+                <a href="/ingredients" className="underline decoration-[#a88a5f] underline-offset-8">Ingredients &amp; Science ↗</a>
+                <a href="/product-facts" className="underline decoration-[#a88a5f] underline-offset-8">Public product facts ↗</a>
+                <a href="/quality" className="underline decoration-[#a88a5f] underline-offset-8">Quality &amp; documentation status ↗</a>
+              </div>
             </div>
             <div className="pointer-events-none absolute -right-36 -top-40 h-[450px] w-[450px] rounded-full border border-[#bc9862]/30" />
           </div>

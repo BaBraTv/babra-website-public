@@ -33,10 +33,10 @@ export function VisitorAnalytics({ enabled, googleAnalyticsEnabled, campaigns }:
     let activity = Date.now(); let wholesaleStarted = false;
     const activityListener = () => { activity = Date.now(); };
     const click = (event: MouseEvent) => {
-      const element = event.target instanceof Element ? event.target.closest("a,button") : null;
+      const element = event.target instanceof Element ? event.target.closest("[data-analytics-event],[data-analytics],a,button") : null;
       if (!element) return;
-      const tagged = element.getAttribute("data-analytics");
-      if (tagged && (analyticsEvents as readonly string[]).includes(tagged)) trackAnalytics(tagged as AnalyticsEvent);
+      const tagged = element.getAttribute("data-analytics-event") || element.getAttribute("data-analytics");
+      if (tagged && (analyticsEvents as readonly string[]).includes(tagged)) trackAnalytics(tagged as AnalyticsEvent, path);
       if (element instanceof HTMLAnchorElement) {
         const url = new URL(element.href);
         if (["wa.me", "api.whatsapp.com", "web.whatsapp.com"].includes(url.hostname)) trackAnalytics("whatsapp_click");
