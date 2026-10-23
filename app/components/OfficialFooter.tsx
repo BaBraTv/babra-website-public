@@ -15,6 +15,8 @@ const footerGroups = [
       ["Store", "/store"],
       ["Samples", "/sample-request"],
       ["Cosmetics", "/cosmetics"],
+      ["Ingredients & Science", "/ingredients"],
+      ["Official Product Information", "/product-facts"],
       ["Real BaBra Stories", "/testimonials"]
     ]
   },
@@ -22,6 +24,8 @@ const footerGroups = [
     title: "Support",
     links: [
       ["Support", "/contact"],
+      ["Product FAQ", "/faq"],
+      ["Quality", "/quality"],
       ["Privacy", "/privacy"],
       ["Terms", "/terms"],
       ["Delivery", "/delivery"]

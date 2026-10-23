@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
 import { OfficialMedia } from "../components/OfficialMedia";
 import { officialMediaById } from "../data/official-media";
-import { whatsappOrderUrl, rwandaOrderUrl, PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products } from "../commerce-data";
+import { whatsappOrderUrl, rwandaOrderUrl, PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaOrders, site } from "../commerce-data";
 
 const commerceBlocks = [
-  ["Official products only", "Explore BaBra Lotion Women, Men and Kids in their original packaging."],
+  ["Three verified identities", "Explore Signature for Her, Signature for Him and Soft Care for Kids, each in a 500 mL presentation."],
   ["Pricing", PRICE_INQUIRY_NOTE],
-  ["Directions", "Follow the directions on the product label"],
-  ["Personal assistance", "Contact BaBra for product guidance and ordering support"]
+  ["Evidence-labelled guidance", "Each product page separates current document matches from facts that still need final approval."],
+  ["Personal assistance", "Contact BaBra for product-specific guidance, current label information and ordering support."]
 ];
 
+const description = "Official BaBra Lotion catalog: Signature for Her, Signature for Him and Soft Care for Kids, all 500 mL, with evidence-labelled product information.";
 export const metadata: Metadata = {
-  title: "BaBra Cosmetics Products",
-  description: "Official BaBra Lotion Women, Men, and Kids 500 ml product catalog."
+  title: "BaBra Lotion Collection | 500 mL Products",
+  description,
+  alternates: { canonical: `${site.url}/products`, languages: { "en-RW": `${site.url}/products`, "x-default": `${site.url}/products` } },
+  openGraph: { title: "BaBra Lotion Collection", description, url: `${site.url}/products`, type: "website", images: [{ url: "/media/products/babra-lotion-women-500ml.png", alt: "BaBra Lotion Signature for Her 500 mL bottle" }] },
+  twitter: { card: "summary_large_image", title: "BaBra Lotion Collection", description, images: ["/media/products/babra-lotion-women-500ml.png"] }
 };
 
 export default function ProductsPage() {
@@ -26,7 +30,7 @@ export default function ProductsPage() {
             <p className="mt-10 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Cosmetics Division</p>
             <h1 className="mt-4 max-w-5xl font-serif text-5xl leading-[1.05] md:text-7xl">Official BaBra Lotion catalog.</h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/66">
-              Discover BaBra Lotion Women, Men and Kids. Ask our team about current prices, availability and delivery.
+              Discover Signature for Her, Signature for Him and Soft Care for Kids. Read clear product facts, then ask our team about current prices, availability and delivery.
             </p>
           </div>
           <figure className="overflow-hidden rounded-[2rem] border border-[#d6ad57]/25 bg-[radial-gradient(circle_at_50%_15%,#ffffff,#fff8e6_52%,#c99f37)] p-6 shadow-2xl shadow-black/40">
@@ -48,7 +52,7 @@ export default function ProductsPage() {
                 <h2 className="mt-3 font-serif text-4xl leading-tight">{product.name}</h2>
                 <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-white/55">{product.size}</p>
                 <p className="mt-3 text-xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
-                <a className="mt-6 flex min-h-12 items-center justify-center rounded-full bg-[#f1d58b] px-5 py-3 text-center font-bold text-[#130d08]" href={rwandaOrderUrl(`Hello Vida Pharmacy, I would like to order ${product.name} from BaBra. Quantity: __. Delivery location: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer">Rwanda order · Vida Pharmacy</a>
+                <a className="mt-6 flex min-h-12 items-center justify-center rounded-full bg-[#f1d58b] px-5 py-3 text-center font-bold text-[#130d08]" href={rwandaOrderUrl(`Hello ${rwandaOrders.partner}, I would like to order ${product.name} from BaBra. Quantity: __. Delivery location: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer" data-analytics-event="rwanda_order_click">Rwanda order · {rwandaOrders.partner}</a>
                 <a className="mt-3 flex min-h-12 items-center justify-center rounded-full border border-white/20 px-5 py-3 text-center font-bold text-white" href={whatsappOrderUrl(`Hello BaBra Cosmetics, I would like to order ${product.name} internationally. Quantity: __. Destination country/city: __. Please confirm price, stock and delivery options.`)} target="_blank" rel="noopener noreferrer">International order · BaBra</a>
                 <a className="mt-3 inline-flex min-h-11 items-center rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b] transition hover:bg-[#f1d58b] hover:text-[#130d08]" href={`/products/${product.slug}`}>View Details</a>
               </div>
@@ -69,6 +73,21 @@ export default function ProductsPage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-[#130d0b] px-5 py-16 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
+          {[
+            ["Ingredients & Science", "/ingredients", "Understand cosmetic functions without confusing ingredient research with finished-product proof."],
+            ["Public product facts", "/product-facts", "Read the compact, AI-friendly facts record and evidence status for every variant."],
+            ["Factual FAQ", "/faq", "Get careful answers about face use, daily use, retinol, age guidance and official buying channels."]
+          ].map(([title, href, text]) => (
+            <a key={href} className="rounded-2xl border border-white/10 bg-white/[0.045] p-6 transition hover:border-[#d6ad57]/45" href={href}>
+              <h2 className="font-serif text-3xl text-[#fff4e3]">{title}</h2>
+              <p className="mt-4 text-sm leading-7 text-white/58">{text}</p>
+            </a>
+          ))}
         </div>
       </section>
     </main>

@@ -8,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/private", "/admin", "/dashboard"]
     },
+    host: site.url,
     sitemap: `${site.url}/sitemap.xml`
   };
 }
