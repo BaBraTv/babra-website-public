@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     // Only emit a fixed stage and an allowlisted HTTP status. Never log customer data,
     // Meta response bodies, phone numbers, access tokens or raw exception messages.
-    const httpStatus = error instanceof Error && /^WhatsApp send failed: [45]\\d\\d$/.test(error.message)
+    const httpStatus = error instanceof Error && /^WhatsApp send failed: [45]\d\d$/.test(error.message)
       ? Number(error.message.slice(-3)) : undefined;
     console.error("WhatsApp webhook processing failed; Meta may retry", { stage, ...(httpStatus ? { httpStatus } : {}) });
     return new Response("Retry later", { status: 503, headers });
