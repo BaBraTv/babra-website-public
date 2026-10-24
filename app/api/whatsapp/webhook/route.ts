@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
   const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;
   const version = process.env.WHATSAPP_GRAPH_VERSION;
   if (!phoneId || !accessToken || !version || !/^v\d+\.0$/.test(version)) return new Response("Not configured", { status: 503 });
+  let stage: "processing" | "database" | "whatsapp_send" = "processing";
   try {
     for (const entry of payload.entry || []) for (const change of entry.changes || []) {
       if (change.field !== "messages" || change.value?.metadata?.phone_number_id !== phoneId) continue;
@@ -53,6 +54,7 @@ export async function POST(request: NextRequest) {
         const id = `wa_${eventKey(messageId)}`;
         const prisma = getPrisma();
         // One durable inbox receipt and quote per Meta message. No schema migration required.
+        stage = "database";
         const receipt = await prisma.$transaction(async (tx) => {
           await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${id})::bigint)`;
           const existing = await tx.contactMessage.findUnique({ where: { id } });
@@ -78,20 +80,25 @@ export async function POST(request: NextRequest) {
           const current = await tx.contactMessage.findUniqueOrThrow({ where: { id } });
           if ((JSON.parse(current.message) as { sent?: boolean }).sent) return;
           const { reply } = JSON.parse(current.message) as { reply: string };
+          stage = "whatsapp_send";
           const response = await fetch(`https://graph.facebook.com/${version}/${phoneId}/messages`, {
             method: "POST", signal: AbortSignal.timeout(8000),
             headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
             body: JSON.stringify({ messaging_product: "whatsapp", recipient_type: "individual", to: sender, type: "text", text: { preview_url: false, body: reply } })
           });
           if (!response.ok) throw new Error(`WhatsApp send failed: ${response.status}`);
+          stage = "database";
           await tx.contactMessage.update({ where: { id }, data: { status: "IN_REVIEW", message: JSON.stringify({ ...JSON.parse(current.message), sent: true }) } });
         }, { timeout: 12000 });
       }
     }
     return new Response("OK", { headers });
-  } catch {
-    // Do not log customer messages, phone numbers, credentials, or Meta response bodies.
-    console.error("WhatsApp webhook processing failed; Meta may retry");
+  } catch (error) {
+    // Only emit a fixed stage and an allowlisted HTTP status. Never log customer data,
+    // Meta response bodies, phone numbers, access tokens or raw exception messages.
+    const httpStatus = error instanceof Error && /^WhatsApp send failed: [45]\\d\\d$/.test(error.message)
+      ? Number(error.message.slice(-3)) : undefined;
+    console.error("WhatsApp webhook processing failed; Meta may retry", { stage, ...(httpStatus ? { httpStatus } : {}) });
     return new Response("Retry later", { status: 503, headers });
   }
 }
