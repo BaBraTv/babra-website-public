@@ -86,7 +86,22 @@ export async function POST(request: NextRequest) {
             headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
             body: JSON.stringify({ messaging_product: "whatsapp", recipient_type: "individual", to: sender, type: "text", text: { preview_url: false, body: reply } })
           });
-          if (!response.ok) throw new Error(`WhatsApp send failed: ${response.status}`);
+          if (!response.ok) {
+            // Meta error codes are numeric identifiers, not sensitive payloads.
+            // Never log response messages/details or raw response bodies.
+            const body: unknown = await response.json().catch(() => null);
+            const e = body && typeof body === "object" && "error" in body
+              ? (body as { error?: unknown }).error : null;
+            const meta = e && typeof e === "object" ? e as { code?: unknown; error_subcode?: unknown } : null;
+            const code = Number.isSafeInteger(meta?.code) ? Number(meta?.code) : 0;
+            const subcode = Number.isSafeInteger(meta?.error_subcode) ? Number(meta?.error_subcode) : 0;
+            console.error("WhatsApp send rejected", {
+              httpStatus: response.status,
+              ...(code ? { metaCode: code } : {}),
+              ...(subcode ? { metaSubcode: subcode } : {})
+            });
+            throw new Error(`WhatsApp send failed: ${response.status}`);
+          }
           stage = "database";
           await tx.contactMessage.update({ where: { id }, data: { status: "IN_REVIEW", message: JSON.stringify({ ...JSON.parse(current.message), sent: true }) } });
         }, { timeout: 12000 });
