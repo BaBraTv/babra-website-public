@@ -95,7 +95,24 @@ export async function POST(request: NextRequest) {
             const meta = e && typeof e === "object" ? e as { code?: unknown; error_subcode?: unknown } : null;
             const code = Number.isSafeInteger(meta?.code) ? Number(meta?.code) : 0;
             const subcode = Number.isSafeInteger(meta?.error_subcode) ? Number(meta?.error_subcode) : 0;
+            const description = [
+              typeof (meta as { message?: unknown } | null)?.message === "string" ? (meta as { message: string }).message : "",
+              typeof (meta as { error_data?: { details?: unknown } } | null)?.error_data?.details === "string"
+                ? (meta as { error_data: { details: string } }).error_data.details : ""
+            ].join(" ").toLowerCase();
+            // Allowlisted diagnostic categories; do not log arbitrary Meta messages
+            // because they can contain phone numbers, names, or other personal data.
+            const permissionHint =
+              /granular permission/.test(description) ? "granular_permission" :
+              /graph api permission checks/.test(description) ? "graph_permission_checks" :
+              /not authorized|unauthorized/.test(description) ? "not_authorized" :
+              /not allowed|allowlist/.test(description) ? "allowlist" :
+              /business account|waba/.test(description) ? "business_account_access" :
+              /phone number/.test(description) ? "phone_number_access" :
+              /permission/.test(description) ? "generic_permission" :
+              /application/.test(description) ? "application_access" : "unclassified";
             console.error("WhatsApp send rejected", {
+              permissionHint,
               httpStatus: response.status,
               ...(code ? { metaCode: code } : {}),
               ...(subcode ? { metaSubcode: subcode } : {})
