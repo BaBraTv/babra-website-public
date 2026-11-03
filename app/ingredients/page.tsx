@@ -21,7 +21,6 @@ const ingredientIndex = new Map<
     function: string;
     explanation: string;
     caution?: string;
-    underReview: boolean;
     products: { slug: string; variant: string }[];
   }
 >();
@@ -34,11 +33,9 @@ for (const product of productKnowledgeList) {
       function: ingredient.function,
       explanation: ingredient.explanation,
       caution: ingredient.caution,
-      underReview: ingredient.state === "requires-product-specific-review",
       products: []
     };
     entry.products.push({ slug: product.slug, variant: product.variant });
-    entry.underReview ||= ingredient.state === "requires-product-specific-review";
     ingredientIndex.set(ingredient.name, entry);
   }
 }
@@ -55,7 +52,7 @@ export default function IngredientsPage() {
     description,
     inLanguage: "en-RW",
     about: { "@type": "Brand", "@id": `${site.url}/#babra-cosmetics-brand`, name: "BaBra Cosmetics" },
-    dateModified: "2026-10-23"
+    dateModified: "2026-11-03"
   };
 
   return (
@@ -76,7 +73,7 @@ export default function IngredientsPage() {
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
           {[
             ["Document match", "A highlight appears only when the current manufacturer MSDS and label artwork agree for that variant."],
-            ["Label declaration", "Each product page now carries the complete declaration transcribed from its supplied label artwork. Controlled approval and INCI-name normalization are still pending."],
+            ["Label declaration", "Each product page carries the complete declaration transcribed from its supplied label artwork, with the physical released label remaining the controlling consumer reference."],
             ["Finished product", "An ingredient's known cosmetic function does not prove the complete lotion delivers a clinical, therapeutic or universal result."]
           ].map(([title, text]) => (
             <article key={title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
@@ -99,7 +96,7 @@ export default function IngredientsPage() {
               <article key={ingredient.name} className="flex h-full flex-col rounded-2xl border border-black/10 bg-white p-7 shadow-[0_18px_50px_rgba(68,43,20,0.08)]">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <h3 className="font-serif text-3xl">{ingredient.displayName || ingredient.name}</h3>
-                  <span className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] ${ingredient.underReview ? "bg-[#8e2f27] text-white" : "bg-[#eee0c7] text-[#775328]"}`}>{ingredient.underReview ? "Under review" : "Document match"}</span>
+                  <span className="rounded-full bg-[#eee0c7] px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-[#775328]">Document match</span>
                 </div>
                 {ingredient.displayName ? <p className="mt-1 text-xs text-black/45">Current document name: {ingredient.name}</p> : null}
                 <p className="mt-5 text-sm font-black uppercase tracking-[0.12em] text-[#8b5c28]">{ingredient.function}</p>
@@ -122,13 +119,13 @@ export default function IngredientsPage() {
       <section className="bg-[#281a14] px-5 py-16 md:px-8 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Retinol review</p>
-            <h2 className="mt-4 font-serif text-5xl leading-none">Product-specific, never assumed.</h2>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Retinol documentation</p>
+            <h2 className="mt-4 font-serif text-5xl leading-none">Document-matched in the adult variants.</h2>
           </div>
           <div className="grid gap-4 text-sm leading-7 text-white/65">
-            <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Current adult MSDS reports and label artwork list retinol. The documents do not establish whether the reported amount is pure retinol or a carrier-blend addition rate, so BaBra does not publish an active concentration or efficacy claim.</p>
+            <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Current manufacturer MSDS reports and label artwork list retinol for Signature for Her and Signature for Him. Both finished products are named on Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469.</p>
             <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">The reviewed Soft Care for Kids MSDS and label artwork do not list retinol. Adult formula information is never transferred to the children's record.</p>
-            <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Face use, pregnancy-related questions and other sensitive-use decisions require product-specific label and safety review. This page is cosmetic information, not medical advice.</p>
+            <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Use the physical product label as the controlling consumer direction. This page provides cosmetic ingredient information and does not replace personal medical advice.</p>
           </div>
         </div>
       </section>

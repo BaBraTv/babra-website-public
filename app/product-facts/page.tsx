@@ -74,7 +74,7 @@ export default function ProductFactsPage() {
 
       <section className="px-5 py-12 md:px-8 md:py-16">
         <div className="mx-auto max-w-7xl rounded-2xl border border-[#a88a5f]/25 bg-[#efe2cc] p-6 text-sm leading-7 text-[#5f442b]">
-          <strong>Status key:</strong> “Verified” means supported for public identity or company facts. “Document match” means the current manufacturer MSDS and label artwork agree, while final approved INCI publication is pending. “Under review” means a product-specific safety, concentration or regulatory conclusion must not be inferred.
+          <strong>Status key:</strong> “Verified” means supported for public identity or company facts. “Document match” means the current manufacturer MSDS and label artwork agree for the named product. Rwanda FDA import authorization is reported separately from US FDA product approval.
         </div>
       </section>
 

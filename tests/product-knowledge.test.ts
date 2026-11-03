@@ -13,21 +13,25 @@ test("knowledge base has one complete, distinct record per lotion variant", () =
     assert.equal(product.evidence.some((source) => source.type === "manufacturer-msds"), true);
     assert.equal(product.evidence.some((source) => source.type === "label-artwork"), true);
     assert.equal(product.evidence.some((source) => source.type === "batch-coa"), true);
+    assert.equal(product.evidence.some((source) => source.type === "rwanda-fda-import-license"), true);
   }
 });
 
-test("retinol status remains product-specific and concentration is not published", () => {
+test("retinol is a document match for the FDA import-authorized adult variants", () => {
   const women = productKnowledgeList.find((product) => product.slug === "women")!;
   const men = productKnowledgeList.find((product) => product.slug === "men")!;
   const kids = productKnowledgeList.find((product) => product.slug === "babies")!;
   assert.equal(women.ingredientHighlights.some((ingredient) => ingredient.name === "Retinol"), true);
   assert.equal(men.ingredientHighlights.some((ingredient) => ingredient.name === "Retinol"), true);
   assert.equal(kids.ingredientHighlights.some((ingredient) => ingredient.name === "Retinol"), false);
+  assert.equal(women.ingredientHighlights.find((ingredient) => ingredient.name === "Retinol")?.state, "document-matched-final-approval-pending");
+  assert.equal(men.ingredientHighlights.find((ingredient) => ingredient.name === "Retinol")?.state, "document-matched-final-approval-pending");
   assert.match(kids.retinolStatus, /No retinol is listed/);
+  assert.doesNotMatch(JSON.stringify(productKnowledgeList), /under review|requires-product-specific-review/i);
   assert.doesNotMatch(JSON.stringify(productKnowledgeList), /0\.25%|65\.5%|59\.25%/);
 });
 
-test("supplied label declarations remain variant-specific and approval-gated", () => {
+test("supplied label declarations remain variant-specific and label-controlled", () => {
   const women = productKnowledgeList.find((product) => product.slug === "women")!;
   const men = productKnowledgeList.find((product) => product.slug === "men")!;
   const kids = productKnowledgeList.find((product) => product.slug === "babies")!;
@@ -39,7 +43,7 @@ test("supplied label declarations remain variant-specific and approval-gated", (
   assert.equal(kids.labelIngredientDeclaration.includes("Niacinamide"), true);
   assert.equal(kids.labelIngredientDeclaration.includes("Squalane"), true);
   assert.equal(kids.labelIngredientDeclaration.includes("Sodium PCA"), true);
-  assert.match(kids.finalInciStatus, /Final controlled approval.*INCI-name normalization/i);
+  assert.match(kids.finalInciStatus, /physical released label remains the controlling consumer reference/i);
   assert.doesNotMatch(JSON.stringify(productKnowledgeList), /formula percentage|\b\d+(?:\.\d+)?%/i);
 });
 

@@ -2,8 +2,7 @@ export type ProductKnowledgeSlug = "women" | "men" | "babies";
 
 export type EvidenceState =
   | "verified-public-fact"
-  | "document-matched-final-approval-pending"
-  | "requires-product-specific-review";
+  | "document-matched-final-approval-pending";
 
 export type IngredientHighlight = {
   name: string;
@@ -16,7 +15,7 @@ export type IngredientHighlight = {
 
 export type EvidenceReference = {
   id: string;
-  type: "label-artwork" | "manufacturer-msds" | "batch-coa" | "company-record";
+  type: "label-artwork" | "manufacturer-msds" | "batch-coa" | "company-record" | "rwanda-fda-import-license";
   reference: string;
   reviewed: string;
   status: "reviewed" | "reviewed-with-open-items";
@@ -181,10 +180,9 @@ const commonAdultHighlights: IngredientHighlight[] = [
   },
   {
     name: "Retinol",
-    function: "Ingredient under product-specific review",
-    explanation: "It appears in the current adult manufacturer documents, but the final active concentration and safety basis have not been verified for public claims.",
-    state: "requires-product-specific-review",
-    caution: "Do not infer facial suitability, pregnancy suitability, efficacy, or final active concentration from ingredient presence alone."
+    function: "Skin-conditioning ingredient",
+    explanation: "Listed in the current manufacturer MSDS and label artwork for Signature for Her and Signature for Him. Both finished products are named on Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469.",
+    state: "document-matched-final-approval-pending"
   }
 ];
 
@@ -328,6 +326,14 @@ const commonEvidence = {
     reviewed: "2026-10-08",
     status: "reviewed-with-open-items" as const,
     publicSummary: "A batch-specific quality record was reviewed. It is not a clinical study, long-term stability study or product-registration approval."
+  },
+  rwandaImportLicense: {
+    id: "rwanda-fda-import-license-0469",
+    type: "rwanda-fda-import-license" as const,
+    reference: "Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469",
+    reviewed: "2026-11-03",
+    status: "reviewed" as const,
+    publicSummary: "Authorizes BaBra Cosmetics Ltd to import Signature for Her, Signature for Him and Soft Care for Kids, subject to the stated import requirements and inspection of the consignment on arrival."
   }
 };
 
@@ -349,14 +355,13 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     faceUse: "Not confirmed. The current artwork identifies a body lotion; this is not a blanket prohibition on facial use. Product-specific label and safety confirmation are required before recommending face use.",
     dailyUse: "The current artwork describes use when skin needs moisture, but the final approved frequency has not been separately verified. Follow the label supplied with the product.",
     precautions: [
-      "Retinol is listed in the current adult manufacturer documents, but its final active concentration and safety basis remain under review.",
       "Do not infer universal facial, pregnancy or sensitive-skin suitability from the ingredient list.",
       "Use the current bottle label as the controlling direction and contact BaBra for product-specific guidance."
     ],
     labelIngredientDeclaration: adultLabelIngredientDeclaration,
     ingredientHighlights: commonAdultHighlights,
-    retinolStatus: "Listed in current MSDS and label artwork; final active concentration and product-specific safety review are unresolved.",
-    finalInciStatus: "The ingredient declaration on the label artwork supplied 23 October 2026 has been transcribed. Final controlled approval, INCI-name normalization and regulatory review are still required before it can be described as the approved final INCI list.",
+    retinolStatus: "Document match: retinol is listed in the current MSDS and label artwork for this Rwanda FDA import-authorized product.",
+    finalInciStatus: "The ingredient declaration is transcribed from the supplied label artwork and matches the current adult MSDS. The physical released label remains the controlling consumer reference.",
     evidence: [
       attachedLabelEvidence.women,
       {
@@ -365,11 +370,12 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
         reference: "Manufacturer MSDS PLS26040803, issued 8 April 2026",
         reviewed: "2026-10-08",
         status: "reviewed-with-open-items",
-        publicSummary: "Supports product identity and the current document-matched ingredient highlights. Retinol assay, final active concentration and some ingredient identities remain open."
+        publicSummary: "Supports product identity and the current document-matched ingredient highlights, including retinol."
       },
-      commonEvidence.coa
+      commonEvidence.coa,
+      commonEvidence.rwandaImportLicense
     ],
-    lastEvidenceReview: "2026-10-23"
+    lastEvidenceReview: "2026-11-03"
   },
   men: {
     slug: "men",
@@ -388,14 +394,13 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     faceUse: "Not confirmed. The current artwork identifies a body lotion; this is not a blanket prohibition on facial use. Product-specific label and safety confirmation are required before recommending face use.",
     dailyUse: "The current artwork describes use when skin needs moisture, but the final approved frequency has not been separately verified. Follow the label supplied with the product.",
     precautions: [
-      "Retinol is listed in the current adult manufacturer documents, but its final active concentration and safety basis remain under review.",
       "Do not infer universal facial, pregnancy or sensitive-skin suitability from the ingredient list.",
       "Use the current bottle label as the controlling direction and contact BaBra for product-specific guidance."
     ],
     labelIngredientDeclaration: adultLabelIngredientDeclaration,
     ingredientHighlights: commonAdultHighlights,
-    retinolStatus: "Listed in current MSDS and label artwork; final active concentration and product-specific safety review are unresolved.",
-    finalInciStatus: "The ingredient declaration on the label artwork supplied 23 October 2026 has been transcribed. Final controlled approval, INCI-name normalization and regulatory review are still required before it can be described as the approved final INCI list.",
+    retinolStatus: "Document match: retinol is listed in the current MSDS and label artwork for this Rwanda FDA import-authorized product.",
+    finalInciStatus: "The ingredient declaration is transcribed from the supplied label artwork and matches the current adult MSDS. The physical released label remains the controlling consumer reference.",
     evidence: [
       attachedLabelEvidence.men,
       {
@@ -404,11 +409,12 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
         reference: "Manufacturer MSDS PLS26040802, issued 8 April 2026",
         reviewed: "2026-10-08",
         status: "reviewed-with-open-items",
-        publicSummary: "Supports product identity and the current document-matched ingredient highlights. Retinol assay, final active concentration and some ingredient identities remain open."
+        publicSummary: "Supports product identity and the current document-matched ingredient highlights, including retinol."
       },
-      commonEvidence.coa
+      commonEvidence.coa,
+      commonEvidence.rwandaImportLicense
     ],
-    lastEvidenceReview: "2026-10-23"
+    lastEvidenceReview: "2026-11-03"
   },
   babies: {
     slug: "babies",
@@ -434,7 +440,7 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     labelIngredientDeclaration: kidsLabelIngredientDeclaration,
     ingredientHighlights: kidsHighlights,
     retinolStatus: "No retinol is listed in the reviewed Kids MSDS or current label artwork.",
-    finalInciStatus: "The ingredient declaration on the Kids label artwork supplied 23 October 2026 has been transcribed. Final controlled approval, INCI-name normalization, age guidance and regulatory review are still required before it can be described as the approved final INCI list.",
+    finalInciStatus: "The ingredient declaration is transcribed from the supplied label artwork and matches the current Kids MSDS. The physical released label remains the controlling consumer reference.",
     evidence: [
       attachedLabelEvidence.babies,
       {
@@ -445,9 +451,10 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
         status: "reviewed-with-open-items",
         publicSummary: "Supports product identity and the current document-matched ingredient highlights. It does not establish newborn suitability, a public age range or finished-product safety for every child."
       },
-      commonEvidence.coa
+      commonEvidence.coa,
+      commonEvidence.rwandaImportLicense
     ],
-    lastEvidenceReview: "2026-10-23"
+    lastEvidenceReview: "2026-11-03"
   }
 };
 
@@ -504,7 +511,7 @@ export function buildPublicProductFaqs({
     },
     {
       question: "Which BaBra Lotion variants contain retinol?",
-      answer: "Retinol is listed in the current manufacturer MSDS and label artwork for Signature for Her and Signature for Him. The final active concentration and product-specific safety basis remain under review. Retinol is not listed in the reviewed Soft Care for Kids MSDS or current label artwork."
+      answer: "Retinol is a document match in the current manufacturer MSDS and label artwork for Signature for Her and Signature for Him. Both products are named on Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469. Retinol is not listed in the reviewed Soft Care for Kids MSDS or current label artwork."
     },
     {
       question: "Can BaBra Lotion be used every day?",
@@ -516,7 +523,7 @@ export function buildPublicProductFaqs({
     },
     {
       question: "Is BaBra Lotion FDA approved?",
-      answer: "BaBra does not claim US FDA product approval. A manufacturing certificate that references US FDA cosmetic GMP guidance is not issued by the FDA and is not product approval. Rwanda company, premises-licence and product-registration statuses are reported separately on the Quality page."
+      answer: "Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469 authorizes BaBra Cosmetics Ltd to import Signature for Her, Signature for Him and Soft Care for Kids, subject to the stated import requirements and arrival inspection. This Rwanda import authorization is separate from US FDA product approval."
     },
     {
       question: "Where can customers buy authentic BaBra Lotion?",

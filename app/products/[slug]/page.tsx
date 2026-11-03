@@ -179,9 +179,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 <article key={ingredient.name} className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="font-serif text-2xl text-[#fff6e9]">{ingredient.displayName || ingredient.name}</h3>
-                    <span className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] ${ingredient.state === "requires-product-specific-review" ? "bg-[#8e2f27] text-white" : "bg-[#d6ad57]/15 text-[#e7c77d]"}`}>
-                      {ingredient.state === "requires-product-specific-review" ? "Under review" : "Document match"}
-                    </span>
+                    <span className="rounded-full bg-[#d6ad57]/15 px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-[#e7c77d]">Document match</span>
                   </div>
                   {ingredient.displayName ? <p className="mt-1 text-xs text-white/45">Label/MSDS name: {ingredient.name}</p> : null}
                   <p className="mt-4 text-sm font-bold text-[#e1c282]">{ingredient.function}</p>
