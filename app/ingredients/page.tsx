@@ -130,14 +130,6 @@ export default function IngredientsPage() {
         </div>
       </section>
 
-      <section className="bg-[#fffaf1] px-5 py-12 text-[#251a13] md:px-8 md:py-16" aria-labelledby="science-reference-heading">
-        <div className="mx-auto max-w-7xl rounded-2xl border border-black/10 bg-white p-7 shadow-[0_18px_50px_rgba(68,43,20,0.06)] md:p-9">
-          <p className="text-xs font-black uppercase tracking-[0.2em] text-[#8b5c28]">How to read this page</p>
-          <h2 id="science-reference-heading" className="mt-3 font-serif text-4xl">Ingredient function is context, not product approval.</h2>
-          <p className="mt-5 max-w-5xl leading-8 text-black/64">Function terms such as humectant, emollient and skin conditioning follow established cosmetic terminology and the reviewed product records. The European Commission explains that its CosIng database is informative, is not itself an authorization list and does not replace finished-product safety assessment.</p>
-          <a className="mt-6 inline-flex border-b border-[#8b5c28] pb-2 font-bold text-[#704719]" href="https://single-market-economy.ec.europa.eu/sectors/cosmetics/cosmetic-ingredient-database_en" target="_blank" rel="noopener noreferrer">European Commission cosmetic ingredient database →</a>
-        </div>
-      </section>
     </main>
   );
 }
