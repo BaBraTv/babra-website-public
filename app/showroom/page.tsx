@@ -37,9 +37,9 @@ export default function ShowroomPage() {
               <div className="flex min-h-[520px] flex-col items-center justify-center bg-[radial-gradient(circle_at_50%_50%,rgba(214,173,87,0.24),transparent_70%),linear-gradient(135deg,#201711,#090706)] p-6">
                 <div className="flex w-full items-center justify-center gap-2 sm:gap-4">
                   {[
-                    ["/media/products/babra-lotion-women-500ml.png", "BaBra Lotion Women"],
-                    ["/media/products/babra-lotion-men-500ml.png", "BaBra Lotion Men"],
-                    ["/media/products/babra-lotion-babies-500ml.png", "BaBra Lotion Kids"]
+                    ["/media/products/babra-lotion-women-luxury-500ml.webp", "BaBra Lotion Women"],
+                    ["/media/products/babra-lotion-men-luxury-500ml.webp", "BaBra Lotion Men"],
+                    ["/media/products/babra-lotion-babies-luxury-500ml.webp", "BaBra Lotion Kids"]
                   ].map(([src, alt]) => (
                     <Image key={src} className="h-[300px] min-w-0 flex-1 object-contain sm:h-[360px]" src={src} alt={alt} width={520} height={1024} />
                   ))}

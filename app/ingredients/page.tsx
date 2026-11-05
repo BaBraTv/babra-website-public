@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   title: "Ingredients & Science | BaBra Lotion",
   description,
   alternates: { canonical, languages: { "en-RW": canonical, "x-default": canonical } },
-  openGraph: { title: "BaBra Ingredients & Science", description, url: canonical, type: "website", images: [{ url: "/media/products/babra-lotion-women-500ml.png", alt: "BaBra Lotion Signature for Her 500 mL bottle" }] },
-  twitter: { card: "summary_large_image", title: "BaBra Ingredients & Science", description, images: ["/media/products/babra-lotion-women-500ml.png"] }
+  openGraph: { title: "BaBra Ingredients & Science", description, url: canonical, type: "website", images: [{ url: "/media/products/babra-lotion-women-luxury-500ml.webp", alt: "BaBra Lotion Signature for Her 500 mL bottle" }] },
+  twitter: { card: "summary_large_image", title: "BaBra Ingredients & Science", description, images: ["/media/products/babra-lotion-women-luxury-500ml.webp"] }
 };
 
 const ingredientIndex = new Map<

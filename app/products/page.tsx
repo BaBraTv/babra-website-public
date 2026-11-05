@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   title: "BaBra Lotion Collection | 500 mL Products",
   description,
   alternates: { canonical: `${site.url}/products`, languages: { "en-RW": `${site.url}/products`, "x-default": `${site.url}/products` } },
-  openGraph: { title: "BaBra Lotion Collection", description, url: `${site.url}/products`, type: "website", images: [{ url: "/media/products/babra-lotion-women-500ml.png", alt: "BaBra Lotion Signature for Her 500 mL bottle" }] },
-  twitter: { card: "summary_large_image", title: "BaBra Lotion Collection", description, images: ["/media/products/babra-lotion-women-500ml.png"] }
+  openGraph: { title: "BaBra Lotion Collection", description, url: `${site.url}/products`, type: "website", images: [{ url: "/media/products/babra-lotion-women-luxury-500ml.webp", alt: "BaBra Lotion Signature for Her 500 mL bottle" }] },
+  twitter: { card: "summary_large_image", title: "BaBra Lotion Collection", description, images: ["/media/products/babra-lotion-women-luxury-500ml.webp"] }
 };
 
 export default function ProductsPage() {

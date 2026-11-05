@@ -31,34 +31,34 @@ export const officialMedia: OfficialMediaItem[] = [
     id: "babra-lotion-women-500ml",
     title: "BaBra Lotion Women — 500 ml",
     category: "product",
-    path: "/media/products/babra-lotion-women-500ml.png",
+    path: "/media/products/babra-lotion-women-luxury-500ml.webp",
     alt: "Official BaBra Lotion Women 500 ml bottle",
     status: "approved",
     approved: true,
     usage: ["homepage hero", "featured products", "store", "product cards", "product detail pages", "cart", "checkout"],
-    sourceNote: "Verified existing repository asset copied from public/brand/official-babra-bottle.png."
+    sourceNote: "Luxury product visualization based on the bottle references supplied by BaBra on 5 November 2026."
   },
   {
     id: "babra-lotion-men-500ml",
     title: "BaBra Lotion Men — 500 ml",
     category: "product",
-    path: "/media/products/babra-lotion-men-500ml.png",
+    path: "/media/products/babra-lotion-men-luxury-500ml.webp",
     alt: "Official BaBra Lotion Men 500 ml bottle",
     status: "approved",
     approved: true,
     usage: ["homepage hero", "featured products", "store", "product cards", "product detail pages", "cart", "checkout"],
-    sourceNote: "Verified existing repository asset copied from public/brand/official-babra-bottle-men.png."
+    sourceNote: "Luxury product visualization based on the bottle references supplied by BaBra on 5 November 2026."
   },
   {
     id: "babra-lotion-babies-500ml",
     title: "BaBra Lotion Kids — 500 ml",
     category: "product",
-    path: "/media/products/babra-lotion-babies-500ml.png",
+    path: "/media/products/babra-lotion-babies-luxury-500ml.webp",
     alt: "Official BaBra Lotion Kids 500 ml bottle",
     status: "approved",
     approved: true,
     usage: ["homepage hero", "featured products", "store", "product cards", "product detail pages", "cart", "checkout"],
-    sourceNote: "Verified existing repository asset copied from public/brand/official-babra-bottle-kids.png."
+    sourceNote: "Luxury product visualization based on the bottle references supplied by BaBra on 5 November 2026."
   }
 ];
 

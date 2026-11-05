@@ -8,7 +8,7 @@ const collection = [
     name: "Signature for Her",
     title: "The signature of elegance.",
     description: "A 500 mL body-lotion edition with evidence-labelled usage and ingredient information.",
-    image: "/media/products/babra-lotion-women-500ml.png",
+    image: "/media/products/babra-lotion-women-luxury-500ml.webp",
     alt: "Official BaBra Lotion Signature for Her 500 mL bottle",
     href: "/products/women",
     number: "01",
@@ -18,7 +18,7 @@ const collection = [
     name: "Signature for Him",
     title: "Confidence, quietly expressed.",
     description: "A 500 mL body-lotion edition with evidence-labelled usage and ingredient information.",
-    image: "/media/products/babra-lotion-men-500ml.png",
+    image: "/media/products/babra-lotion-men-luxury-500ml.webp",
     alt: "Official BaBra Lotion Signature for Him 500 mL bottle",
     href: "/products/men",
     number: "02",
@@ -28,7 +28,7 @@ const collection = [
     name: "Soft Care for Kids",
     title: "Care for little moments.",
     description: "A 500 mL children's body-lotion edition with age and ingredient status kept product-specific.",
-    image: "/media/products/babra-lotion-babies-500ml.png",
+    image: "/media/products/babra-lotion-babies-luxury-500ml.webp",
     alt: "Official BaBra Lotion Soft Care for Kids 500 mL bottle",
     href: "/products/babies",
     number: "03",
@@ -164,7 +164,7 @@ export default function HomePage() {
               className="relative z-10 -mr-[7%] w-[39%] translate-y-3 -rotate-[4deg] sm:w-[37%]"
             >
               <Image
-                src="/media/products/babra-lotion-men-500ml.png"
+                src="/media/products/babra-lotion-men-luxury-500ml.webp"
                 width={516}
                 height={1024}
                 alt="Official BaBra Lotion Men 500 ml bottle"
@@ -179,7 +179,7 @@ export default function HomePage() {
               className="relative z-20 w-[44%] sm:w-[42%]"
             >
               <Image
-                src="/media/products/babra-lotion-women-500ml.png"
+                src="/media/products/babra-lotion-women-luxury-500ml.webp"
                 width={518}
                 height={1024}
                 alt="Official BaBra Lotion Signature for Her 500 mL bottle"
@@ -194,7 +194,7 @@ export default function HomePage() {
               className="relative z-10 -ml-[7%] w-[39%] translate-y-4 rotate-[4deg] sm:w-[37%]"
             >
               <Image
-                src="/media/products/babra-lotion-babies-500ml.png"
+                src="/media/products/babra-lotion-babies-luxury-500ml.webp"
                 width={512}
                 height={1024}
                 alt="Official BaBra Lotion Kids 500 ml bottle"
@@ -348,7 +348,7 @@ export default function HomePage() {
           </div>
           <div className="relative grid min-h-[440px] overflow-hidden border border-[#b89e77]/50 bg-[#f7f0e4] p-7 shadow-[0_30px_80px_rgba(80,50,26,0.13)] sm:grid-cols-[1fr_1fr] sm:gap-8 sm:p-10">
             <div className="relative z-10 flex items-center justify-center">
-              <Image src="/media/products/babra-lotion-women-500ml.png" alt="Original BaBra Lotion Signature for Her 500 mL packaging" width={518} height={1024} className="h-[350px] w-full object-contain drop-shadow-[16px_24px_14px_rgba(55,33,18,0.2)]" sizes="(min-width: 768px) 28vw, 70vw" />
+              <Image src="/media/products/babra-lotion-women-luxury-500ml.webp" alt="Original BaBra Lotion Signature for Her 500 mL packaging" width={518} height={1024} className="h-[350px] w-full object-contain drop-shadow-[16px_24px_14px_rgba(55,33,18,0.2)]" sizes="(min-width: 768px) 28vw, 70vw" />
             </div>
             <div className="relative z-10 flex flex-col justify-center border-t border-[#bba17c]/40 py-8 sm:border-l sm:border-t-0 sm:py-0 sm:pl-9">
               <p className="font-serif text-4xl leading-[1.1] text-[#33261e]">Original.<br />Considered.<br /><em className="font-normal text-[#a07742]">Distinctly BaBra.</em></p>

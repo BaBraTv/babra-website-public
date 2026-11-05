@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   title: "BaBra Lotion FAQ",
   description,
   alternates: { canonical, languages: { "en-RW": canonical, "x-default": canonical } },
-  openGraph: { title: "BaBra Lotion FAQ", description, url: canonical, type: "website", images: [{ url: "/media/products/babra-lotion-women-500ml.png", alt: "BaBra Lotion Signature for Her 500 mL bottle" }] },
-  twitter: { card: "summary_large_image", title: "BaBra Lotion FAQ", description, images: ["/media/products/babra-lotion-women-500ml.png"] }
+  openGraph: { title: "BaBra Lotion FAQ", description, url: canonical, type: "website", images: [{ url: "/media/products/babra-lotion-women-luxury-500ml.webp", alt: "BaBra Lotion Signature for Her 500 mL bottle" }] },
+  twitter: { card: "summary_large_image", title: "BaBra Lotion FAQ", description, images: ["/media/products/babra-lotion-women-luxury-500ml.webp"] }
 };
 
 const faqs = buildPublicProductFaqs({

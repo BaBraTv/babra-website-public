@@ -55,7 +55,7 @@ export const metadata: Metadata = {
       "Official BaBra Cosmetics product information and the wider BaBra ecosystem, rooted in Rwanda.",
     url: site.url,
     siteName: site.domain,
-    images: [{ url: "/media/products/babra-lotion-women-500ml.png", alt: "BaBra Lotion Signature for Her 500 mL bottle" }],
+    images: [{ url: "/media/products/babra-lotion-women-luxury-500ml.webp", alt: "BaBra Lotion Signature for Her 500 mL bottle" }],
     locale: "en_RW",
     type: "website"
   },
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "BaBra | Luxury in Every Touch",
     description: "Official BaBra Cosmetics product information and the wider BaBra ecosystem, rooted in Rwanda.",
-    images: ["/media/products/babra-lotion-women-500ml.png"]
+    images: ["/media/products/babra-lotion-women-luxury-500ml.webp"]
   }
 };
 
