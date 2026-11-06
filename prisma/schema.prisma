@@ -788,3 +788,42 @@ model Testimonial {
   @@index([status, publishedAt])
   @@index([createdAt])
 }
+
+model GalleryPost {
+  id           String @id @default(cuid())
+  title        String
+  description  String
+  activityDate DateTime @db.Date
+  division     String
+  status       String @default("PUBLISHED")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  images       GalleryImage[]
+  comments     GalleryComment[]
+  @@index([status, activityDate, id])
+}
+
+model GalleryImage {
+  id          String @id @default(cuid())
+  postId      String
+  alt         String
+  src         String?
+  data        Bytes?
+  contentType String
+  position    Int @default(0)
+  post        GalleryPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  @@index([postId, position])
+}
+
+model GalleryComment {
+  id        String @id @default(cuid())
+  postId    String
+  author    String
+  body      String
+  status    String @default("PENDING")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  post      GalleryPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  @@index([postId, status, createdAt])
+  @@index([status, createdAt])
+}
