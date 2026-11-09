@@ -12,7 +12,7 @@ export default function TermsPage() {
         <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
         <h1 className="mt-8 font-serif text-6xl leading-none">Terms of Use</h1>
         <p className="mt-6 leading-8 text-white/66">
-          By using babra.store, customers and partners agree to use official BaBra Store information responsibly and to complete orders through approved checkout or WhatsApp support channels.
+          By using babra.store, customers and partners agree to use official BaBra Store information responsibly and to complete orders through official ordering or WhatsApp support channels.
         </p>
         {[
           ["Official store", `${site.domain} is the official public commerce and information website for ${site.company}.`],

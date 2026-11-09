@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { trackAnalytics } from "../analytics-client";
-import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaLocations, rwandaOrderUrl, rwandaOrders, site } from "../commerce-data";
+import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaOrderUrl, rwandaOrders, site } from "../commerce-data";
 import { InstallAppButton } from "../InstallAppButton";
 
 type CartItem = {
@@ -18,7 +18,7 @@ const translations = {
     checkout: "Checkout",
     profile: "Customer profile",
     tracking: "Order tracking",
-    add: "Shop Now",
+    add: "Add to enquiry",
     fallback: "Ask on WhatsApp"
   },
   rw: {
@@ -27,7 +27,7 @@ const translations = {
     checkout: "Kwishyura",
     profile: "Umwirondoro",
     tracking: "Gukurikirana commande",
-    add: "Shop Now",
+    add: "Add to enquiry",
     fallback: "Baza kuri WhatsApp"
   },
   fr: {
@@ -36,7 +36,7 @@ const translations = {
     checkout: "Commande",
     profile: "Profil client",
     tracking: "Suivi commande",
-    add: "Shop Now",
+    add: "Add to enquiry",
     fallback: "Demander sur WhatsApp"
   }
 };
@@ -46,19 +46,14 @@ type Lang = keyof typeof translations;
 export function StoreClient() {
   const [language, setLanguage] = useState<Lang>("en");
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [customerType, setCustomerType] = useState("Retail");
-  const [orderCode, setOrderCode] = useState("BABRA-STORE-0001");
-  const [selectedProvince, setSelectedProvince] = useState("Kigali City");
   const copy = translations[language];
 
   useEffect(() => {
     try {
       const savedCart = window.localStorage.getItem("babra-cart");
       const savedLanguage = window.localStorage.getItem("babra-store-language") as Lang | null;
-      const savedCustomerType = window.localStorage.getItem("babra-customer-type");
       if (savedCart) setCart(JSON.parse(savedCart) as CartItem[]);
       if (savedLanguage && translations[savedLanguage]) setLanguage(savedLanguage);
-      if (savedCustomerType) setCustomerType(savedCustomerType);
     } catch {
       // Local storage is optional; WhatsApp ordering still works without it.
     }
@@ -72,11 +67,6 @@ export function StoreClient() {
   function saveLanguage(next: Lang) {
     setLanguage(next);
     window.localStorage.setItem("babra-store-language", next);
-  }
-
-  function saveCustomerType(next: string) {
-    setCustomerType(next);
-    window.localStorage.setItem("babra-customer-type", next);
   }
 
   const cartLines = useMemo(
@@ -103,26 +93,11 @@ export function StoreClient() {
     saveCart(next);
   }
 
-  function saveDraftOrder() {
-    const nextOrderCode = `BABRA-${Date.now().toString().slice(-6)}`;
-    setOrderCode(nextOrderCode);
-    window.localStorage.setItem(
-      "babra-draft-order",
-      JSON.stringify({
-        code: nextOrderCode,
-        customerType,
-        province: selectedProvince,
-        items: cartLines.map((item) => ({ slug: item!.slug, quantity: item!.quantity })),
-        createdAt: new Date().toLocaleString()
-      })
-    );
-  }
-
   const whatsappMessage = [
     `Hello ${site.name}, I want to place an order on ${site.domain}.`,
     `Items: ${cartLines.map((item) => `${item!.product.shortName} x${item!.quantity}`).join(", ") || "Please advise"}.`,
     "Please confirm today's price, delivery cost, and availability.",
-    "If I qualify for reseller, wholesale, or distributor pricing, please advise me.",
+    "Please advise on retail or wholesale pricing where applicable.",
     "Delivery: Rwanda address will be confirmed by province, district, sector, cell, village, phone, landmark, and notes."
   ].join("\n");
 
@@ -135,9 +110,9 @@ export function StoreClient() {
             <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">
               {site.domain}
             </a>
-            <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Store commerce app</p>
+            <p className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Signature Store</p>
             <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-[0.9] md:text-8xl">Shop official BaBra products.</h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/68">Official products and approved media. Rwanda orders are routed through Vida Pharmacy; BaBra handles international and partnership enquiries.</p>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-white/68">Discover the BaBra Lotion collection. Our official team confirms price, stock and delivery before your order is placed.</p>
             <div className="mt-7 flex flex-wrap gap-3">
               {(["en", "rw", "fr"] as Lang[]).map((lang) => (
                 <button
@@ -180,7 +155,7 @@ export function StoreClient() {
           <div className="flex flex-wrap items-end justify-between gap-5">
             <div>
               <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Product pages</p>
-              <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">Women, men, and babies.</h2>
+              <h2 className="mt-3 font-serif text-5xl leading-none md:text-7xl">For Her. For Him. For Kids.</h2>
             </div>
               <a className="rounded-full border border-white/20 px-5 py-3 font-black text-white transition hover:border-[#f1d58b]/60 hover:text-[#f1d58b]" href="/sample-request">
               Request Samples
@@ -223,7 +198,7 @@ export function StoreClient() {
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#a9141d]">{copy.cart}</p>
             <h2 className="mt-3 font-serif text-5xl leading-none">Quote request.</h2>
               <p className="mt-5 leading-8 text-black/64">
-                Add products you want. Rwanda retail orders are routed to Vida Pharmacy for current price, stock and delivery confirmation; wholesale and international enquiries remain with BaBra.
+                Add products you want. Rwanda retail orders are routed to VIDAPHARMA for current price, stock and delivery confirmation; wholesale and international enquiries remain with BaBra.
               </p>
           </div>
           <div className="rounded-lg border border-black/10 bg-white p-6 shadow-xl shadow-black/5">
@@ -251,85 +226,22 @@ export function StoreClient() {
             )}
             <div className="mt-6 rounded-lg bg-[#090706] p-5 text-white">
               <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]">Price confirmation</p>
-              <p className="mt-2 text-white/62">For Rwanda retail orders, Vida Pharmacy confirms current price, stock and delivery. BaBra handles wholesale and international enquiries.</p>
+              <p className="mt-2 text-white/62">For Rwanda retail orders, VIDAPHARMA confirms current price, stock and delivery. BaBra handles wholesale and international enquiries.</p>
               <p className="mt-4 text-3xl font-black">{PRICE_INQUIRY_LABEL}</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="px-5 py-14 md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
-          <form className="rounded-lg border border-white/10 bg-[#18110f] p-6 lg:col-span-2">
-            <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">{copy.checkout}</p>
-            <h2 className="mt-3 font-serif text-5xl leading-none">Rwanda-first delivery.</h2>
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
-              <label className="grid gap-2 text-sm font-bold text-white/78">
-                Customer type
-                <select className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" value={customerType} onChange={(event) => saveCustomerType(event.target.value)}>
-                  {["Retail", "Reseller", "Wholesale", "Distributor"].map((type) => (
-                    <option key={type}>{type}</option>
-                  ))}
-                </select>
-              </label>
-              <label className="grid gap-2 text-sm font-bold text-white/78">
-                Province
-                <select className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" value={selectedProvince} onChange={(event) => setSelectedProvince(event.target.value)}>
-                  {Object.keys(rwandaLocations).map((province) => (
-                    <option key={province}>{province}</option>
-                  ))}
-                </select>
-              </label>
-              {["District", "Sector", "Cell", "Village", "Phone / WhatsApp", "Nearest landmark"].map((field) => (
-                <label key={field} className="grid gap-2 text-sm font-bold text-white/78">
-                  {field}
-                  {field === "District" ? (
-                    <select className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white">
-                      {rwandaLocations[selectedProvince as keyof typeof rwandaLocations].map((district) => (
-                        <option key={district}>{district}</option>
-                      ))}
-                    </select>
-                  ) : (
-                    <input className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" placeholder={field} />
-                  )}
-                </label>
-              ))}
-              <label className="grid gap-2 text-sm font-bold text-white/78 md:col-span-2">
-                Delivery notes
-                <textarea className="min-h-28 rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" placeholder="Building color, gate number, preferred delivery time, or rider instructions" />
-              </label>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href={rwandaOrderUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">
-                {copy.fallback}
-              </a>
-              <button className="rounded-full border border-white/20 px-6 py-3 font-black text-white" type="button" onClick={saveDraftOrder}>
-                Save draft order
-              </button>
-            </div>
-          </form>
-
-          <aside className="grid gap-5">
-            <section className="rounded-lg border border-white/10 bg-[#18110f] p-6">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-[#d6ad57]">{copy.profile}</p>
-              <div className="mt-5 grid gap-3">
-                {["Full name", "Phone", "Email", "Preferred language"].map((field) => (
-                  <input key={field} className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" placeholder={field} />
-                ))}
-              </div>
-            </section>
-            <section className="rounded-lg border border-white/10 bg-[#18110f] p-6">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-[#d6ad57]">{copy.tracking}</p>
-              <input className="mt-5 w-full rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-white" value={orderCode} onChange={(event) => setOrderCode(event.target.value)} />
-              <div className="mt-5 grid gap-3">
-                {["Order received", "Payment confirmation", "Packing", "Out for delivery"].map((step, index) => (
-                  <div key={step} className="rounded-lg border border-white/10 bg-black/20 px-4 py-3 text-sm font-bold text-white/78">
-                    <span className="whitespace-nowrap">Step {index + 1}.</span> {step}
-                  </div>
-                ))}
-              </div>
-            </section>
-          </aside>
+      <section className="px-5 py-16 md:px-8">
+        <div className="mx-auto max-w-7xl rounded-[2rem] border border-[#d6ad57]/30 bg-[#18110f] p-8 md:p-12">
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Personal ordering assistance</p>
+          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-6xl">Your BaBra selection. One simple conversation.</h2>
+          <p className="mt-6 max-w-3xl leading-8 text-white/70">Select products and quantities, then request a quote. The BaBra team confirms price, stock, delivery and payment instructions directly. No order is placed or paid for by adding items here.</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a className="rounded-full bg-[#f1d58b] px-7 py-4 font-bold text-[#130d08]" href={rwandaOrderUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">Request a quote on WhatsApp</a>
+            <a className="rounded-full border border-white/30 px-7 py-4 font-bold text-white" href="/contact">Contact BaBra</a>
+          </div>
         </div>
       </section>
 
@@ -337,7 +249,7 @@ export function StoreClient() {
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 xl:grid-cols-4">
           {[
             [site.company, site.address],
-            ["Rwanda orders · Vida Pharmacy", rwandaOrders.phone],
+            ["Rwanda orders · VIDAPHARMA", rwandaOrders.phone],
             ["BaBra Call / WhatsApp · international", site.phone],
             ["Email", site.email]
           ].map(([title, text]) => (

@@ -6,10 +6,10 @@ export const site = {
   domain: "babra.store",
   url: "https://www.babra.store",
   company: "BaBra Cosmetics Ltd",
-  email: "support@babra.store",
+  email: "babracosmeticsltd@gmail.com",
   phone: "+250 788 351 482",
   whatsapp: "250788351482",
-  address: "Kigali, Rwanda",
+  address: "UBUMWE HOUSE, Room B1-62, Nyabugogo, Kigali, Rwanda",
   license: "Official information pending",
   manufacturing: "Official information pending",
   positioning: "Official information pending"
