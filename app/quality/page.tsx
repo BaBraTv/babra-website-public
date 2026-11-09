@@ -45,7 +45,7 @@ export default function QualityPage() {
     name: "BaBra Quality, Manufacturing and Registration Status",
     description,
     inLanguage: "en-RW",
-    dateModified: "2026-11-03",
+    dateModified: "2026-11-09",
     about: { "@type": "Organization", "@id": `${site.url}/#babra-cosmetics`, name: "BaBra Cosmetics Ltd" }
   };
 
@@ -136,23 +136,7 @@ export default function QualityPage() {
         </div>
       </section>
 
-      <section className="bg-[#fffaf1] px-5 py-16 text-[#251a13] md:px-8 md:py-24">
-        <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#8b5c28]">Open verification items</p>
-          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-7xl">What must be resolved before stronger claims.</h2>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {[
-              "Final approved INCI lists and corrected consumer label artwork for all three variants.",
-              "Kids age-range, preservation and finished-product safety substantiation; factory capability alone is not enough.",
-              "Confirmation that 'Building B' in product records and 'Building 2' on certificates identify the same manufacturing site.",
-              "Current live issuer validity and surveillance status for the Intertek certificates.",
-              "A final official product-registration decision before any registration or approval claim is published."
-            ].map((item) => (
-              <div key={item} className="rounded-2xl border border-black/10 bg-white p-6 leading-7 text-black/63 shadow-[0_18px_50px_rgba(68,43,20,0.06)]">{item}</div>
-            ))}
-          </div>
-        </div>
-      </section>
+
     </main>
   );
 }
