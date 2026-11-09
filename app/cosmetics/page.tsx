@@ -35,7 +35,7 @@ export default function CosmeticsPage() {
             <p className={styles.eyebrow}>EI BaBra Holding Ltd · Cosmetics</p>
             <h1>BaBra<br />Cosmetics.</h1>
             <p className={styles.slogan}>Luxury in Every Touch.</p>
-            <p className={styles.intro}>Discover Signature for Her, Signature for Him and Soft Care for Kids. Explore evidence-labelled product information before arranging your order with our team.</p>
+            <p className={styles.intro}>Discover Signature for Her, Signature for Him and Soft Care for Kids. Discover each edition, explore its ingredients and arrange your order with our team.</p>
             <div className={styles.actions}><a href="#collection" className={styles.primary}>Explore the collection <span aria-hidden="true">&nbsp;↗</span></a><a href={rwandaEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">Rwanda order · VIDAPHARMA</a><a href={internationalEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">International · BaBra</a></div>
           </div>
           <figure className={styles.heroVisual}>
@@ -47,14 +47,14 @@ export default function CosmeticsPage() {
         <section id="collection" className={styles.section}>
           <p className={styles.eyebrow}>The collection</p>
           <h2 className={styles.heading}>Find your BaBra.</h2>
-          <p className={styles.sectionIntro}>Three 500 mL body-lotion editions, each presented in original BaBra packaging. Product pages separate verified identity, current document matches and facts that still require final approval.</p>
+          <p className={styles.sectionIntro}>Three 500 mL body-lotion editions, each presented in original BaBra packaging. Explore each edition's ingredients and follow the directions printed on your bottle.</p>
           <div className={styles.grid}>
             {products.map((product) => (
               <article key={product.slug} className={styles.card}>
                 <a href={`/products/${product.slug}`} aria-label={`View ${product.name}`}><figure className={styles.productPhoto}><OfficialMedia className={styles.productImage} media={officialMediaById[product.mediaId]} sizes="(min-width: 768px) 30vw, 92vw" /></figure></a>
                 <div className={styles.productMeta}><span>{product.category}</span><span>{product.size}</span></div>
                 <h3>BaBra Lotion {product.shortName}</h3>
-                <p>{product.description} Read the product page for current usage, ingredient and suitability status.</p>
+                <p>{product.description} Explore ingredients and see the bottle for product-specific directions.</p>
                 <a className={styles.primary} href={rwandaOrderUrl(`Hello VIDAPHARMA, I would like to order ${product.name} from BaBra. Quantity: __. Delivery location in Rwanda: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer">Rwanda order · {rwandaOrders.partner}</a>
                 <a className={styles.secondary} href={whatsappOrderUrl(`Hello BaBra Cosmetics, I would like to order ${product.name} internationally. Quantity: __. Destination country/city: __. Please confirm price, stock and delivery options.`)} target="_blank" rel="noopener noreferrer">International order · BaBra</a>
                 <a className={styles.detail} href={`/products/${product.slug}`}>View product details <span aria-hidden="true">↗</span></a>
@@ -79,11 +79,11 @@ export default function CosmeticsPage() {
       </section>
       <section id="knowledge" className={`${styles.wrap} ${styles.section}`} aria-labelledby="knowledge-title">
         <p className={styles.eyebrow}>Product knowledge</p>
-        <h2 id="knowledge-title" className={styles.heading}>Luxury, with a clear evidence trail.</h2>
-        <p className={styles.sectionIntro}>BaBra protects confidential formula percentages while making product identity, ingredient functions, usage status and quality documentation easier to understand.</p>
+        <h2 id="knowledge-title" className={styles.heading}>Discover thoughtful care.</h2>
+        <p className={styles.sectionIntro}>Explore cosmetic ingredients, their functions and the BaBra skincare experience.</p>
         <div className={styles.partnerGrid}>
-          <article className={styles.card}><h3>Ingredients &amp; Science</h3><p>Understand evidence-labelled highlights and general cosmetic functions without treating ingredient studies as clinical proof of the finished lotion.</p><a className={styles.detail} href="/ingredients" data-analytics-event="ingredient_science_view">Explore ingredient science <span aria-hidden="true">↗</span></a></article>
-          <article className={styles.card}><h3>Product facts &amp; FAQ</h3><p>Read a compact facts record plus careful answers on facial use, daily use, retinol, age guidance and official buying channels.</p><a className={styles.detail} href="/product-facts" data-analytics-event="product_facts_view">Open product facts <span aria-hidden="true">↗</span></a><a className={styles.detail} href="/faq">Read the factual FAQ <span aria-hidden="true">↗</span></a></article>
+          <article className={styles.card}><h3>Ingredients &amp; Science</h3><p>Discover ingredient highlights and their cosmetic functions.</p><a className={styles.detail} href="/ingredients" data-analytics-event="ingredient_science_view">Explore ingredient science <span aria-hidden="true">↗</span></a></article>
+          <article className={styles.card}><h3>Questions &amp; care</h3><p>Find answers about product use, ingredients, choosing an edition and ordering.</p><a className={styles.detail} href="/faq">Read the BaBra FAQ <span aria-hidden="true">↗</span></a></article>
         </div>
       </section>
       <section id="product-films" className={`${styles.wrap} ${styles.section}`} aria-labelledby="product-films-title">
@@ -95,9 +95,9 @@ export default function CosmeticsPage() {
       </section>
       <section id="stories" className={`${styles.wrap} ${styles.section}`} aria-labelledby="stories-title">
         <p className={styles.eyebrow}>Real BaBra Stories</p>
-        <h2 id="stories-title" className={styles.heading}>Customer experiences, reviewed before publication.</h2>
+        <h2 id="stories-title" className={styles.heading}>Your experience matters.</h2>
         <p className={styles.sectionIntro}>
-          Real customer stories are being collected and reviewed. BaBra does not publish invented testimonials, fake ratings, or fabricated before-and-after claims.
+          Share your BaBra experience. Customer stories are published only with permission and review.
         </p>
         <div className={styles.actions}>
           <a className={styles.primary} href="/testimonials">Read & share Real BaBra Stories</a>
@@ -109,16 +109,6 @@ export default function CosmeticsPage() {
           >
             Share by WhatsApp
           </a>
-        </div>
-      </section>
-      <section id="partnerships" className={`${styles.partnerships} ${styles.section}`}>
-        <div className={styles.wrap}>
-          <p className={styles.eyebrow}>Our partnerships</p>
-          <h2 className={styles.heading}>A shared commitment to the next chapter.</h2>
-          <div className={styles.partnerGrid}>
-            <article className={styles.partner}><span className={styles.status}>Lotion manufacturing · China</span><h3>Guangzhou Pallas<br />Cosmetics Co., Ltd.</h3><p>Our manufacturing partner in China for the three BaBra Lotion variants.</p><p>Facility certificates, the Rwanda company premises licence and product-registration status are reported separately on the <a className={styles.detail} href="/quality">Quality page <span aria-hidden="true">↗</span></a>.</p></article>
-            <article className={styles.partner}><span className={styles.status}>In development · India</span><h3>Harish Ram /<br />HCP Wellness</h3><p>We are collaborating on new product development and samples, including soaps, skincare and oral care.</p><p className={styles.development}>These projects are in development. They are not confirmed launches and are not offered for sale.</p></article>
-          </div>
         </div>
       </section>
       <section id="order" className={styles.section}>

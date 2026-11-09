@@ -7,7 +7,7 @@ const collection = [
   {
     name: "Signature for Her",
     title: "The signature of elegance.",
-    description: "A 500 mL body-lotion edition with evidence-labelled usage and ingredient information.",
+    description: "A 500 mL signature lotion for a refined, comfortable skincare experience.",
     image: "/media/products/babra-lotion-women-luxury-500ml.webp",
     alt: "Official BaBra Lotion Signature for Her 500 mL bottle",
     href: "/products/women",
@@ -17,7 +17,7 @@ const collection = [
   {
     name: "Signature for Him",
     title: "Confidence, quietly expressed.",
-    description: "A 500 mL body-lotion edition with evidence-labelled usage and ingredient information.",
+    description: "A 500 mL signature lotion for a refined, comfortable skincare experience.",
     image: "/media/products/babra-lotion-men-luxury-500ml.webp",
     alt: "Official BaBra Lotion Signature for Him 500 mL bottle",
     href: "/products/men",
@@ -27,7 +27,7 @@ const collection = [
   {
     name: "Soft Care for Kids",
     title: "Care for little moments.",
-    description: "A 500 mL children's body-lotion edition with age and ingredient status kept product-specific.",
+    description: "A 500 mL lotion for children's care. See the product label for directions.",
     image: "/media/products/babra-lotion-babies-luxury-500ml.webp",
     alt: "Official BaBra Lotion Soft Care for Kids 500 mL bottle",
     href: "/products/babies",
@@ -119,7 +119,7 @@ export default function HomePage() {
           >
             <div className="flex items-center gap-4">
               <span className="h-px w-12 bg-[#d6ad57]" aria-hidden="true" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#e5c179] md:text-xs">Born from African ambition</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#e5c179] md:text-xs">Discover the BaBra signature</span>
             </div>
             <h1 className="mt-8 max-w-3xl font-serif text-[clamp(4rem,8vw,8.2rem)] leading-[0.92] tracking-[-0.055em] text-[#fbf4e9]">
               BaBra.
@@ -130,8 +130,7 @@ export default function HomePage() {
               Luxury in Every Touch.
             </p>
             <p className="mt-6 max-w-xl text-base leading-8 text-[#f1e5d5]/68 md:text-lg">
-              Rooted in Rwanda. Inspired by possibility. Discover a world where
-              premium beauty, innovation and purpose share one name.
+              Discover the BaBra Signature Collection, where thoughtful skincare, refined presentation and everyday care meet.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <a href="#collection" className="inline-flex min-h-[52px] items-center justify-center rounded-full bg-[#ebcf8a] px-7 text-xs font-black uppercase tracking-[0.12em] text-[#21150f] transition hover:bg-[#fff1c8]">
@@ -142,7 +141,7 @@ export default function HomePage() {
               </a>
             </div>
             <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-[#d6ad57]/20 pt-6">
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d5b879]">Rwanda · Global ambition</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#d5b879]">The BaBra Signature Collection</span>
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#eadfd1]/55">Signature for Her · Signature for Him · Soft Care for Kids</span>
             </div>
           </motion.div>
@@ -287,7 +286,7 @@ export default function HomePage() {
             <p className="font-serif text-[clamp(2.5rem,4vw,4.4rem)] leading-[1.1] text-[#fff4e4]">
               “One vision.<br /><em className="font-normal text-[#f0cf92]">Lasting impact.</em>”
             </p>
-            <p className="mt-7 text-xs font-bold uppercase tracking-[0.23em] text-[#f0cf92]/85">EI BaBra Holding Ltd · Rwanda</p>
+            <p className="mt-7 text-xs font-bold uppercase tracking-[0.23em] text-[#f0cf92]/85">EI BaBra Holding Ltd</p>
             <div className="mt-11 h-px w-full bg-[#f0cf92]/25" />
             <a href="/founder" className="mt-8 inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.16em] text-[#fff4e4] transition hover:text-[#f0cf92]">
               Explore our founder's story <span className="text-xl" aria-hidden="true">↗</span>
@@ -327,7 +326,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="mt-8 max-w-3xl text-sm leading-7 text-[#f5ece2]/55">
-            Some BaBra divisions are operating, while others are in development. We present our ambitions as ambitions, not as completed facilities.
+            Discover BaBra's growing portfolio of businesses and long-term initiatives.
           </p>
         </div>
       </section>
@@ -340,7 +339,7 @@ export default function HomePage() {
               Beauty should feel personal.
             </h2>
             <p className="mt-6 text-base leading-8 text-[#655447]">
-              Find your BaBra Lotion edition, connect with our team, or learn from customer experiences reviewed before publication.
+              Discover the signature collection, explore customer stories or speak with our team for personal assistance.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <a href="/testimonials" className="inline-flex min-h-12 items-center rounded-full bg-[#2d1f17] px-7 text-xs font-bold uppercase tracking-[0.11em] text-[#fff5e8] transition hover:bg-[#5d3327]">Real BaBra Stories ↗</a>
@@ -353,11 +352,10 @@ export default function HomePage() {
             </div>
             <div className="relative z-10 flex flex-col justify-center border-t border-[#bba17c]/40 py-8 sm:border-l sm:border-t-0 sm:py-0 sm:pl-9">
               <p className="font-serif text-4xl leading-[1.1] text-[#33261e]">Original.<br />Considered.<br /><em className="font-normal text-[#a07742]">Distinctly BaBra.</em></p>
-              <p className="mt-6 text-sm leading-7 text-[#685749]">Product pages now distinguish verified identity, current document matches and facts still awaiting final label or safety approval.</p>
+              <p className="mt-6 text-sm leading-7 text-[#685749]">Explore our signature collection, learn about ingredients and contact BaBra for ordering assistance.</p>
               <div className="mt-7 grid gap-4 text-[11px] font-bold uppercase tracking-[0.14em] text-[#80603a]">
                 <a href="/ingredients" className="underline decoration-[#a88a5f] underline-offset-8">Ingredients &amp; Science ↗</a>
-                <a href="/product-facts" className="underline decoration-[#a88a5f] underline-offset-8">Public product facts ↗</a>
-                <a href="/quality" className="underline decoration-[#a88a5f] underline-offset-8">Quality &amp; documentation status ↗</a>
+                <a href="/quality" className="underline decoration-[#a88a5f] underline-offset-8">Our quality commitment ↗</a>
               </div>
             </div>
             <div className="pointer-events-none absolute -right-36 -top-40 h-[450px] w-[450px] rounded-full border border-[#bc9862]/30" />
@@ -368,7 +366,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-[#130d0d] px-5 py-24 md:px-9 md:py-32">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(139,66,41,0.23),transparent_60%)]" />
         <div className="relative mx-auto max-w-5xl text-center">
-          <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#d6ad57]">From Kigali to the world</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-[#d6ad57]">The BaBra experience</p>
           <h2 className="mt-7 font-serif text-5xl leading-[1.08] tracking-[-0.04em] text-[#fff3e6] md:text-7xl">
             The next chapter<br />starts with <em className="font-normal text-[#deb980]">connection.</em>
           </h2>

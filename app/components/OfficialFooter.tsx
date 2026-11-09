@@ -17,7 +17,6 @@ const footerGroups = [
       ["Samples", "/sample-request"],
       ["Cosmetics", "/cosmetics"],
       ["Ingredients & Science", "/ingredients"],
-      ["Official Product Information", "/product-facts"],
       ["Real BaBra Stories", "/testimonials"]
     ]
   },
@@ -41,7 +40,7 @@ export function OfficialFooter() {
         <div>
           <p className="font-serif text-3xl">EI BaBra Holding Ltd</p>
           <p className="mt-4 max-w-md leading-7 text-white/58">
-            Official BaBra public platform. Only approved media and official-safe information are published.
+            The BaBra signature of beauty, innovation and lasting impact. Luxury in Every Touch.
           </p>
         </div>
         <nav className="grid gap-6 sm:grid-cols-3" aria-label="Footer navigation">
