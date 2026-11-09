@@ -11,11 +11,11 @@ import { googleAnalyticsMeasurementId } from "../lib/google-analytics";
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "BaBra | Luxury in Every Touch | Rwanda",
+    default: "BaBra | Luxury in Every Touch",
     template: `%s | ${site.domain}`
   },
   description:
-    "Official home of BaBra Cosmetics and the BaBra ecosystem in Rwanda. Explore BaBra Lotion Signature for Her, Signature for Him and Soft Care for Kids, all 500 mL.",
+    "Discover the BaBra Signature Collection: Signature for Her, Signature for Him and Soft Care for Kids, all 500 mL.",
   keywords: [
     "BaBra Lotion",
     "BaBra Lotion Rwanda",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BaBra | Luxury in Every Touch",
     description:
-      "Official BaBra Cosmetics product information and the wider BaBra ecosystem, rooted in Rwanda.",
+      "Discover the BaBra signature lotion collection and the wider BaBra ecosystem.",
     url: site.url,
     siteName: site.domain,
     images: [{ url: "/media/products/babra-lotion-women-luxury-500ml.webp", alt: "BaBra Lotion Signature for Her 500 mL bottle" }],
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "BaBra | Luxury in Every Touch",
-    description: "Official BaBra Cosmetics product information and the wider BaBra ecosystem, rooted in Rwanda.",
+    description: "Discover the BaBra signature lotion collection and the wider BaBra ecosystem.",
     images: ["/media/products/babra-lotion-women-luxury-500ml.webp"]
   }
 };

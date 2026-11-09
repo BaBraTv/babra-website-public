@@ -13,7 +13,7 @@ const pillars = [
   ["About", "EI BaBra Holding Ltd is the public platform for the official BaBra company ecosystem."],
   ["Portfolio", "Public routes connect BaBra's commerce, technology, education, healthcare, agriculture, media, and community-impact work."],
   ["Digital access", "Customers, applicants, partners, and communities can reach the appropriate BaBra division through official forms and contact routes."],
-  ["Trust", "The platform publishes approved information and clearly labels services that require manual verification."]
+  ["Trust", "Discover clear contact routes, product information and direct assistance from BaBra."]
 ];
 
 const roadmap = [
@@ -24,7 +24,7 @@ const roadmap = [
 
 export const metadata: Metadata = {
   title: "EI BaBra Holding Ltd | Official Companies",
-  description: "Official EI BaBra Holding Ltd page for BaBra Cosmetics, Rwanda Mobile Hub, BaBra Schools, BaBra Foundation, and LifeTalk TV.",
+  description: "Explore BaBra Cosmetics, services and long-term initiatives within EI BaBra Holding Ltd.",
   alternates: {
     canonical: `${site.url}/holding`
   },
@@ -66,7 +66,7 @@ export default function HoldingPage() {
             <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Official holding platform</p>
             <h1 className="mt-4 font-serif text-6xl leading-none md:text-8xl">EI BaBra Holding Ltd.</h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-white/66">
-              The official public gateway to BaBra companies, products, services, forms, and verified contact routes.
+              Discover the businesses, initiatives and long-term vision behind BaBra.
             </p>
           </div>
         </div>
@@ -89,7 +89,7 @@ export default function HoldingPage() {
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Companies</p>
-          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">Official BaBra companies.</h2>
+          <h2 className="mt-3 max-w-4xl font-serif text-5xl leading-none md:text-7xl">The BaBra ecosystem.</h2>
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {companies.map(([title, text, href]) => (
               <a key={title} href={href} className="rounded-lg border border-white/10 bg-[#18110f] p-6 shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:border-[#d6ad57]/45">

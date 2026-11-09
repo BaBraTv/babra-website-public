@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   if (!record) return { title: "Product not found" };
 
   const canonical = `${site.url}/products/${record.slug}`;
-  const description = `${record.publicName}, ${record.size}. Read evidence-labelled ingredient highlights, current usage guidance, precautions and official ordering channels.`;
+  const description = `${record.publicName}, ${record.size}. Explore ingredients, usage guidance, precautions and official ordering channels.`;
 
   return {
     title: `${record.publicName} — ${record.size}`,
@@ -112,7 +112,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/72">{record.overview}</p>
 
             <div className="mt-7 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-[0.12em]">
-              <span className="rounded-full border border-[#e7c77d]/35 bg-[#e7c77d]/10 px-4 py-2 text-[#f3d997]">Verified identity</span>
+              <span className="rounded-full border border-[#e7c77d]/35 bg-[#e7c77d]/10 px-4 py-2 text-[#f3d997]">Signature edition</span>
               <span className="rounded-full border border-white/15 px-4 py-2 text-white/70">{record.size}</span>
               <span className="rounded-full border border-white/15 px-4 py-2 text-white/70">Made in {record.countryOfManufacture}</span>
             </div>
@@ -144,9 +144,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       <section className="bg-[#f7f0e5] px-5 py-16 text-[#251a13] md:px-8 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#8b5c28]">Evidence-labelled product guidance</p>
-            <h2 className="mt-4 font-serif text-5xl leading-none tracking-[-0.035em] md:text-7xl">What the records support.</h2>
-            <p className="mt-6 leading-8 text-black/65">These facts separate what is verified from what still requires final label or safety confirmation. The physical label supplied with the product remains the controlling direction.</p>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#8b5c28]">Product information</p>
+            <h2 className="mt-4 font-serif text-5xl leading-none tracking-[-0.035em] md:text-7xl">Thoughtful care.</h2>
+            <p className="mt-6 leading-8 text-black/65">Explore product information and follow the directions printed on the bottle you receive.</p>
           </div>
 
           <div className="mt-12 grid gap-5 md:grid-cols-2">
@@ -170,8 +170,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Ingredient highlights</p>
-              <h2 className="mt-4 font-serif text-5xl leading-none tracking-[-0.035em] md:text-6xl">Function, not fantasy.</h2>
-              <p className="mt-6 leading-8 text-white/62">Highlights below match the current manufacturer MSDS and label artwork. They are not presented as a final approved INCI list, formula disclosure or clinical proof of the finished product.</p>
+              <h2 className="mt-4 font-serif text-5xl leading-none tracking-[-0.035em] md:text-6xl">Ingredients that matter.</h2>
+              <p className="mt-6 leading-8 text-white/62">Discover ingredients listed for this edition and their cosmetic functions.</p>
               <a className="mt-8 inline-flex border-b border-[#d6ad57] pb-2 font-bold text-[#f1d58b]" href="/ingredients" data-analytics-event="ingredient_science_view">Explore Ingredients &amp; Science →</a>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -179,9 +179,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 <article key={ingredient.name} className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="font-serif text-2xl text-[#fff6e9]">{ingredient.displayName || ingredient.name}</h3>
-                    <span className="rounded-full bg-[#d6ad57]/15 px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-[#e7c77d]">Document match</span>
+                    <span className="rounded-full bg-[#d6ad57]/15 px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-[#e7c77d]">Ingredient highlight</span>
                   </div>
-                  {ingredient.displayName ? <p className="mt-1 text-xs text-white/45">Label/MSDS name: {ingredient.name}</p> : null}
+                  {ingredient.displayName ? <p className="mt-1 text-xs text-white/45">Ingredient name: {ingredient.name}</p> : null}
                   <p className="mt-4 text-sm font-bold text-[#e1c282]">{ingredient.function}</p>
                   <p className="mt-2 text-sm leading-7 text-white/58">{ingredient.explanation}</p>
                   {ingredient.caution ? <p className="mt-3 border-l-2 border-[#b34d3e] pl-3 text-xs leading-6 text-[#efc8bf]">{ingredient.caution}</p> : null}
@@ -193,9 +193,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <section className="mt-12 rounded-[2rem] border border-[#d6ad57]/25 bg-[#1b120f] p-7 md:p-10" aria-labelledby="label-declaration-heading">
             <div className="grid gap-7 lg:grid-cols-[0.7fr_1.3fr]">
               <div>
-                <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Supplied label declaration</p>
-                <h2 id="label-declaration-heading" className="mt-4 font-serif text-4xl leading-none text-[#fff6e9] md:text-5xl">What the artwork currently lists.</h2>
-                <p className="mt-5 text-sm leading-7 text-white/58">Transcribed from the variant label artwork supplied on 23 October 2026. Names are reproduced as shown and have not been silently converted into regulatory INCI terminology. This is not a formula-percentage disclosure or confirmation that the artwork is approved for printing.</p>
+                <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Ingredient information</p>
+                <h2 id="label-declaration-heading" className="mt-4 font-serif text-4xl leading-none text-[#fff6e9] md:text-5xl">Ingredients for this edition.</h2>
+                <p className="mt-5 text-sm leading-7 text-white/58">This information comes from manufacturer-supplied label records. Check the ingredient declaration on the physical bottle you receive.</p>
               </div>
               <div>
                 <ol className="flex flex-wrap gap-2" aria-label={`Ingredients shown on the supplied ${record.variant} label artwork`}>
@@ -205,7 +205,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                     </li>
                   ))}
                 </ol>
-                <p className="mt-6 border-l-2 border-[#d6ad57] pl-4 text-sm leading-7 text-[#e7d3ac]">{record.finalInciStatus}</p>
+                <p className="mt-6 border-l-2 border-[#d6ad57] pl-4 text-sm leading-7 text-[#e7d3ac]">For questions about an ingredient or sensitivity, check the bottle label and contact our team.</p>
               </div>
             </div>
           </section>
@@ -215,41 +215,27 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       <section className="bg-[#fffaf1] px-5 py-16 text-[#241910] md:px-8 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <article>
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#9a582c]">Precautions &amp; open questions</p>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#9a582c]">Care &amp; precautions</p>
             <h2 className="mt-4 font-serif text-5xl leading-none">Use with the right context.</h2>
             <ul className="mt-8 grid gap-4">
               {record.precautions.map((precaution) => (
                 <li key={precaution} className="rounded-xl border border-black/10 bg-white p-5 leading-7 text-black/66">{precaution}</li>
               ))}
             </ul>
-            <div className="mt-6 rounded-xl border border-[#b67b3d]/30 bg-[#f4e7d1] p-5 text-sm leading-7 text-[#5d422a]">
-              <strong>INCI publication status:</strong> {record.finalInciStatus}
-            </div>
           </article>
 
           <article className="rounded-[2rem] bg-[#241812] p-7 text-white md:p-10">
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Evidence basis</p>
-            <h2 className="mt-4 font-serif text-4xl">Records reviewed for this variant.</h2>
-            <div className="mt-8 grid gap-5">
-              {record.evidence.map((source) => (
-                <section key={source.id} className="border-t border-white/12 pt-5">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="font-bold text-[#fff3dd]">{source.reference}</h3>
-                    <span className="text-xs text-white/45">Reviewed {source.reviewed}</span>
-                  </div>
-                  <p className="mt-3 text-sm leading-7 text-white/58">{source.publicSummary}</p>
-                </section>
-              ))}
-            </div>
-            <p className="mt-7 text-xs leading-6 text-white/42">Evidence summaries protect confidential formula percentages and do not replace the original controlled documents.</p>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Personal assistance</p>
+            <h2 className="mt-4 font-serif text-4xl">Care with confidence.</h2>
+            <p className="mt-6 leading-8 text-white/65">Have questions about ingredients, product use or choosing a lotion? Our team is happy to help. Follow the packaging supplied with your product.</p>
+            <a href="/contact" className="mt-7 inline-flex rounded-full bg-[#e9c985] px-6 py-3 font-bold text-[#241812]">Speak with BaBra</a>
           </article>
         </div>
 
         <div className="mx-auto mt-12 grid max-w-7xl gap-4 md:grid-cols-3">
           {[
-            ["Plain-language facts", "/product-facts", "A compact record for people, search engines and AI systems."],
             ["Common questions", "/faq", "Face use, daily use, variants, ingredients and buying channels."],
-            ["Quality status", "/quality", "Manufacturing certificates, company licence and registration status kept separate."]
+            ["Our quality commitment", "/quality", "Learn about BaBra manufacturing, documentation and care."]
           ].map(([title, href, text]) => (
             <a key={href} href={href} className="rounded-2xl border border-black/10 bg-white p-6 shadow-[0_18px_50px_rgba(68,43,20,0.07)] transition hover:-translate-y-1">
               <h2 className="font-serif text-3xl">{title}</h2>

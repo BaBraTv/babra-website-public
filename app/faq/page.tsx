@@ -42,9 +42,9 @@ export default function FaqPage() {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_82%_15%,rgba(214,173,87,0.22),transparent_32rem)]" />
         <div className="mx-auto max-w-6xl">
           <a className="text-xs font-black uppercase tracking-[0.2em] text-[#e5c67f]" href="/cosmetics">BaBra Cosmetics</a>
-          <p className="mt-12 text-xs font-black uppercase tracking-[0.28em] text-[#d6ad57]">Factual FAQ</p>
+          <p className="mt-12 text-xs font-black uppercase tracking-[0.28em] text-[#d6ad57]">BaBra FAQ</p>
           <h1 className="mt-5 max-w-4xl font-serif text-6xl leading-[0.96] tracking-[-0.045em] md:text-8xl">Questions deserve<br /><em className="font-normal text-[#d8b77c]">precise answers.</em></h1>
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-white/66">Every answer distinguishes product evidence from general cosmetic science. No medical, universal-safety or approval claim is implied.</p>
+          <p className="mt-8 max-w-3xl text-lg leading-8 text-white/66">Answers about our Signature Collection, ingredients, daily care and how to order.</p>
         </div>
       </header>
 
