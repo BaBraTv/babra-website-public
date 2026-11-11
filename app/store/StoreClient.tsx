@@ -61,12 +61,20 @@ export function StoreClient() {
 
   function saveCart(next: CartItem[]) {
     setCart(next);
-    window.localStorage.setItem("babra-cart", JSON.stringify(next));
+    try {
+      window.localStorage.setItem("babra-cart", JSON.stringify(next));
+    } catch {
+      // Keep the selected items in memory when browser storage is unavailable.
+    }
   }
 
   function saveLanguage(next: Lang) {
     setLanguage(next);
-    window.localStorage.setItem("babra-store-language", next);
+    try {
+      window.localStorage.setItem("babra-store-language", next);
+    } catch {
+      // Language selection remains active for this visit.
+    }
   }
 
   const cartLines = useMemo(

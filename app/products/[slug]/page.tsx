@@ -78,7 +78,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     ]
   };
 
-  const orderMessage = `Hello BaBra Cosmetics, I would like to order ${record.publicName}, ${record.size}. Quantity: __. Delivery location: __. Please confirm current price, stock, delivery fee and payment instructions.`;
+  const rwandaMessage = `Hello ${rwandaOrders.partner}, I would like to order ${record.publicName}, ${record.size}. Quantity: __. Delivery district: __. Please confirm retail price, stock and delivery cost.`;
+  const internationalMessage = `Hello BaBra Cosmetics, I would like an international quotation for ${record.publicName}, ${record.size}. Quantity: __. Destination country and city: __. Please confirm availability, shipping cost and payment instructions.`;
 
   return (
     <main className="min-h-screen bg-[#0b0807] text-white">
@@ -89,7 +90,6 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <a className="font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/products">BaBra collection</a>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-white/70">
             <a href="/ingredients" data-analytics-event="ingredient_science_view">Ingredients &amp; Science</a>
-            <a href="/product-facts" data-analytics-event="product_facts_view">Product facts</a>
             <a href="/faq">FAQ</a>
             <a href="/quality">Quality</a>
           </div>
@@ -128,10 +128,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </div>
 
             <div className="mt-7 flex flex-wrap gap-3">
-              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href={rwandaOrderUrl(orderMessage)} target="_blank" rel="noopener noreferrer" data-analytics-event="rwanda_order_click">
+              <a className="rounded-full bg-[#f1d58b] px-6 py-3 font-black text-[#130d08]" href={rwandaOrderUrl(rwandaMessage)} target="_blank" rel="noopener noreferrer" data-analytics-event="rwanda_order_click">
                 Rwanda order · {rwandaOrders.partner}
               </a>
-              <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href={whatsappOrderUrl(orderMessage)} target="_blank" rel="noopener noreferrer" data-analytics-event="order_channel_click">
+              <a className="rounded-full border border-white/25 px-6 py-3 font-black text-white" href={whatsappOrderUrl(internationalMessage)} target="_blank" rel="noopener noreferrer" data-analytics-event="order_channel_click">
                 International order · BaBra
               </a>
             </div>
