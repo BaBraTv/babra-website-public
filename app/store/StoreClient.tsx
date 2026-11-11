@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { trackAnalytics } from "../analytics-client";
-import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaOrderUrl, rwandaOrders, site } from "../commerce-data";
+import { PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaOrderUrl, whatsappOrderUrl, rwandaOrders, site } from "../commerce-data";
 import { InstallAppButton } from "../InstallAppButton";
 
 type CartItem = {
@@ -93,12 +93,18 @@ export function StoreClient() {
     saveCart(next);
   }
 
-  const whatsappMessage = [
-    `Hello ${site.name}, I want to place an order on ${site.domain}.`,
-    `Items: ${cartLines.map((item) => `${item!.product.shortName} x${item!.quantity}`).join(", ") || "Please advise"}.`,
-    "Please confirm today's price, delivery cost, and availability.",
-    "Please advise on retail or wholesale pricing where applicable.",
-    "Delivery: Rwanda address will be confirmed by province, district, sector, cell, village, phone, landmark, and notes."
+  const selectedItems = cartLines.map((item) => `${item!.product.shortName} x${item!.quantity}`).join(", ") || "Please help me choose a BaBra Lotion edition";
+  const rwandaMessage = [
+    `Hello ${rwandaOrders.partner}, I would like a BaBra Lotion quotation for delivery in Rwanda.`,
+    `Products: ${selectedItems}.`,
+    "Delivery location: __.",
+    "Please confirm the current retail price, stock availability, delivery fee and next steps."
+  ].join("\n");
+  const internationalMessage = [
+    "Hello BaBra Cosmetics, I would like an international BaBra Lotion quotation.",
+    `Products: ${selectedItems}.`,
+    "Destination country and city: __.",
+    "Please confirm availability, international shipping, total price and payment instructions."
   ].join("\n");
 
   return (
@@ -237,10 +243,10 @@ export function StoreClient() {
         <div className="mx-auto max-w-7xl rounded-[2rem] border border-[#d6ad57]/30 bg-[#18110f] p-8 md:p-12">
           <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Personal ordering assistance</p>
           <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-6xl">Your BaBra selection. One simple conversation.</h2>
-          <p className="mt-6 max-w-3xl leading-8 text-white/70">Select products and quantities, then request a quote. The BaBra team confirms price, stock, delivery and payment instructions directly. No order is placed or paid for by adding items here.</p>
+          <p className="mt-6 max-w-3xl leading-8 text-white/70">Select products and quantities, then choose your destination. VIDAPHARMA handles Rwanda retail enquiries; BaBra Cosmetics assists with international orders. Prices and payment instructions are confirmed before any order or payment.</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a className="rounded-full bg-[#f1d58b] px-7 py-4 font-bold text-[#130d08]" href={rwandaOrderUrl(whatsappMessage)} target="_blank" rel="noopener noreferrer">Request a quote on WhatsApp</a>
-            <a className="rounded-full border border-white/30 px-7 py-4 font-bold text-white" href="/contact">Contact BaBra</a>
+            <a className="rounded-full bg-[#f1d58b] px-7 py-4 font-bold text-[#130d08]" href={rwandaOrderUrl(rwandaMessage)} target="_blank" rel="noopener noreferrer">Rwanda order · VIDAPHARMA</a>
+            <a className="rounded-full border border-white/30 px-7 py-4 font-bold text-white" href={whatsappOrderUrl(internationalMessage)} target="_blank" rel="noopener noreferrer">International order · BaBra</a>
           </div>
         </div>
       </section>

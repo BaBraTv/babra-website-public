@@ -80,6 +80,6 @@ export function GalleryClient() {
       {busy && <p className={styles.loading} role="status">Turimo gufungura ibikorwa…</p>}
       {!busy && !error && !posts.length && <div className={styles.empty}><h2>Nta bikorwa birashyirwaho kuri aya mahitamo.</h2><p>Garuka urebe amashusho n’amakuru mashya ya BaBra.</p></div>}
       {hasMore && !busy && !error && <div className={styles.more}><button className={styles.primary} onClick={() => setPage(page + 1)}>Reba ibindi bikorwa ↓</button></div>}
-    </section><footer className={styles.footer}><a href="/">← BaBra Home</a><span>EI BaBra Holding Ltd · Kigali, Rwanda</span><a href="/admin/gallery">Gushyiraho ibikorwa ↗</a></footer>
+    </section><footer className={styles.footer}><a href="/">← BaBra Home</a><span>EI BaBra Holding Ltd · Kigali, Rwanda</span><a href="/contact">Twandikire ↗</a></footer>
   </main>;
 }

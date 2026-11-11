@@ -98,9 +98,9 @@ export function TestimonialsClient() {
             BaBra Cosmetics
           </a>
           <p className="mt-10 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">Real BaBra Stories</p>
-          <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">Customer experiences, reviewed before publication.</h1>
+          <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-none md:text-8xl">Stories shared with BaBra.</h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-white/66">
-            Every story shown here is submitted by a customer and reviewed by BaBra before publication. We do not create fake testimonials, fake ratings, or fabricated before-and-after claims.
+            Discover personal experiences shared by our customers with permission. Every published story is reviewed by BaBra.
           </p>
         </div>
       </section>
@@ -119,9 +119,9 @@ export function TestimonialsClient() {
             <p className="mt-10">Loading customer stories…</p>
           ) : stories.length === 0 ? (
             <div className="mt-10 rounded-2xl border border-black/10 bg-white p-7 shadow-xl shadow-black/5">
-              <h3 className="font-serif text-3xl">No published stories yet.</h3>
+              <h3 className="font-serif text-3xl">Your story could be the first.</h3>
               <p className="mt-3 max-w-2xl leading-7 text-black/62">
-                Customer stories are being collected and reviewed. BaBra will publish only stories that have permission and pass moderation.
+                Share your BaBra experience with us. Stories appear here only after consent and review.
               </p>
             </div>
           ) : (
