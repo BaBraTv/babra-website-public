@@ -86,6 +86,21 @@ export default function CosmeticsPage() {
           <article className={styles.card}><h3>Questions &amp; care</h3><p>Find answers about product use, ingredients, choosing an edition and ordering.</p><a className={styles.detail} href="/faq">Read the BaBra FAQ <span aria-hidden="true">↗</span></a></article>
         </div>
       </section>
+      <section id="product-care" className={`${styles.wrap} ${styles.section}`} aria-labelledby="product-care-title">
+        <p className={styles.eyebrow}>Product care &amp; usage guidelines</p>
+        <h2 id="product-care-title" className={styles.heading}>Preserve the original formula.</h2>
+        <p className={styles.sectionIntro}>A principle worth keeping: use BaBra Lotion exactly as supplied and follow the directions on your specific bottle.</p>
+        <div className={styles.partnerGrid}>
+          <article className={styles.card}>
+            <h3>Keep the formula original</h3>
+            <p>Do not open the bottle to alter its contents, dilute the lotion, or add water, glycerin, oils, fragrances or any other substances. These changes may affect the product's stability, safety, performance and overall quality.</p>
+          </article>
+          <article className={styles.card}>
+            <h3>Use your BaBra bottle as intended</h3>
+            <p>Normal use of the pump dispenser is permitted. Apply the lotion according to the product label; for Soft Care for Kids, follow the age-specific directions on the bottle or ask the BaBra team.</p>
+          </article>
+        </div>
+      </section>
       <section id="product-films" className={`${styles.wrap} ${styles.section}`} aria-labelledby="product-films-title">
         <p className={styles.eyebrow}>BaBra on film</p>
         <h2 id="product-films-title" className={styles.heading}>Signature for Her. A closer look.</h2>
