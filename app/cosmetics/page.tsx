@@ -28,7 +28,7 @@ export default function CosmeticsPage() {
       <div className={styles.wrap}>
         <nav className={styles.nav} aria-label="Cosmetics navigation">
           <a href="/" aria-label="BaBra Holding home"><OfficialMedia media={officialMediaById["babra-logo-primary"]} className={styles.logo} sizes="100px" /></a>
-          <div className={styles.navLinks}><a href="/">BaBra Holding</a><a href="#collection">The collection</a><a href="/ingredients">Ingredients</a><a href="#order">Contact &amp; order</a></div>
+          <div className={styles.navLinks}><a href="/">BaBra Holding</a><a href="#collection">The collection</a><a href="/ingredients">Ingredients</a><a href="/where-to-buy">Where to buy</a><a href="#order">Contact &amp; order</a></div>
         </nav>
         <section className={styles.hero}>
           <div>
