@@ -58,7 +58,7 @@ export default function QualityPage() {
           <div>
             <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Documentation & partnerships</p>
             <h2 className="mt-4 font-serif text-5xl leading-none md:text-6xl">Confidence through clarity.</h2>
-            <p className="mt-6 max-w-2xl leading-8 text-white/70">BaBra Cosmetics Ltd holds a Rwanda FDA cosmetics-wholesaler premises licence. Import authorization and finished-product registration are distinct matters. Authorized partners may request current supporting documentation directly from BaBra.</p>
+            <p className="mt-6 max-w-2xl leading-8 text-white/70">BaBra Cosmetics Ltd maintains Rwanda FDA premises and import documentation, supported by manufacturing quality records including ISO 22716 and cosmetics GMP. We work with professional distribution partners and provide official product, batch and quality documentation through our team.</p>
           </div>
           <div className="flex flex-col gap-4">
             <a href="/contact" className="rounded-full bg-[#e7c681] px-7 py-4 text-center font-bold text-[#26180d]">Request official information</a>
