@@ -13,6 +13,7 @@ const footerGroups = [
     links: [
       ["Products", "/products"],
       ["Store", "/store"],
+      ["Where to Buy", "/where-to-buy"],
       ["Gallery · Daily activities", "/gallery"],
       ["Samples", "/sample-request"],
       ["Cosmetics", "/cosmetics"],
