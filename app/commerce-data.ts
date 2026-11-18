@@ -9,10 +9,7 @@ export const site = {
   email: "babracosmeticsltd@gmail.com",
   phone: "+250 788 351 482",
   whatsapp: "250788351482",
-  address: "UBUMWE HOUSE, Room B1-62, Nyabugogo, Kigali, Rwanda",
-  license: "Official information pending",
-  manufacturing: "Official information pending",
-  positioning: "Official information pending"
+  address: "UBUMWE HOUSE, Room B1-62, Nyabugogo, Kigali, Rwanda"
 };
 
 export const cosmetics = {
@@ -26,13 +23,17 @@ export const cosmetics = {
 
 export const rwandaOrders = {
   partner: "VIDAPHARMA",
+  legalName: "VIDAPHARMA LTD",
   phone: "0734 299 777",
-  whatsapp: "250734299777"
+  whatsapp: "250734299777",
+  location: "Kiyovu, Nyarugenge, Kigali City, Rwanda",
+  logo: "/partners/vidapharma-logo.png",
+  website: "https://www.vidapharma.rw",
+  rwandaFdaListing: "https://rwandafda.gov.rw/monitoring-tool/documents-management/uploads/30/Licensed-Premises/1768394413_2.%20eLIST%20OF%20LICENSED%20HUMAN%20WHOLESALE%20PHARMACIES-DECEMBER%202025.pdf"
 } as const;
 
 export const PRICE_INQUIRY_LABEL = "Price on request";
 export const PRICE_INQUIRY_NOTE = "Official price, stock, delivery, reseller, wholesale, and distributor details are confirmed by BaBra.";
-export const OFFICIAL_INFORMATION_PENDING = "Official information pending";
 
 export type ProductSlug = "women" | "men" | "babies";
 
@@ -48,7 +49,6 @@ export type StoreProduct = {
   audience: string;
   benefits: string[];
   usage: string;
-  fragrance: string;
   gallery: string[];
   ctaLabel: string;
   alt: string;
@@ -68,7 +68,6 @@ export const products: StoreProduct[] = [
     audience: productKnowledge.women.intendedUse,
     benefits: productKnowledge.women.ingredientHighlights.slice(0, 4).map((ingredient) => ingredient.displayName || ingredient.name),
     usage: productKnowledge.women.usage,
-    fragrance: "Fragrance is listed in the current product documents; the fragrance composition and allergen disclosure remain under final review.",
     gallery: [approvedProductMedia.women.path],
     ctaLabel: "Request official details",
     alt: approvedProductMedia.women.alt,
@@ -86,7 +85,6 @@ export const products: StoreProduct[] = [
     audience: productKnowledge.men.intendedUse,
     benefits: productKnowledge.men.ingredientHighlights.slice(0, 4).map((ingredient) => ingredient.displayName || ingredient.name),
     usage: productKnowledge.men.usage,
-    fragrance: "Fragrance is listed in the current product documents; the fragrance composition and allergen disclosure remain under final review.",
     gallery: [approvedProductMedia.men.path],
     ctaLabel: "Request official details",
     alt: approvedProductMedia.men.alt,
@@ -104,7 +102,6 @@ export const products: StoreProduct[] = [
     audience: productKnowledge.babies.intendedUse,
     benefits: productKnowledge.babies.ingredientHighlights.slice(0, 4).map((ingredient) => ingredient.displayName || ingredient.name),
     usage: productKnowledge.babies.usage,
-    fragrance: "Fragrance is listed in the current product documents; age-specific allergen and safety substantiation remain under final review.",
     gallery: [approvedProductMedia.babies.path],
     ctaLabel: "Request official details",
     alt: approvedProductMedia.babies.alt,

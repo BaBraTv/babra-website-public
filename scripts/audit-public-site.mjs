@@ -7,10 +7,11 @@ const coreRoutes = [
   "/products/men",
   "/products/babies",
   "/cosmetics",
+  "/where-to-buy",
   "/ingredients",
-  "/product-facts",
   "/faq",
-  "/quality"
+  "/quality",
+  "/child-family-support"
 ];
 
 const failures = [];
@@ -106,14 +107,37 @@ for (const path of ["/products/women", "/products/men", "/products/babies"]) {
   check(!Object.hasOwn(product, "offers"), `${path}: unverified Offer schema must not be published`);
 }
 
-const factsPage = pageHtml.get("/product-facts") || "";
-check(
-  factsPage.includes("BaBra Lotion — Official Product Information &amp; Frequently Asked Questions"),
-  "/product-facts: exact official information title is missing"
-);
-const faqSchema = (structuredData.get("/product-facts") || []).find((node) => node["@type"] === "FAQPage");
-check(Boolean(faqSchema), "/product-facts: missing FAQPage structured data");
-check(Array.isArray(faqSchema?.mainEntity) && faqSchema.mainEntity.length >= 10, "/product-facts: FAQPage schema is incomplete");
+const faqSchema = (structuredData.get("/faq") || []).find((node) => node["@type"] === "FAQPage");
+check(Boolean(faqSchema), "/faq: missing FAQPage structured data");
+check(Array.isArray(faqSchema?.mainEntity) && faqSchema.mainEntity.length >= 10, "/faq: FAQPage schema is incomplete");
+
+const qualityPage = pageHtml.get("/quality") || "";
+check(qualityPage.includes("RWA-FDA/DD-WCP/12-2025/0062/0120"), "/quality: premises licence reference is missing");
+check(qualityPage.includes("RWANDA-FDA26/COS/SLIC/0469"), "/quality: import authorization reference is missing");
+check(qualityPage.includes("HBPCER20260202"), "/quality: ISO 22716 certificate reference is missing");
+check(qualityPage.includes("HBPCER20260203"), "/quality: GMP certificate reference is missing");
+check(qualityPage.includes("do not by themselves establish finished-product registration"), "/quality: finished-product registration distinction is missing");
+
+const partnerPage = pageHtml.get("/where-to-buy") || "";
+check(partnerPage.includes("VIDAPHARMA LTD"), "/where-to-buy: confirmed partner name is missing");
+check(partnerPage.includes("0734 299 777"), "/where-to-buy: confirmed order telephone is missing");
+check(partnerPage.includes("Kiyovu, Nyarugenge, Kigali City, Rwanda"), "/where-to-buy: licensed premises location is missing");
+check(partnerPage.includes("Official VIDAPHARMA LTD logo"), "/where-to-buy: official partner logo is missing");
+
+const forbiddenPublicCopy = [
+  "official information pending",
+  "reviewed-with-open-items",
+  "final approval pending",
+  "public wording standard",
+  "compliance note",
+  "search intent"
+];
+for (const [path, html] of pageHtml) {
+  const normalized = html.toLowerCase();
+  for (const phrase of forbiddenPublicCopy) {
+    check(!normalized.includes(phrase), `${path}: internal or placeholder copy exposed (${phrase})`);
+  }
+}
 
 const linkPaths = new Set();
 for (const html of pageHtml.values()) {
@@ -150,7 +174,11 @@ try {
     Array.isArray(facts.frequentlyAskedQuestions) && facts.frequentlyAskedQuestions.length >= 10,
     "/product-facts.json: official FAQ data is incomplete"
   );
-  check(!JSON.stringify(facts).includes("0.25%"), "/product-facts.json: confidential concentration leaked");
+  const factsText = JSON.stringify(facts).toLowerCase();
+  check(!factsText.includes("0.25%"), "/product-facts.json: confidential concentration leaked");
+  for (const phrase of forbiddenPublicCopy) {
+    check(!factsText.includes(phrase), `/product-facts.json: internal or placeholder copy exposed (${phrase})`);
+  }
 } catch (error) {
   failures.push(`/product-facts.json: invalid JSON (${error.message})`);
 }

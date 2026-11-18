@@ -15,11 +15,11 @@ export function GET() {
     {
       publisher: "BaBra Cosmetics Ltd",
       canonical: `${site.url}/product-facts`,
-      generatedForPublicReference: "2026-10-23",
+      generatedForPublicReference: "2026-11-18",
       policy: {
         formulaPercentagesPublished: false,
         offerPublished: false,
-        finalInciStatus: "Variant label declarations transcribed; final controlled approval and INCI normalization pending",
+        ingredientReference: "Variant ingredient declarations come from manufacturer-supplied label records; the physical bottle is the controlling consumer reference.",
         interpretationRule: "Ingredient functions do not constitute clinical proof of a finished product."
       },
       frequentlyAskedQuestions: faqs,
@@ -40,27 +40,24 @@ export function GET() {
         retinolStatus: product.retinolStatus,
         finalInciStatus: product.finalInciStatus,
         suppliedLabelIngredientDeclaration: {
-          status: "transcribed-from-artwork-final-approval-pending",
+          consumerReference: "Check the physical bottle supplied with the product.",
           ingredients: product.labelIngredientDeclaration
         },
         ingredientHighlights: product.ingredientHighlights.map((ingredient) => ({
           name: ingredient.name,
           familiarName: ingredient.displayName,
-          cosmeticFunction: ingredient.function,
-          evidenceState: ingredient.state
+          cosmeticFunction: ingredient.function
         })),
         evidenceReferences: product.evidence.map((source) => ({
           type: source.type,
           reference: source.reference,
-          reviewed: source.reviewed,
-          status: source.status
+          reviewed: source.reviewed
         })),
         purchase: {
           rwanda: `${rwandaOrders.partner}, ${rwandaOrders.phone}`,
           international: "Contact BaBra Cosmetics through the official website",
-          priceAndAvailability: "Confirmed at enquiry; no public verified offer is currently available"
-        },
-        lastEvidenceReview: product.lastEvidenceReview
+          priceAndAvailability: "Confirmed when you contact the official order channel"
+        }
       }))
     },
     {

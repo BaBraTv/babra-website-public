@@ -90,6 +90,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <a className="font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/products">BaBra collection</a>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-white/70">
             <a href="/ingredients" data-analytics-event="ingredient_science_view">Ingredients &amp; Science</a>
+            <a href="/where-to-buy">Where to buy</a>
             <a href="/faq">FAQ</a>
             <a href="/quality">Quality</a>
           </div>
@@ -235,6 +236,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <div className="mx-auto mt-12 grid max-w-7xl gap-4 md:grid-cols-3">
           {[
             ["Common questions", "/faq", "Face use, daily use, variants, ingredients and buying channels."],
+            ["Authorized partners", "/where-to-buy", "Confirmed pharmacy, distribution and ordering details."],
             ["Our quality commitment", "/quality", "Learn about BaBra manufacturing, documentation and care."]
           ].map(([title, href, text]) => (
             <a key={href} href={href} className="rounded-2xl border border-black/10 bg-white p-6 shadow-[0_18px_50px_rgba(68,43,20,0.07)] transition hover:-translate-y-1">

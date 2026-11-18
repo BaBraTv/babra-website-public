@@ -17,15 +17,15 @@ test("knowledge base has one complete, distinct record per lotion variant", () =
   }
 });
 
-test("retinol is a document match for the FDA import-authorized adult variants", () => {
+test("retinol remains variant-specific in manufacturer records", () => {
   const women = productKnowledgeList.find((product) => product.slug === "women")!;
   const men = productKnowledgeList.find((product) => product.slug === "men")!;
   const kids = productKnowledgeList.find((product) => product.slug === "babies")!;
   assert.equal(women.ingredientHighlights.some((ingredient) => ingredient.name === "Retinol"), true);
   assert.equal(men.ingredientHighlights.some((ingredient) => ingredient.name === "Retinol"), true);
   assert.equal(kids.ingredientHighlights.some((ingredient) => ingredient.name === "Retinol"), false);
-  assert.equal(women.ingredientHighlights.find((ingredient) => ingredient.name === "Retinol")?.state, "document-matched-final-approval-pending");
-  assert.equal(men.ingredientHighlights.find((ingredient) => ingredient.name === "Retinol")?.state, "document-matched-final-approval-pending");
+  assert.match(women.retinolStatus, /manufacturer MSDS and label artwork/);
+  assert.match(men.retinolStatus, /manufacturer MSDS and label artwork/);
   assert.match(kids.retinolStatus, /No retinol is listed/);
   assert.doesNotMatch(JSON.stringify(productKnowledgeList), /under review|requires-product-specific-review/i);
   assert.doesNotMatch(JSON.stringify(productKnowledgeList), /0\.25%|65\.5%|59\.25%/);
@@ -47,10 +47,10 @@ test("supplied label declarations remain variant-specific and label-controlled",
   assert.doesNotMatch(JSON.stringify(productKnowledgeList), /formula percentage|\b\d+(?:\.\d+)?%/i);
 });
 
-test("face-use copy neither approves universal use nor creates a blanket prohibition", () => {
+test("face-use copy stays label-led without approving universal use", () => {
   for (const product of productKnowledgeList) {
-    assert.match(product.faceUse, /Not confirmed/);
-    assert.match(product.faceUse, /not a blanket prohibition/);
+    assert.match(product.faceUse, /presented as a body lotion/);
+    assert.match(product.faceUse, /product label/);
     assert.doesNotMatch(product.faceUse, /safe for all|approved for (the )?face/i);
   }
 });
@@ -67,17 +67,20 @@ test("Product structured data contains verified identity and omits an unverified
   }
 });
 
-test("public knowledge pages retain claim guardrails and visible evidence labels", async () => {
+test("public knowledge pages distinguish documented records from product registration", async () => {
   const files = [
     "app/products/[slug]/page.tsx",
     "app/ingredients/page.tsx",
-    "app/product-facts/page.tsx",
     "app/faq/page.tsx",
-    "app/quality/page.tsx"
+    "app/quality/page.tsx",
+    "app/where-to-buy/page.tsx",
+    "lib/product-knowledge.ts"
   ];
   const combined = (await Promise.all(files.map((file) => readFile(file, "utf8")))).join("\n");
-  assert.match(combined, /final approved INCI/i);
-  assert.match(combined, /not (?:FDA product approval|product approval)/i);
+  assert.match(combined, /do not by themselves establish finished-product registration/i);
+  assert.match(combined, /not by itself establish finished-product registration/i);
+  assert.match(combined, /not by the US FDA/i);
+  assert.doesNotMatch(combined, /official information pending|final approval pending|public wording standard|compliance note/i);
   assert.doesNotMatch(combined, /dermatologist[- ]approved|clinically proven|safe for everyone|has FDA approval|approved by the (?:US )?FDA|FDA-approved/i);
 });
 
@@ -94,8 +97,13 @@ test("official product information page includes the required public questions",
   assert.equal(questions.includes("Is BaBra Lotion designed for face and body?"), true);
   assert.equal(questions.includes("Where can customers buy authentic BaBra Lotion?"), true);
   assert.equal(questions.includes("How can distributors contact BaBra Cosmetics Ltd?"), true);
-  const page = await readFile("app/product-facts/page.tsx", "utf8");
-  assert.match(page, /BaBra Lotion — Official Product Information & Frequently Asked Questions/);
+  const faqPage = await readFile("app/faq/page.tsx", "utf8");
+  assert.match(faqPage, /FAQPage/);
+
+  const partnerPage = await readFile("app/where-to-buy/page.tsx", "utf8");
+  assert.match(partnerPage, /VIDAPHARMA LTD/);
+  assert.match(partnerPage, /Official VIDAPHARMA LTD logo/);
+  assert.match(partnerPage, /Kiyovu, Nyarugenge, Kigali City, Rwanda|rwandaOrders\.location/);
 });
 
 test("new public analytics events accept only allowlisted route combinations", () => {

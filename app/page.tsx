@@ -355,6 +355,7 @@ export default function HomePage() {
               <p className="mt-6 text-sm leading-7 text-[#685749]">Explore our signature collection, learn about ingredients and contact BaBra for ordering assistance.</p>
               <div className="mt-7 grid gap-4 text-[11px] font-bold uppercase tracking-[0.14em] text-[#80603a]">
                 <a href="/ingredients" className="underline decoration-[#a88a5f] underline-offset-8">Ingredients &amp; Science ↗</a>
+                <a href="/where-to-buy" className="underline decoration-[#a88a5f] underline-offset-8">Authorized partners ↗</a>
                 <a href="/quality" className="underline decoration-[#a88a5f] underline-offset-8">Our quality commitment ↗</a>
               </div>
             </div>

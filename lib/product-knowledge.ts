@@ -181,7 +181,7 @@ const commonAdultHighlights: IngredientHighlight[] = [
   {
     name: "Retinol",
     function: "Skin-conditioning ingredient",
-    explanation: "Listed in the current manufacturer MSDS and label artwork for Signature for Her and Signature for Him. Both finished products are named on Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469.",
+    explanation: "Listed in the manufacturer MSDS and label artwork for Signature for Her and Signature for Him.",
     state: "document-matched-final-approval-pending"
   }
 ];
@@ -333,7 +333,7 @@ const commonEvidence = {
     reference: "Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469",
     reviewed: "2026-11-03",
     status: "reviewed" as const,
-    publicSummary: "Authorizes BaBra Cosmetics Ltd to import Signature for Her, Signature for Him and Soft Care for Kids, subject to the stated import requirements and inspection of the consignment on arrival."
+    publicSummary: "The document named Signature for Her, Signature for Him and Soft Care for Kids and recorded import authorization from 13 May through 12 November 2026. It does not by itself establish finished-product registration."
   }
 };
 
@@ -350,17 +350,17 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     countryOfManufacture: "China",
     productCode: "L-350W365477",
     overview: "A 500 mL moisturising body lotion combining glycerin, aloe vera leaf juice, shea butter, jojoba seed oil, panthenol and hyaluronic acid to help hydrate, soften and condition the skin.",
-    intendedUse: "Current product records and artwork identify this variant as a body lotion. Facial use is not confirmed by the approved public evidence currently available.",
-    usage: "The current artwork directs users to massage the lotion into skin where moisture is desired. It states that the product is ready to use and should not be diluted. Follow the physical label on your bottle because final artwork may change.",
-    faceUse: "Not confirmed. The current artwork identifies a body lotion; this is not a blanket prohibition on facial use. Product-specific label and safety confirmation are required before recommending face use.",
-    dailyUse: "The current artwork describes use when skin needs moisture, but the final approved frequency has not been separately verified. Follow the label supplied with the product.",
+    intendedUse: "The product information presents this variant as a body lotion. Follow the directions printed on the bottle you receive.",
+    usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label on your bottle.",
+    faceUse: "This edition is presented as a body lotion. For facial use or individual skin concerns, follow the product label and seek appropriate personal advice.",
+    dailyUse: "Apply when skin needs moisture and follow the directions on the physical bottle supplied with your product.",
     precautions: [
       "Do not infer universal facial, pregnancy or sensitive-skin suitability from the ingredient list.",
       "Use the current bottle label as the controlling direction and contact BaBra for product-specific guidance."
     ],
     labelIngredientDeclaration: adultLabelIngredientDeclaration,
     ingredientHighlights: commonAdultHighlights,
-    retinolStatus: "Document match: retinol is listed in the current MSDS and label artwork for this Rwanda FDA import-authorized product.",
+    retinolStatus: "Retinol is listed in the manufacturer MSDS and label artwork for this edition.",
     finalInciStatus: "The ingredient declaration is transcribed from the supplied label artwork and matches the current adult MSDS. The physical released label remains the controlling consumer reference.",
     evidence: [
       attachedLabelEvidence.women,
@@ -389,17 +389,17 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     countryOfManufacture: "China",
     productCode: "L-349W702477",
     overview: "A 500 mL moisturising body lotion combining glycerin, aloe vera leaf juice, shea butter, jojoba seed oil, panthenol and hyaluronic acid to help hydrate, soften and condition the skin.",
-    intendedUse: "Current product records and artwork identify this variant as a body lotion. Facial use is not confirmed by the approved public evidence currently available.",
-    usage: "The current artwork directs users to massage the lotion into skin where moisture is desired. It states that the product is ready to use and should not be diluted. Follow the physical label on your bottle because final artwork may change.",
-    faceUse: "Not confirmed. The current artwork identifies a body lotion; this is not a blanket prohibition on facial use. Product-specific label and safety confirmation are required before recommending face use.",
-    dailyUse: "The current artwork describes use when skin needs moisture, but the final approved frequency has not been separately verified. Follow the label supplied with the product.",
+    intendedUse: "The product information presents this variant as a body lotion. Follow the directions printed on the bottle you receive.",
+    usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label on your bottle.",
+    faceUse: "This edition is presented as a body lotion. For facial use or individual skin concerns, follow the product label and seek appropriate personal advice.",
+    dailyUse: "Apply when skin needs moisture and follow the directions on the physical bottle supplied with your product.",
     precautions: [
       "Do not infer universal facial, pregnancy or sensitive-skin suitability from the ingredient list.",
       "Use the current bottle label as the controlling direction and contact BaBra for product-specific guidance."
     ],
     labelIngredientDeclaration: adultLabelIngredientDeclaration,
     ingredientHighlights: commonAdultHighlights,
-    retinolStatus: "Document match: retinol is listed in the current MSDS and label artwork for this Rwanda FDA import-authorized product.",
+    retinolStatus: "Retinol is listed in the manufacturer MSDS and label artwork for this edition.",
     finalInciStatus: "The ingredient declaration is transcribed from the supplied label artwork and matches the current adult MSDS. The physical released label remains the controlling consumer reference.",
     evidence: [
       attachedLabelEvidence.men,
@@ -428,13 +428,13 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     countryOfManufacture: "China",
     productCode: "L-351W220477",
     overview: "A 500 mL children's body lotion with glycerin, niacinamide, squalane, sodium PCA, shea butter, panthenol and oat kernel extract to help moisturise, soften and condition the skin.",
-    intendedUse: "Current product records and artwork identify this variant as a children's body lotion. The reviewed documents do not establish a public age range or newborn suitability.",
-    usage: "The current artwork directs users to massage the lotion into skin where moisture is desired. It states that the product is ready to use and should not be diluted. Follow the physical label on your bottle and request age guidance from BaBra.",
-    faceUse: "Not confirmed. The current artwork identifies a body lotion; this is not a blanket prohibition on facial use. Product-specific label, age and safety confirmation are required before recommending face use.",
-    dailyUse: "The current artwork describes use when skin needs moisture, but an approved age-specific frequency has not been separately verified. Follow the label supplied with the product.",
+    intendedUse: "The product information presents this variant as a children's body lotion. Follow the age and usage directions printed on the bottle you receive.",
+    usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label and ask BaBra if you need age-specific guidance.",
+    faceUse: "This edition is presented as a body lotion. For facial use or individual skin concerns, follow the product label and seek appropriate personal advice.",
+    dailyUse: "Apply when skin needs moisture and follow the age and usage directions on the physical bottle supplied with your product.",
     precautions: [
       "No retinol is listed in the reviewed Kids MSDS or current label artwork; adult ingredients are never transferred to this record.",
-      "The reviewed evidence does not establish newborn suitability or a public 0-12 age claim.",
+      "No newborn or 0-12 age claim is published; follow the age guidance on the bottle.",
       "Use the current bottle label as the controlling direction and contact BaBra for age- and product-specific guidance."
     ],
     labelIngredientDeclaration: kidsLabelIngredientDeclaration,
@@ -491,15 +491,15 @@ export function buildPublicProductFaqs({
     },
     {
       question: "What BaBra Lotion variants are available?",
-      answer: "The public collection contains BaBra Lotion Signature for Her, Signature for Him and Soft Care for Kids. Each is presented in a 500 mL bottle."
+      answer: "The BaBra collection contains Signature for Her, Signature for Him and Soft Care for Kids. Each is presented in a 500 mL bottle."
     },
     {
       question: "Is BaBra Lotion designed for face and body?",
-      answer: "The current reviewed artwork identifies all three variants as body lotion, and the approved public evidence does not yet confirm facial suitability. This is not a generic statement that BaBra Lotion is prohibited for facial use. A face-use recommendation requires the final label and product-specific safety evidence for the exact variant."
+      answer: "All three editions are presented as body lotions. For facial use or individual skin concerns, follow the label on your exact edition and seek appropriate personal advice."
     },
     {
       question: "What ingredients does BaBra Lotion contain?",
-      answer: "Each product page publishes the complete ingredient declaration transcribed from the supplied label artwork, without confidential percentages. Signature for Her and Signature for Him have an adult declaration that includes retinol. Soft Care for Kids has a distinct declaration that includes niacinamide, squalane and sodium PCA and does not list retinol. Final controlled artwork approval and INCI-name normalization remain pending."
+      answer: "Each product page publishes the ingredient declaration from the manufacturer-supplied label record, without confidential percentages. Signature for Her and Signature for Him include retinol. Soft Care for Kids has a distinct declaration that includes niacinamide, squalane and sodium PCA and does not list retinol. The physical bottle remains the controlling consumer reference."
     },
     {
       question: "What are the recognized cosmetic functions of the highlighted ingredients?",
@@ -511,19 +511,19 @@ export function buildPublicProductFaqs({
     },
     {
       question: "Which BaBra Lotion variants contain retinol?",
-      answer: "Retinol is a document match in the current manufacturer MSDS and label artwork for Signature for Her and Signature for Him. Both products are named on Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469. Retinol is not listed in the reviewed Soft Care for Kids MSDS or current label artwork."
+      answer: "Retinol is listed in the manufacturer MSDS and label artwork for Signature for Her and Signature for Him. It is not listed in the Soft Care for Kids MSDS or label artwork."
     },
     {
       question: "Can BaBra Lotion be used every day?",
-      answer: "Current artwork describes applying the lotion when skin needs moisture, but a separate final approved frequency has not been published. Follow the directions on the physical bottle supplied with your product and request product-specific guidance when needed."
+      answer: "Apply the lotion when skin needs moisture and follow the directions on the physical bottle supplied with your product. Ask BaBra if you need product-specific guidance."
     },
     {
       question: "Is Soft Care for Kids suitable from birth?",
-      answer: "The reviewed MSDS and label artwork do not establish a public age range or newborn suitability. Manufacturing capability for infant and children's skincare is not the same as a finished-product safety assessment. Contact BaBra for current age-specific guidance."
+      answer: "BaBra does not publish a newborn-suitability claim for Soft Care for Kids. Follow the age guidance on the physical bottle and contact BaBra when you need product-specific advice."
     },
     {
       question: "Is BaBra Lotion FDA approved?",
-      answer: "Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469 authorizes BaBra Cosmetics Ltd to import Signature for Her, Signature for Him and Soft Care for Kids, subject to the stated import requirements and arrival inspection. This Rwanda import authorization is separate from US FDA product approval."
+      answer: "Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469 named Signature for Her, Signature for Him and Soft Care for Kids and documented import authorization from 13 May through 12 November 2026. That record does not by itself establish finished-product registration, and BaBra does not present it as US FDA product approval."
     },
     {
       question: "Where can customers buy authentic BaBra Lotion?",
@@ -556,8 +556,7 @@ export function productJsonLd(product: ProductKnowledgeRecord, siteUrl = "https:
     },
     additionalProperty: [
       { "@type": "PropertyValue", name: "Variant", value: product.variant },
-      { "@type": "PropertyValue", name: "Net content", value: product.size },
-      { "@type": "PropertyValue", name: "Product information review", value: product.lastEvidenceReview }
+      { "@type": "PropertyValue", name: "Net content", value: product.size }
     ]
     // Offer is intentionally omitted until price, currency, stock and seller are verified.
   };

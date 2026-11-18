@@ -17,6 +17,7 @@ const footerGroups = [
       ["Gallery · Daily activities", "/gallery"],
       ["Samples", "/sample-request"],
       ["Cosmetics", "/cosmetics"],
+      ["Where to buy", "/where-to-buy"],
       ["Ingredients & Science", "/ingredients"],
       ["Real BaBra Stories", "/testimonials"]
     ]

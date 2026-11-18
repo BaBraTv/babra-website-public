@@ -219,7 +219,7 @@ export function DivisionPage({ division }: { division: DivisionKey }) {
               ["Products", "/products", "Official BaBra Lotion Women, Men, and Babies 500 ml."],
               ["Store", "/store", "Retail checkout, cart, Rwanda delivery flow, and WhatsApp order fallback."],
               ["Showroom", "/showroom", "Premium showroom support, samples, and product verification."],
-              ["Quality", "/quality", "Public-safe compliance, manufacturing support, and brand protection."]
+              ["Quality", "/quality", "Documented manufacturing records and Rwanda authorizations, clearly explained."]
             ].map(([title, href, text]) => (
               <a key={title} href={href} className="rounded-2xl border border-[#f1d58b]/20 bg-white/[0.05] p-6 hover:border-[#f1d58b]/55">
                 <h3 className="font-serif text-3xl">{title}</h3>

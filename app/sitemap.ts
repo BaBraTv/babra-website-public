@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ["/products/babies", "weekly", 0.95],
     ["/store", "weekly", 0.95],
     ["/cosmetics", "weekly", 0.9],
+    ["/where-to-buy", "weekly", 0.9],
     ["/ingredients", "monthly", 0.9],
     ["/faq", "monthly", 0.9],
     ["/wholesale-distributor", "weekly", 0.95],
