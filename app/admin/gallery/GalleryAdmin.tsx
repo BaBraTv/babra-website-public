@@ -55,6 +55,16 @@ export function GalleryAdmin() {
       setMessage(status === "APPROVED" ? "Igitekerezo cyemejwe." : "Igitekerezo nticyemejwe.");
     } catch (e) { setError(e instanceof Error ? e.message : "Ntibyakunze."); } finally { setBusy(false); }
   }
+  async function approveGuestPhoto(post: GalleryEntry) {
+    setBusy(true); setError(""); setMessage("");
+    try {
+      const r = await fetch("/api/admin/gallery", { method: "PATCH", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: post.id, title: post.title, description: post.description, division: post.division, activityDate: post.activityDate.slice(0, 10), status: "PUBLISHED" }) });
+      const d = await r.json();
+      if (!r.ok || !d.ok) throw Error(d.error || "Could not approve photo.");
+      setMessage("Ifoto yemejwe kandi iri kuri Gallery."); await load();
+    } catch (e) { setError(e instanceof Error ? e.message : "Approval failed."); } finally { setBusy(false); }
+  }
   return <main className={styles.page}><nav className={styles.nav}><a href="/admin" className={styles.brand}>BaBra<span>Admin · Gallery</span></a><div><a href="/gallery">Reba Gallery ↗</a><a href="/admin">Dashboard</a></div></nav>
     <div className={styles.admin}><p className={styles.eyebrow}>Umunsi ku wundi</p><h1>Ibikorwa bya BaBra.</h1><p>Shyiraho amafoto, itariki n’amakuru y’igikorwa. Emeza ibitekerezo by’abashyitsi.</p>
       {message && <p className={styles.success} role="status">{message}</p>}{error && <p className={styles.error} role="alert">{error} <button onClick={() => { setError(""); void load(); }}>Ongera ugerageze</button></p>}
@@ -80,6 +90,6 @@ export function GalleryAdmin() {
         </section>
         <section className={styles.panel}><h2>Ibitekerezo bitegereje ({comments.length})</h2>{!comments.length && <p className={styles.muted}>{loading ? "Birimo gufungurwa…" : "Nta bitekerezo bitegereje kwemezwa."}</p>}{comments.map(c => <div className={styles.comment} key={c.id}><strong>{c.author}</strong><p className={styles.muted}>{c.post.title} · {galleryDisplayDate(c.createdAt)}</p><p>{c.body}</p><div className={styles.adminActions}><button disabled={busy} onClick={() => moderate(c.id, "APPROVED")}>Emeza ✓</button><button disabled={busy} onClick={() => moderate(c.id, "REJECTED")}>Ntucyemeze ×</button></div></div>)}</section>
       </div>
-      <section aria-label="Ibikorwa byabitswe"><h2 className={styles.eyebrow}>Ibikorwa byabitswe ({posts.length})</h2>{posts.map(p => <article className={styles.panel} key={p.id}><div className={styles.thumbs}>{p.images.map(photo => <img key={photo.id} src={photo.src || `/api/gallery/media/${photo.id}`} alt={photo.alt} />)}</div><h3>{p.title}</h3><p className={styles.muted}>{galleryDisplayDate(p.activityDate)} · {p.division} · {p.status === "PUBLISHED" ? "Biragaragara" : "Birahishe"}</p><p>{p.description}</p><div className={styles.adminActions}><button onClick={() => { startEdit(p); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Hindura / Hisha</button><a href={`/gallery#activity-${p.id}`}>Reba kuri Gallery ↗</a></div></article>)}</section>
+      <section aria-label="Ibikorwa byabitswe"><h2 className={styles.eyebrow}>Ibikorwa byabitswe ({posts.length})</h2>{posts.map(p => <article className={styles.panel} key={p.id}><div className={styles.thumbs}>{p.images.map(photo => <img key={photo.id} src={photo.src || `/api/gallery/media/${photo.id}`} alt={photo.alt} />)}</div><h3>{p.title}</h3><p className={styles.muted}>{galleryDisplayDate(p.activityDate)} · {p.division} · {p.status === "PUBLISHED" ? "Biragaragara" : "Birahishe"}</p><p>{p.description}</p><div className={styles.adminActions}>{p.status === "HIDDEN" && <button disabled={busy} onClick={() => approveGuestPhoto(p)}>Emeza ifoto ✓</button>}<button onClick={() => { startEdit(p); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Hindura / Hisha</button><a href={`/gallery#activity-${p.id}`}>Reba kuri Gallery ↗</a></div></article>)}</section>
     </div></main>;
 }
