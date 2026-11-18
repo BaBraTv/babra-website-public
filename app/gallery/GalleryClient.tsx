@@ -57,6 +57,67 @@ function ActivityCard({ post }: { post: GalleryEntry }) {
   </article>;
 }
 
+
+async function prepareGuestPhoto(file: File) {
+  if (!/^image\/(jpeg|png|webp)$/.test(file.type) || file.size > 15000000) throw Error("Choose a JPG, PNG or WebP photo below 15 MB.");
+  const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+  try {
+    const ratio = Math.min(1, 1200 / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(bitmap.width * ratio));
+    canvas.height = Math.max(1, Math.round(bitmap.height * ratio));
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw Error("Could not process the photo.");
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    let encoded = canvas.toDataURL("image/jpeg", .78);
+    if (encoded.length > 790000) encoded = canvas.toDataURL("image/jpeg", .5);
+    if (encoded.length > 790000) throw Error("Photo is too large; choose another.");
+    return { data: encoded.split(",")[1], type: "image/jpeg" as const, alt: "Customer-submitted BaBra moment" };
+  } finally { bitmap.close(); }
+}
+
+function GuestPhotoSubmission() {
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    setBusy(true); setError(""); setMessage("");
+    try {
+      const file = data.get("photo");
+      if (!(file instanceof File) || !file.size) throw Error("Please choose a photo.");
+      const photo = await prepareGuestPhoto(file);
+      const response = await fetch("/api/gallery/submit", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: data.get("title"), description: data.get("description"), photo, consent: data.get("consent") === "on", website: data.get("website") })
+      });
+      const body = await response.json();
+      if (!response.ok || !body.ok) throw Error(body.error || "Submission failed. Try again.");
+      form.reset();
+      setMessage(body.message);
+    } catch (e) { setError(e instanceof Error ? e.message : "Submission failed. Try again."); }
+    finally { setBusy(false); }
+  }
+  return <section className={styles.panel} aria-label="Share your BaBra moment">
+    <p className={styles.eyebrow}>Community Gallery</p>
+    <h2>Share your BaBra moment.</h2>
+    <p>Have a BaBra photo to share? Send it here. Our team reviews every photo before it appears publicly.</p>
+    <form className={styles.form} onSubmit={submit}>
+      <label>Photo title<input name="title" minLength={3} maxLength={140} required placeholder="My BaBra moment" /></label>
+      <label>Your story<textarea name="description" minLength={5} maxLength={1500} rows={3} required placeholder="Tell us about the photo" /></label>
+      <label>Choose your photo (JPG, PNG or WebP)<input type="file" name="photo" accept="image/jpeg,image/png,image/webp" required /></label>
+      <div className={styles.honeypot} aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
+      <label className={styles.check}><input type="checkbox" name="consent" required />I own this photo or have permission to share it, and agree to BaBra reviewing it for publication.</label>
+      <p className={styles.note}>Photos are not published automatically. Do not submit private information or images of children without their parent or guardian's consent.</p>
+      <button className={styles.primary} disabled={busy}>{busy ? "Submitting…" : "Send Photo for Review ↗"}</button>
+      {message && <p role="status" className={styles.success}>{message}</p>}
+      {error && <p role="alert" className={styles.error}>{error}</p>}
+    </form>
+  </section>;
+}
+
 export function GalleryClient() {
   const [posts, setPosts] = useState<GalleryEntry[]>([]), [division, setDivision] = useState(""), [date, setDate] = useState("");
   const [page, setPage] = useState(0), [hasMore, setHasMore] = useState(false), [busy, setBusy] = useState(true), [error, setError] = useState(false), [retry, setRetry] = useState(0);
@@ -80,6 +141,7 @@ export function GalleryClient() {
       {busy && <p className={styles.loading} role="status">Turimo gufungura ibikorwa…</p>}
       {!busy && !error && !posts.length && <div className={styles.empty}><h2>Nta bikorwa birashyirwaho kuri aya mahitamo.</h2><p>Garuka urebe amashusho n’amakuru mashya ya BaBra.</p></div>}
       {hasMore && !busy && !error && <div className={styles.more}><button className={styles.primary} onClick={() => setPage(page + 1)}>Reba ibindi bikorwa ↓</button></div>}
+      <GuestPhotoSubmission />
     </section><footer className={styles.footer}><a href="/">← BaBra Home</a><span>EI BaBra Holding Ltd · Kigali, Rwanda</span><a href="/contact">Twandikire ↗</a></footer>
   </main>;
 }
