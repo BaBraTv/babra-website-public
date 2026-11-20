@@ -42,7 +42,9 @@ export default function WhereToBuyPage() {
     }
   };
 
-  const candidateMapUrl = process.env.NEXT_PUBLIC_BABRA_PARTNER_MAP_URL?.trim();
+  // Public-viewer Google Earth project confirmed in Drive on 20 November 2026.
+  const verifiedBaBraMapUrl = "https://earth.google.com/earth/d/1yLqhWZFBKx-Fo3-5V_3CR6uj95ubv-_A?usp=sharing";
+  const candidateMapUrl = process.env.NEXT_PUBLIC_BABRA_PARTNER_MAP_URL?.trim() || verifiedBaBraMapUrl;
   const projectMapUrl = candidateMapUrl && /^https:\/\/(earth\.google\.com\/|www\.google\.com\/maps\/d\/)/i.test(candidateMapUrl)
     ? candidateMapUrl
     : undefined;
