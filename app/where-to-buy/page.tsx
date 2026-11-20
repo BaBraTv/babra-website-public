@@ -3,6 +3,7 @@ import Image from "next/image";
 import { rwandaOrderUrl, rwandaOrders, site, whatsappOrderUrl } from "../commerce-data";
 import { OfficialMedia } from "../components/OfficialMedia";
 import { officialMediaById } from "../data/official-media";
+import PartnerLocator from "./PartnerLocator";
 
 const canonical = `${site.url}/where-to-buy`;
 const description = "Find confirmed BaBra Lotion ordering channels and authorized pharmacy or retail partners in Rwanda without unverified listings.";
@@ -40,6 +41,11 @@ export default function WhereToBuyPage() {
       }
     }
   };
+
+  const candidateMapUrl = process.env.NEXT_PUBLIC_BABRA_PARTNER_MAP_URL?.trim();
+  const projectMapUrl = candidateMapUrl && /^https:\/\/(earth\.google\.com\/|www\.google\.com\/maps\/d\/)/i.test(candidateMapUrl)
+    ? candidateMapUrl
+    : undefined;
 
   return (
     <main className="min-h-screen bg-[#0b0807] text-white">
@@ -96,6 +102,8 @@ export default function WhereToBuyPage() {
           </article>
         </div>
       </section>
+
+      <PartnerLocator projectMapUrl={projectMapUrl} />
 
       <section className="bg-[#211610] px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
