@@ -105,6 +105,18 @@ export function TestimonialsClient() {
         </div>
       </section>
 
+      <section aria-labelledby="signature-for-her-story" lang="rw" className="border-y border-[#d6ad57]/25 px-5 py-14 md:px-8">
+        <article className="mx-auto max-w-7xl rounded-2xl border border-[#d6ad57]/30 bg-[#18110f] p-7 md:p-12">
+          <p className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]">Ubuhamya bw’umukiriya · Signature For Her</p>
+          <h2 id="signature-for-her-story" className="mt-4 max-w-4xl font-serif text-4xl leading-tight md:text-6xl">Ibyumweru bibiri. Inkuru y’impinduka ku ruhu rwe.</h2>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-white/80">Nta kidushimisha nko kumva umukiriya adusangiza urugendo rwe. Umukiriya wa BaBra yatubwiye ko yabonye impinduka zimushimishije ku ruhu rwe nyuma y’ibyumweru bibiri akoresha BaBra Signature For Her. Turamushimira icyizere yatugiriye no kutugezaho ubuhamya bwe.</p>
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-white/80">Buri ruhu rugira urugendo rwarwo. Natwe twishimira kuba igice cya gahunda yawe yo kurwitaho.</p>
+          <p className="mt-5 text-sm leading-6 text-white/60">Iyi ni incamake y’ubuhamya bw’umukiriya twahawe na BaBra. Ibisubizo bishobora gutandukana kuri buri muntu.</p>
+          <p className="mt-6 font-serif text-2xl text-[#f1d58b]">BaBra Lotion — Luxury in Every Touch.</p>
+          <a href="/products/women" className="mt-7 inline-block rounded-full bg-[#f1d58b] px-6 py-3 font-bold text-[#18110c]">Menya Signature For Her</a>
+        </article>
+      </section>
+
       <section className="bg-[#fffaf1] px-5 py-16 text-[#18110c] md:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-end justify-between gap-5">
