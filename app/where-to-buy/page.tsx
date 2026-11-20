@@ -6,7 +6,7 @@ import { officialMediaById } from "../data/official-media";
 import PartnerLocator from "./PartnerLocator";
 
 const canonical = `${site.url}/where-to-buy`;
-const description = "Find confirmed BaBra Lotion ordering channels and authorized pharmacy or retail partners in Rwanda without unverified listings.";
+const description = "Find BaBra Lotion through our Rwanda ordering channel and browse recorded pharmacy, beauty retail, supermarket and distributor partners. Confirm stock and exact location before visiting.";
 const rwandaOrderMessage = "Hello VIDAPHARMA, I would like to order BaBra Lotion in Rwanda. Please confirm the current price, stock, collection or delivery options, and the nearest available stock point.";
 const internationalMessage = "Hello BaBra Cosmetics, I would like to order BaBra Lotion outside Rwanda. Please confirm the available editions, price and delivery options for my destination.";
 
@@ -58,7 +58,7 @@ export default function WhereToBuyPage() {
             <a className="text-xs font-black uppercase tracking-[0.2em] text-[#e5c67f]" href="/cosmetics">BaBra Cosmetics</a>
             <p className="mt-12 text-xs font-black uppercase tracking-[0.28em] text-[#d6ad57]">Authorized pharmacy &amp; retail partners</p>
             <h1 className="mt-5 max-w-5xl font-serif text-6xl leading-[0.96] tracking-[-0.045em] md:text-8xl">Find your <em className="font-normal text-[#d8b77c]">BaBra.</em></h1>
-            <p className="mt-8 max-w-3xl text-lg leading-8 text-white/70">Use the confirmed Rwanda ordering channel below for current stock, collection and delivery assistance. Partner details appear only when the business name, logo, telephone and location are supported by official sources.</p>
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-white/70">Use the official Rwanda ordering channel for current stock and delivery support. Explore BaBra partner categories below, and confirm each shop’s exact location, opening hours and product availability before travelling.</p>
           </div>
           <figure className="overflow-hidden rounded-[2rem] border border-[#d6ad57]/25 bg-[radial-gradient(circle_at_50%_15%,#ffffff,#fff8e6_52%,#c99f37)] p-6 shadow-2xl shadow-black/40">
             <OfficialMedia className="h-[430px] w-full object-contain drop-shadow-2xl" media={officialMediaById["babra-lotion-women-500ml"]} priority sizes="(min-width: 1024px) 42vw, 92vw" />
