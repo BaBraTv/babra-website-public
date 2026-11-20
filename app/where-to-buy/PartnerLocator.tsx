@@ -11,6 +11,8 @@ type Partner = {
   area: string;
   phone?: string;
   mapsQuery?: string;
+  googlePlaceId?: string;
+  publicListingChecked?: string;
 };
 
 const filters: { id: Filter; label: string }[] = [
@@ -33,18 +35,33 @@ const categoryLabels: Record<Category, string> = {
 // Do not publish coordinates from the earlier imported CSV: some were inaccurate (including 0,0).
 const partners: Partner[] = [
   { name: "VIDAPHARMA LTD", category: "distributor", area: "Nyarugenge, Kigali — confirm collection point", phone: "+250 734 299 777" },
-  { name: "IMPRESS PHARMACY", category: "pharmacy", area: "288 KN 2 Avenue, Kigali", phone: "+250 780 274 614", mapsQuery: "IMPRESS PHARMACY 288 KN 2 Avenue Kigali Rwanda" },
+  { name: "IMPRESS PHARMACY", category: "pharmacy", area: "288 KN 2 Avenue, Kigali", phone: "+250 780 274 614", mapsQuery: "IMPRESS PHARMACY 288 KN 2 Avenue Kigali Rwanda", googlePlaceId: "ChIJ60spoXml3BkRapVaQijI_Tc", publicListingChecked: "20 Nov 2026" },
   { name: "Pharmacie La Licorne", category: "pharmacy", area: "Opposite Nyabugogo Bus Station, Kimisagara, Kigali", phone: "+250 788 485 071" },
   { name: "Healthcare Pharmacy", category: "pharmacy", area: "Near Kigali City Market, Kigali", phone: "+250 788 872 220" },
   { name: "Stream Pharmacy", category: "pharmacy", area: "Kagugu, Kigali", phone: "+250 781 294 430" },
-  { name: "Ngabo Pharmacy", category: "pharmacy", area: "Kisimenti, Remera, Kigali", mapsQuery: "Ngabo Pharmacy KG 201 Street Kisimenti Kigali Rwanda" },
-  { name: "Teta Pharmacy", category: "pharmacy", area: "Kisimenti / Rando, Remera, Kigali", phone: "+250 789 192 226" },
+  { name: "Ngabo Pharmacy", category: "pharmacy", area: "KG 201 Street, Kisimenti, Remera, Kigali", mapsQuery: "Ngabo Pharmacy KG 201 Street Kisimenti Kigali Rwanda", googlePlaceId: "ChIJFwPedJan3BkRtgcnTLrGx-M", publicListingChecked: "20 Nov 2026" },
+  { name: "Teta Pharmacy", category: "pharmacy", area: "KG 201 Street, Kisimenti / Rando, Remera, Kigali", phone: "+250 789 192 226", mapsQuery: "Teta Pharmacy KG 201 Street Kigali Rwanda", googlePlaceId: "ChIJ7f2Z0B-n3BkRBbxfUKBLiSc", publicListingChecked: "20 Nov 2026" },
   { name: "UNIPHARMA Kisimenti B1", category: "pharmacy", area: "Kisimenti, Remera, Kigali — confirm branch address" },
   { name: "UNIPHARMA Giporoso B3", category: "pharmacy", area: "Giporoso, Remera, Kigali — confirm branch address" },
   { name: "UNIPHARMA Nyarutarama B4", category: "pharmacy", area: "Nyarutarama, Kigali — confirm branch address" },
   { name: "Umoja Cosmetics", category: "cosmetics", area: "Downtown Kigali", phone: "+250 786 994 364" },
   { name: "Igihozo Supermarket", category: "supermarket", area: "Contact BaBra to confirm the exact store location" }
 ];
+
+const categoryStyles: Record<Category, string> = {
+  pharmacy: "bg-[#e6f2e8] text-[#1c613d] border-[#c0e1c9]",
+  cosmetics: "bg-[#ede8fa] text-[#5b4184] border-[#d6caed]",
+  supermarket: "bg-[#fff0df] text-[#99531c] border-[#f5d6b2]",
+  distributor: "bg-[#fbefcd] text-[#855f13] border-[#ead28a]"
+};
+
+// Google Maps directions are only generated for independently checked business-place listings.
+// Broad-area addresses are intentionally excluded to prevent incorrect navigation.
+const directionsUrl = (partner: Partner) =>
+  partner.mapsQuery && partner.googlePlaceId
+    ? "https://www.google.com/maps/dir/?api=1&destination=" +
+      encodeURIComponent(partner.mapsQuery) + "&destination_place_id=" + encodeURIComponent(partner.googlePlaceId)
+    : null;
 
 const babraWhatsapp = "250788351482";
 const whatsappHelp = (partner: string) =>
@@ -73,13 +90,13 @@ export default function PartnerLocator({ projectMapUrl }: { projectMapUrl?: stri
             <h2 id="partner-locator-title" className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-6xl">Find a BaBra partner near you.</h2>
             <p className="mt-6 max-w-3xl leading-8 text-[#4d423b]">
               Explore pharmacies, cosmetics shops, supermarkets and distributors recorded as BaBra partners. 
-              Addresses are provided at their currently known level of detail. Please confirm the exact branch, current BaBra Lotion stock and opening hours before travelling.
+              Addresses are provided at their currently known level of detail. Get Directions is shown only for independently checked public listings. Please confirm the exact branch, current BaBra Lotion stock and opening hours before travelling.
             </p>
           </div>
           {projectMapUrl ? (
             <a href={projectMapUrl} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full bg-[#25170f] px-7 py-4 text-center font-bold text-white hover:bg-[#473120]">
-              Open BaBra partner map ↗
+              Open official BaBra Google Earth map ↗
             </a>
           ) : null}
         </div>
@@ -114,7 +131,7 @@ export default function PartnerLocator({ projectMapUrl }: { projectMapUrl?: stri
         <div className="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {matchingPartners.map((partner) => (
             <article key={partner.name} className="flex h-full flex-col rounded-[1.5rem] border border-black/10 bg-white p-6 shadow-[0_12px_40px_rgba(68,43,20,0.06)]">
-              <span className="self-start rounded-full bg-[#f5ead7] px-3 py-2 text-[11px] font-black uppercase tracking-[0.12em] text-[#77501f]">
+              <span className={"self-start rounded-full border px-3 py-2 text-[11px] font-black uppercase tracking-[0.12em] " + categoryStyles[partner.category]}>
                 {categoryLabels[partner.category]}
               </span>
               <h3 className="mt-5 font-serif text-3xl leading-tight">{partner.name}</h3>
@@ -124,14 +141,20 @@ export default function PartnerLocator({ projectMapUrl }: { projectMapUrl?: stri
                   {partner.phone}
                 </a>
               ) : null}
+              {partner.publicListingChecked ? (
+                <p className="mt-3 text-xs leading-5 text-[#796b60]">Public Google Maps business listing checked: {partner.publicListingChecked}. This does not confirm live stock or a recent site visit.</p>
+              ) : (
+                <p className="mt-3 text-xs leading-5 text-[#796b60]">Exact shop pin or branch details have not been independently confirmed for directions.</p>
+              )}
               <div className="mt-auto flex flex-wrap gap-2 pt-7">
-                {partner.mapsQuery ? (
+                {directionsUrl(partner) ? (
                   <a
                     className="rounded-full bg-[#25170f] px-4 py-3 text-xs font-bold text-white hover:bg-[#473120]"
-                    href={"https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(partner.mapsQuery)}
+                    href={directionsUrl(partner)!}
                     target="_blank" rel="noopener noreferrer"
+                    aria-label={"Get Google Maps directions to the public business listing for " + partner.name}
                   >
-                    Search on Google Maps ↗
+                    Get Directions ↗
                   </a>
                 ) : null}
                 <a className="rounded-full border border-black/15 px-4 py-3 text-xs font-bold text-[#25170f] hover:bg-[#f5eee2]"
@@ -150,7 +173,7 @@ export default function PartnerLocator({ projectMapUrl }: { projectMapUrl?: stri
 
         <p className="mt-8 text-sm leading-7 text-[#5c5046]">
           This directory reflects partner information recorded by BaBra Cosmetics; it is not synced to pharmacy inventory systems.
-          New partners and corrected locations will be added after verification. If a location is inaccurate, please contact BaBra.
+          The linked Google Earth project is maintained separately and may contain pins still under review. Google Earth projects are opened externally, not embedded in this page. New partners and corrected locations will be added after verification. If a location is inaccurate, please contact BaBra.
         </p>
       </div>
     </section>
