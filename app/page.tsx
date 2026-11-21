@@ -52,6 +52,7 @@ const navLinks = [
   ["Our World", "#our-world"],
   ["Store", "/store"],
   ["Gallery", "/gallery"],
+  ["Community", "/community"],
   ["Contact", "/contact"]
 ] as const;
 

@@ -462,6 +462,12 @@ export function PlatformClient({ mode }: { mode: Mode }) {
     saveJson(storageKeys.cart, next);
   }
 
+  function accountDestination(defaultPath: string) {
+    return new URLSearchParams(window.location.search).get("next") === "community"
+      ? "/community"
+      : defaultPath;
+  }
+
   async function signUp() {
     setIsBusy(true);
     setStatusMessage("");
@@ -480,7 +486,7 @@ export function PlatformClient({ mode }: { mode: Mode }) {
       saveJson(storageKeys.account, account);
       saveJson(storageKeys.loggedIn, true);
       setLoggedIn(true);
-      window.location.href = "/account";
+      window.location.href = accountDestination("/account");
     } catch (error) {
       setStatusMessage(error instanceof Error ? error.message : "Signup failed");
     } finally {
@@ -508,7 +514,9 @@ export function PlatformClient({ mode }: { mode: Mode }) {
       );
       saveJson(storageKeys.loggedIn, true);
       setLoggedIn(true);
-      window.location.href = result.user.role === "ADMIN" || result.user.role === "STAFF" ? "/admin" : "/account";
+      window.location.href = accountDestination(
+        result.user.role === "ADMIN" || result.user.role === "STAFF" ? "/admin" : "/account"
+      );
     } catch (error) {
       setStatusMessage(error instanceof Error ? error.message : "Login failed");
     } finally {

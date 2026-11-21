@@ -132,7 +132,7 @@ export function GalleryClient() {
     return () => controller.abort();
   }, [page, division, date, retry]);
   return <main className={styles.page}>
-    <nav className={styles.nav} aria-label="Gallery navigation"><a href="/" className={styles.brand}>BaBra<span>Luxury in Every Touch.</span></a><div><a href="/cosmetics">Cosmetics</a><a href="/store">Store</a><a href="/contact">Contact</a></div></nav>
+    <nav className={styles.nav} aria-label="Gallery navigation"><a href="/" className={styles.brand}>BaBra<span>Luxury in Every Touch.</span></a><div><a href="/cosmetics">Cosmetics</a><a href="/store">Store</a><a href="/community">Community</a><a href="/contact">Contact</a></div></nav>
     <header className={styles.hero}><div><p className={styles.eyebrow}>EI BaBra Holding · Ibikorwa byacu</p><h1>BaBra,<br /><em>umunsi ku wundi.</em></h1><p>Amashusho, ibikorwa n’ibihe dusangira. Reba ibyo dukora, igihe byabereye, utubwire n’igitekerezo cyawe.</p></div><span className={styles.heroMark} aria-hidden="true">B.</span></header>
     <section className={styles.content} aria-label="Ibikorwa bya BaBra">
       <div className={styles.filters}><div><p className={styles.eyebrow}>Gallery</p><h2>Ibihe bya BaBra.</h2></div><label>Igice cya BaBra<select value={division} onChange={e => { setDivision(e.target.value); setPage(0); }}><option value="">Ibikorwa byose</option>{galleryDivisions.map(d => <option key={d}>{d}</option>)}</select></label><label>Itariki<input type="date" value={date} onChange={e => { setDate(e.target.value); setPage(0); }} /></label>{(division || date) && <button className={styles.reset} onClick={() => { setDivision(""); setDate(""); setPage(0); }}>Siba amahitamo ×</button>}</div>
