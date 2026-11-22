@@ -352,10 +352,10 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     overview: "A 500 mL moisturising body lotion combining glycerin, aloe vera leaf juice, shea butter, jojoba seed oil, panthenol and hyaluronic acid to help hydrate, soften and condition the skin.",
     intendedUse: "The product information presents this variant as a body lotion. Follow the directions printed on the bottle you receive.",
     usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label on your bottle.",
-    faceUse: "This edition is presented as a body lotion. For facial use or individual skin concerns, follow the product label and seek appropriate personal advice.",
+    faceUse: "Follow the directions and precautions on your product label. Contact BaBra Cosmetics for guidance on your edition.",
     dailyUse: "Apply when skin needs moisture and follow the directions on the physical bottle supplied with your product.",
     precautions: [
-      "Do not infer universal facial, pregnancy or sensitive-skin suitability from the ingredient list.",
+      "If you are pregnant or have sensitive skin, ask a healthcare professional for advice about your skincare routine.",
       "Use the current bottle label as the controlling direction and contact BaBra for product-specific guidance."
     ],
     labelIngredientDeclaration: adultLabelIngredientDeclaration,
@@ -391,10 +391,10 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     overview: "A 500 mL moisturising body lotion combining glycerin, aloe vera leaf juice, shea butter, jojoba seed oil, panthenol and hyaluronic acid to help hydrate, soften and condition the skin.",
     intendedUse: "The product information presents this variant as a body lotion. Follow the directions printed on the bottle you receive.",
     usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label on your bottle.",
-    faceUse: "This edition is presented as a body lotion. For facial use or individual skin concerns, follow the product label and seek appropriate personal advice.",
+    faceUse: "Follow the directions and precautions on your product label. Contact BaBra Cosmetics for guidance on your edition.",
     dailyUse: "Apply when skin needs moisture and follow the directions on the physical bottle supplied with your product.",
     precautions: [
-      "Do not infer universal facial, pregnancy or sensitive-skin suitability from the ingredient list.",
+      "If you are pregnant or have sensitive skin, ask a healthcare professional for advice about your skincare routine.",
       "Use the current bottle label as the controlling direction and contact BaBra for product-specific guidance."
     ],
     labelIngredientDeclaration: adultLabelIngredientDeclaration,
@@ -430,7 +430,7 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     overview: "A 500 mL children's body lotion with glycerin, niacinamide, squalane, sodium PCA, shea butter, panthenol and oat kernel extract to help moisturise, soften and condition the skin.",
     intendedUse: "The product information presents this variant as a children's body lotion. Follow the age and usage directions printed on the bottle you receive.",
     usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label and ask BaBra if you need age-specific guidance.",
-    faceUse: "This edition is presented as a body lotion. For facial use or individual skin concerns, follow the product label and seek appropriate personal advice.",
+    faceUse: "Follow the directions and precautions on your product label. Contact BaBra Cosmetics for guidance on your edition.",
     dailyUse: "Apply when skin needs moisture and follow the age and usage directions on the physical bottle supplied with your product.",
     precautions: [
       "No retinol is listed in the reviewed Kids MSDS or current label artwork; adult ingredients are never transferred to this record.",
@@ -495,7 +495,7 @@ export function buildPublicProductFaqs({
     },
     {
       question: "Is BaBra Lotion designed for face and body?",
-      answer: "All three editions are presented as body lotions. For facial use or individual skin concerns, follow the label on your exact edition and seek appropriate personal advice."
+      answer: "The bottle directions say to massage the lotion into skin wherever and whenever it needs moisture. Follow the directions and precautions on your edition’s label. Contact BaBra Cosmetics for specific guidance on face and body use."
     },
     {
       question: "What ingredients does BaBra Lotion contain?",
