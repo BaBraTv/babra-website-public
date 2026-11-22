@@ -65,7 +65,7 @@ export default function FaqPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             <a className="rounded-xl bg-[#2a1b14] p-5 font-bold text-white" href="/products">Explore the collection →</a>
             <a className="rounded-xl border border-black/12 bg-white p-5 font-bold" href="/ingredients">Ingredients &amp; Science →</a>
-            <a className="rounded-xl border border-black/12 bg-white p-5 font-bold" href="/quality">Quality status →</a>
+            <a className="rounded-xl border border-black/12 bg-white p-5 font-bold" href="/quality">Quality &amp; Documentation →</a>
           </div>
         </div>
       </section>

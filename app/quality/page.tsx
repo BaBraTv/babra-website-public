@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import { site } from "../commerce-data";
 
 const canonical = `${site.url}/quality`;
-const description = "Documented BaBra manufacturing records and Rwanda premises and import authorizations, clearly separated from finished-product registration.";
+const title = "Quality & Documentation | BaBra Cosmetics";
+const description = "Find Rwanda FDA licence references for BaBra Cosmetics and manufacturing certificates for BaBra Lotion. Contact our team to verify product and batch details.";
 
 export const metadata: Metadata = {
-  title: "Quality Records & Authorizations | BaBra Cosmetics",
+  title,
   description,
   alternates: { canonical, languages: { "en-RW": canonical, "x-default": canonical } },
-  openGraph: { title: "BaBra Quality Records & Authorizations", description, url: canonical, type: "website", images: [{ url: "/media/logos/babra-logo.jpeg", alt: "Official BaBra logo" }] },
-  twitter: { card: "summary_large_image", title: "BaBra Quality Records & Authorizations", description, images: ["/media/logos/babra-logo.jpeg"] }
+  openGraph: { title, description, url: canonical, type: "website", images: [{ url: "/media/logos/babra-logo.jpeg", alt: "Official BaBra logo" }] },
+  twitter: { card: "summary_large_image", title, description, images: ["/media/logos/babra-logo.jpeg"] }
 };
 
 const manufacturingRecords = [
@@ -23,7 +24,7 @@ const manufacturingRecords = [
     title: "Cosmetics GMP assessment certificate",
     reference: "Intertek certificate HBPCER20260203",
     dates: "Issued 26 May 2026 · Printed expiry 24 May 2029",
-    description: "The record identifies Guangzhou Pallas Cosmetics Co., Ltd. and references cosmetics good manufacturing practice guidance. It was issued by Intertek, not by the US FDA."
+    description: "Intertek issued this certificate to Guangzhou Pallas Cosmetics Co., Ltd. following an assessment against cosmetics good manufacturing practice guidance."
   }
 ];
 
@@ -33,10 +34,10 @@ export default function QualityPage() {
     "@type": "WebPage",
     "@id": `${canonical}#webpage`,
     url: canonical,
-    name: "BaBra Quality Records and Authorizations",
+    name: "BaBra Quality & Documentation",
     description,
     inLanguage: "en-RW",
-    dateModified: "2026-11-18",
+    dateModified: "2026-11-22",
     about: { "@type": "Organization", "@id": `${site.url}/#babra-cosmetics`, name: "BaBra Cosmetics Ltd" }
   };
 
@@ -48,16 +49,14 @@ export default function QualityPage() {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_80%_12%,rgba(214,173,87,0.2),transparent_34rem),radial-gradient(circle_at_10%_80%,rgba(111,49,37,0.22),transparent_28rem)]" />
         <div className="mx-auto max-w-7xl">
           <a className="text-xs font-black uppercase tracking-[0.2em] text-[#e5c67f]" href="/">BaBra Cosmetics</a>
-          <p className="mt-12 text-xs font-black uppercase tracking-[0.28em] text-[#d6ad57]">Quality records &amp; authorizations</p>
-          <h1 className="mt-5 max-w-5xl font-serif text-6xl leading-[0.96] tracking-[-0.045em] md:text-8xl">Trust, stated with <em className="font-normal text-[#d8b77c]">precision.</em></h1>
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-white/70">BaBra presents manufacturing records, Rwanda premises licensing and import authorization in their proper categories, with the references and dates shown on the reviewed documents.</p>
+          <h1 className="mt-12 max-w-5xl font-serif text-6xl leading-[0.96] tracking-[-0.045em] md:text-8xl">Quality &amp; <em className="font-normal text-[#d8b77c]">Documentation</em></h1>
+          <p className="mt-8 max-w-3xl text-lg leading-8 text-white/70">Find the licence references and dates for BaBra Cosmetics in Rwanda, along with the quality certificates for our manufacturing partner, Guangzhou Pallas Cosmetics Co., Ltd.</p>
         </div>
       </header>
 
       <section className="bg-[#f7f0e5] px-5 py-16 text-[#251a13] md:px-8 md:py-24">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#8b5c28]">Manufacturer quality records</p>
-          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-6xl">Facility-scope evidence, professionally presented.</h2>
+          <h2 className="max-w-4xl font-serif text-5xl leading-none md:text-6xl">Manufacturing quality certificates</h2>
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {manufacturingRecords.map((item) => (
               <article key={item.title} className="rounded-2xl border border-black/10 bg-white p-8 shadow-[0_18px_50px_rgba(68,43,20,0.08)]">
@@ -73,8 +72,7 @@ export default function QualityPage() {
 
       <section className="bg-[#211610] px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Rwanda documentation</p>
-          <h2 className="mt-4 max-w-4xl font-serif text-5xl leading-none md:text-6xl">Premises and import records, kept distinct.</h2>
+          <h2 className="max-w-4xl font-serif text-5xl leading-none md:text-6xl">Rwanda FDA licence records</h2>
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
             <article className="rounded-2xl border border-white/10 bg-white/[0.045] p-7 md:p-9">
               <p className="text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">Rwanda FDA premises licence</p>
@@ -86,8 +84,8 @@ export default function QualityPage() {
               </dl>
             </article>
             <article className="rounded-2xl border border-[#d6ad57]/35 bg-white/[0.07] p-7 md:p-9">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">Documented Rwanda FDA import authorization</p>
-              <h3 className="mt-4 font-serif text-4xl">Three BaBra Lotion variants named.</h3>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">Rwanda FDA import licence record</p>
+              <h3 className="mt-4 font-serif text-4xl">Three BaBra Lotion editions</h3>
               <dl className="mt-7 grid gap-5 text-sm">
                 <div><dt className="font-bold text-[#e9cc90]">Reference</dt><dd className="mt-2 leading-7 text-white/65">RWANDA-FDA26/COS/SLIC/0469</dd></div>
                 <div><dt className="font-bold text-[#e9cc90]">Products named</dt><dd className="mt-2 leading-7 text-white/65">Signature for Her, Signature for Him and Soft Care for Kids, 500 mL.</dd></div>
@@ -96,11 +94,10 @@ export default function QualityPage() {
             </article>
           </div>
           <div className="mt-8 rounded-2xl border border-[#d6ad57]/25 bg-[#f3e6d1] p-7 text-[#2c1d14] md:p-9">
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-[#8b5c28]">Clear regulatory distinction</p>
-            <h3 className="mt-4 font-serif text-4xl">These records do not by themselves establish finished-product registration.</h3>
-            <p className="mt-5 max-w-4xl leading-8 text-black/65">The premises licence concerns the named Rwanda wholesale premises. The import licence documented authorization to import the products named during its printed term. The ISO 22716 and GMP records concern the manufacturer&apos;s facility and quality system. None of these records is presented as US FDA approval or as an automatic substitute for finished-product registration.</p>
+            <h3 className="font-serif text-4xl">Verify your BaBra Lotion</h3>
+            <p className="mt-5 max-w-4xl leading-8 text-black/65">To verify your bottle or request the latest product documents, contact BaBra Cosmetics with the product name and batch number on the label.</p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a href="/contact" className="rounded-full bg-[#2b1c13] px-7 py-4 text-center font-bold text-white">Request official information</a>
+              <a href="/contact" className="rounded-full bg-[#2b1c13] px-7 py-4 text-center font-bold text-white">Contact BaBra Cosmetics</a>
               <a href="/where-to-buy" className="rounded-full border border-black/20 px-7 py-4 text-center font-bold text-[#2b1c13]">Authorized partners</a>
             </div>
           </div>

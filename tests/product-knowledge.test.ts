@@ -66,19 +66,24 @@ test("Product structured data contains verified identity and omits an unverified
   }
 });
 
-test("public knowledge pages distinguish documented records from product registration", async () => {
+test("public knowledge pages present Rwanda FDA licence records with their documented term", async () => {
   const files = [
     "app/products/[slug]/page.tsx",
     "app/ingredients/page.tsx",
     "app/faq/page.tsx",
-    "app/quality/page.tsx",
     "app/where-to-buy/page.tsx",
-    "lib/product-knowledge.ts"
+    "lib/product-knowledge.ts",
+    "public/llms.txt"
   ];
-  const combined = (await Promise.all(files.map((file) => readFile(file, "utf8")))).join("\n");
-  assert.match(combined, /do not by themselves establish finished-product registration/i);
-  assert.match(combined, /not by itself establish finished-product registration/i);
-  assert.match(combined, /not by the US FDA/i);
+  const [qualityPage, ...otherPages] = await Promise.all(
+    ["app/quality/page.tsx", ...files].map((file) => readFile(file, "utf8"))
+  );
+  const combined = [qualityPage, ...otherPages].join("\n");
+  assert.match(qualityPage, /Rwanda FDA premises licence/i);
+  assert.match(qualityPage, /Rwanda FDA import licence record/i);
+  assert.match(qualityPage, /Issued 13 May 2026 · Printed valid through 12 November 2026/i);
+  assert.match(qualityPage, /href="\/contact"/);
+  assert.doesNotMatch(combined, /0469 authorizes|Is BaBra Lotion FDA approved\?/i);
   assert.doesNotMatch(combined, /official information pending|final approval pending|public wording standard|compliance note/i);
   assert.doesNotMatch(combined, /dermatologist[- ]approved|clinically proven|safe for everyone|has FDA approval|approved by the (?:US )?FDA|FDA-approved/i);
 });
@@ -94,6 +99,7 @@ test("official product information page includes the required public questions",
   assert.equal(questions.includes("What is BaBra Lotion?"), true);
   assert.equal(questions.includes("Who manufactures BaBra Lotion?"), true);
   assert.match(faqs.find(({ question }) => question === "Is BaBra Lotion designed for face and body?")?.answer ?? "", /wherever and whenever it needs moisture/);
+  assert.match(faqs.find(({ question }) => question === "Where can I verify BaBra Lotion’s Rwanda FDA documents?")?.answer ?? "", /product name and batch number/);
   assert.equal(questions.includes("Where can customers buy authentic BaBra Lotion?"), true);
   assert.equal(questions.includes("How can distributors contact BaBra Cosmetics Ltd?"), true);
   const faqPage = await readFile("app/faq/page.tsx", "utf8");

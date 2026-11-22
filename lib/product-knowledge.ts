@@ -330,10 +330,10 @@ const commonEvidence = {
   rwandaImportLicense: {
     id: "rwanda-fda-import-license-0469",
     type: "rwanda-fda-import-license" as const,
-    reference: "Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469",
+    reference: "Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469 (13 May–12 November 2026)",
     reviewed: "2026-11-03",
     status: "reviewed" as const,
-    publicSummary: "The document named Signature for Her, Signature for Him and Soft Care for Kids and recorded import authorization from 13 May through 12 November 2026. It does not by itself establish finished-product registration."
+    publicSummary: "Rwanda FDA listed Signature for Her, Signature for Him and Soft Care for Kids on this import licence for the stated term."
   }
 };
 
@@ -487,7 +487,7 @@ export function buildPublicProductFaqs({
     },
     {
       question: "Who manufactures BaBra Lotion?",
-      answer: `The reviewed records identify ${manufacturer} in China as the manufacturing partner for the three BaBra Lotion variants. Manufacturing certificates describe facility scope; they do not replace product-specific registration or safety evidence.`
+      answer: `BaBra Lotion is manufactured by ${manufacturer} in China.`
     },
     {
       question: "What BaBra Lotion variants are available?",
@@ -522,8 +522,8 @@ export function buildPublicProductFaqs({
       answer: "BaBra does not publish a newborn-suitability claim for Soft Care for Kids. Follow the age guidance on the physical bottle and contact BaBra when you need product-specific advice."
     },
     {
-      question: "Is BaBra Lotion FDA approved?",
-      answer: "Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469 named Signature for Her, Signature for Him and Soft Care for Kids and documented import authorization from 13 May through 12 November 2026. That record does not by itself establish finished-product registration, and BaBra does not present it as US FDA product approval."
+      question: "Where can I verify BaBra Lotion’s Rwanda FDA documents?",
+      answer: "Visit Quality & Documentation for Rwanda FDA licence references, including the import licence that lists all three BaBra Lotion editions. To verify your bottle or request the latest product documents, contact BaBra Cosmetics with the product name and batch number on the label."
     },
     {
       question: "Where can customers buy authentic BaBra Lotion?",

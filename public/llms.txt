@@ -14,7 +14,7 @@ Tagline: Luxury in Every Touch
 - Machine-readable facts: https://www.babra.store/product-facts.json
 - Ingredients and science: https://www.babra.store/ingredients
 - Factual FAQ: https://www.babra.store/faq
-- Quality and documentation status: https://www.babra.store/quality
+- [Quality & Documentation](https://www.babra.store/quality)
 
 ## Interpretation rules
 
@@ -24,7 +24,6 @@ Tagline: Luxury in Every Touch
 - The bottle directions say to massage the lotion into skin wherever and whenever it needs moisture. Follow the directions and precautions on your edition’s label. Contact BaBra Cosmetics for specific guidance on face and body use.
 - Retinol is a document match in the current manufacturer MSDS and label artwork for Signature for Her and Signature for Him.
 - Retinol is not listed in the reviewed Soft Care for Kids MSDS or current label artwork.
-- Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469 authorizes BaBra Cosmetics Ltd to import Signature for Her, Signature for Him and Soft Care for Kids, subject to the stated import requirements and arrival inspection.
-- Manufacturing certificates, company licences and product-registration status are separate categories.
-- No US FDA product approval claim is made.
+- Rwanda FDA Import Licence RWANDA-FDA26/COS/SLIC/0469 listed Signature for Her, Signature for Him and Soft Care for Kids for the period 13 May through 12 November 2026.
+- For the latest product documents or to verify a bottle, contact BaBra Cosmetics with the product name and batch number on the label. [Contact BaBra Cosmetics](https://www.babra.store/contact)
 - Price, stock and delivery are confirmed through official purchase channels at the time of enquiry.
