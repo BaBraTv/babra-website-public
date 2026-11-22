@@ -125,7 +125,7 @@ const commonAdultHighlights: IngredientHighlight[] = [
     name: "Aloe Barbadensis Leaf Juice",
     displayName: "Aloe vera leaf juice",
     function: "Skin-conditioning ingredient",
-    explanation: "Supports a conditioned skin feel. Ingredient presence alone does not establish a soothing or therapeutic result for the finished lotion.",
+    explanation: "Supports a conditioned skin feel.",
     state: "document-matched-final-approval-pending"
   },
   {
@@ -151,13 +151,13 @@ const commonAdultHighlights: IngredientHighlight[] = [
   {
     name: "Beta-Glucan",
     function: "Skin-conditioning ingredient",
-    explanation: "Included to support a comfortable, conditioned skin feel; this is not a therapeutic claim.",
+    explanation: "Included to support a comfortable, conditioned skin feel.",
     state: "document-matched-final-approval-pending"
   },
   {
     name: "Bisabolol",
     function: "Skin-conditioning ingredient",
-    explanation: "Included for skin-conditioning support. The ingredient does not by itself prove a finished-product calming or clinical result.",
+    explanation: "Included for skin-conditioning support.",
     state: "document-matched-final-approval-pending"
   },
   {
@@ -169,13 +169,13 @@ const commonAdultHighlights: IngredientHighlight[] = [
   {
     name: "Allantoin",
     function: "Skin-conditioning ingredient",
-    explanation: "Supports a soft, conditioned skin feel without implying a medical or healing effect.",
+    explanation: "Supports a soft, conditioned skin feel.",
     state: "document-matched-final-approval-pending"
   },
   {
     name: "Hyaluronic Acid",
     function: "Humectant",
-    explanation: "Helps bind water at the skin surface. Ingredient function is not clinical proof of the finished lotion.",
+    explanation: "Helps bind water at the skin surface.",
     state: "document-matched-final-approval-pending"
   },
   {
@@ -203,14 +203,14 @@ const kidsHighlights: IngredientHighlight[] = [
     name: "Aloe Barbadensis Leaf Juice",
     displayName: "Aloe vera leaf juice",
     function: "Skin-conditioning ingredient",
-    explanation: "Supports a conditioned skin feel. Ingredient presence alone does not establish a soothing or therapeutic result for the finished lotion.",
+    explanation: "Supports a conditioned skin feel.",
     state: "document-matched-final-approval-pending"
   },
   {
     name: "Nicotinamide",
     displayName: "Niacinamide",
     function: "Skin-conditioning ingredient",
-    explanation: "Supports skin conditioning. Ingredient presence alone does not establish a finished-product clinical result.",
+    explanation: "Supports skin conditioning.",
     state: "document-matched-final-approval-pending"
   },
   {
@@ -248,27 +248,27 @@ const kidsHighlights: IngredientHighlight[] = [
   {
     name: "Beta-Glucan",
     function: "Skin-conditioning ingredient",
-    explanation: "Included to support a comfortable, conditioned skin feel; this is not a therapeutic claim.",
+    explanation: "Included to support a comfortable, conditioned skin feel.",
     state: "document-matched-final-approval-pending"
   },
   {
     name: "Calendula Officinalis Extract",
     displayName: "Calendula extract",
     function: "Skin-conditioning ingredient",
-    explanation: "Included for skin-conditioning support; ingredient presence does not establish a treatment or finished-product clinical result.",
+    explanation: "Included for skin-conditioning support.",
     state: "document-matched-final-approval-pending"
   },
   {
     name: "Avena Sativa Kernel Extract",
     displayName: "Oat kernel extract",
     function: "Skin-conditioning ingredient",
-    explanation: "Included for skin-conditioning support; this is not proof of a therapeutic effect.",
+    explanation: "Included for skin-conditioning support.",
     state: "document-matched-final-approval-pending"
   },
   {
     name: "Bisabolol",
     function: "Skin-conditioning ingredient",
-    explanation: "Included for skin-conditioning support. The ingredient does not by itself prove a finished-product calming or clinical result.",
+    explanation: "Included for skin-conditioning support.",
     state: "document-matched-final-approval-pending"
   },
   {
@@ -280,13 +280,13 @@ const kidsHighlights: IngredientHighlight[] = [
   {
     name: "Allantoin",
     function: "Skin-conditioning ingredient",
-    explanation: "Supports a soft, conditioned skin feel without implying a medical or healing effect.",
+    explanation: "Supports a soft, conditioned skin feel.",
     state: "document-matched-final-approval-pending"
   },
   {
     name: "Hyaluronic Acid",
     function: "Humectant",
-    explanation: "Helps bind water at the skin surface. Ingredient function is not clinical proof of the finished lotion.",
+    explanation: "Helps bind water at the skin surface.",
     state: "document-matched-final-approval-pending"
   }
 ];
@@ -325,7 +325,7 @@ const commonEvidence = {
     reference: "Manufacturer COA for batch 20260401",
     reviewed: "2026-10-08",
     status: "reviewed-with-open-items" as const,
-    publicSummary: "A batch-specific quality record was reviewed. It is not a clinical study, long-term stability study or product-registration approval."
+    publicSummary: "Manufacturer quality record for batch 20260401."
   },
   rwandaImportLicense: {
     id: "rwanda-fda-import-license-0469",
@@ -503,7 +503,7 @@ export function buildPublicProductFaqs({
     },
     {
       question: "What are the recognized cosmetic functions of the highlighted ingredients?",
-      answer: "Humectants such as glycerin, sodium PCA and hyaluronic acid help retain moisture at the skin surface. Emollients such as shea butter, squalane, jojoba seed oil and caprylic/capric triglyceride help soften the skin surface. Panthenol, niacinamide, aloe vera leaf juice, oat kernel extract and other highlighted ingredients support skin conditioning. These general functions are not clinical proof of the finished lotion."
+      answer: "Humectants such as glycerin, sodium PCA and hyaluronic acid help retain moisture at the skin surface. Emollients such as shea butter, squalane, jojoba seed oil and caprylic/capric triglyceride help soften the skin surface. Panthenol, niacinamide, aloe vera leaf juice, oat kernel extract and other highlighted ingredients support skin conditioning."
     },
     {
       question: "Does BaBra publish the full ingredient list?",

@@ -15,12 +15,12 @@ export function GET() {
     {
       publisher: "BaBra Cosmetics Ltd",
       canonical: `${site.url}/product-facts`,
-      generatedForPublicReference: "2026-11-18",
+      generatedForPublicReference: "2026-11-22",
       policy: {
         formulaPercentagesPublished: false,
         offerPublished: false,
         ingredientReference: "Variant ingredient declarations come from manufacturer-supplied label records; the physical bottle is the controlling consumer reference.",
-        interpretationRule: "Ingredient functions do not constitute clinical proof of a finished product."
+        interpretationRule: "Ingredient highlights describe each ingredient’s cosmetic role in the lotion."
       },
       frequentlyAskedQuestions: faqs,
       products: productKnowledgeList.map((product) => ({
