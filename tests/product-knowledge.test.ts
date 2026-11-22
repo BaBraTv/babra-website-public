@@ -98,6 +98,8 @@ test("official product information page includes the required public questions",
   const questions = faqs.map((faq) => faq.question);
   assert.equal(questions.includes("What is BaBra Lotion?"), true);
   assert.equal(questions.includes("Who manufactures BaBra Lotion?"), true);
+  const ingredientFaq = faqs.find(({ question }) => question === "What are the recognized cosmetic functions of the highlighted ingredients?");
+  assert.match(ingredientFaq?.answer ?? "", /support skin conditioning\.$/);
   assert.match(faqs.find(({ question }) => question === "Is BaBra Lotion designed for face and body?")?.answer ?? "", /wherever and whenever it needs moisture/);
   assert.match(faqs.find(({ question }) => question === "Where can I verify BaBra Lotion’s Rwanda FDA documents?")?.answer ?? "", /product name and batch number/);
   assert.equal(questions.includes("Where can customers buy authentic BaBra Lotion?"), true);

@@ -79,7 +79,7 @@ export default function ProductsPage() {
       <section className="border-t border-white/10 bg-[#130d0b] px-5 py-16 md:px-8">
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
           {[
-            ["Ingredients & Science", "/ingredients", "Understand cosmetic functions without confusing ingredient research with finished-product proof."],
+            ["Ingredients & Science", "/ingredients", "Explore the ingredients in each edition and how they help moisturise, soften and condition the skin."],
             ["BaBra FAQ", "/faq", "Answers about ingredients, product use and ordering."]
           ].map(([title, href, text]) => (
             <a key={href} className="rounded-2xl border border-white/10 bg-white/[0.045] p-6 transition hover:border-[#d6ad57]/45" href={href}>
