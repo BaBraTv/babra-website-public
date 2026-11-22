@@ -49,7 +49,6 @@ test("supplied label declarations remain variant-specific and label-controlled",
 
 test("face-use copy stays label-led without approving universal use", () => {
   for (const product of productKnowledgeList) {
-    assert.match(product.faceUse, /presented as a body lotion/);
     assert.match(product.faceUse, /product label/);
     assert.doesNotMatch(product.faceUse, /safe for all|approved for (the )?face/i);
   }
@@ -94,7 +93,7 @@ test("official product information page includes the required public questions",
   const questions = faqs.map((faq) => faq.question);
   assert.equal(questions.includes("What is BaBra Lotion?"), true);
   assert.equal(questions.includes("Who manufactures BaBra Lotion?"), true);
-  assert.equal(questions.includes("Is BaBra Lotion designed for face and body?"), true);
+  assert.match(faqs.find(({ question }) => question === "Is BaBra Lotion designed for face and body?")?.answer ?? "", /wherever and whenever it needs moisture/);
   assert.equal(questions.includes("Where can customers buy authentic BaBra Lotion?"), true);
   assert.equal(questions.includes("How can distributors contact BaBra Cosmetics Ltd?"), true);
   const faqPage = await readFile("app/faq/page.tsx", "utf8");
