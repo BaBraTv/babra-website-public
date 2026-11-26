@@ -21,10 +21,14 @@ export const cosmetics = {
   manufacturer: "Guangzhou Pallas Cosmetics Co., Ltd."
 } as const;
 
+const vidapharmaContactPhone = "+250 788 308 076";
+
 export const rwandaOrders = {
   partner: "VIDAPHARMA",
   legalName: "VIDAPHARMA LTD",
-  phone: "0734 299 777",
+  contactPhone: vidapharmaContactPhone,
+  contactTelephone: vidapharmaContactPhone.replaceAll(" ", ""),
+  orderPhone: "0734 299 777",
   whatsapp: "250734299777",
   location: "Kiyovu, Nyarugenge, Kigali City, Rwanda",
   logo: "/partners/vidapharma-logo.png",

@@ -92,7 +92,8 @@ test("official product information page includes the required public questions",
   const faqs = buildPublicProductFaqs({
     manufacturer: "Guangzhou Pallas Cosmetics Co., Ltd.",
     rwandaPartner: "VIDAPHARMA",
-    rwandaPhone: "0734 299 777",
+    rwandaContactPhone: "+250 788 308 076",
+    rwandaOrderPhone: "0734 299 777",
     domain: "babra.store"
   });
   const questions = faqs.map((faq) => faq.question);
@@ -102,7 +103,9 @@ test("official product information page includes the required public questions",
   assert.match(ingredientFaq?.answer ?? "", /support skin conditioning\.$/);
   assert.match(faqs.find(({ question }) => question === "Is BaBra Lotion designed for face and body?")?.answer ?? "", /wherever and whenever it needs moisture/);
   assert.match(faqs.find(({ question }) => question === "Where can I verify BaBra Lotion’s Rwanda FDA documents?")?.answer ?? "", /product name and batch number/);
-  assert.equal(questions.includes("Where can customers buy authentic BaBra Lotion?"), true);
+  const purchaseFaq = faqs.find(({ question }) => question === "Where can customers buy authentic BaBra Lotion?");
+  assert.match(purchaseFaq?.answer ?? "", /call or WhatsApp VIDAPHARMA at 0734 299 777/);
+  assert.match(purchaseFaq?.answer ?? "", /general VIDAPHARMA enquiries, call \+250 788 308 076/);
   assert.equal(questions.includes("How can distributors contact BaBra Cosmetics Ltd?"), true);
   const faqPage = await readFile("app/faq/page.tsx", "utf8");
   assert.match(faqPage, /FAQPage/);

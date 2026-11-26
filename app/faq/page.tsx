@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 const faqs = buildPublicProductFaqs({
   manufacturer: cosmetics.manufacturer,
   rwandaPartner: rwandaOrders.partner,
-  rwandaPhone: rwandaOrders.phone,
+  rwandaContactPhone: rwandaOrders.contactPhone,
+  rwandaOrderPhone: rwandaOrders.orderPhone,
   domain: site.domain
 });
 

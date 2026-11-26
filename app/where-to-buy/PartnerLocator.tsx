@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { rwandaOrderUrl, rwandaOrders } from "../commerce-data";
 
 type Category = "pharmacy" | "cosmetics" | "supermarket" | "distributor";
 type Filter = "all" | Category;
@@ -34,7 +35,7 @@ const categoryLabels: Record<Category, string> = {
 // Only provide map search when there is an independently identifiable public listing.
 // Do not publish coordinates from the earlier imported CSV: some were inaccurate (including 0,0).
 const partners: Partner[] = [
-  { name: "VIDAPHARMA LTD", category: "distributor", area: "Nyarugenge, Kigali — confirm collection point", phone: "+250 734 299 777" },
+  { name: rwandaOrders.legalName, category: "distributor", area: "Nyarugenge, Kigali — confirm collection point", phone: rwandaOrders.contactPhone },
   { name: "IMPRESS PHARMACY", category: "pharmacy", area: "288 KN 2 Avenue, Kigali", phone: "+250 780 274 614", mapsQuery: "IMPRESS PHARMACY 288 KN 2 Avenue Kigali Rwanda", googlePlaceId: "ChIJ60spoXml3BkRapVaQijI_Tc", publicListingChecked: "20 Nov 2026" },
   { name: "Pharmacie La Licorne", category: "pharmacy", area: "Opposite Nyabugogo Bus Station, Kimisagara, Kigali", phone: "+250 788 485 071" },
   { name: "Healthcare Pharmacy", category: "pharmacy", area: "Near Kigali City Market, Kigali", phone: "+250 788 872 220" },
@@ -139,6 +140,16 @@ export default function PartnerLocator({ projectMapUrl }: { projectMapUrl?: stri
               {partner.phone ? (
                 <a className="mt-3 self-start text-sm font-bold text-[#724b20] underline underline-offset-4" href={"tel:" + partner.phone.replace(/[^\d+]/g, "")}>
                   {partner.phone}
+                </a>
+              ) : null}
+              {partner.name === rwandaOrders.legalName ? (
+                <a
+                  className="mt-2 self-start text-sm font-bold text-[#724b20] underline underline-offset-4"
+                  href={rwandaOrderUrl("Hello VIDAPHARMA, I would like to order BaBra Lotion in Rwanda.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp orders · {rwandaOrders.orderPhone}
                 </a>
               ) : null}
               {partner.publicListingChecked ? (

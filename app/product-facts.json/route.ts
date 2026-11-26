@@ -6,7 +6,8 @@ export const dynamic = "force-static";
 const faqs = buildPublicProductFaqs({
   manufacturer: cosmetics.manufacturer,
   rwandaPartner: rwandaOrders.partner,
-  rwandaPhone: rwandaOrders.phone,
+  rwandaContactPhone: rwandaOrders.contactPhone,
+  rwandaOrderPhone: rwandaOrders.orderPhone,
   domain: site.domain
 });
 
@@ -54,7 +55,7 @@ export function GET() {
           reviewed: source.reviewed
         })),
         purchase: {
-          rwanda: `${rwandaOrders.partner}, ${rwandaOrders.phone}`,
+          rwanda: `${rwandaOrders.partner}, ${rwandaOrders.orderPhone}`,
           international: "Contact BaBra Cosmetics through the official website",
           priceAndAvailability: "Confirmed when you contact the official order channel"
         }

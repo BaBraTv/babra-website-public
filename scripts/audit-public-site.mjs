@@ -120,7 +120,15 @@ check(qualityPage.includes("do not by themselves establish finished-product regi
 
 const partnerPage = pageHtml.get("/where-to-buy") || "";
 check(partnerPage.includes("VIDAPHARMA LTD"), "/where-to-buy: confirmed partner name is missing");
-check(partnerPage.includes("0734 299 777"), "/where-to-buy: confirmed order telephone is missing");
+check(
+  partnerPage.includes('href="tel:+250788308076">+250 788 308 076</a>'),
+  "/where-to-buy: VIDAPHARMA general contact must dial +250788308076"
+);
+check(
+  partnerPage.includes('href="tel:+250734299777">0734 299 777</a>') &&
+    partnerPage.includes('href="https://wa.me/250734299777?text='),
+  "/where-to-buy: VIDAPHARMA orders must use +250734299777 for calls and WhatsApp"
+);
 check(partnerPage.includes("Kiyovu, Nyarugenge, Kigali City, Rwanda"), "/where-to-buy: licensed premises location is missing");
 check(partnerPage.includes("Official VIDAPHARMA LTD logo"), "/where-to-buy: official partner logo is missing");
 

@@ -472,12 +472,14 @@ export type PublicProductFaq = {
 export function buildPublicProductFaqs({
   manufacturer,
   rwandaPartner,
-  rwandaPhone,
+  rwandaContactPhone,
+  rwandaOrderPhone,
   domain
 }: {
   manufacturer: string;
   rwandaPartner: string;
-  rwandaPhone: string;
+  rwandaContactPhone: string;
+  rwandaOrderPhone: string;
   domain: string;
 }): PublicProductFaq[] {
   return [
@@ -527,7 +529,7 @@ export function buildPublicProductFaqs({
     },
     {
       question: "Where can customers buy authentic BaBra Lotion?",
-      answer: `For Rwanda orders, contact ${rwandaPartner} at ${rwandaPhone}. For international orders, contact BaBra Cosmetics through ${domain}. Price, stock and delivery are confirmed at the time of enquiry.`
+      answer: `For Rwanda orders, call or WhatsApp ${rwandaPartner} at ${rwandaOrderPhone}. For general ${rwandaPartner} enquiries, call ${rwandaContactPhone}. For international orders, contact BaBra Cosmetics through ${domain}. Price, stock and delivery are confirmed at the time of enquiry.`
     },
     {
       question: "How can distributors contact BaBra Cosmetics Ltd?",
