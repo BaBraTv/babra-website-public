@@ -31,7 +31,12 @@ export default function WhereToBuyPage() {
       "@type": "Organization",
       name: rwandaOrders.legalName,
       url: rwandaOrders.website,
-      telephone: `+${rwandaOrders.whatsapp}`,
+      telephone: rwandaOrders.contactTelephone,
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "orders",
+        telephone: `+${rwandaOrders.whatsapp}`
+      },
       logo: `${site.url}${rwandaOrders.logo}`,
       address: {
         "@type": "PostalAddress",
@@ -85,17 +90,21 @@ export default function WhereToBuyPage() {
 
                 <dl className="mt-8 grid gap-5 sm:grid-cols-2">
                   <div className="rounded-xl border border-black/10 p-5">
-                    <dt className="text-xs font-black uppercase tracking-[0.16em] text-[#8b5c28]">Order telephone</dt>
-                    <dd className="mt-3 text-2xl font-black"><a href={`tel:+${rwandaOrders.whatsapp}`}>{rwandaOrders.phone}</a></dd>
+                    <dt className="text-xs font-black uppercase tracking-[0.16em] text-[#8b5c28]">Call VIDAPHARMA</dt>
+                    <dd className="mt-3 text-xl font-black"><a href={`tel:${rwandaOrders.contactTelephone}`}>{rwandaOrders.contactPhone}</a></dd>
                   </div>
                   <div className="rounded-xl border border-black/10 p-5">
+                    <dt className="text-xs font-black uppercase tracking-[0.16em] text-[#8b5c28]">Orders · Call or WhatsApp</dt>
+                    <dd className="mt-3 text-xl font-black"><a href={`tel:+${rwandaOrders.whatsapp}`}>{rwandaOrders.orderPhone}</a></dd>
+                  </div>
+                  <div className="rounded-xl border border-black/10 p-5 sm:col-span-2">
                     <dt className="text-xs font-black uppercase tracking-[0.16em] text-[#8b5c28]">Licensed premises location</dt>
                     <dd className="mt-3 leading-7 font-bold">{rwandaOrders.location}</dd>
                   </div>
                 </dl>
 
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a className="rounded-full bg-[#25170f] px-7 py-4 font-bold text-white" href={rwandaOrderUrl(rwandaOrderMessage)} target="_blank" rel="noopener noreferrer">Order via VIDAPHARMA</a>
+                  <a className="rounded-full bg-[#25170f] px-7 py-4 font-bold text-white" href={rwandaOrderUrl(rwandaOrderMessage)} target="_blank" rel="noopener noreferrer">Order on WhatsApp</a>
                   <a className="rounded-full border border-black/20 px-7 py-4 font-bold" href={rwandaOrders.website} target="_blank" rel="noopener noreferrer">Official partner website</a>
                 </div>
                 <p className="mt-6 text-sm leading-7 text-black/52">VIDAPHARMA LTD and its Kiyovu premises appear in the <a className="font-bold underline underline-offset-4" href={rwandaOrders.rwandaFdaListing} target="_blank" rel="noopener noreferrer">Rwanda FDA licensed wholesale pharmacies list</a>. Confirm the collection point before travelling.</p>

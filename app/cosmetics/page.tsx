@@ -128,8 +128,27 @@ export default function CosmeticsPage() {
       </section>
       <section id="order" className={styles.section}>
         <div className={`${styles.wrap} ${styles.orderGrid}`}>
-          <div><p className={styles.eyebrow}>Let’s make it personal</p><h2 className={styles.heading}>Your next order.<br />One conversation away.</h2><ol className={styles.steps}><li>Choose Women, Men or Kids.</li><li>For Rwanda orders, contact VIDAPHARMA. For international orders or partnerships, contact BaBra directly.</li><li>Share quantity and delivery location, then review the confirmed price, stock and delivery details. Opening WhatsApp does not place or pay for an order.</li></ol><p className={`${styles.sectionIntro} mt-6`}>Rwanda orders: VIDAPHARMA — {rwandaOrders.phone}. Official BaBra Call/WhatsApp and international partnerships: {cosmetics.phone}.</p></div>
-          <aside className={styles.contact}><p className={styles.eyebrow}>Official contact</p><h3>BaBra Cosmetics Ltd</h3><p>TIN {cosmetics.tin}</p><p>Rwanda orders · {rwandaOrders.partner}</p><a className={styles.contactLink} href={rwandaEnquiry} target="_blank" rel="noopener noreferrer">{rwandaOrders.phone}</a><p>BaBra Call / WhatsApp & international partnerships</p><a className={styles.contactLink} href={`tel:${cosmetics.phone}`}>{cosmetics.phone}</a><a className={styles.contactLink} href={`mailto:${cosmetics.email}`}>{cosmetics.email}</a><div className={styles.actions}><a href={rwandaEnquiry} className={styles.primary} target="_blank" rel="noopener noreferrer">Rwanda order</a><a href={internationalEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">International enquiry</a></div><div className={styles.business}><p>Wholesale, distributor or international enquiry?</p><a href="/wholesale-distributor">Request a wholesale quote <span aria-hidden="true">&nbsp;↗</span></a></div></aside>
+          <div><p className={styles.eyebrow}>Let’s make it personal</p><h2 className={styles.heading}>Your next order.<br />One conversation away.</h2><ol className={styles.steps}><li>Choose Women, Men or Kids.</li><li>For Rwanda orders, contact VIDAPHARMA. For international orders or partnerships, contact BaBra directly.</li><li>Share quantity and delivery location, then review the confirmed price, stock and delivery details. Opening WhatsApp does not place or pay for an order.</li></ol><p className={`${styles.sectionIntro} mt-6`}>Rwanda orders: VIDAPHARMA — {rwandaOrders.orderPhone}. Official BaBra Call/WhatsApp and international partnerships: {cosmetics.phone}.</p></div>
+          <aside className={styles.contact}>
+            <p className={styles.eyebrow}>Official contact</p>
+            <h3>BaBra Cosmetics Ltd</h3>
+            <p>TIN {cosmetics.tin}</p>
+            <p>Call {rwandaOrders.partner}</p>
+            <a className={styles.contactLink} href={`tel:${rwandaOrders.contactTelephone}`}>{rwandaOrders.contactPhone}</a>
+            <p>Rwanda WhatsApp orders · {rwandaOrders.partner}</p>
+            <a className={styles.contactLink} href={rwandaEnquiry} target="_blank" rel="noopener noreferrer">{rwandaOrders.orderPhone}</a>
+            <p>BaBra Call / WhatsApp &amp; international partnerships</p>
+            <a className={styles.contactLink} href={`tel:${cosmetics.phone}`}>{cosmetics.phone}</a>
+            <a className={styles.contactLink} href={`mailto:${cosmetics.email}`}>{cosmetics.email}</a>
+            <div className={styles.actions}>
+              <a href={rwandaEnquiry} className={styles.primary} target="_blank" rel="noopener noreferrer">Rwanda order</a>
+              <a href={internationalEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">International enquiry</a>
+            </div>
+            <div className={styles.business}>
+              <p>Wholesale, distributor or international enquiry?</p>
+              <a href="/wholesale-distributor">Request a wholesale quote <span aria-hidden="true">&nbsp;↗</span></a>
+            </div>
+          </aside>
         </div>
       </section>
       <div className={styles.mobileBar} aria-label="Quick ordering"><a className={styles.secondary} href={internationalEnquiry} target="_blank" rel="noopener noreferrer">International · BaBra</a><a className={styles.primary} href={rwandaEnquiry} target="_blank" rel="noopener noreferrer">Rwanda · VIDAPHARMA</a></div>

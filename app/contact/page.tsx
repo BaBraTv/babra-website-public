@@ -1,4 +1,5 @@
 import { ContactForm } from "./ContactForm";
+import { rwandaOrderUrl, rwandaOrders } from "../commerce-data";
 
 const contactOptions = [
   ["Samples", "Request product samples for testing, shop display, salon use, or launch review."],
@@ -8,7 +9,6 @@ const contactOptions = [
 ];
 
 const quickFacts = [
-  ["Rwanda orders · VIDAPHARMA", "0734 299 777"],
   ["BaBra Call / WhatsApp", "+250 788 351 482"],
   ["Email", "babracosmeticsltd@gmail.com"],
   ["Office", "UBUMWE HOUSE · Room B1-62, Nyabugogo, Kigali"],
@@ -78,6 +78,22 @@ export default function ContactPage() {
       <section className="px-5 py-16 md:px-8">
         <div className="mx-auto max-w-7xl rounded-lg border border-white/10 bg-[#18110f] p-7 md:p-10">
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-lg border border-white/10 bg-black/20 p-5">
+              <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">VIDAPHARMA · Rwanda</span>
+              <div className="mt-3 space-y-2 text-sm font-bold text-white/86">
+                <p><a className="underline underline-offset-4" href={`tel:${rwandaOrders.contactTelephone}`}>Call · {rwandaOrders.contactPhone}</a></p>
+                <p>
+                  <a
+                    className="underline underline-offset-4"
+                    href={rwandaOrderUrl("Hello VIDAPHARMA, I would like to order BaBra Lotion in Rwanda.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    WhatsApp orders · {rwandaOrders.orderPhone}
+                  </a>
+                </p>
+              </div>
+            </div>
             {quickFacts.map(([label, value]) => (
               <div key={label} className="rounded-lg border border-white/10 bg-black/20 p-5">
                 <span className="text-xs font-black uppercase tracking-[0.18em] text-[#d6ad57]">{label}</span>

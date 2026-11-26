@@ -254,6 +254,7 @@ export function StoreClient() {
           <p className="mt-6 max-w-3xl leading-8 text-white/70">Select products and quantities, then choose your destination. VIDAPHARMA handles Rwanda retail enquiries; BaBra Cosmetics assists with international orders. Prices and payment instructions are confirmed before any order or payment.</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a className="rounded-full bg-[#f1d58b] px-7 py-4 font-bold text-[#130d08]" href={rwandaOrderUrl(rwandaMessage)} target="_blank" rel="noopener noreferrer">Rwanda order · VIDAPHARMA</a>
+            <a className="rounded-full border border-white/30 px-7 py-4 font-bold text-white" href={`tel:${rwandaOrders.contactTelephone}`}>Call VIDAPHARMA · {rwandaOrders.contactPhone}</a>
             <a className="rounded-full border border-white/30 px-7 py-4 font-bold text-white" href={whatsappOrderUrl(internationalMessage)} target="_blank" rel="noopener noreferrer">International order · BaBra</a>
           </div>
         </div>
@@ -263,7 +264,7 @@ export function StoreClient() {
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2 xl:grid-cols-4">
           {[
             [site.company, site.address],
-            ["Rwanda orders · VIDAPHARMA", rwandaOrders.phone],
+            ["Rwanda orders · VIDAPHARMA", rwandaOrders.orderPhone],
             ["BaBra Call / WhatsApp · international", site.phone],
             ["Email", site.email]
           ].map(([title, text]) => (
