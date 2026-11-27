@@ -88,6 +88,8 @@ const dictionary: Record<Exclude<LanguageCode, "EN">, Record<string, string>> = 
     "Our Story": "Inkuru yacu",
     "Our World": "Ibikorwa bya BaBra",
     "Ingredients & Science": "Ibigize lotion n'uko bikora",
+    "BaBra Lotion benefits": "Ibyiza bya BaBra Lotion",
+    "See what the Signature editions are designed for.": "Menya icyo lotion zo mu cyegeranyo cya BaBra zagenewe.",
     "Compare Body Lotions": "Gereranya amavuta y'umubiri",
     "Quality & Documentation": "Ubuziranenge n'inyandiko",
     "Real BaBra Stories": "Ubuhamya bw'abakiriya ba BaBra",

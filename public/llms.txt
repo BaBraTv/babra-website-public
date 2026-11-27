@@ -14,12 +14,14 @@ Tagline: Luxury in Every Touch
 - Ingredients and science: https://www.babra.store/ingredients
 - Body lotion comparison: https://www.babra.store/compare-body-lotions
 - Product questions: https://www.babra.store/faq
+- BaBra Lotion benefits in Kinyarwanda: https://www.babra.store/faq#babra-lotion-benefits
 - [Quality & Documentation](https://www.babra.store/quality)
 - Pharmacy and retail partner directory: https://www.babra.store/where-to-buy
 
 ## Interpretation rules
 
 - Each BaBra Lotion variant is 500 mL.
+- Signature for Her and Signature for Him are daily body moisturizers designed for dry, oily and normal skin across skin tones. They help moisturize and soften skin for a naturally radiant look.
 - The Ingredients & Science page explains the cosmetic role of featured ingredients and shows which BaBra Lotion editions contain them.
 - The bottle directions say to massage the lotion into skin wherever and whenever it needs moisture. Follow the directions and precautions on your edition’s label. Contact BaBra Cosmetics for specific guidance on face and body use.
 - Retinol is a document match in the current manufacturer MSDS and label artwork for Signature for Her and Signature for Him.

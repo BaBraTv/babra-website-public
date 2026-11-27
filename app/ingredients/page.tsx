@@ -52,7 +52,7 @@ export default function IngredientsPage() {
     description,
     inLanguage: "en-RW",
     about: { "@type": "Brand", "@id": `${site.url}/#babra-cosmetics-brand`, name: "BaBra Cosmetics" },
-    dateModified: "2026-11-27"
+    dateModified: "2026-11-28"
   };
 
   return (
@@ -126,7 +126,7 @@ export default function IngredientsPage() {
             <h2 className="mt-4 font-serif text-5xl leading-none">Retinol in the adult editions.</h2>
           </div>
           <div className="grid gap-4 text-sm leading-7 text-white/65">
-            <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Retinol is listed in manufacturer ingredient records for Signature for Her and Signature for Him. Follow the label for directions and precautions.</p>
+            <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Signature for Her and Signature for Him list retinol, a vitamin A derivative used in skin care products that address the appearance of fine lines. <a className="font-bold text-[#f1d58b] underline underline-offset-4" href="https://www.aad.org/public/everyday-care/skin-care-secrets/anti-aging/retinoid-retinol">Read the American Academy of Dermatology’s guide to retinol.</a></p>
             <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Soft Care for Kids has its own ingredient declaration. <a className="font-bold text-[#f1d58b] underline underline-offset-4" href="/products/babies#label-ingredients">Read the Kids edition label.</a></p>
             <a className="rounded-xl border border-[#d6ad57]/40 bg-white/[0.04] p-5 font-bold text-[#f1d58b]" href="/compare-body-lotions">Compare Body Lotions <span aria-hidden="true">↗</span></a>
           </div>

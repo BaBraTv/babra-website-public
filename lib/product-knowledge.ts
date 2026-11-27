@@ -352,7 +352,7 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     productCode: "L-350W365477",
     overview: "A 500 mL moisturising body lotion combining glycerin, aloe vera leaf juice, shea butter, jojoba seed oil, panthenol and hyaluronic acid to help hydrate, soften and condition the skin.",
     careMoment: "Take a few quiet minutes after a shower to care for yourself and enjoy the feeling of soft, moisturized skin.",
-    intendedUse: "The product information presents this variant as a body lotion. Follow the directions printed on the bottle you receive.",
+    intendedUse: "Daily moisturizing body care designed for dry, oily and normal skin, across skin tones from light to deep.",
     usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label on your bottle.",
     faceUse: "Follow the directions and precautions on your product label. Contact BaBra Cosmetics for guidance on your edition.",
     dailyUse: "Apply when skin needs moisture and follow the directions on the physical bottle supplied with your product.",
@@ -392,7 +392,7 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     productCode: "L-349W702477",
     overview: "A 500 mL moisturising body lotion combining glycerin, aloe vera leaf juice, shea butter, jojoba seed oil, panthenol and hyaluronic acid to help hydrate, soften and condition the skin.",
     careMoment: "An easy step in your daily routine, whether you are getting ready for the day or winding down at night.",
-    intendedUse: "The product information presents this variant as a body lotion. Follow the directions printed on the bottle you receive.",
+    intendedUse: "Daily moisturizing body care designed for dry, oily and normal skin, across skin tones from light to deep.",
     usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label on your bottle.",
     faceUse: "Follow the directions and precautions on your product label. Contact BaBra Cosmetics for guidance on your edition.",
     dailyUse: "Apply when skin needs moisture and follow the directions on the physical bottle supplied with your product.",
@@ -473,6 +473,11 @@ export type PublicProductFaq = {
   answer: string;
 };
 
+export const bodyLotionBenefitsRw: PublicProductFaq = {
+  question: "Ese BaBra Lotion ni nziza?",
+  answer: "Yego. BaBra Lotion yagenewe guha uruhu ubuhehere, kurworoshya no kugaragaza urumuri rwarwo rusanzwe. Signature for Her na Signature for Him zagenewe uruhu rwumye, urw’amavuta n’urusanzwe, ku mabara atandukanye y’uruhu, harimo urw’inzobe n’urw’igikara. Glycerin na hyaluronic acid bifasha uruhu kugumana ubuhehere, naho shea butter ikarworoshya. Izo lotion zombi zirimo na retinol, ikomoka kuri vitamine A kandi ikoreshwa mu kwita ku mirongo mito igaragara ku ruhu uko imyaka yiyongera. Soft Care for Kids yagenewe gufasha uruhu rw’abana kugumana ubuhehere no koroha."
+};
+
 export function buildPublicProductFaqs({
   manufacturer,
   rwandaPartner,
@@ -490,6 +495,10 @@ export function buildPublicProductFaqs({
     {
       question: "What is BaBra Lotion?",
       answer: "BaBra Lotion is the signature body-care collection from BaBra Cosmetics, a Rwandan skincare brand based in Kigali. The three 500 mL editions are Signature for Her, Signature for Him and Soft Care for Kids."
+    },
+    {
+      question: "What is BaBra Lotion good for?",
+      answer: "BaBra Lotion is made to moisturize and soften skin and bring out its natural radiance. Signature for Her and Signature for Him are designed for dry, oily and normal skin, across skin tones from light to deep. Glycerin and hyaluronic acid help skin retain moisture, while shea butter helps soften its surface. Both adult editions contain retinol, a vitamin A derivative used in skin care products that address the appearance of fine lines. Soft Care for Kids is a moisturizing body lotion for children."
     },
     {
       question: "Who manufactures BaBra Lotion?",
