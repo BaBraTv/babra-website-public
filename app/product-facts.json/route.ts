@@ -1,4 +1,4 @@
-import { buildPublicProductFaqs, productKnowledgeList } from "../../lib/product-knowledge";
+import { bodyLotionBenefitsRw, buildPublicProductFaqs, productKnowledgeList } from "../../lib/product-knowledge";
 import { cosmetics, rwandaOrders, site } from "../commerce-data";
 
 export const dynamic = "force-static";
@@ -16,8 +16,9 @@ export function GET() {
     {
       publisher: "BaBra Cosmetics Ltd",
       canonical: `${site.url}/products`,
-      generatedForPublicReference: "2026-11-27",
+      generatedForPublicReference: "2026-11-28",
       resources: {
+        lotionBenefits: site.url + "/faq#babra-lotion-benefits",
         ingredientsAndScience: `${site.url}/ingredients`,
         bodyLotionComparison: `${site.url}/compare-body-lotions`,
         qualityAndDocumentation: `${site.url}/quality`,
@@ -30,6 +31,7 @@ export function GET() {
         interpretationRule: "Ingredient highlights describe each ingredient’s cosmetic role in the lotion."
       },
       frequentlyAskedQuestions: faqs,
+      frequentlyAskedQuestionsRw: [bodyLotionBenefitsRw],
       products: productKnowledgeList.map((product) => ({
         slug: product.slug,
         canonicalUrl: `${site.url}/products/${product.slug}`,

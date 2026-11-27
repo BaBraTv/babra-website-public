@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { buildPublicProductFaqs } from "../../lib/product-knowledge";
+import { bodyLotionBenefitsRw, buildPublicProductFaqs } from "../../lib/product-knowledge";
 import { cosmetics, rwandaOrders, site } from "../commerce-data";
 
 const canonical = `${site.url}/faq`;
-const description = "Factual answers about BaBra Lotion face use, ingredients, variants, daily use, retinol, children's guidance, quality records and official purchase channels.";
+const description = "Discover the benefits of BaBra Lotion, who the Signature editions are designed for, what retinol does and how to choose your edition.";
 
 export const metadata: Metadata = {
   title: "BaBra Lotion FAQ",
@@ -27,12 +27,20 @@ export default function FaqPage() {
     "@type": "FAQPage",
     "@id": `${canonical}#faq`,
     url: canonical,
-    inLanguage: "en-RW",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: { "@type": "Answer", text: faq.answer }
-    }))
+    inLanguage: ["en-RW", "rw"],
+    mainEntity: [
+      ...faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer }
+      })),
+      {
+        "@type": "Question",
+        name: bodyLotionBenefitsRw.question,
+        inLanguage: "rw",
+        acceptedAnswer: { "@type": "Answer", text: bodyLotionBenefitsRw.answer, inLanguage: "rw" }
+      }
+    ]
   };
 
   return (
@@ -50,6 +58,19 @@ export default function FaqPage() {
 
       <section className="bg-[#f7f0e5] px-5 py-16 text-[#251a13] md:px-8 md:py-24">
         <div className="mx-auto max-w-5xl">
+          <article
+            id="babra-lotion-benefits"
+            lang="rw"
+            aria-labelledby="babra-lotion-benefits-title"
+            className="mb-8 scroll-mt-16 rounded-2xl border border-[#c6a374]/45 bg-[#fffaf1] p-6 md:p-8"
+          >
+            <h2 id="babra-lotion-benefits-title" className="font-serif text-3xl leading-tight md:text-4xl">{bodyLotionBenefitsRw.question}</h2>
+            <p className="mt-4 max-w-3xl leading-8 text-[#50382a]">{bodyLotionBenefitsRw.answer}</p>
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-sm font-semibold text-[#70461e]">
+              <a className="underline underline-offset-4" href="/products">Reba icyegeranyo cya BaBra Lotion</a>
+              <a className="underline underline-offset-4" href="/ingredients">Menya ibigize BaBra Lotion</a>
+            </div>
+          </article>
           <div className="grid gap-4">
             {faqs.map((faq) => (
               <details key={faq.question} className="group rounded-2xl border border-black/10 bg-white p-6 shadow-[0_18px_50px_rgba(68,43,20,0.07)] md:p-8">

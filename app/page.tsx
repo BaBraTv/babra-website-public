@@ -26,6 +26,7 @@ const divisions = [
 
 const resources = [
   ["Ingredients & Science", "See what helps the lotion hold moisture and leave skin feeling soft.", "/ingredients"],
+  ["BaBra Lotion benefits", "See what the Signature editions are designed for.", "/faq#babra-lotion-benefits"],
   ["Compare Body Lotions", "See BaBra alongside 10 body lotions using the same criteria.", "/compare-body-lotions"],
   ["Quality & Documentation", "Find manufacturing records and learn how to verify your bottle.", "/quality"],
   ["Where to Buy", "Find a pharmacy or retail partner and check availability.", "/where-to-buy"],

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { parseAnalyticsPayload } from "../lib/analytics-policy.ts";
-import { buildPublicProductFaqs, productJsonLd, productKnowledgeList } from "../lib/product-knowledge.ts";
+import { bodyLotionBenefitsRw, buildPublicProductFaqs, productJsonLd, productKnowledgeList } from "../lib/product-knowledge.ts";
 
 test("knowledge base has one complete, distinct record per lotion variant", () => {
   assert.deepEqual(productKnowledgeList.map((product) => product.slug).sort(), ["babies", "men", "women"]);
@@ -99,6 +99,11 @@ test("official product information page includes the required public questions",
   const questions = faqs.map((faq) => faq.question);
   assert.equal(questions.includes("What is BaBra Lotion?"), true);
   assert.equal(questions.includes("Who manufactures BaBra Lotion?"), true);
+  const benefits = faqs.find(({ question }) => question === "What is BaBra Lotion good for?");
+  assert.match(benefits?.answer ?? "", /designed for dry, oily and normal skin/);
+  assert.match(benefits?.answer ?? "", /Both adult editions contain retinol/);
+  assert.equal(bodyLotionBenefitsRw.question, "Ese BaBra Lotion ni nziza?");
+  assert.match(bodyLotionBenefitsRw.answer, /Yego\..*uruhu rwumye, urw’amavuta n’urusanzwe.*urw’inzobe n’urw’igikara/);
   const ingredientFaq = faqs.find(({ question }) => question === "What are the recognized cosmetic functions of the highlighted ingredients?");
   assert.match(ingredientFaq?.answer ?? "", /support skin conditioning\.$/);
   assert.match(faqs.find(({ question }) => question === "Is BaBra Lotion designed for face and body?")?.answer ?? "", /wherever and whenever it needs moisture/);
