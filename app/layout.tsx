@@ -8,14 +8,16 @@ import { VisitorAnalytics } from "./components/VisitorAnalytics";
 import { GoogleAnalytics } from "./components/GoogleAnalytics";
 import { googleAnalyticsMeasurementId } from "../lib/google-analytics";
 
+const homeTitle = "BaBra Lotion | Luxury in Every Touch";
+const homeDescription = "Discover BaBra Lotion, the 500 mL body-care collection from BaBra Cosmetics in Kigali, Rwanda. Explore Signature for Her, Signature for Him and Soft Care for Kids.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "BaBra | Luxury in Every Touch",
+    default: homeTitle,
     template: `%s | ${site.domain}`
   },
-  description:
-    "Discover the BaBra Signature Collection: Signature for Her, Signature for Him and Soft Care for Kids, all 500 mL.",
+  description: homeDescription,
   keywords: [
     "BaBra Lotion",
     "BaBra Lotion Rwanda",
@@ -50,9 +52,8 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }]
   },
   openGraph: {
-    title: "BaBra | Luxury in Every Touch",
-    description:
-      "Discover the BaBra signature lotion collection and the wider BaBra ecosystem.",
+    title: homeTitle,
+    description: homeDescription,
     url: site.url,
     siteName: site.domain,
     images: [{ url: "/media/products/babra-lotion-women-luxury-500ml.webp", alt: "BaBra Lotion Signature for Her 500 mL bottle" }],
@@ -61,8 +62,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BaBra | Luxury in Every Touch",
-    description: "Discover the BaBra signature lotion collection and the wider BaBra ecosystem.",
+    title: homeTitle,
+    description: homeDescription,
     images: ["/media/products/babra-lotion-women-luxury-500ml.webp"]
   }
 };

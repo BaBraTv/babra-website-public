@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { OfficialMedia } from "../components/OfficialMedia";
 import { officialMediaById } from "../data/official-media";
 import { whatsappOrderUrl, rwandaOrderUrl, PRICE_INQUIRY_LABEL, PRICE_INQUIRY_NOTE, products, rwandaOrders, site } from "../commerce-data";
+import { getProductKnowledge } from "../../lib/product-knowledge";
 
 const commerceBlocks = [
   ["Three signature editions", "Explore Signature for Her, Signature for Him and Soft Care for Kids, each in a 500 mL presentation."],
@@ -28,7 +29,7 @@ export default function ProductsPage() {
           <div>
             <a className="text-sm font-black uppercase tracking-[0.18em] text-[#f1d58b]" href="/">babra.store</a>
             <p className="mt-10 text-sm font-black uppercase tracking-[0.24em] text-[#d6ad57]">BaBra Cosmetics Division</p>
-            <h1 className="mt-4 max-w-5xl font-serif text-5xl leading-[1.05] md:text-7xl">The Signature Collection.</h1>
+            <h1 className="mt-4 max-w-5xl font-serif text-5xl leading-[1.05] md:text-7xl">BaBra Lotion Signature Collection</h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/66">
               Discover Signature for Her, Signature for Him and Soft Care for Kids. Explore each edition and ask our team about current prices, availability and delivery.
             </p>
@@ -51,10 +52,11 @@ export default function ProductsPage() {
                 <span className="inline-flex whitespace-nowrap text-xs font-black uppercase tracking-[0.2em] text-[#d6ad57]">{product.category}</span>
                 <h2 className="mt-3 font-serif text-4xl leading-tight">{product.name}</h2>
                 <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-white/55">{product.size}</p>
-                <p className="mt-3 text-xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
+                <p className="mt-3 leading-7 text-[#f3e4d0]">{getProductKnowledge(product.slug)?.careMoment}</p>
+                <p className="mt-4 text-xl font-black text-[#f1d58b]">{PRICE_INQUIRY_LABEL}</p>
                 <a className="mt-6 flex min-h-12 items-center justify-center rounded-full bg-[#f1d58b] px-5 py-3 text-center font-bold text-[#130d08]" href={rwandaOrderUrl(`Hello ${rwandaOrders.partner}, I would like to order ${product.name} from BaBra. Quantity: __. Delivery location: __. Please confirm price, stock and delivery fee.`)} target="_blank" rel="noopener noreferrer" data-analytics-event="rwanda_order_click">Rwanda order · {rwandaOrders.partner}</a>
                 <a className="mt-3 flex min-h-12 items-center justify-center rounded-full border border-white/20 px-5 py-3 text-center font-bold text-white" href={whatsappOrderUrl(`Hello BaBra Cosmetics, I would like to order ${product.name} internationally. Quantity: __. Destination country/city: __. Please confirm price, stock and delivery options.`)} target="_blank" rel="noopener noreferrer">International order · BaBra</a>
-                <a className="mt-3 inline-flex min-h-11 items-center rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b] transition hover:bg-[#f1d58b] hover:text-[#130d08]" href={`/products/${product.slug}`}>View Details</a>
+                <a className="mt-3 inline-flex min-h-11 items-center rounded-full border border-[#d6ad57]/35 px-5 py-3 font-black text-[#f1d58b] transition hover:bg-[#f1d58b] hover:text-[#130d08]" href={`/products/${product.slug}`}>Ingredients &amp; details</a>
               </div>
             </article>
           ))}
@@ -80,6 +82,7 @@ export default function ProductsPage() {
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
           {[
             ["Ingredients & Science", "/ingredients", "Explore the ingredients in each edition and how they help moisturise, soften and condition the skin."],
+            ["Compare Body Lotions", "/compare-body-lotions", "Compare BaBra with ten other lotions by ingredients, fragrance, size and intended use."],
             ["BaBra FAQ", "/faq", "Answers about ingredients, product use and ordering."]
           ].map(([title, href, text]) => (
             <a key={href} className="rounded-2xl border border-white/10 bg-white/[0.045] p-6 transition hover:border-[#d6ad57]/45" href={href}>

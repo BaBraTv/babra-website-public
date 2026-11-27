@@ -37,7 +37,7 @@ export default function QualityPage() {
     name: "BaBra Quality & Documentation",
     description,
     inLanguage: "en-RW",
-    dateModified: "2026-11-22",
+    dateModified: "2026-11-27",
     about: { "@type": "Organization", "@id": `${site.url}/#babra-cosmetics`, name: "BaBra Cosmetics Ltd" }
   };
 
@@ -89,13 +89,17 @@ export default function QualityPage() {
               <dl className="mt-7 grid gap-5 text-sm">
                 <div><dt className="font-bold text-[#e9cc90]">Reference</dt><dd className="mt-2 leading-7 text-white/65">RWANDA-FDA26/COS/SLIC/0469</dd></div>
                 <div><dt className="font-bold text-[#e9cc90]">Products named</dt><dd className="mt-2 leading-7 text-white/65">Signature for Her, Signature for Him and Soft Care for Kids, 500 mL.</dd></div>
+                <div><dt className="font-bold text-[#e9cc90]">Documented scope</dt><dd className="mt-2 leading-7 text-white/65">Importation of the products on the corresponding invoice, subject to the licence conditions and consignment inspection.</dd></div>
                 <div><dt className="font-bold text-[#e9cc90]">Documented term</dt><dd className="mt-2 leading-7 text-white/65">Issued 13 May 2026 · Printed valid through 12 November 2026.</dd></div>
               </dl>
             </article>
           </div>
+          <p className="mt-6 max-w-4xl text-sm leading-7 text-white/75">
+            Look up finished-product registrations in the <a className="font-semibold text-[#f1d58b] underline underline-offset-4" href="https://monitoring.rwandafda.gov.rw/register/chcr/">Rwanda FDA Cosmetics and Household Chemicals Products Register</a>.
+          </p>
           <div className="mt-8 rounded-2xl border border-[#d6ad57]/25 bg-[#f3e6d1] p-7 text-[#2c1d14] md:p-9">
             <h3 className="font-serif text-4xl">Verify your BaBra Lotion</h3>
-            <p className="mt-5 max-w-4xl leading-8 text-black/65">To verify your bottle or request the latest product documents, contact BaBra Cosmetics with the product name and batch number on the label.</p>
+            <p className="mt-5 max-w-4xl leading-8 text-black/65">The batch number and product expiry date are printed on your bottle. Send the edition name and batch number to BaBra Cosmetics to verify the bottle or ask for the latest product documents.</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <a href="/contact" className="rounded-full bg-[#2b1c13] px-7 py-4 text-center font-bold text-white">Contact BaBra Cosmetics</a>
               <a href="/where-to-buy" className="rounded-full border border-black/20 px-7 py-4 text-center font-bold text-[#2b1c13]">Authorized partners</a>
