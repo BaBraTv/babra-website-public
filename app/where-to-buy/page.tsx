@@ -6,7 +6,7 @@ import { officialMediaById } from "../data/official-media";
 import PartnerLocator from "./PartnerLocator";
 
 const canonical = `${site.url}/where-to-buy`;
-const description = "Find BaBra Lotion through our Rwanda ordering channel and browse recorded pharmacy, beauty retail, supermarket and distributor partners. Confirm stock and exact location before visiting.";
+const description = "Find pharmacy and retail partners for BaBra Lotion in Rwanda. Check current availability and get direct support for local or international orders.";
 const rwandaOrderMessage = "Hello VIDAPHARMA, I would like to order BaBra Lotion in Rwanda. Please confirm the current price, stock, collection or delivery options, and the nearest available stock point.";
 const internationalMessage = "Hello BaBra Cosmetics, I would like to order BaBra Lotion outside Rwanda. Please confirm the available editions, price and delivery options for my destination.";
 

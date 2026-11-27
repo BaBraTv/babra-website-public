@@ -9,6 +9,7 @@ const coreRoutes = [
   "/cosmetics",
   "/where-to-buy",
   "/ingredients",
+  "/compare-body-lotions",
   "/faq",
   "/quality",
   "/child-family-support"
@@ -104,6 +105,8 @@ for (const path of ["/products/women", "/products/men", "/products/babies"]) {
     `${path}: Product schema has invalid brand`
   );
   check(product.manufacturer?.["@type"] === "Organization", `${path}: Product schema has invalid manufacturer`);
+  const label = product.additionalProperty?.find((property) => property.name === "Label ingredients")?.value;
+  check(typeof label === "string" && label.includes("Hyaluronic Acid"), `${path}: structured label ingredients are missing`);
   check(!Object.hasOwn(product, "offers"), `${path}: unverified Offer schema must not be published`);
 }
 
@@ -116,7 +119,10 @@ check(qualityPage.includes("RWA-FDA/DD-WCP/12-2025/0062/0120"), "/quality: premi
 check(qualityPage.includes("RWANDA-FDA26/COS/SLIC/0469"), "/quality: import authorization reference is missing");
 check(qualityPage.includes("HBPCER20260202"), "/quality: ISO 22716 certificate reference is missing");
 check(qualityPage.includes("HBPCER20260203"), "/quality: GMP certificate reference is missing");
-check(qualityPage.includes("do not by themselves establish finished-product registration"), "/quality: finished-product registration distinction is missing");
+check(
+  qualityPage.includes("finished-product registrations") && qualityPage.includes('href="https://monitoring.rwandafda.gov.rw/register/chcr/"'),
+  "/quality: finished-product registration register is missing"
+);
 
 const partnerPage = pageHtml.get("/where-to-buy") || "";
 check(partnerPage.includes("VIDAPHARMA LTD"), "/where-to-buy: confirmed partner name is missing");

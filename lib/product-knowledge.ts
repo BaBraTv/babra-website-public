@@ -34,6 +34,7 @@ export type ProductKnowledgeRecord = {
   countryOfManufacture: "China";
   productCode: string;
   overview: string;
+  careMoment: string;
   intendedUse: string;
   usage: string;
   faceUse: string;
@@ -350,6 +351,7 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     countryOfManufacture: "China",
     productCode: "L-350W365477",
     overview: "A 500 mL moisturising body lotion combining glycerin, aloe vera leaf juice, shea butter, jojoba seed oil, panthenol and hyaluronic acid to help hydrate, soften and condition the skin.",
+    careMoment: "Take a few quiet minutes after a shower to care for yourself and enjoy the feeling of soft, moisturized skin.",
     intendedUse: "The product information presents this variant as a body lotion. Follow the directions printed on the bottle you receive.",
     usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label on your bottle.",
     faceUse: "Follow the directions and precautions on your product label. Contact BaBra Cosmetics for guidance on your edition.",
@@ -389,6 +391,7 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     countryOfManufacture: "China",
     productCode: "L-349W702477",
     overview: "A 500 mL moisturising body lotion combining glycerin, aloe vera leaf juice, shea butter, jojoba seed oil, panthenol and hyaluronic acid to help hydrate, soften and condition the skin.",
+    careMoment: "An easy step in your daily routine, whether you are getting ready for the day or winding down at night.",
     intendedUse: "The product information presents this variant as a body lotion. Follow the directions printed on the bottle you receive.",
     usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label on your bottle.",
     faceUse: "Follow the directions and precautions on your product label. Contact BaBra Cosmetics for guidance on your edition.",
@@ -428,6 +431,7 @@ export const productKnowledge: Record<ProductKnowledgeSlug, ProductKnowledgeReco
     countryOfManufacture: "China",
     productCode: "L-351W220477",
     overview: "A 500 mL children's body lotion with glycerin, niacinamide, squalane, sodium PCA, shea butter, panthenol and oat kernel extract to help moisturise, soften and condition the skin.",
+    careMoment: "A quiet moment of care after bath time, when it is just you and your little one.",
     intendedUse: "The product information presents this variant as a children's body lotion. Follow the age and usage directions printed on the bottle you receive.",
     usage: "Massage the lotion into skin where moisture is desired. The product is ready to use and should not be diluted. Follow the physical label and ask BaBra if you need age-specific guidance.",
     faceUse: "Follow the directions and precautions on your product label. Contact BaBra Cosmetics for guidance on your edition.",
@@ -485,7 +489,7 @@ export function buildPublicProductFaqs({
   return [
     {
       question: "What is BaBra Lotion?",
-      answer: "BaBra Lotion is a BaBra Cosmetics body-lotion collection presented in three 500 mL variants: Signature for Her, Signature for Him and Soft Care for Kids. Public product information is kept variant-specific and evidence-labelled."
+      answer: "BaBra Lotion is the signature body-care collection from BaBra Cosmetics, a Rwandan skincare brand based in Kigali. The three 500 mL editions are Signature for Her, Signature for Him and Soft Care for Kids."
     },
     {
       question: "Who manufactures BaBra Lotion?",
@@ -509,7 +513,7 @@ export function buildPublicProductFaqs({
     },
     {
       question: "Does BaBra publish the full ingredient list?",
-      answer: "BaBra publishes the complete ingredient declaration transcribed from the supplied label artwork for each variant, alongside evidence-labelled highlights and without confidential formula percentages. The physical label on the released product remains the controlling consumer reference."
+      answer: "Open any edition in the BaBra Lotion collection to read its full ingredient declaration from the manufacturer's label record. You can also check the declaration printed on the bottle you receive."
     },
     {
       question: "Which BaBra Lotion variants contain retinol?",
@@ -525,11 +529,11 @@ export function buildPublicProductFaqs({
     },
     {
       question: "Where can I verify BaBra Lotion’s Rwanda FDA documents?",
-      answer: "Visit Quality & Documentation for Rwanda FDA licence references, including the import licence that lists all three BaBra Lotion editions. To verify your bottle or request the latest product documents, contact BaBra Cosmetics with the product name and batch number on the label."
+      answer: "Visit Quality & Documentation for the premises and import licence references, their scope and the dates shown on each record. Your bottle label gives its own batch number and product expiry date. Send BaBra Cosmetics the product name and batch number to verify your bottle or request the latest documents."
     },
     {
       question: "Where can customers buy authentic BaBra Lotion?",
-      answer: `For Rwanda orders, call or WhatsApp ${rwandaPartner} at ${rwandaOrderPhone}. For general ${rwandaPartner} enquiries, call ${rwandaContactPhone}. For international orders, contact BaBra Cosmetics through ${domain}. Price, stock and delivery are confirmed at the time of enquiry.`
+      answer: `The Where to Buy directory at ${domain}/where-to-buy lists partner pharmacies and retailers in Rwanda. For Rwanda orders, call or WhatsApp ${rwandaPartner} at ${rwandaOrderPhone}. For general ${rwandaPartner} enquiries, call ${rwandaContactPhone}. For international orders, contact BaBra Cosmetics through ${domain}. Price, stock and delivery are confirmed at the time of enquiry.`
     },
     {
       question: "How can distributors contact BaBra Cosmetics Ltd?",
@@ -558,7 +562,8 @@ export function productJsonLd(product: ProductKnowledgeRecord, siteUrl = "https:
     },
     additionalProperty: [
       { "@type": "PropertyValue", name: "Variant", value: product.variant },
-      { "@type": "PropertyValue", name: "Net content", value: product.size }
+      { "@type": "PropertyValue", name: "Net content", value: product.size },
+      { "@type": "PropertyValue", name: "Label ingredients", value: product.labelIngredientDeclaration.join(", ") }
     ]
     // Offer is intentionally omitted until price, currency, stock and seller are verified.
   };

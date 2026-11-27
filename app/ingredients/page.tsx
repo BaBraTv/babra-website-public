@@ -3,7 +3,7 @@ import { productKnowledgeList } from "../../lib/product-knowledge";
 import { site } from "../commerce-data";
 
 const canonical = `${site.url}/ingredients`;
-const description = "Discover ingredient highlights and cosmetic functions within the BaBra Lotion Signature Collection.";
+const description = "Explore how glycerin, hyaluronic acid, shea butter, panthenol and other ingredients contribute to the BaBra Lotion Signature Collection.";
 
 export const metadata: Metadata = {
   title: "Ingredients & Science | BaBra Lotion",
@@ -52,7 +52,7 @@ export default function IngredientsPage() {
     description,
     inLanguage: "en-RW",
     about: { "@type": "Brand", "@id": `${site.url}/#babra-cosmetics-brand`, name: "BaBra Cosmetics" },
-    dateModified: "2026-11-03"
+    dateModified: "2026-11-27"
   };
 
   return (
@@ -63,24 +63,29 @@ export default function IngredientsPage() {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_10%,rgba(214,173,87,0.2),transparent_34rem),radial-gradient(circle_at_8%_85%,rgba(115,51,38,0.22),transparent_30rem)]" />
         <div className="mx-auto max-w-7xl">
           <a className="text-xs font-black uppercase tracking-[0.2em] text-[#e5c67f]" href="/cosmetics">BaBra Cosmetics</a>
-          <p className="mt-12 text-xs font-black uppercase tracking-[0.28em] text-[#d6ad57]">Ingredients &amp; Science</p>
-          <h1 className="mt-5 max-w-5xl font-serif text-6xl leading-[0.96] tracking-[-0.045em] md:text-8xl">Thoughtful ingredients.<br /><em className="font-normal text-[#d8b77c]">Beautiful care.</em></h1>
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-white/68">Explore ingredients behind the BaBra collection and learn how cosmetic ingredients support moisturising and conditioning care.</p>
+          <h1 className="mt-12 max-w-5xl font-serif text-5xl leading-[1.02] tracking-[-0.045em] md:text-8xl">BaBra Lotion <em className="font-normal text-[#d8b77c]">Ingredients &amp; Science</em></h1>
+          <p className="mt-7 max-w-3xl text-lg leading-8 text-white/75">Soft, moisturized skin is the feeling we set out to create. Explore how the ingredients in the BaBra Signature Collection hold water, soften the skin surface and contribute to the feel of the lotion.</p>
         </div>
       </section>
 
       <section className="border-y border-white/10 bg-[#17100d] px-5 py-10 md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
-          {[
-            ["Hydration", "Humectants such as glycerin and hyaluronic acid help attract and retain moisture at the skin surface."],
-            ["Softness", "Emollients such as shea butter help give skin a soft, conditioned feel."],
-            ["Care for every edition", "Each BaBra edition has its own ingredient information. Check the bottle for the full declaration and usage directions."]
-          ].map(([title, text]) => (
-            <article key={title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-              <h2 className="font-serif text-3xl text-[#fff4e3]">{title}</h2>
-              <p className="mt-4 text-sm leading-7 text-white/58">{text}</p>
-            </article>
-          ))}
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              ["Humectants and water retention", "Glycerin and hyaluronic acid attract and hold water in the stratum corneum, the outermost layer of skin. Sodium PCA is another humectant listed for Soft Care for Kids."],
+              ["Emollients and softness", "Shea butter and jojoba seed oil help soften the skin surface and give the lotion a smooth application. Squalane, listed for Soft Care for Kids, also acts as an emollient."],
+              ["Skin conditioning", "Panthenol, also called provitamin B5, contributes to moisture retention and a conditioned skin feel. Niacinamide, a form of vitamin B3, is listed for Soft Care for Kids."]
+            ].map(([title, text]) => (
+              <article key={title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                <h2 className="font-serif text-3xl text-[#fff4e3]">{title}</h2>
+                <p className="mt-4 text-sm leading-7 text-white/75">{text}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm leading-6 text-[#eccea1]">
+            <a className="underline underline-offset-4" href="https://dermnetnz.org/topics/emollients-and-moisturisers">DermNet · Emollients and moisturizers</a>
+            <a className="underline underline-offset-4" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9315586/">Research review · Moisturizer ingredients</a>
+          </p>
         </div>
       </section>
 
@@ -96,7 +101,6 @@ export default function IngredientsPage() {
               <article key={ingredient.name} className="flex h-full flex-col rounded-2xl border border-black/10 bg-white p-7 shadow-[0_18px_50px_rgba(68,43,20,0.08)]">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <h3 className="font-serif text-3xl">{ingredient.displayName || ingredient.name}</h3>
-                  <span className="rounded-full bg-[#eee0c7] px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-[#775328]">Ingredient highlight</span>
                 </div>
                 {ingredient.displayName ? <p className="mt-1 text-xs text-black/45">Ingredient name: {ingredient.name}</p> : null}
                 <p className="mt-5 text-sm font-black uppercase tracking-[0.12em] text-[#8b5c28]">{ingredient.function}</p>
@@ -119,13 +123,12 @@ export default function IngredientsPage() {
       <section className="bg-[#281a14] px-5 py-16 md:px-8 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Know your ingredients</p>
             <h2 className="mt-4 font-serif text-5xl leading-none">Retinol in the adult editions.</h2>
           </div>
           <div className="grid gap-4 text-sm leading-7 text-white/65">
             <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Retinol is listed in manufacturer ingredient records for Signature for Her and Signature for Him. Follow the label for directions and precautions.</p>
-            <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Retinol is not listed in current ingredient records for Soft Care for Kids. Do not assume ingredient profiles are the same across editions.</p>
-            <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Follow the physical product label and seek individual advice for specific skin concerns.</p>
+            <p className="rounded-xl border border-white/10 bg-white/[0.04] p-5">Soft Care for Kids has its own ingredient declaration. <a className="font-bold text-[#f1d58b] underline underline-offset-4" href="/products/babies#label-ingredients">Read the Kids edition label.</a></p>
+            <a className="rounded-xl border border-[#d6ad57]/40 bg-white/[0.04] p-5 font-bold text-[#f1d58b]" href="/compare-body-lotions">Compare Body Lotions <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </section>

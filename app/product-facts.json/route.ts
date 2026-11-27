@@ -15,8 +15,14 @@ export function GET() {
   return Response.json(
     {
       publisher: "BaBra Cosmetics Ltd",
-      canonical: `${site.url}/product-facts`,
-      generatedForPublicReference: "2026-11-22",
+      canonical: `${site.url}/products`,
+      generatedForPublicReference: "2026-11-27",
+      resources: {
+        ingredientsAndScience: `${site.url}/ingredients`,
+        bodyLotionComparison: `${site.url}/compare-body-lotions`,
+        qualityAndDocumentation: `${site.url}/quality`,
+        whereToBuy: `${site.url}/where-to-buy`
+      },
       policy: {
         formulaPercentagesPublished: false,
         offerPublished: false,
@@ -47,7 +53,8 @@ export function GET() {
         ingredientHighlights: product.ingredientHighlights.map((ingredient) => ({
           name: ingredient.name,
           familiarName: ingredient.displayName,
-          cosmeticFunction: ingredient.function
+          cosmeticFunction: ingredient.function,
+          explanation: ingredient.explanation
         })),
         evidenceReferences: product.evidence.map((source) => ({
           type: source.type,

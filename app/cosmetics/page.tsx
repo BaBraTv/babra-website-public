@@ -35,7 +35,7 @@ export default function CosmeticsPage() {
             <p className={styles.eyebrow}>EI BaBra Holding Ltd · Cosmetics</p>
             <h1>BaBra<br />Cosmetics.</h1>
             <p className={styles.slogan}>Luxury in Every Touch.</p>
-            <p className={styles.intro}>Discover Signature for Her, Signature for Him and Soft Care for Kids. Discover each edition, explore its ingredients and arrange your order with our team.</p>
+            <p className={styles.intro}>For the quiet minutes you keep for yourself and the small moments you share with the people you love. Discover three signature 500 mL body lotions from BaBra Cosmetics in Kigali, Rwanda.</p>
             <div className={styles.actions}><a href="#collection" className={styles.primary}>Explore the collection <span aria-hidden="true">&nbsp;↗</span></a><a href={rwandaEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">Rwanda order · VIDAPHARMA</a><a href={internationalEnquiry} className={styles.secondary} target="_blank" rel="noopener noreferrer">International · BaBra</a></div>
           </div>
           <figure className={styles.heroVisual}>
@@ -83,6 +83,7 @@ export default function CosmeticsPage() {
         <p className={styles.sectionIntro}>Explore cosmetic ingredients, their functions and the BaBra skincare experience.</p>
         <div className={styles.partnerGrid}>
           <article className={styles.card}><h3>Ingredients &amp; Science</h3><p>Discover ingredient highlights and their cosmetic functions.</p><a className={styles.detail} href="/ingredients" data-analytics-event="ingredient_science_view">Explore ingredient science <span aria-hidden="true">↗</span></a></article>
+          <article className={styles.card}><h3>Compare Body Lotions</h3><p>Compare selected ingredients, fragrance, sizes and intended use across eleven body lotions.</p><a className={styles.detail} href="/compare-body-lotions">See the comparison <span aria-hidden="true">↗</span></a></article>
           <article className={styles.card}><h3>Questions &amp; care</h3><p>Find answers about product use, ingredients, choosing an edition and ordering.</p><a className={styles.detail} href="/faq">Read the BaBra FAQ <span aria-hidden="true">↗</span></a></article>
         </div>
       </section>

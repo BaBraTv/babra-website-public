@@ -10,11 +10,12 @@ Tagline: Luxury in Every Touch
 - Signature for Her: https://www.babra.store/products/women
 - Signature for Him: https://www.babra.store/products/men
 - Soft Care for Kids: https://www.babra.store/products/babies
-- Official product collection and directions: https://www.babra.store/products
 - Machine-readable facts: https://www.babra.store/product-facts.json
 - Ingredients and science: https://www.babra.store/ingredients
-- Factual FAQ: https://www.babra.store/faq
+- Body lotion comparison: https://www.babra.store/compare-body-lotions
+- Product questions: https://www.babra.store/faq
 - [Quality & Documentation](https://www.babra.store/quality)
+- Pharmacy and retail partner directory: https://www.babra.store/where-to-buy
 
 ## Interpretation rules
 

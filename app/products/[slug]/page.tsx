@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   if (!record) return { title: "Product not found" };
 
   const canonical = `${site.url}/products/${record.slug}`;
-  const description = `${record.publicName}, ${record.size}. Explore ingredients, usage guidance, precautions and official ordering channels.`;
+  const description = `Read the full ingredient label, care directions and official purchase options for ${record.publicName}, ${record.size}.`;
 
   return {
     title: `${record.publicName} — ${record.size}`,
@@ -108,14 +108,20 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
           <div>
             <p className="text-xs font-black uppercase tracking-[0.28em] text-[#d6ad57]">BaBra Cosmetics · {record.category}</p>
-            <h1 className="mt-5 max-w-4xl font-serif text-5xl leading-[0.98] tracking-[-0.04em] sm:text-7xl lg:text-8xl">{record.variant}</h1>
-            <p className="mt-5 font-serif text-2xl italic text-[#e6c98e]">Luxury in Every Touch</p>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/72">{record.overview}</p>
+            <h1 className="mt-5 max-w-4xl font-serif text-5xl leading-[1.02] tracking-[-0.045em] sm:text-6xl xl:text-7xl">
+              BaBra Lotion <span className="block text-[#f4d79f]">{record.variant}</span>
+            </h1>
+            <p className="mt-5 max-w-2xl font-serif text-2xl leading-snug text-[#f6e6cb]">{record.careMoment}</p>
+            <p className="mt-4 max-w-2xl text-base leading-8 text-white/80">{record.overview}</p>
 
             <div className="mt-7 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-[0.12em]">
-              <span className="rounded-full border border-[#e7c77d]/35 bg-[#e7c77d]/10 px-4 py-2 text-[#f3d997]">Signature edition</span>
               <span className="rounded-full border border-white/15 px-4 py-2 text-white/70">{record.size}</span>
               <span className="rounded-full border border-white/15 px-4 py-2 text-white/70">Made in {record.countryOfManufacture}</span>
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-[#f1d58b]">
+              <a className="underline decoration-[#c6a96d] underline-offset-4" href="#label-ingredients">Read the bottle ingredients</a>
+              {record.slug === "women" ? <a className="underline decoration-[#c6a96d] underline-offset-4" href="/cosmetics#product-films">View the back-label film</a> : null}
             </div>
 
             <div className="mt-8 rounded-2xl border border-[#f1d58b]/25 bg-white/[0.055] p-5">
@@ -146,7 +152,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
             <p className="text-xs font-black uppercase tracking-[0.24em] text-[#8b5c28]">Product information</p>
-            <h2 className="mt-4 font-serif text-5xl leading-none tracking-[-0.035em] md:text-7xl">Thoughtful care.</h2>
+            <h2 className="mt-4 font-serif text-5xl leading-none tracking-[-0.035em] md:text-7xl">How to use your lotion</h2>
             <p className="mt-6 leading-8 text-black/65">Explore product information and follow the directions printed on the bottle you receive.</p>
           </div>
 
@@ -171,17 +177,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Ingredient highlights</p>
-              <h2 className="mt-4 font-serif text-5xl leading-none tracking-[-0.035em] md:text-6xl">Ingredients that matter.</h2>
-              <p className="mt-6 leading-8 text-white/62">Discover ingredients listed for this edition and their cosmetic functions.</p>
+              <h2 className="mt-4 font-serif text-5xl leading-none tracking-[-0.035em] md:text-6xl">How the ingredients work</h2>
+              <p className="mt-6 leading-8 text-white/75">Humectants help the outer layer of skin retain water. Emollients help soften its surface. Explore the role of each featured ingredient in this edition.</p>
               <a className="mt-8 inline-flex border-b border-[#d6ad57] pb-2 font-bold text-[#f1d58b]" href="/ingredients" data-analytics-event="ingredient_science_view">Explore Ingredients &amp; Science →</a>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {record.ingredientHighlights.map((ingredient) => (
                 <article key={ingredient.name} className="rounded-2xl border border-white/10 bg-white/[0.045] p-6">
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <h3 className="font-serif text-2xl text-[#fff6e9]">{ingredient.displayName || ingredient.name}</h3>
-                    <span className="rounded-full bg-[#d6ad57]/15 px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-[#e7c77d]">Ingredient highlight</span>
-                  </div>
+                  <h3 className="font-serif text-2xl text-[#fff6e9]">{ingredient.displayName || ingredient.name}</h3>
                   {ingredient.displayName ? <p className="mt-1 text-xs text-white/45">Ingredient name: {ingredient.name}</p> : null}
                   <p className="mt-4 text-sm font-bold text-[#e1c282]">{ingredient.function}</p>
                   <p className="mt-2 text-sm leading-7 text-white/58">{ingredient.explanation}</p>
@@ -191,12 +194,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </div>
           </div>
 
-          <section className="mt-12 rounded-[2rem] border border-[#d6ad57]/25 bg-[#1b120f] p-7 md:p-10" aria-labelledby="label-declaration-heading">
+          <section id="label-ingredients" className="mt-12 scroll-mt-16 rounded-[2rem] border border-[#d6ad57]/25 bg-[#1b120f] p-7 md:p-10" aria-labelledby="label-declaration-heading">
             <div className="grid gap-7 lg:grid-cols-[0.7fr_1.3fr]">
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.24em] text-[#d6ad57]">Ingredient information</p>
-                <h2 id="label-declaration-heading" className="mt-4 font-serif text-4xl leading-none text-[#fff6e9] md:text-5xl">Ingredients for this edition.</h2>
-                <p className="mt-5 text-sm leading-7 text-white/58">This information comes from manufacturer-supplied label records. Check the ingredient declaration on the physical bottle you receive.</p>
+                <h2 id="label-declaration-heading" className="mt-4 font-serif text-4xl leading-none text-[#fff6e9] md:text-5xl">Full ingredient declaration</h2>
+                <p className="mt-5 text-sm leading-7 text-white/75">Read the ingredients in label order for this edition. Check the declaration on the bottle you receive.</p>
               </div>
               <div>
                 <ol className="flex flex-wrap gap-2" aria-label={`Ingredients shown on the supplied ${record.variant} label artwork`}>
@@ -233,11 +236,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </article>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-7xl gap-4 md:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-7xl gap-4 md:grid-cols-2 xl:grid-cols-4">
           {[
             ["Common questions", "/faq", "Face use, daily use, variants, ingredients and buying channels."],
             ["Authorized partners", "/where-to-buy", "Confirmed pharmacy, distribution and ordering details."],
-            ["Our quality commitment", "/quality", "Learn about BaBra manufacturing, documentation and care."]
+            ["Quality & Documentation", "/quality", "Find BaBra manufacturing records and check your bottle."],
+            ["Compare Body Lotions", "/compare-body-lotions", "See features and ingredients of eleven body lotions side by side."]
           ].map(([title, href, text]) => (
             <a key={href} href={href} className="rounded-2xl border border-black/10 bg-white p-6 shadow-[0_18px_50px_rgba(68,43,20,0.07)] transition hover:-translate-y-1">
               <h2 className="font-serif text-3xl">{title}</h2>
