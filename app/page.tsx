@@ -146,7 +146,7 @@ export default function HomePage() {
                   <p className="mt-1 text-sm font-semibold text-[#765432]">{product.size} · {product.category}</p>
                   <p className="mt-3 leading-7 text-[#675044]">{product.careMoment}</p>
                   <span className="mt-5 inline-block border-b border-[#916e45] pb-1 text-sm font-semibold text-[#513820]">
-                    Explore product <span aria-hidden="true">↗</span>
+                    Explore product
                   </span>
                 </div>
               </a>
@@ -167,7 +167,7 @@ export default function HomePage() {
             <p className="mt-4 max-w-2xl leading-8 text-[#f2ded3]">
               We wanted that same feeling in the care you give your own skin. From Kigali, we are building a new Rwandan skincare brand with the ambition to become a global leader in body care.
             </p>
-            <a href="/founder" className="mt-6 inline-block border-b border-[#eccd9a] pb-1 text-sm font-semibold text-[#ffe2ae]">Meet our founder <span aria-hidden="true">↗</span></a>
+            <a href="/founder" className="mt-6 inline-block border-b border-[#eccd9a] pb-1 text-sm font-semibold text-[#ffe2ae]">Meet our founder</a>
           </div>
         </div>
       </section>
@@ -187,7 +187,7 @@ export default function HomePage() {
                   <h3 className="font-serif text-2xl">{label}</h3>
                   <p className="mt-1 text-sm leading-6 text-[#634b3a]">{description}</p>
                 </div>
-                <span className="text-lg text-[#815831]" aria-hidden="true">↗</span>
+                <span className="mr-1 h-2.5 w-2.5 shrink-0 rotate-45 border-r border-t border-[#815831]" aria-hidden="true" />
               </a>
             ))}
           </div>
@@ -198,7 +198,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1220px]">
           <div className="flex flex-wrap items-end justify-between gap-5 border-b border-[#d6ad57]/30 pb-6">
             <h2 className="font-serif text-4xl tracking-[-0.035em] md:text-5xl">Our World</h2>
-            <a href="/holding" className="border-b border-[#e5c381]/60 pb-1 text-sm font-semibold text-[#f2e0b9]">EI BaBra Holding Ltd <span aria-hidden="true">↗</span></a>
+            <a href="/holding" className="border-b border-[#e5c381]/60 pb-1 text-sm font-semibold text-[#f2e0b9]">EI BaBra Holding Ltd</a>
           </div>
           <div className="grid gap-x-9 sm:grid-cols-2 lg:grid-cols-3">
             {divisions.map(([title, description, href]) => (
