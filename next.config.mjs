@@ -1,5 +1,14 @@
 const nextConfig = {
   typedRoutes: true,
+  async redirects() {
+    return [
+      {
+        source: "/brand/homepage-video-poster.webp",
+        destination: "/media/cosmetics/babra-lotion-women-front-poster.webp",
+        permanent: true
+      }
+    ];
+  },
   async headers() {
     return [
       {
