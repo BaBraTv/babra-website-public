@@ -15,13 +15,14 @@ const navLinks = [
   ["Contact", "/contact"]
 ] as const;
 
-const divisions = [
+const ourWorld = [
   ["BaBra Cosmetics", "Beauty and personal care", "/cosmetics"],
   ["Rwanda Mobile Hub", "Technology and service", "/rwanda-mobile-hub"],
   ["BaBra Schools", "Education", "/schools"],
   ["BaBra AI Academy", "AI education", "/academy"],
   ["BaBra Foundation", "Community care", "/foundation"],
-  ["LifeTalk TV", "Media and storytelling", "/lifetalk-tv"]
+  ["LifeTalk TV", "Media and storytelling", "/lifetalk-tv"],
+  ["Dental Experts Clinic", "Healthcare partner in Kimironko, Kigali", "/dental-experts-clinic"]
 ] as const;
 
 const resources = [
@@ -202,7 +203,7 @@ export default function HomePage() {
             <a href="/holding" className="border-b border-[#e5c381]/60 pb-1 text-sm font-semibold text-[#f2e0b9]">EI BaBra Holding Ltd</a>
           </div>
           <div className="grid gap-x-9 sm:grid-cols-2 lg:grid-cols-3">
-            {divisions.map(([title, description, href]) => (
+            {ourWorld.map(([title, description, href]) => (
               <a key={href} href={href} className="border-b border-white/15 py-5 transition hover:text-[#f5d495]">
                 <h3 className="font-serif text-2xl">{title}</h3>
                 <p className="mt-1 text-sm text-[#f5ece2]/70">{description}</p>
